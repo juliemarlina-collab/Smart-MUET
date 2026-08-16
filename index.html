@@ -1,13 +1,1195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="refresh" content="0; url=splash.html">
-  <title>Smart MUET Guide</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <title>Smart MUET Guide 2026 · ELU · JPA · PPD</title>
+  <link rel="icon" href="data:,">
   <script>
-    window.location.replace('splash.html');
+    // Prevent the browser from restoring a previous scroll position.
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/muet-guide.css?v=20260726-1"/>
+  <link rel="stylesheet" href="css/responsive-fix.css?v=20260726-1">
 </head>
-<body></body>
+<body>
+<main class="app-shell">
+
+  <!-- ══ REGISTER ════════════════════════════════════════════════════ -->
+  <section id="registerScreen" class="screen active">
+    <div class="brand-bar">
+      <img src="assets/heroes/small-muet-logo.svg" alt="Smart MUET Guide Logo" style="width:56px;height:56px;min-width:56px;border-radius:14px;object-fit:contain;display:block;box-shadow:4px 4px 0 var(--yellow),0 0 0 2.5px var(--yellow)"/>
+      <div style="flex:1;min-width:0">
+        <div class="bar-label">ELU · JPA · PPD</div>
+        <div class="bar-title" style="font-size:15px;letter-spacing:-.02em">Smart MUET Guide</div>
+      </div>
+    </div>
+
+    <!-- Register hero banner -->
+    <div style="border:var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:14px">
+      <img src="assets/heroes/welcome-hero.svg" alt="Smart MUET Guide hero banner" style="display:block;width:100%;height:auto" onerror="this.style.display='none'"/>
+    </div>
+
+    <div class="hero-note-card">
+      <div>
+        <p class="tiny">Smart MUET Guide 2026 · ELU · JPA · PPD</p>
+        <h2>Practise. Check. Improve. Track Your Band.</h2>
+      </div>
+      <p>Guided practice for all four MUET components — Speaking, Reading, Listening and Writing. Complete Study Vaults, get rubric feedback and track your band progress toward your target.</p>
+    </div>
+
+    <div class="card">
+      <h2>Create Your Profile</h2>
+      <p class="tiny" style="margin-top:4px;color:var(--muted)">Register once. Your profile is used across all vaults and modules.</p>
+      <div class="instr-card" style="background:#eff6ff;border-color:#93c5fd;padding:10px 12px;margin-bottom:12px;border-radius:14px">
+        <p style="font-size:12px;font-weight:900;color:#1e40af;margin:0">💡 <b>Use your student email.</b> It is used to identify your records in the progress-record system. Your data is saved in this browser — use the same device to continue where you left off.</p>
+      </div>
+      <form id="regForm" class="form">
+        <label>Full Name
+          <input id="regName" required placeholder="e.g. Aisyah Ahmad"/>
+        </label>
+        <label>Student Email
+          <input id="regEmail" type="email" required placeholder="e.g. students@gmail.com.my"/>
+        </label>
+        <label>Student No.
+          <input id="regNo" required placeholder="e.g. 06DPR23F1001"/>
+        </label>
+        <label>Class / Group
+          <input id="regGroup" required placeholder="e.g. DPR3A"/>
+        </label>
+        <label>Target Band
+          <select id="regBand">
+            <option value="3.5">Band 3.5</option>
+            <option value="4.0" selected>Band 4.0</option>
+            <option value="4.5">Band 4.5</option>
+            <option value="5.0">Band 5.0</option>
+            <option value="5+">Band 5+</option>
+          </select>
+        </label>
+        <button class="btn yellow" type="submit">Start My Journey →</button>
+      </form>
+
+      <div id="restoreBox" style="margin-top:16px;text-align:center;border-top:2px dashed rgba(0,0,0,.1);padding-top:14px">
+        <button type="button" id="showRestoreBtn" style="background:none;border:none;color:var(--blue);font-weight:900;font-size:13px;text-decoration:underline;cursor:pointer;padding:6px">
+          Already registered on another device? Restore your progress
+        </button>
+        <div id="restoreForm" style="display:none;margin-top:12px;text-align:left">
+          <label>Student Email
+            <input id="restoreEmail" type="email" placeholder="Enter the email you registered with"/>
+          </label>
+          <button type="button" id="restoreBtn" class="btn white" style="margin-top:10px">Restore My Progress</button>
+          <p id="restoreMsg" style="margin-top:8px;font-size:12px;font-weight:800;color:var(--muted)"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ HOME ════════════════════════════════════════════════════════ -->
+  <section id="homeScreen" class="screen">
+
+    <!-- HEADER -->
+    <div class="brand-bar">
+      <img src="assets/heroes/small-muet-logo.svg" alt="Smart MUET Guide"
+        style="width:56px;height:56px;min-width:56px;border-radius:14px;object-fit:contain;display:block;box-shadow:4px 4px 0 var(--yellow),0 0 0 2.5px var(--yellow)"/>
+      <div style="flex:1;min-width:0;overflow:hidden;margin-left:10px">
+        <div class="bar-label" style="margin-bottom:1px">WELCOME BACK</div>
+        <div class="bar-title" id="homeName" style="font-size:20px;line-height:1.1">Smart MUET Guide</div>
+        <div id="homeGroupLabel" style="font-size:11px;font-weight:800;color:var(--muted);margin-top:1px"></div>
+      </div>
+      <button id="homeAvatarBtn" onclick="Hub.goTo('profileScreen')" style="margin-left:auto;width:56px;height:56px;min-width:56px;border:var(--line);border-radius:14px;background:var(--yellow);color:var(--ink);box-shadow:3px 3px 0 var(--ink);font-size:20px;font-weight:1000;font-family:'Sora',sans-serif;cursor:pointer;display:grid;place-items:center;flex-shrink:0;letter-spacing:-.02em;line-height:1">JM</button>
+    </div>
+
+    <!-- HERO BANNER — natural height, no compression -->
+    <div style="border:var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:16px">
+      <img src="assets/heroes/home-hero-banner-main.svg"
+        alt="Smart MUET Guide — Your MUET Band Starts Here"
+        style="display:block;width:100%;height:auto"
+        onerror="this.onerror=null;this.src='assets/heroes/home-hero-portrait.png'"/>
+    </div>
+
+
+    <!-- 1. YOUR PROGRESS -->
+    <div class="home-section-pill">📊 YOUR PROGRESS</div>
+    <div class="dash-card" style="margin-bottom:10px">
+      <div>
+        <p class="tiny">Estimated Practice Band</p>
+        <h1 id="homeBand" style="color:white;margin-top:4px;font-size:32px">Band 0.0</h1>
+        <p id="homeBandMsg" style="font-size:13px;font-weight:900;margin-top:4px">Complete your first task to start tracking.</p>
+      </div>
+      <div class="band-disc" id="bandDisc"><span id="homePercent">0%</span></div>
+    </div>
+    <div class="stat-row" style="margin-bottom:20px">
+      <div class="stat-card red"><span>🔥</span><b id="homeStreak">0</b><small>Day Streak</small></div>
+      <div class="stat-card blue"><span>⭐</span><b id="homeXP">0</b><small>XP Earned</small></div>
+      <div class="stat-card lime"><span>🎯</span><b id="homeTarget">4.0</b><small>Target Band</small></div>
+    </div>
+
+
+    <!-- 2. CONTINUE VAULT (hidden until started) -->
+    <div id="continueVaultCard" style="display:none;margin-bottom:20px">
+      <div class="home-section-pill">🔒 CONTINUE YOUR VAULT</div>
+      <div style="background:var(--ink);border:var(--line);box-shadow:var(--shadow);border-radius:20px;padding:16px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px">
+        <div>
+          <div style="font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5);margin-bottom:4px">CONTINUE WHERE YOU LEFT OFF</div>
+          <div id="continueVaultTitle" style="font-family:'Sora';font-weight:800;font-size:18px;color:white;line-height:1.1">Vault 1</div>
+          <div id="continueVaultStatus" style="font-size:12px;font-weight:900;color:rgba(255,255,255,.6);margin-top:3px">0/4 components done</div>
+        </div>
+        <button id="continueVaultBtn" class="btn yellow" style="min-height:44px;width:auto;padding:10px 18px;white-space:nowrap;font-size:14px;font-weight:1000">Continue →</button>
+      </div>
+    </div>
+
+    <!-- 3. TODAY'S FOCUS -->
+    <div class="focus-box" id="focusBox" style="margin-bottom:20px">
+      <div class="tag">TODAY'S FOCUS</div>
+      <h2 id="focusTitle" style="font-size:21px;margin-top:6px">Start with Speaking</h2>
+      <p id="focusText" style="margin-top:6px;font-weight:800;font-size:13px;line-height:1.5">Complete one Task A using PREP structure.</p>
+      <button class="btn black" style="margin-top:12px;font-size:15px;font-weight:1000" id="focusBtn">Open Focus Skill</button>
+    </div>
+
+    <!-- 4. SKILL MODULES -->
+    <div class="home-section-pill">🎓 SKILL MODULES</div>
+    <p style="font-size:12px;font-weight:900;color:var(--muted);margin-bottom:10px;margin-top:-4px">Standalone guides — practise anytime. Scores do not count toward vault progress.</p>
+    <div class="module-grid" style="margin-bottom:16px">
+      <button class="module-card m-speaking" onclick="MUET.goPage('speaking.html')">
+        <div class="module-icon">🎤</div>
+        <h3>Speaking</h3><p>Guide · PREP</p>
+        <div class="scorebar"><span id="spkBar"></span></div>
+        <small id="spkScore">No attempt</small>
+      </button>
+      <button class="module-card m-reading" onclick="MUET.goPage('reading.html')">
+        <div class="module-icon">📖</div>
+        <h3>Reading</h3><p>Guide · Tips</p>
+        <div class="scorebar"><span id="readBar"></span></div>
+        <small id="readScore">No attempt</small>
+      </button>
+      <button class="module-card m-listening" onclick="MUET.goPage('listening.html')">
+        <div class="module-icon">🎧</div>
+        <h3>Listening</h3><p>Guide · Tips</p>
+        <div class="scorebar"><span id="lstBar"></span></div>
+        <small id="lstScore">No attempt</small>
+      </button>
+      <button class="module-card m-writing" onclick="MUET.goPage('writing.html')">
+        <div class="module-icon">✍️</div>
+        <h3>Writing</h3><p>Guide · PEEL</p>
+        <div class="scorebar"><span id="wrtBar"></span></div>
+        <small id="wrtScore">No attempt</small>
+      </button>
+    </div>
+
+    <!-- 5. ABOUT MUET -->
+    <div class="home-section-pill">📚 ABOUT MUET</div>
+    <p style="font-size:12px;font-weight:900;color:var(--muted);margin-bottom:10px;margin-top:-4px">Tap any card to expand and learn more.</p>
+    <div style="display:grid;gap:10px;margin-bottom:20px">
+
+      <div class="qi-card" onclick="toggleQI(this)">
+        <div class="qi-header">
+          <div class="qi-icon-wrap qi-icon-blue">
+            <img src="assets/heroes/icon-muet-intro.svg" alt="" style="width:36px;height:36px;object-fit:contain;display:block"/>
+          </div>
+          <div class="qi-content">
+            <div class="qi-title">MUET Quick Intro</div>
+            <ul class="qi-list qi-list-blue">
+              <li>Malaysian University English Test by MPM.</li>
+              <li>4 components: Listening, Speaking, Reading, Writing.</li>
+            </ul>
+          </div>
+          <div class="qi-chevron">›</div>
+        </div>
+        <div class="qi-expanded" style="display:none">
+          <p style="font-size:12px;font-weight:800;color:var(--ink);line-height:1.6">Used for university entry and academic English readiness. Result valid for <b>5 years</b>. Sessions: 1, 2, 3 and MUET on Demand (MoD).</p>
+        </div>
+      </div>
+
+      <div class="qi-card" onclick="toggleQI(this)">
+        <div class="qi-header">
+          <div class="qi-icon-wrap qi-icon-green">
+            <img src="assets/heroes/icon-why-muet.svg" alt="" style="width:36px;height:36px;object-fit:contain;display:block"/>
+          </div>
+          <div class="qi-content">
+            <div class="qi-title">Why Take MUET?</div>
+            <ul class="qi-list qi-list-green">
+              <li>Required for Malaysian higher education admission.</li>
+              <li>Proves English proficiency for study and career.</li>
+            </ul>
+          </div>
+          <div class="qi-chevron">›</div>
+        </div>
+        <div class="qi-expanded" style="display:none">
+          <p style="font-size:12px;font-weight:800;color:var(--ink);line-height:1.6">Many universities require Band 3 or 4 for degree entry. A higher band strengthens scholarship and postgraduate applications.</p>
+        </div>
+      </div>
+
+      <div class="qi-card" onclick="toggleQI(this)">
+        <div class="qi-header">
+          <div class="qi-icon-wrap qi-icon-yellow">
+            <img src="assets/heroes/icon-muet-facts.svg" alt="" style="width:36px;height:36px;object-fit:contain;display:block"/>
+          </div>
+          <div class="qi-content">
+            <div class="qi-title">Important MUET Facts</div>
+            <ul class="qi-list qi-list-yellow">
+              <li>360 marks total · 90 per component.</li>
+              <li>Band 1–5+ · Result valid 5 years.</li>
+            </ul>
+          </div>
+          <div class="qi-chevron">›</div>
+        </div>
+        <div class="qi-expanded" style="display:none">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div style="background:#fefce8;border:2px solid var(--ink);border-radius:12px;padding:10px;text-align:center"><div style="font-size:20px;font-weight:1000;font-family:'Sora'">360</div><div style="font-size:10px;font-weight:1000;color:var(--muted)">Total Marks</div></div>
+            <div style="background:#fefce8;border:2px solid var(--ink);border-radius:12px;padding:10px;text-align:center"><div style="font-size:20px;font-weight:1000;font-family:'Sora'">90</div><div style="font-size:10px;font-weight:1000;color:var(--muted)">Per Component</div></div>
+            <div style="background:#fefce8;border:2px solid var(--ink);border-radius:12px;padding:10px;text-align:center"><div style="font-size:20px;font-weight:1000;font-family:'Sora'">5 yrs</div><div style="font-size:10px;font-weight:1000;color:var(--muted)">Result Validity</div></div>
+            <div style="background:#fefce8;border:2px solid var(--ink);border-radius:12px;padding:10px;text-align:center"><div style="font-size:16px;font-weight:1000;font-family:'Sora'">1–5+</div><div style="font-size:10px;font-weight:1000;color:var(--muted)">Band Scale</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qi-card" onclick="toggleQI(this)">
+        <div class="qi-header">
+          <div class="qi-icon-wrap qi-icon-pink">
+            <img src="assets/heroes/icon-app-facts.svg" alt="" style="width:36px;height:36px;object-fit:contain;display:block"/>
+          </div>
+          <div class="qi-content">
+            <div class="qi-title">Smart MUET Guide — App Facts</div>
+            <ul class="qi-list qi-list-pink">
+              <li>All 4 MUET components in one app.</li>
+              <li>Guided practice vaults with tips and sample answers.</li>
+              <li>Progress tracking and band estimate.</li>
+              <li>Auto feedback and badge journey.</li>
+            </ul>
+          </div>
+          <div class="qi-chevron">›</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA STRIP -->
+    <div style="background:var(--ink);border:var(--line);border-radius:18px;padding:14px 16px;display:flex;align-items:center;gap:10px;margin-bottom:20px;box-shadow:var(--shadow)">
+      <span style="font-size:22px;flex-shrink:0">⭐</span>
+      <div style="flex:1;min-width:0;font-size:13px;font-weight:900;color:white;line-height:1.4">
+        Your MUET success journey starts now.<br><span style="color:var(--yellow);font-size:14px">Let's aim high!</span>
+      </div>
+      <button class="btn yellow" style="min-width:42px;width:42px;height:42px;padding:0;border-radius:50%;font-size:22px;flex-shrink:0;line-height:1" onclick="Hub.goTo('vaultScreen')">›</button>
+    </div>
+
+    <!-- 6. HOW TO USE — collapsible -->
+    <div class="home-section-pill">📋 HOW TO USE THIS APP</div>
+    <div class="qi-card" onclick="toggleQI(this)" style="margin-bottom:20px">
+      <div class="qi-header" style="min-height:60px">
+        <div class="qi-icon-wrap" style="background:var(--yellow)">
+          <span style="font-size:24px">📖</span>
+        </div>
+        <div class="qi-content">
+          <div class="qi-title">Your Smart MUET Flow</div>
+          <p style="font-size:11px;font-weight:900;color:var(--muted);margin-top:2px">5 steps to get started — tap to expand</p>
+        </div>
+        <div class="qi-chevron">›</div>
+      </div>
+      <div class="qi-expanded" style="display:none">
+        <ol style="padding-left:18px;display:grid;gap:8px;margin:0">
+          <li style="font-size:13px;font-weight:900;line-height:1.5"><b>Go to Study Vault</b> — start with Vault 1 (Phase 1 · Guided Learning).</li>
+          <li style="font-size:13px;font-weight:900;line-height:1.5"><b>Complete the self-check</b> — rate your confidence before each session.</li>
+          <li style="font-size:13px;font-weight:900;line-height:1.5"><b>Work through all 4 components</b> — Speaking → Reading → Listening → Writing.</li>
+          <li style="font-size:13px;font-weight:900;line-height:1.5"><b>Submit each component</b> — get score, rubric feedback and badge.</li>
+          <li style="font-size:13px;font-weight:900;line-height:1.5"><b>Check your Vault Round-Up</b> — see total /360, band and focus area.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- OPEN VAULT CTA -->
+    <button class="btn lime" onclick="Hub.goTo('vaultScreen')"
+      style="margin-bottom:24px;font-size:16px;font-weight:1000;padding:16px">
+      🔒 Open Study Vault →
+    </button>
+
+  </section>
+
+  <!-- ══ VAULT ════════════════════════════════════════════════════════ -->
+  <section id="vaultScreen" class="screen">
+    <div class="brand-bar">
+      <button class="icon-btn" onclick="Hub.goTo('homeScreen')" style="margin-left:0;margin-right:8px">←</button>
+      <div>
+        <div class="bar-label">Guided Practice</div>
+        <div class="bar-title">Study Vault</div>
+      </div>
+      <button class="icon-btn">🔒</button>
+    </div>
+
+    <!-- Vault hero banner (image) -->
+    <div style="border:var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:14px">
+      <img src="assets/heroes/study-vault-hero.svg" alt="Study Vault hero banner" style="display:block;width:100%;height:auto" onerror="this.style.display='none'"/>
+    </div>
+
+    <!-- Vault hero banner (info card) -->
+    <div style="background:var(--ink);border:var(--line);box-shadow:var(--shadow);border-radius:var(--r2);padding:18px;margin-bottom:16px;overflow:hidden;position:relative">
+      <div style="position:absolute;right:-10px;top:-10px;font-size:80px;opacity:.08;line-height:1">🔒</div>
+      <div style="font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.6);margin-bottom:6px">GUIDED PRACTICE JOURNEY</div>
+      <h2 style="color:white;margin-bottom:6px">Study Vault</h2>
+      <p style="color:rgba(255,255,255,.8);font-weight:800;font-size:13px;line-height:1.5">Each vault has all four MUET components. Complete Speaking → Reading → Listening → Writing to unlock your Vault Round-Up and band estimate.</p>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:14px">
+        <div style="background:var(--blue);border:2px solid rgba(255,255,255,.3);border-radius:12px;padding:8px 4px;text-align:center"><div style="font-size:18px">🎤</div><div style="font-size:9px;font-weight:1000;color:white;margin-top:2px">SPEAK</div></div>
+        <div style="background:var(--green);border:2px solid rgba(255,255,255,.3);border-radius:12px;padding:8px 4px;text-align:center"><div style="font-size:18px">📖</div><div style="font-size:9px;font-weight:1000;color:var(--ink);margin-top:2px">READ</div></div>
+        <div style="background:var(--yellow);border:2px solid rgba(255,255,255,.3);border-radius:12px;padding:8px 4px;text-align:center"><div style="font-size:18px">🎧</div><div style="font-size:9px;font-weight:1000;color:var(--ink);margin-top:2px">LISTEN</div></div>
+        <div style="background:var(--pink);border:2px solid rgba(255,255,255,.3);border-radius:12px;padding:8px 4px;text-align:center"><div style="font-size:18px">✍️</div><div style="font-size:9px;font-weight:1000;color:var(--ink);margin-top:2px">WRITE</div></div>
+      </div>
+    </div>
+
+    <div class="instr-card green">
+      <h2>How to Use Study Vault</h2>
+      <ol>
+        <li>Complete <b>Vault 1 → 2 → 3</b> (Phase 1 — Guided Learning).</li>
+        <li>Sit <b>Mock MUET Practice 1</b> to get your first practice Band estimate.</li>
+        <li>Continue through Phase 2 and Phase 3 for deeper preparation.</li>
+        <li>Each Mock MUET Practice is a full 4-component exam simulation with strict timing.</li>
+      </ol>
+    </div>
+
+    <!-- ── PHASE 1 HEADER ── -->
+    <div style="background:var(--ink);border:var(--line);border-radius:16px;padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px">
+      <div style="background:var(--yellow);border:var(--line);border-radius:10px;width:32px;height:32px;display:grid;place-items:center;font-size:15px;font-weight:1000;flex-shrink:0">1</div>
+      <div>
+        <div style="font-size:9px;font-weight:1000;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.5)">Phase 1</div>
+        <div style="font-family:'Sora';font-weight:800;font-size:14px;color:white">Guided Learning</div>
+      </div>
+      <div style="margin-left:auto;font-size:10px;font-weight:900;color:rgba(255,255,255,.4)">Vault 1–3 + Mock 1</div>
+    </div>
+
+    <!-- Vault 1 card (active) -->
+    <div class="card" style="border-left:6px solid var(--yellow)">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+        <div>
+          <div style="font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:4px">Vault 1 · Foundation</div>
+          <h3>Vault 1</h3>
+          <p style="color:var(--muted);font-weight:800;font-size:13px;margin-top:2px">Foundation · tips and sample answers before each component</p>
+        </div>
+        <div style="background:var(--yellow);border:var(--line);border-radius:999px;padding:6px 10px;font-size:11px;font-weight:1000;white-space:nowrap" id="v1Status">0/4 Done</div>
+      </div>
+      <div class="comp-dots" style="margin:12px 0 8px" id="v1Dots">
+        <div class="dot pending">🎤</div>
+        <div class="dot pending">📖</div>
+        <div class="dot pending">🎧</div>
+        <div class="dot pending">✍️</div>
+      </div>
+      <div class="prog-bar" style="margin-bottom:12px"><span id="v1Prog" style="width:0%"></span></div>
+      <button class="btn yellow" onclick="Hub.openVault('VAULT-01')">Open Vault 1 →</button>
+    </div>
+
+    <!-- Phase 1: Vault 2, Vault 3, Mock MUET Practice 1 -->
+    <div style="display:grid;gap:10px;margin-bottom:4px" id="phase1Grid"></div>
+
+    <!-- ── PHASE 2 HEADER ── -->
+    <div style="background:var(--ink);border:var(--line);border-radius:16px;padding:10px 14px;margin-top:18px;margin-bottom:12px;display:flex;align-items:center;gap:10px">
+      <div style="background:var(--blue);border:var(--line);border-radius:10px;width:32px;height:32px;display:grid;place-items:center;font-size:15px;font-weight:1000;flex-shrink:0;color:white">2</div>
+      <div>
+        <div style="font-size:9px;font-weight:1000;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.5)">Phase 2</div>
+        <div style="font-family:'Sora';font-weight:800;font-size:14px;color:white">Building Strength</div>
+      </div>
+      <div style="margin-left:auto;font-size:10px;font-weight:900;color:rgba(255,255,255,.4)">Vault 4–6 + Mock 2</div>
+    </div>
+
+    <!-- Phase 2: Vault 4, 5, 6, Mock MUET Practice 2 -->
+    <div style="display:grid;gap:10px;margin-bottom:4px" id="phase2Grid"></div>
+
+    <!-- ── PHASE 3 HEADER ── -->
+    <div style="background:var(--ink);border:var(--line);border-radius:16px;padding:10px 14px;margin-top:18px;margin-bottom:12px;display:flex;align-items:center;gap:10px">
+      <div style="background:var(--pink);border:var(--line);border-radius:10px;width:32px;height:32px;display:grid;place-items:center;font-size:15px;font-weight:1000;flex-shrink:0">3</div>
+      <div>
+        <div style="font-size:9px;font-weight:1000;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.5)">Phase 3</div>
+        <div style="font-family:'Sora';font-weight:800;font-size:14px;color:white">Final Preparation</div>
+      </div>
+      <div style="margin-left:auto;font-size:10px;font-weight:900;color:rgba(255,255,255,.4)">Vault 7–9 + Mock 3</div>
+    </div>
+
+    <!-- Phase 3: Vault 7, 8, 9, Mock MUET Practice 3 -->
+    <div style="display:grid;gap:10px;margin-bottom:20px" id="phase3Grid"></div>
+
+  </section>
+
+  <!-- ══ PROGRESS ═════════════════════════════════════════════════════ -->
+  <section id="progressScreen" class="screen">
+    <div class="brand-bar">
+      <button class="icon-btn" onclick="Hub.goTo('homeScreen')" style="margin-left:0;margin-right:8px">←</button>
+      <div><div class="bar-label">Analytics</div><div class="bar-title">Progress</div></div>
+      <button class="icon-btn">📈</button>
+    </div>
+
+    <!-- Progress hero banner -->
+    <div style="border:var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:14px">
+      <img src="assets/heroes/progress-hero.svg" alt="Progress hero banner" style="display:block;width:100%;height:auto" onerror="this.style.display='none'"/>
+    </div>
+
+    <!-- Progress tabs -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px">
+      <button id="ptab-dash"   class="prog-tab prog-tab-active" onclick="Hub.progTab('dash')">📊 Dashboard</button>
+      <button id="ptab-vaults" class="prog-tab" onclick="Hub.progTab('vaults')">🗂️ Vault History</button>
+      <button id="ptab-badges" class="prog-tab" onclick="Hub.progTab('badges')">🏅 Badges</button>
+    </div>
+
+    <!-- TAB: Dashboard -->
+    <div id="prog-dash">
+      <!-- Overall band -->
+      <div class="card blue" style="display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px">
+        <div>
+          <p class="tiny" style="color:rgba(255,255,255,.7)">Estimated Practice Band</p>
+          <div id="pd-band" style="font-family:'Sora';font-size:30px;font-weight:800;color:white;margin-top:4px">Band 0.0</div>
+          <p id="pd-bandmsg" style="font-weight:800;font-size:13px;color:rgba(255,255,255,.8);margin-top:4px"></p>
+        </div>
+        <div class="band-disc" id="pd-disc"><span id="pd-pct">0%</span></div>
+      </div>
+
+      <!-- 4 score bars + total -->
+      <div class="card">
+        <h2>Component Scores</h2>
+        <div id="progRows" style="display:grid;gap:14px;margin-top:14px"></div>
+        <div id="totalRow" style="display:flex;justify-content:space-between;align-items:center;background:var(--ink);color:white;border-radius:14px;padding:12px 14px;margin-top:12px;font-weight:1000;font-size:15px">
+          <span>Total</span><span id="totalScore">0 / 360 · Band 0.0</span>
+        </div>
+      </div>
+
+      <!-- Target gap -->
+      <div class="card yellow" id="pd-gapCard">
+        <h2>Target Band Gap</h2>
+        <div id="pd-gap" style="margin-top:10px;font-weight:800;font-size:13px;line-height:1.6"></div>
+      </div>
+
+      <!-- Latest feedback per skill -->
+      <div class="card">
+        <h2>Latest Feedback</h2>
+        <div id="feedbackRows" style="display:grid;gap:10px;margin-top:12px"></div>
+      </div>
+    </div>
+
+    <!-- TAB: Vault History -->
+    <div id="prog-vaults" style="display:none">
+      <div class="instr-card green">
+        <h2>Vault-by-Vault History</h2>
+        <ul>
+          <li>Each vault shows your scores for all four components.</li>
+          <li>Completed vaults show total /360 and band estimate.</li>
+          <li>Vaults not yet started appear as locked placeholders.</li>
+        </ul>
+      </div>
+      <div id="vaultHistoryList" style="display:grid;gap:14px"></div>
+    </div>
+
+    <!-- TAB: Badges -->
+    <div id="prog-badges" style="display:none">
+      <div class="card">
+        <h2>Completion Badges</h2>
+        <p style="font-size:13px;font-weight:800;color:var(--muted);margin-top:4px">Badges unlock as you complete components, vaults and mock exams.</p>
+        <div id="badgeGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PROFILE ═══════════════════════════════════════════════════════ -->
+  <section id="profileScreen" class="screen">
+    <div class="brand-bar">
+      <button class="icon-btn" onclick="Hub.goTo('homeScreen')" style="margin-left:0;margin-right:8px">←</button>
+      <div><div class="bar-label">Settings</div><div class="bar-title">Profile</div></div>
+      <button class="icon-btn">⚙️</button>
+    </div>
+
+    <div class="card">
+      <h2>Student Profile</h2>
+      <form id="editForm" class="form">
+        <label>Full Name<input id="editName"/></label>
+        <label>Student Email<input id="editEmail" type="email"/></label>
+        <label>Student No.<input id="editRegNo"/></label>
+        <label>Class / Group<input id="editGroup"/></label>
+        <label>Target Band
+          <select id="editBand">
+            <option value="3.5">Band 3.5</option>
+            <option value="4.0">Band 4.0</option>
+            <option value="4.5">Band 4.5</option>
+            <option value="5.0">Band 5.0</option>
+            <option value="5+">Band 5+</option>
+          </select>
+        </label>
+        <button class="btn yellow" type="submit">Save Profile</button>
+        <button class="btn pink" type="button" onclick="Hub.resetAll()">Reset All Progress</button>
+      </form>
+    </div>
+  </section>
+
+  <nav id="nav" class="bottom-nav">
+    <button class="nav-btn active" id="nav-home" onclick="Hub.goTo('homeScreen')">
+      <img src="assets/heroes/nav-home.svg" alt="Home" class="nav-icon"/>
+      <span>Home</span>
+    </button>
+    <button class="nav-btn" id="nav-vault" onclick="Hub.goTo('vaultScreen')">
+      <img src="assets/heroes/nav-vault.svg" alt="Vault" class="nav-icon"/>
+      <span>Vault</span>
+    </button>
+    <button class="nav-btn" id="nav-progress" onclick="Hub.goTo('progressScreen')">
+      <img src="assets/heroes/nav-progress.svg" alt="Progress" class="nav-icon"/>
+      <span>Progress</span>
+    </button>
+    <button class="nav-btn" id="nav-profile" onclick="Hub.goTo('profileScreen')">
+      <img src="assets/heroes/nav-profile.svg" alt="Profile" class="nav-icon"/>
+      <span>Profile</span>
+    </button>
+  </nav>
+
+  <div id="toast" class="toast"></div>
+</main>
+
+<script src="js/muet-shared.js?v=20260726-1"></script>
+<script src="js/backend-config.js?v=20260726-1"></script>
+<script>
+const Hub = (() => {
+
+  const BADGES = [
+    ['✨','First Step','first_step'],
+    ['🎤','PREP Starter','prep_starter'],
+    ['💬','Discussion Builder','discussion_builder'],
+    ['📖','Passage Hunter','passage_hunter'],
+    ['🎧','Audio Focus','audio_focus'],
+    ['✍️','Essay Builder','essay_builder'],
+    ['🏆','Vault Finisher','vault_finisher'],
+    ['🎯','Mock Finisher','mock_finisher'],
+    ['📈','Band Climber','band_climber']
+  ];
+
+  const SKILLS = [
+    ['speaking','Speaking','🎤','speaking.html'],
+    ['reading','Reading','📖','reading.html'],
+    ['listening','Listening','🎧','listening.html'],
+    ['writing','Writing','✍️','writing.html']
+  ];
+
+  // ── Vault routing (shared across openVault, Continue card, vault cards) ──
+  const VAULT_ORDER  = ['VAULT-01','VAULT-02','VAULT-03','MOCK-01','VAULT-04','VAULT-05','VAULT-06','MOCK-02','VAULT-07','VAULT-08','VAULT-09','MOCK-03'];
+  const VAULT_LABELS = { 'VAULT-01':'Vault 1','VAULT-02':'Vault 2','VAULT-03':'Vault 3','MOCK-01':'Mock MUET Practice 1','VAULT-04':'Vault 4','VAULT-05':'Vault 5','VAULT-06':'Vault 6','MOCK-02':'Mock MUET Practice 2','VAULT-07':'Vault 7','VAULT-08':'Vault 8','VAULT-09':'Vault 9','MOCK-03':'Mock MUET Practice 3' };
+  // Only vaults with a real welcome page built so far are listed explicitly;
+  // anything else falls back to Vault 1's page until its own pages exist.
+  const VAULT_PAGES  = { 'VAULT-01':'vault1-welcome.html', 'VAULT-02':'vault2-welcome.html' };
+  function resolveVaultPage(vaultId) { return VAULT_PAGES[vaultId] || 'vault1-welcome.html'; }
+
+  // A vault is unlocked once the vault immediately before it (in VAULT_ORDER)
+  // is fully completed (4/4). The first vault is always unlocked.
+  function isVaultUnlocked(vaultId) {
+    const idx = VAULT_ORDER.indexOf(vaultId);
+    if (idx <= 0) return true;
+    const prevId = VAULT_ORDER[idx - 1];
+    return MUET.vaultProgress(prevId).count === 4;
+  }
+
+  function init() {
+    const p = MUET.loadProfile();
+    const validHash = ['homeScreen','vaultScreen','progressScreen','profileScreen'];
+    const hashId = (location.hash || '').replace('#','');
+    if (p) {
+      goTo(validHash.includes(hashId) ? hashId : 'homeScreen');
+      renderHome(); fillEdit();
+    } else {
+      goTo('registerScreen');
+    }
+
+    document.getElementById('regForm')?.addEventListener('submit', e => {
+      e.preventDefault();
+      const p = {
+        name:       document.getElementById('regName').value.trim(),
+        email:      document.getElementById('regEmail').value.trim().toLowerCase(),
+        regNo:      document.getElementById('regNo').value.trim(),
+        group:      document.getElementById('regGroup').value.trim(),
+        targetBand: document.getElementById('regBand').value,
+        xp: 50, streak: 1, badges: ['first_step'],
+        createdAt: new Date().toISOString()
+      };
+      MUET.saveProfile(p);
+      if (typeof sendRegistration === 'function') sendRegistration(p);
+      MUET.toast('Welcome to Smart MUET Guide! Your journey starts now.');
+      goTo('homeScreen'); renderHome(); fillEdit();
+    });
+
+    // ── Restore progress on a new browser/device by email ──────────────
+    document.getElementById('showRestoreBtn')?.addEventListener('click', () => {
+      const box = document.getElementById('restoreForm');
+      box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    });
+    document.getElementById('restoreBtn')?.addEventListener('click', async () => {
+      const emailInput = document.getElementById('restoreEmail');
+      const msgEl = document.getElementById('restoreMsg');
+      const email = emailInput.value.trim().toLowerCase();
+      if (!email) { msgEl.textContent = 'Enter the email you registered with.'; return; }
+      if (typeof restoreStudentData !== 'function') {
+        msgEl.textContent = 'Restore is not available right now.';
+        return;
+      }
+      msgEl.textContent = 'Looking up your progress…';
+      const result = await restoreStudentData(email);
+      if (!result.ok) {
+        msgEl.textContent = result.message || 'No saved progress found for that email.';
+        return;
+      }
+      MUET.saveProfile(result.profile);
+      Object.entries(result.sessions || {}).forEach(([skill, list]) => MUET.saveSessions(skill, list || []));
+      if (result.activeVault) MUET.saveActiveVault(result.activeVault);
+      msgEl.textContent = '';
+      MUET.toast('Welcome back! Your progress has been restored.');
+      goTo('homeScreen'); renderHome(); fillEdit();
+    });
+
+    document.getElementById('editForm')?.addEventListener('submit', e => {
+      e.preventDefault();
+      const p = MUET.loadProfile() || {};
+      p.name       = document.getElementById('editName').value.trim();
+      p.email      = document.getElementById('editEmail').value.trim().toLowerCase();
+      p.regNo      = document.getElementById('editRegNo').value.trim();
+      p.group      = document.getElementById('editGroup').value.trim();
+      p.targetBand = document.getElementById('editBand').value;
+      MUET.saveProfile(p);
+      MUET.toast('Profile saved.');
+      goTo('homeScreen'); renderHome();
+    });
+  }
+
+  function goTo(id) {
+    MUET.goTo(id);
+
+    // Always place the selected screen at the top. This prevents a restored
+    // scroll position from making the application appear blank.
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      const activeScreen = document.getElementById(id);
+      if (activeScreen) activeScreen.scrollTop = 0;
+    });
+
+    if (id === 'homeScreen')     renderHome();
+    if (id === 'vaultScreen')    renderVault();
+    if (id === 'progressScreen') { renderProgress(); progTab('dash'); }
+    if (id === 'profileScreen')  fillEdit();
+    const nav = document.getElementById('nav');
+    if (nav) {
+      nav.style.display = (id === 'registerScreen') ? 'none' : 'grid';
+      document.body.classList.toggle('no-sidebar', id === 'registerScreen');
+      // Update active nav button
+      const navMap = {
+        homeScreen: 'nav-home',
+        vaultScreen: 'nav-vault',
+        progressScreen: 'nav-progress',
+        profileScreen: 'nav-profile'
+      };
+      nav.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      const activeId = navMap[id];
+      if (activeId) {
+        const activeBtn = document.getElementById(activeId);
+        if (activeBtn) activeBtn.classList.add('active');
+      }
+    }
+  }
+
+  function renderHome() {
+    const p = MUET.loadProfile(); if (!p) return;
+    document.getElementById('homeName').textContent   = p.name || 'Smart MUET Guide';
+    // Update avatar initials
+    const avatarBtn = document.getElementById('homeAvatarBtn');
+    if (avatarBtn && p.name) {
+      const parts    = p.name.trim().split(/\s+/);
+      const initials = parts.length >= 2
+        ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+        : parts[0].substring(0, 2).toUpperCase();
+      avatarBtn.textContent = initials;
+    }
+    const gl = document.getElementById('homeGroupLabel');
+    if (gl) gl.textContent = p.group ? `${p.group} · ELU` : 'ELU · JPA · PPD';
+    document.getElementById('homeStreak').textContent = p.streak || 0;
+    document.getElementById('homeXP').textContent     = p.xp || 0;
+    document.getElementById('homeTarget').textContent = p.targetBand || '4.0';
+
+    const scores = {};
+    SKILLS.forEach(([skill]) => {
+      scores[skill] = MUET.latestScore(skill);
+      const pc = Math.round(scores[skill] / 90 * 100);
+      const barId = { speaking:'spkBar', reading:'readBar', listening:'lstBar', writing:'wrtBar' }[skill];
+      const txtId = { speaking:'spkScore', reading:'readScore', listening:'lstScore', writing:'wrtScore' }[skill];
+      const bar = document.getElementById(barId);
+      const txt = document.getElementById(txtId);
+      if (bar) bar.style.width = Math.min(100, pc) + '%';
+      if (txt) txt.textContent = scores[skill] ? `${scores[skill]}/90 · ${pc}%` : 'No attempt';
+    });
+
+    const total = scores.speaking + scores.reading + scores.listening + scores.writing;
+    const b     = MUET.calcBand(total);
+    const pc    = Math.round(total / 360 * 100);
+    document.getElementById('homeBand').textContent    = 'Band ' + b;
+    document.getElementById('homeBandMsg').textContent = MUET.bandMessage(b);
+    document.getElementById('homePercent').textContent = pc + '%';
+    document.getElementById('bandDisc').style.setProperty('--p', pc + '%');
+
+    // Focus
+    const weakest = SKILLS.slice().sort((a,b) => scores[a[0]] - scores[b[0]])[0];
+    const tips = { speaking:'Complete one Task A using PREP: Point, Reason, Example, Point again.',
+                   reading:'Complete one part. Read questions first, then scan the passage.',
+                   listening:'Practise one part. Write keywords only, not full sentences.',
+                   writing:'Write one task. Check word count and tick the rubric before submitting.' };
+    document.getElementById('focusTitle').textContent = weakest[2] + ' Focus: ' + weakest[1];
+    document.getElementById('focusText').textContent  = tips[weakest[0]];
+    document.getElementById('focusBtn').onclick       = () => MUET.goPage(weakest[3]);
+
+    // ── Continue Last Vault smart card ──────────────────────────────
+    const continuCard  = document.getElementById('continueVaultCard');
+    // Find the most recently active vault that is incomplete
+    let continueVault  = null;
+    for (const vid of VAULT_ORDER) {
+      const prog = MUET.vaultProgress(vid);
+      if (prog.count > 0 && !prog.complete) { continueVault = vid; break; }
+    }
+    // If all started vaults are complete, suggest the next unopened one (only if unlocked)
+    if (!continueVault) {
+      for (const vid of VAULT_ORDER) {
+        if (MUET.vaultProgress(vid).count === 0 && isVaultUnlocked(vid)) { continueVault = vid; break; }
+      }
+    }
+    if (continueVault && continuCard) {
+      const prog  = MUET.vaultProgress(continueVault);
+      const label = VAULT_LABELS[continueVault] || continueVault;
+      const page  = resolveVaultPage(continueVault);
+      const isNew = prog.count === 0;
+      document.getElementById('continueVaultTitle').textContent  = label;
+      document.getElementById('continueVaultStatus').textContent = isNew
+        ? 'Not started yet — begin here'
+        : `${prog.count}/4 components done · ${4 - prog.count} remaining`;
+      document.getElementById('continueVaultBtn').textContent  = isNew ? 'Start →' : 'Continue →';
+      document.getElementById('continueVaultBtn').onclick      = () => MUET.goPage(page);
+      continuCard.style.display = 'block';
+    } else if (continuCard) {
+      continuCard.style.display = 'none';
+    }
+  }
+
+  function renderVault() {
+    // Update Vault 1 live card
+    const prog = MUET.vaultProgress('VAULT-01');
+    const count = prog.count;
+    const pct   = Math.round(count / 4 * 100);
+    const el  = document.getElementById('v1Status');
+    if (el) el.textContent = count === 4 ? 'Completed ✅' : count + '/4 Done';
+    const bar = document.getElementById('v1Prog');
+    if (bar) bar.style.width = pct + '%';
+    const dots = document.getElementById('v1Dots');
+    if (dots) {
+      const skills = ['speaking','reading','listening','writing'];
+      const icons  = ['🎤','📖','🎧','✍️'];
+      dots.innerHTML = skills.map((s, si) =>
+        `<div class="dot ${prog.done[s] ? 'done' : ''}">${icons[si]}</div>`
+      ).join('');
+    }
+    renderVaultCards();
+  }
+
+  // ── Render phased vault + mock cards ────────────────────────────
+  function renderVaultCards() {
+
+    // ── Phase 1: Vault 2, Vault 3, Mock MUET Practice 1
+    const PHASE1 = [
+      { id:'VAULT-02', label:'Vault 2', tag:'Foundation', note:'Guided practice with tips and sample answers.', isMock:false },
+      { id:'VAULT-03', label:'Vault 3', tag:'Foundation', note:'Consolidate foundation skills before Mock 1.', isMock:false },
+      { id:'MOCK-01',  label:'Mock MUET Practice 1', tag:'🎯 Practice Exam Simulation', note:'Full 4 components · strict timing · practice Band estimate.', isMock:true }
+    ];
+
+    // ── Phase 2: Vault 4, 5, 6, Mock MUET Practice 2
+    const PHASE2 = [
+      { id:'VAULT-04', label:'Vault 4', tag:'Building Strength', note:'Question type awareness · deeper practice.', isMock:false },
+      { id:'VAULT-05', label:'Vault 5', tag:'Building Strength', note:'Component-level timing introduced.', isMock:false },
+      { id:'VAULT-06', label:'Vault 6', tag:'Building Strength', note:'Writing thesis and Speaking interaction focus.', isMock:false },
+      { id:'MOCK-02',  label:'Mock MUET Practice 2', tag:'🎯 Progress Check', note:'Full exam · compare with Mock 1 · identify weak areas.', isMock:true }
+    ];
+
+    // ── Phase 3: Vault 7, 8, 9, Mock MUET Practice 3
+    const PHASE3 = [
+      { id:'VAULT-07', label:'Vault 7', tag:'Final Preparation', note:'Advanced practice · near-exam conditions.', isMock:false },
+      { id:'VAULT-08', label:'Vault 8', tag:'Final Preparation', note:'Timed · mistake pattern focus.', isMock:false },
+      { id:'VAULT-09', label:'Vault 9', tag:'Final Preparation', note:'Last full practice before final mock.', isMock:false },
+      { id:'MOCK-03',  label:'Mock MUET Practice 3', tag:'🎯 Final Readiness Check', note:'Full exam · final Band report · intervention plan.', isMock:true }
+    ];
+
+    function vaultCard(v) {
+      const prog       = MUET.vaultProgress(v.id);
+      const hasAttempt = prog.count > 0;
+      const unlocked   = isVaultUnlocked(v.id);
+      const hasPage    = !!VAULT_PAGES[v.id];
+      const clickable  = unlocked && hasPage; // only route to vaults whose real pages exist
+      const accentColor = v.isMock ? 'var(--pink)' : 'var(--yellow)';
+      const borderColor = v.isMock ? '#f472b6' : (unlocked ? '#0f172a' : '#94a3b8');
+      const bgColor     = v.isMock ? '#fdf2f8' : 'white';
+      const tagColor    = v.isMock ? '#db2777' : '#94a3b8';
+      const labelColor  = v.isMock ? 'var(--ink)' : '#64748b';
+      const noteColor   = v.isMock ? '#9d174d' : '#94a3b8';
+      const icon        = v.isMock ? '📋' : (unlocked ? '🔓' : '🔒');
+      const statusText  = v.isMock ? 'Coming soon'
+                         : !unlocked ? 'Locked'
+                         : hasPage ? 'Start →'
+                         : 'Unlocked · Coming soon';
+      const clickAttr   = clickable ? ` onclick="Hub.openVault('${v.id}')" style="cursor:pointer"` : '';
+
+      if (hasAttempt) {
+        const pct    = Math.round(prog.count / 4 * 100);
+        const icons  = ['🎤','📖','🎧','✍️'];
+        const skills = ['speaking','reading','listening','writing'];
+        return `<div${clickAttr} style="background:var(--paper);border:var(--line);box-shadow:var(--shadow);border-radius:20px;padding:14px${clickable ? ';cursor:pointer' : ''}">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px">
+            <div>
+              <div style="font-size:9px;font-weight:1000;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)">${v.tag}</div>
+              <div style="font-family:'Sora';font-weight:800;font-size:16px">${v.label}</div>
+            </div>
+            <div style="background:${accentColor};border:var(--line);border-radius:999px;padding:5px 10px;font-size:11px;font-weight:1000;white-space:nowrap">${prog.count}/4 Done</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:10px">
+            ${skills.map((s,si) => `<div style="background:${prog.done[s]?accentColor:'white'};border:var(--line);border-radius:10px;padding:6px 4px;text-align:center;font-size:14px">${icons[si]}</div>`).join('')}
+          </div>
+          <div style="background:#e2e8f0;border-radius:8px;height:8px;border:2px solid var(--ink);overflow:hidden">
+            <div style="background:var(--ink);height:100%;width:${pct}%;transition:width .3s"></div>
+          </div>
+        </div>`;
+      }
+
+      return `<div${clickAttr} style="border:3px ${unlocked ? 'solid' : 'dashed'} ${borderColor};border-radius:20px;padding:14px;background:${bgColor}${clickable ? ';cursor:pointer' : ''}">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:44px;height:44px;min-width:44px;border:2px solid ${borderColor};border-radius:50%;display:grid;place-items:center;font-size:20px;background:white">${icon}</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:9px;font-weight:1000;text-transform:uppercase;letter-spacing:.1em;color:${tagColor};margin-bottom:2px">${v.tag}</div>
+            <div style="font-family:'Sora';font-weight:800;font-size:15px;color:${labelColor}">${v.label}</div>
+            <div style="font-size:11px;font-weight:800;color:${noteColor};margin-top:2px">${v.note}</div>
+          </div>
+          <div style="font-size:10px;font-weight:1000;color:${tagColor};white-space:nowrap">${statusText}</div>
+        </div>
+      </div>`;
+    }
+
+    const g1 = document.getElementById('phase1Grid');
+    const g2 = document.getElementById('phase2Grid');
+    const g3 = document.getElementById('phase3Grid');
+    if (g1) g1.innerHTML = PHASE1.map(v => vaultCard(v)).join('');
+    if (g2) g2.innerHTML = PHASE2.map(v => vaultCard(v)).join('');
+    if (g3) g3.innerHTML = PHASE3.map(v => vaultCard(v)).join('');
+  }
+
+  function openVault(vaultId) {
+    if (!isVaultUnlocked(vaultId)) {
+      const idx = VAULT_ORDER.indexOf(vaultId);
+      const prevLabel = idx > 0 ? (VAULT_LABELS[VAULT_ORDER[idx - 1]] || 'the previous vault') : '';
+      MUET.toast(`Complete all 4 components of ${prevLabel} first to unlock ${VAULT_LABELS[vaultId] || vaultId}.`);
+      return;
+    }
+    const vault = (MUET.VAULT_MAP && MUET.VAULT_MAP[vaultId]) || { id: vaultId, title: VAULT_LABELS[vaultId] || vaultId, type: 'practice' };
+    MUET.saveActiveVault({ vaultId: vault.id, vaultTitle: vault.title, vaultType: vault.type });
+    // Route to the correct welcome page for this specific vault
+    MUET.goPage(resolveVaultPage(vaultId));
+  }
+
+  // ── Progress tab switcher ─────────────────────────────────────────
+  function progTab(id) {
+    ['dash','vaults','badges'].forEach(t => {
+      document.getElementById('prog-'+t).style.display    = t === id ? 'block' : 'none';
+      document.getElementById('ptab-'+t).classList.toggle('prog-tab-active', t === id);
+    });
+    if (id === 'vaults') renderVaultHistory();
+    if (id === 'badges') renderBadges();
+  }
+
+  // ── Full skills list ──────────────────────────────────────────────
+  const SKILLS_LIST = [
+    ['speaking','Speaking','🎤','#0757ff','white'],
+    ['reading','Reading','📖','#19d58a','var(--ink)'],
+    ['listening','Listening','🎧','#ffc400','var(--ink)'],
+    ['writing','Writing','✍️','#ff70b8','var(--ink)']
+  ];
+
+  // ── All vaults in order ────────────────────────────────────────────
+  const ALL_VAULTS = [
+    { id:'VAULT-01', label:'Vault 1',      type:'practice', accentColor:'var(--yellow)' },
+    { id:'VAULT-02', label:'Vault 2',      type:'practice', accentColor:'var(--yellow)' },
+    { id:'VAULT-03', label:'Vault 3',      type:'practice', accentColor:'var(--yellow)' },
+    { id:'MOCK-01',  label:'Mock MUET Practice 1',  type:'mock',     accentColor:'var(--pink)'   },
+    { id:'VAULT-04', label:'Vault 4',      type:'practice', accentColor:'var(--yellow)' },
+    { id:'VAULT-05', label:'Vault 5',      type:'practice', accentColor:'var(--yellow)' },
+    { id:'VAULT-06', label:'Vault 6',      type:'practice', accentColor:'var(--yellow)' },
+    { id:'MOCK-02',  label:'Mock MUET Practice 2',  type:'mock',     accentColor:'var(--pink)'   },
+    { id:'VAULT-07', label:'Vault 7',      type:'practice', accentColor:'var(--yellow)' },
+    { id:'VAULT-08', label:'Vault 8',      type:'practice', accentColor:'var(--yellow)' },
+    { id:'VAULT-09', label:'Vault 9',      type:'practice', accentColor:'var(--yellow)' },
+    { id:'MOCK-03',  label:'Mock MUET Practice 3',  type:'mock',     accentColor:'var(--pink)'   }
+  ];
+
+  function getVaultScore(vaultId, skill) {
+    const list = MUET.loadSessions(skill);
+    const hits = list.filter(s => s.vaultId === vaultId);
+    if (!hits.length) return null;
+    const l = hits[hits.length - 1];
+    return l.score90 ?? l.score ?? null;
+  }
+
+  function renderProgress() {
+    // ── Dashboard tab ─────────────────────────────────────────────
+    const allScores = {};
+    SKILLS_LIST.forEach(([skill]) => { allScores[skill] = MUET.latestScore(skill); });
+    const total = Object.values(allScores).reduce((s,v) => s+v, 0);
+    const b     = MUET.calcBand(total);
+    const pct   = Math.round(total / 360 * 100);
+
+    document.getElementById('pd-band').textContent    = 'Band ' + b;
+    document.getElementById('pd-bandmsg').textContent = MUET.bandMessage(b);
+    document.getElementById('pd-pct').textContent     = pct + '%';
+    document.getElementById('pd-disc').style.setProperty('--p', pct + '%');
+    const tsEl = document.getElementById('totalScore');
+    if (tsEl) tsEl.textContent = `${total} / 360  ·  Band ${b}`;
+
+    const pr = document.getElementById('progRows');
+    if (pr) {
+      pr.innerHTML = SKILLS_LIST.map(([skill, label, icon, color, tc]) => {
+        const s  = allScores[skill];
+        const pc = Math.round(s / 90 * 100);
+        const bnd= MUET.scoreToBand(s);
+        return `<div>
+          <div style="display:flex;justify-content:space-between;font-weight:1000;margin-bottom:5px;align-items:center">
+            <span>${icon} ${label}</span>
+            <div style="display:flex;gap:8px;align-items:center">
+              <span style="background:${color};color:${tc};border:2px solid var(--ink);border-radius:999px;padding:3px 9px;font-size:11px;font-weight:1000">Band ${bnd}</span>
+              <span style="font-weight:1000">${s}/90</span>
+            </div>
+          </div>
+          <div class="prog-bar"><span style="width:${pc}%;background:${color}"></span></div>
+        </div>`;
+      }).join('');
+    }
+
+    // Target gap
+    const p      = MUET.loadProfile();
+    const target = p?.targetBand || '4.0';
+    const targetScoreMap = { '3.5':164, '4.0':211, '4.5':258, '5.0':294, '5+':331 };
+    const targetTotal = targetScoreMap[target] || 211;
+    const gap         = Math.max(0, targetTotal - total);
+    const gapEl = document.getElementById('pd-gap');
+    if (gapEl) {
+      if (total === 0) {
+        gapEl.innerHTML = `Start your first vault to begin tracking your band gap.`;
+      } else if (gap === 0) {
+        gapEl.innerHTML = `🎉 You have reached your target Band ${target}! Consider pushing for a higher band.`;
+      } else {
+        const perComp = Math.ceil(gap / 4);
+        gapEl.innerHTML = `
+          <div>Your target: <b>Band ${target} (${targetTotal}/360)</b></div>
+          <div style="margin-top:6px">Current total: <b>${total}/360</b></div>
+          <div style="margin-top:6px">Gap to close: <b>${gap} marks</b> — approximately <b>${perComp} marks per component</b></div>
+          <div style="margin-top:8px;background:white;border:2px solid var(--ink);border-radius:12px;padding:10px">
+            ${SKILLS_LIST.map(([skill,label,icon]) => {
+              const needed = Math.max(0, Math.ceil(targetTotal/4) - allScores[skill]);
+              return `<div>${icon} ${label}: ${needed > 0 ? `need +${needed} more` : '✅ on track'}</div>`;
+            }).join('')}
+          </div>`;
+      }
+    }
+
+    // Latest feedback
+    const fr = document.getElementById('feedbackRows');
+    if (fr) {
+      fr.innerHTML = SKILLS_LIST.map(([skill, label, icon]) => {
+        const s   = allScores[skill];
+        const fb  = MUET.feedbackText(skill, s);
+        const clr = s >= 74 ? '#dcfce7' : s >= 53 ? '#fef9c3' : '#fce7f3';
+        const list = MUET.loadSessions(skill);
+        const last = list.length ? list[list.length-1] : null;
+        const date = last?.date ? new Date(last.date).toLocaleDateString('en-MY',{day:'numeric',month:'short'}) : '—';
+        return `<div style="background:${clr};border:2px solid var(--ink);border-radius:14px;padding:12px">
+          <div style="display:flex;justify-content:space-between;font-weight:1000;margin-bottom:6px">
+            <span>${icon} ${label}</span><small style="color:var(--muted)">${date}</small></div>
+          <p style="font-size:13px;font-weight:800">${fb || 'No attempt yet. Open this module to start.'}</p></div>`;
+      }).join('');
+    }
+  }
+
+  // ── Vault History tab ────────────────────────────────────────────
+  function renderVaultHistory() {
+    const el = document.getElementById('vaultHistoryList');
+    if (!el) return;
+
+    el.innerHTML = ALL_VAULTS.map(vault => {
+      const scores = {};
+      let anyAttempt = false;
+      SKILLS_LIST.forEach(([skill]) => {
+        const s = getVaultScore(vault.id, skill);
+        scores[skill] = s;
+        if (s !== null) anyAttempt = true;
+      });
+
+      const validScores = Object.values(scores).filter(s => s !== null);
+      const completed   = validScores.length === 4;
+      const total       = validScores.reduce((s,v) => s+v, 0);
+      const band        = completed ? MUET.calcBand(total) : null;
+      const count       = validScores.length;
+
+      const typeLabel = { starter:'Starter', practice:'Practice', mock:'Mock Exam' }[vault.type] || '';
+
+      // Compact locked state
+      if (!anyAttempt) {
+        return `<div style="border:3px dashed #94a3b8;border-radius:20px;padding:14px;opacity:.6">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:40px;height:40px;border:2px solid #94a3b8;border-radius:50%;display:grid;place-items:center;font-size:18px;color:#94a3b8">🔒</div>
+            <div>
+              <div style="font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8">${typeLabel}</div>
+              <div style="font-family:'Sora';font-weight:800;font-size:16px;color:#94a3b8">${vault.label}</div>
+            </div>
+            <div style="margin-left:auto;font-size:11px;font-weight:1000;color:#94a3b8">Not started</div>
+          </div>
+        </div>`;
+      }
+
+      // Attempted vault
+      const roundup = MUET.loadRoundup(vault.id);
+      const dateStr  = roundup?.completedAt
+        ? new Date(roundup.completedAt).toLocaleDateString('en-MY',{day:'numeric',month:'short',year:'numeric'})
+        : '—';
+
+      return `<div style="background:var(--paper);border:var(--line);box-shadow:var(--shadow);border-radius:22px;overflow:hidden">
+        <!-- Header -->
+        <div style="background:${vault.accentColor};padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:var(--line)">
+          <div>
+            <div style="font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.1em;opacity:.7">${typeLabel}</div>
+            <div style="font-family:'Sora';font-weight:800;font-size:18px">${vault.label}</div>
+          </div>
+          <div style="background:white;border:var(--line);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:1000;white-space:nowrap">
+            ${completed ? `✅ Band ${band}` : `${count}/4 Done`}
+          </div>
+        </div>
+
+        <!-- Component scores row -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:2px solid rgba(0,0,0,.08)">
+          ${SKILLS_LIST.map(([skill, label, icon, color, tc]) => {
+            const s = scores[skill];
+            const bnd = s !== null ? MUET.scoreToBand(s) : null;
+            return `<div style="padding:12px 8px;text-align:center;border-right:2px solid rgba(0,0,0,.07)">
+              <div style="font-size:20px">${icon}</div>
+              <div style="font-family:'Sora';font-size:15px;font-weight:800;margin:2px 0">${s !== null ? s : '—'}</div>
+              <div style="font-size:10px;font-weight:1000;color:var(--muted)">${s !== null ? `Band ${bnd}` : 'pending'}</div>
+            </div>`;
+          }).join('')}
+        </div>
+
+        <!-- Total + feedback -->
+        <div style="padding:12px 16px">
+          ${completed ? `
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+              <div>
+                <span style="font-family:'Sora';font-size:22px;font-weight:800">${total}/360</span>
+                <span style="background:var(--ink);color:white;border-radius:999px;padding:3px 10px;font-size:11px;font-weight:1000;margin-left:8px">Band ${band}</span>
+              </div>
+              <small style="color:var(--muted);font-weight:900">${dateStr}</small>
+            </div>
+            ${SKILLS_LIST.map(([skill, label, icon]) => {
+              const s = scores[skill];
+              if (s === null) return '';
+              const fb = MUET.feedbackText(skill, s);
+              return `<div style="margin-bottom:6px;font-size:12px;font-weight:800;color:var(--muted)">${icon} <b>${label}:</b> ${fb.split('.')[0]}.</div>`;
+            }).join('')}
+            ${roundup?.reflection ? `<div style="margin-top:10px;background:#f0fdf4;border:2px solid var(--ink);border-radius:12px;padding:10px;font-size:12px;font-weight:800"><b>Your reflection:</b> ${roundup.reflection}</div>` : ''}
+          ` : `
+            <div style="font-size:13px;font-weight:800;color:var(--muted)">${count} of 4 components completed. Return to this vault to finish the remaining components.</div>
+            <div style="margin-top:8px">
+              ${SKILLS_LIST.map(([skill, label, icon]) => {
+                const s = scores[skill];
+                return `<span style="display:inline-block;border:2px solid var(--ink);border-radius:999px;background:${s !== null ? 'var(--lime)' : 'white'};padding:3px 9px;font-size:11px;font-weight:1000;margin:2px">${icon} ${label} ${s !== null ? '✓' : '—'}</span>`;
+              }).join('')}
+            </div>
+          `}
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // ── Badges tab ───────────────────────────────────────────────────
+  function renderBadges() {
+    const p  = MUET.loadProfile(); if (!p) return;
+    const bg = document.getElementById('badgeGrid'); if (!bg) return;
+    const earned = p.badges || [];
+    const BADGE_DEF = [
+      ['✨','First Step','first_step','Register and create your profile'],
+      ['🎤','PREP Starter','prep_starter','Submit your first Speaking Task A'],
+      ['💬','Discussion Builder','discussion_builder','Submit your first Speaking Task B'],
+      ['📖','Passage Hunter','passage_hunter','Submit your first Reading practice'],
+      ['🎧','Audio Focus','audio_focus','Submit your first Listening practice'],
+      ['✍️','Essay Builder','essay_builder','Submit your first Writing task'],
+      ['🏆','Vault Finisher','vault_finisher','Complete all 4 components in one vault'],
+      ['🎯','Mock Finisher','mock_finisher','Complete a Final Mock Exam'],
+      ['📈','Band Climber','band_climber','Score higher than your previous vault']
+    ];
+    bg.innerHTML = BADGE_DEF.map(([icon,name,id,hint]) => {
+      const done = earned.includes(id);
+      return `<div style="border:var(--line);border-radius:16px;background:${done?'var(--lime)':'white'};box-shadow:3px 3px 0 var(--ink);padding:14px 8px;text-align:center;${done?'':'filter:grayscale(1);opacity:.55'}">
+        <span style="font-size:30px;display:block;margin-bottom:6px">${done?icon:'🔒'}</span>
+        <b style="font-size:12px;display:block">${name}</b>
+        <small style="color:var(--muted);display:block;margin-top:4px;font-size:10px;font-weight:900">${done?'Unlocked':''+hint}</small>
+      </div>`;
+    }).join('');
+  }
+
+  function fillEdit() {
+    const p = MUET.loadProfile(); if (!p) return;
+    const set = (id, v) => { const el = document.getElementById(id); if (el) el.value = v; };
+    set('editName',  p.name       || '');
+    set('editEmail', p.email      || '');
+    set('editRegNo', p.regNo      || '');
+    set('editGroup', p.group      || '');
+    set('editBand',  p.targetBand || '4.0');
+  }
+
+  function resetAll() {
+    if (!confirm('Reset all Smart MUET Guide data? This cannot be undone.')) return;
+    Object.values(MUET.LS).forEach(k => localStorage.removeItem(k));
+    ['speaking','reading','listening','writing'].forEach(s => localStorage.removeItem(MUET.LS[s]));
+    MUET.toast('App reset.'); setTimeout(() => location.reload(), 500);
+  }
+
+  function toggleGuide(id) {
+    const body = document.getElementById('gbody-' + id);
+    const chev = document.getElementById('gchev-' + id);
+    if (!body || !chev) return;
+    const open = body.style.display === 'none';
+    body.style.display = open ? 'block' : 'none';
+    chev.textContent   = open ? '▴' : '▾';
+  }
+
+  function toggleTip(id) {
+    const el   = document.getElementById(id);
+    const chev = document.getElementById(id + '-chev');
+    if (!el) return;
+    const open = el.style.display === 'none';
+    el.style.display   = open ? 'block' : 'none';
+    if (chev) chev.textContent = open ? '▴' : '▾';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    window.scrollTo(0, 0);
+    init();
+    requestAnimationFrame(() => window.scrollTo(0, 0));
+  });
+
+  // Chrome can restore an old scroll position when returning to a tab or
+  // reloading from the back-forward cache. Reset it whenever the page appears.
+  window.addEventListener('pageshow', () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  });
+
+  window.addEventListener('load', () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  });
+  return { goTo, openVault, resetAll, progTab, toggleGuide, toggleTip };
+})();  // ── Quick Info Accordion toggle ─────────────────────────────────
+  function toggleQI(card) {
+    const expanded = card.querySelector('.qi-expanded');
+    const chevron  = card.querySelector('.qi-chevron');
+    if (!expanded) return;
+    const isOpen = expanded.style.display !== 'none';
+    expanded.style.display = isOpen ? 'none' : 'block';
+    if (chevron) chevron.textContent = isOpen ? '›' : '⌄';
+  }
+
+</script>
+</body>
 </html>

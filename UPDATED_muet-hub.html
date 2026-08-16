@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MUET SmartHub 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/muet-neopop.css?v=2"/>
+</head>
+<body>
+  <main class="phone-shell">
+
+    <!-- REGISTER SCREEN -->
+    <section id="registerScreen" class="screen active">
+      <div class="brand-bar">
+        <div class="crown-logo">M</div>
+        <div>
+          <div class="brand-small">POLIPD · ELU · 2026</div>
+          <div class="brand-title">MUET SmartHub</div>
+        </div>
+      </div>
+
+      <div class="hero-neo hero-yellow">
+        <div class="hero-copy">
+          <p class="tiny">AI-Powered MUET Learning Companion</p>
+          <h1>Practise.<br>Check.<br>Improve.</h1>
+          <p>One guided dashboard for Speaking, Reading, Listening and Writing.</p>
+        </div>
+        <div class="hero-illustration">
+          <div class="face hair"></div>
+          <div class="bubble b1">B4</div>
+          <div class="bubble b2">XP</div>
+        </div>
+      </div>
+
+      <div class="neo-panel">
+        <h2>Create Profile</h2>
+        <p class="sub">Register once. Use the same profile across all modules.</p>
+
+        <form id="profileForm" class="form">
+          <label>Full Name
+            <input id="name" required placeholder="e.g. Aisyah Ahmad"/>
+          </label>
+          <label>Student No.
+            <input id="regNo" required placeholder="e.g. 06DPR23F1001"/>
+          </label>
+          <label>Class / Group
+            <input id="group" required placeholder="e.g. DPR3A"/>
+          </label>
+          <label>Target Band
+            <select id="targetBand">
+              <option value="3.5">Band 3.5</option>
+              <option value="4.0" selected>Band 4.0</option>
+              <option value="4.5">Band 4.5</option>
+              <option value="5.0">Band 5.0</option>
+              <option value="5+">Band 5+</option>
+            </select>
+          </label>
+          <button class="neo-btn yellow" type="submit">Start My Journey →</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- HOME SCREEN -->
+    <section id="homeScreen" class="screen">
+      <div class="brand-bar dark">
+        <div class="crown-logo yellow">M</div>
+        <div>
+          <div class="brand-small">Welcome back</div>
+          <div id="welcomeName" class="brand-title">MUET Learner</div>
+        </div>
+        <button onclick="MuetNeo.show('profileScreen')" class="hamb">👤</button>
+      </div>
+
+      <div class="dashboard-card">
+        <div>
+          <p class="tiny">Overall Band Estimate</p>
+          <h1 id="overallBand">Band 0.0</h1>
+          <p id="bandMessage">Complete your first task to activate tracking.</p>
+        </div>
+        <div class="band-disc">
+          <span id="overallPercent">0%</span>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-card red"><span>🔥</span><b id="streak">0</b><small>Streak</small></div>
+        <div class="stat-card blue"><span>⭐</span><b id="xp">0</b><small>XP</small></div>
+        <div class="stat-card green"><span>🎯</span><b id="targetDisplay">4.0</b><small>Target</small></div>
+      </div>
+
+      <div class="instruction-card yellow">
+        <h2>Your Smart MUET Flow</h2>
+        <ol>
+          <li>Go to <b>Study Vault</b> and choose one vault to start.</li>
+          <li>Complete all four components: Speaking, Reading, Listening and Writing.</li>
+          <li>Return to the Hub to check your score, progress and badges.</li>
+          <li>Use the dashboard to identify your weakest component before the next vault.</li>
+        </ol>
+      </div>
+
+      <div class="section-head">
+        <h2>Skill Modules</h2>
+      </div>
+
+      <div class="module-grid">
+        <button class="module-card m-speaking" onclick="MuetNeo.openModule('speaking.html')">
+          <div class="module-icon">🎤</div>
+          <h3>Speaking</h3>
+          <p>PREP · Task A/B</p>
+          <div class="scorebar"><span id="speakingBar"></span></div>
+          <small id="speakingScore">No attempt</small>
+        </button>
+
+        <button class="module-card m-reading" onclick="MuetNeo.openModule('reading.html')">
+          <div class="module-icon">📖</div>
+          <h3>Reading</h3>
+          <p>Q-first · Timed</p>
+          <div class="scorebar"><span id="readingBar"></span></div>
+          <small id="readingScore">No attempt</small>
+        </button>
+
+        <button class="module-card m-listening" onclick="MuetNeo.openModule('listening.html')">
+          <div class="module-icon">🎧</div>
+          <h3>Listening</h3>
+          <p>Audio · Keywords</p>
+          <div class="scorebar"><span id="listeningBar"></span></div>
+          <small id="listeningScore">No attempt</small>
+        </button>
+
+        <button class="module-card m-writing" onclick="MuetNeo.openModule('writing.html')">
+          <div class="module-icon">✍️</div>
+          <h3>Writing</h3>
+          <p>Email · Essay</p>
+          <div class="scorebar"><span id="writingBar"></span></div>
+          <small id="writingScore">No attempt</small>
+        </button>
+      </div>
+
+      <div id="focusBox" class="focus-box">
+        <div class="tag">TODAY'S FOCUS</div>
+        <h2 id="focusTitle">Start with Speaking</h2>
+        <p id="focusText">Complete one short Task A using PREP structure.</p>
+        <button id="focusBtn" class="neo-btn black">Open Focus Skill</button>
+      </div>
+
+      <div class="neo-panel">
+        <div class="section-head no-margin">
+          <h2>Study Vault Journey</h2>
+          <span class="mini-badge">NEW FORMAT</span>
+        </div>
+        <p class="sub" style="margin-bottom:10px">Complete all 4 components in each vault to track your progress.</p>
+        <div class="cycle-strip" id="cycleStrip"></div>
+      </div>
+    </section>
+
+    <!-- STUDY VAULT SCREEN -->
+    <section id="vaultScreen" class="screen">
+      <div class="brand-bar dark">
+        <button onclick="MuetNeo.show('homeScreen')" class="hamb">←</button>
+        <div>
+          <div class="brand-small">Guided Practice</div>
+          <div class="brand-title">Study Vault</div>
+        </div>
+        <button class="hamb">🔒</button>
+      </div>
+
+      <div class="instruction-card green">
+        <h2>How to Use Study Vault</h2>
+        <ol>
+          <li>Choose a vault below — start with <b>Starter Vault</b> if it's your first time.</li>
+          <li>Complete all four components: Speaking, Reading, Listening and Writing.</li>
+          <li>Your progress is saved after each component submission.</li>
+          <li>Return here after completing all four to see your Vault Round-Up score.</li>
+        </ol>
+      </div>
+
+      <div id="vaultList" class="vault-list"></div>
+    </section>
+
+    <!-- PROGRESS SCREEN -->
+    <section id="progressScreen" class="screen">
+      <div class="brand-bar dark">
+        <button onclick="MuetNeo.show('homeScreen')" class="hamb">←</button>
+        <div>
+          <div class="brand-small">Analytics</div>
+          <div class="brand-title">Progress</div>
+        </div>
+        <button class="hamb">📈</button>
+      </div>
+
+      <div class="neo-panel">
+        <h2>Component Performance</h2>
+        <div id="progressRows"></div>
+      </div>
+
+      <div class="neo-panel">
+        <h2>Completion Badges</h2>
+        <div id="badges" class="badge-grid"></div>
+      </div>
+    </section>
+
+    <!-- PROFILE SCREEN -->
+    <section id="profileScreen" class="screen">
+      <div class="brand-bar dark">
+        <button onclick="MuetNeo.show('homeScreen')" class="hamb">←</button>
+        <div>
+          <div class="brand-small">Settings</div>
+          <div class="brand-title">Profile</div>
+        </div>
+        <button class="hamb">⚙️</button>
+      </div>
+
+      <!-- 🎨 NEW: PROFILE HERO SECTION -->
+      <div class="profile-hero-section">
+        <div class="profile-hero-card">
+          <!-- Profile Photo -->
+          <div class="profile-photo-display">
+            <img id="profileHeroPhoto" 
+                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='40' r='30' fill='%23ccc'/%3E%3Cellipse cx='50' cy='75' rx='40' ry='25' fill='%23ccc'/%3E%3C/svg%3E" 
+                 alt="Profile photo" 
+                 class="profile-avatar">
+            <div class="photo-upload-badge">📷</div>
+          </div>
+
+          <!-- Profile Info -->
+          <div class="profile-hero-info">
+            <h2 id="profileHeroName">Student Name</h2>
+            <div class="profile-quick-stats">
+              <div class="stat-item target">
+                <span class="label">Target</span>
+                <span class="value" id="profileHeroTarget">Band 4.0</span>
+              </div>
+              <div class="stat-item current">
+                <span class="label">Current</span>
+                <span class="value" id="profileHeroCurrent">Band 0.0</span>
+              </div>
+            </div>
+            <div class="profile-engagement-stats">
+              <span class="engagement-stat">
+                <span class="emoji">🔥</span>
+                <span class="text"><span id="profileHeroStreak">0</span>-day streak</span>
+              </span>
+              <span class="engagement-stat">
+                <span class="emoji">⭐</span>
+                <span class="text"><span id="profileHeroXP">0</span> XP</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Student Profile Form -->
+      <div class="neo-panel">
+        <h2>Student Profile</h2>
+        <form id="editForm" class="form">
+          
+          <label>Full Name
+            <input id="editName"/>
+          </label>
+
+          <!-- 🎨 NEW: Photo Upload Section -->
+          <label>Profile Photo
+            <div class="photo-upload-section">
+              <div class="current-photo-preview">
+                <img id="editPhotoPreview" 
+                     src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='40' r='30' fill='%23e0e0e0'/%3E%3Cellipse cx='50' cy='75' rx='40' ry='25' fill='%23e0e0e0'/%3E%3C/svg%3E" 
+                     alt="Profile preview">
+              </div>
+              <div class="photo-upload-buttons">
+                <button type="button" class="photo-btn upload-btn" onclick="document.getElementById('photoInput').click()">
+                  📱 Upload Photo
+                </button>
+                <button type="button" class="photo-btn camera-btn" onclick="MuetNeo.requestCameraPhoto()">
+                  📷 Take Selfie
+                </button>
+              </div>
+              <input type="file" 
+                     id="photoInput" 
+                     accept="image/*" 
+                     style="display:none" 
+                     onchange="MuetNeo.handlePhotoUpload(event)">
+            </div>
+          </label>
+
+          <label>Student No.
+            <input id="editRegNo"/>
+          </label>
+
+          <label>Class / Group
+            <input id="editGroup"/>
+          </label>
+
+          <label>Target Band
+            <select id="editTarget">
+              <option value="3.5">Band 3.5</option>
+              <option value="4.0">Band 4.0</option>
+              <option value="4.5">Band 4.5</option>
+              <option value="5.0">Band 5.0</option>
+              <option value="5+">Band 5+</option>
+            </select>
+          </label>
+
+          <button class="neo-btn yellow" type="submit">Save Profile</button>
+          <button class="neo-btn pink" type="button" onclick="MuetNeo.resetAll()">Reset App</button>
+        </form>
+      </div>
+    </section>
+
+    <nav id="nav" class="bottom-nav">
+      <button class="active" onclick="MuetNeo.show('homeScreen')">⌂<span>Home</span></button>
+      <button onclick="MuetNeo.show('vaultScreen')">🔒<span>Vault</span></button>
+      <button onclick="MuetNeo.show('progressScreen')">◉<span>Progress</span></button>
+      <button onclick="MuetNeo.show('profileScreen')">☻<span>Profile</span></button>
+    </nav>
+
+    <div id="toast" class="toast">Saved</div>
+  </main>
+
+  <script src="js/muet-neopop.js?v=2"></script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <title>Starter Vault Round-Up · Smart MUET Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/muet-guide.css?v=20260726-1"/>
+  <link rel="stylesheet" href="css/responsive-fix.css?v=20260726-1">
+</head>
+<body>
+<main class="app-shell">
+<section class="screen active" style="padding-bottom:30px">
+
+  <div class="brand-bar">
+    <button class="icon-btn" onclick="location.href='index.html'" style="margin-left:0;margin-right:8px">🏠</button>
+    <div>
+      <div class="bar-label">Starter Vault Complete</div>
+      <div class="bar-title">Vault Round-Up</div>
+    </div>
+    <button class="icon-btn">🏆</button>
+  </div>
+
+  <!-- Celebration hero -->
+  <div class="card lime" style="text-align:center;padding:24px">
+    <div style="font-size:52px;margin-bottom:8px">⭐</div>
+    <h2 style="font-size:24px">Starter Vault Complete!</h2>
+    <p style="margin-top:8px;font-weight:800" id="heroMsg">You completed all four sample components. Check your results below.</p>
+  </div>
+
+  <!-- Total score card -->
+  <div class="card blue">
+    <p class="tiny" style="color:rgba(255,255,255,.7)">Starter Vault Overall Score</p>
+    <div class="roundup-total" style="margin-top:10px;margin-bottom:0">
+      <div>
+        <div class="big" id="totalScore" style="color:white">0 / 360</div>
+        <div style="color:rgba(255,255,255,.7);font-size:13px;font-weight:900;margin-top:4px" id="totalBandLabel">Band —</div>
+      </div>
+      <div class="band-disc" id="bandDisc"><span id="totalPct">0%</span></div>
+    </div>
+    <p style="color:rgba(255,255,255,.82);font-weight:800;font-size:13px;margin-top:12px" id="bandAdvice"></p>
+  </div>
+
+  <!-- Component breakdown -->
+  <div class="card">
+    <h2>Component Breakdown</h2>
+    <div class="roundup-grid" id="compGrid" style="margin-top:14px"></div>
+  </div>
+
+  <!-- Strengths and focus -->
+  <div class="card yellow">
+    <h2>Strengths &amp; Focus Area</h2>
+    <div id="strengthFocus" style="display:grid;gap:12px;margin-top:12px">
+      <div style="background:white;border:var(--line);border-radius:14px;padding:12px">
+        <div style="font-size:11px;font-weight:1000;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:6px">✅ Your Strongest Component</div>
+        <div id="strongLabel" style="font-family:'Sora';font-size:20px;font-weight:800">—</div>
+        <div id="strongFb" style="font-size:13px;font-weight:800;color:var(--muted);margin-top:4px"></div>
+      </div>
+      <div style="background:white;border:var(--line);border-radius:14px;padding:12px">
+        <div style="font-size:11px;font-weight:1000;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:6px">⚡ Focus Area for Vault 1</div>
+        <div id="focusLabel" style="font-family:'Sora';font-size:20px;font-weight:800">—</div>
+        <div id="focusFb" style="font-size:13px;font-weight:800;color:var(--muted);margin-top:4px"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Next action -->
+  <div class="card" style="background:var(--ink);color:white">
+    <h2 style="color:var(--lime)">You Are Ready for Vault 1</h2>
+    <div id="nextAction" style="margin-top:12px;font-weight:800;font-size:14px;line-height:1.6"></div>
+  </div>
+
+  <!-- Achievement summary -->
+  <div class="card lime">
+    <h2>🏅 Starter Vault Achievements</h2>
+    <div id="achieveList" style="display:grid;gap:8px;margin-top:12px;font-weight:900;font-size:14px"></div>
+  </div>
+
+  <!-- Action buttons -->
+  <div style="display:grid;gap:10px;margin-top:4px">
+    <button class="btn yellow" onclick="location.href='vault1-welcome.html'">🚀 Open Vault 1 →</button>
+    <button class="btn white" onclick="location.href='starter-welcome.html'">← Back to Starter Vault</button>
+    <button class="btn black" onclick="location.href='index.html'">🏠 Return to Hub Dashboard</button>
+  </div>
+
+</section>
+</main>
+<div id="toast" class="toast"></div>
+<script src="js/muet-shared.js?v=20260726-1"></script>
+<script>
+const VAULT_ID    = 'VAULT-00';
+const VAULT_TITLE = 'Starter Vault';
+
+const COMP_CONFIG = [
+  { key:'speaking',  label:'Speaking',  icon:'🎤', color:'#0757ff', textColor:'white' },
+  { key:'reading',   label:'Reading',   icon:'📖', color:'#19d58a', textColor:'var(--ink)' },
+  { key:'listening', label:'Listening', icon:'🎧', color:'#ffc400', textColor:'var(--ink)' },
+  { key:'writing',   label:'Writing',   icon:'✍️', color:'#ff70b8', textColor:'var(--ink)' }
+];
+
+function getVaultScore(skill) {
+  const list = MUET.loadSessions(skill);
+  const hits  = list.filter(s => s.vaultId === VAULT_ID);
+  if (!hits.length) return 0;
+  const l = hits[hits.length-1];
+  return l.score90 || l.score || 0;
+}
+
+function render() {
+  const scores = {};
+  COMP_CONFIG.forEach(c => { scores[c.key] = getVaultScore(c.key); });
+
+  const total = Object.values(scores).reduce((s,v) => s+v, 0);
+  const b     = MUET.calcBand(total);
+  const pct   = Math.round(total / 360 * 100);
+
+  document.getElementById('totalScore').textContent    = `${total} / 360`;
+  document.getElementById('totalBandLabel').textContent = `Estimated Band ${b}`;
+  document.getElementById('totalPct').textContent       = pct + '%';
+  document.getElementById('bandDisc').style.setProperty('--p', pct + '%');
+  document.getElementById('bandAdvice').textContent     = MUET.bandMessage(b);
+
+  const allDone = Object.values(scores).every(s => s > 0);
+  document.getElementById('heroMsg').textContent = allDone
+    ? `You completed all four components. Total: ${total}/360 · Band ${b}`
+    : 'Some components are still incomplete. Return to Starter Vault to finish.';
+
+  // Component grid
+  const grid = document.getElementById('compGrid');
+  grid.innerHTML = COMP_CONFIG.map(c => {
+    const s  = scores[c.key];
+    const cb = MUET.scoreToBand(s);
+    return `<div class="roundup-cell" style="background:${c.color};color:${c.textColor}">
+      <span style="font-size:26px">${c.icon}</span>
+      <span class="rscore">${s}/90</span>
+      <span class="rlabel" style="color:${c.textColor};opacity:.8">${c.label}</span>
+      <span style="font-size:11px;font-weight:1000;margin-top:4px;display:block">Band ${cb}</span>
+    </div>`;
+  }).join('');
+
+  // Strongest / focus
+  const sorted  = COMP_CONFIG.slice().sort((a,b) => scores[b.key] - scores[a.key]);
+  const strong  = sorted[0];
+  const weakest = sorted[sorted.length-1];
+
+  document.getElementById('strongLabel').textContent = `${strong.icon} ${strong.label} — ${scores[strong.key]}/90`;
+  document.getElementById('strongFb').textContent    = MUET.feedbackText(strong.key, scores[strong.key]).split('.')[0] + '.';
+  document.getElementById('focusLabel').textContent  = `${weakest.icon} ${weakest.label} — ${scores[weakest.key]}/90`;
+  document.getElementById('focusFb').textContent     = MUET.feedbackText(weakest.key, scores[weakest.key]);
+
+  // Next action
+  const actions = {
+    speaking:  'In Vault 1, use PREP every time for Task A. For Task B, practise inviting other speakers and helping the group agree.',
+    reading:   'In Vault 1, read the questions before the passage. Identify whether answers are direct retrieval, paraphrase or inference.',
+    listening: 'In Vault 1, write only keywords — not full sentences. Wait for distractor correction words like "but" or "actually".',
+    writing:   'In Vault 1, cover all Task 1 bullet points. For Task 2, state your thesis in the first sentence using a clear stand.'
+  };
+  document.getElementById('nextAction').innerHTML =
+    `<p>Your weakest component in this sample set was <b>${weakest.label}</b>.</p>
+    <div style="background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.3);border-radius:14px;padding:12px;margin-top:8px">${actions[weakest.key] || 'Keep practising all four components.'}</div>
+    <p style="margin-top:12px;font-size:13px;opacity:.8">Vault 1 uses a real MUET past paper. You now know the app flow — you are ready.</p>`;
+
+  // Achievements
+  const p      = MUET.loadProfile();
+  const earned = p?.badges || [];
+  const badgeMap = {
+    first_step:          '✨ First Step — profile created',
+    prep_starter:        '🎤 PREP Starter — first Speaking Task A submitted',
+    discussion_builder:  '💬 Discussion Builder — Task B submitted',
+    passage_hunter:      '📖 Passage Hunter — first Reading submitted',
+    audio_focus:         '🎧 Audio Focus — first Listening submitted',
+    essay_builder:       '✍️ Essay Builder — first Writing submitted',
+    vault_finisher:      '🏆 Vault Finisher — all four components completed'
+  };
+  const al = document.getElementById('achieveList');
+  const relevant = Object.entries(badgeMap).filter(([id]) => earned.includes(id));
+  al.innerHTML = relevant.length
+    ? relevant.map(([,text]) => `<div>${text}</div>`).join('')
+    : '<div style="color:var(--muted)">Complete all four components to unlock badges.</div>';
+
+  // Save roundup
+  MUET.saveRoundup(VAULT_ID, {
+    vaultId: VAULT_ID, scores, total, band: b,
+    strongest: strong.key, focus: weakest.key,
+    completedAt: new Date().toISOString()
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (!MUET.loadProfile()) { location.href = 'index.html'; return; }
+  render();
+});
+</script>
+</body>
+</html>

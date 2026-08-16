@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <title>Writing · Vault 1 · Smart MUET Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/muet-guide.css?v=20260726-1"/>
+  <style>
+    .wrt-hero { background:var(--pink); }
+    .flow-step { background:white;border:var(--line);border-radius:var(--r2);box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px; }
+    .flow-step-head { display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;font-weight:1000; }
+    .step-num { width:36px;height:36px;border:var(--line);border-radius:50%;background:var(--pink);display:grid;place-items:center;font-weight:1000;font-size:16px;flex-shrink:0; }
+    .flow-step-body { padding:0 16px 16px;border-top:2px solid rgba(0,0,0,.07); }
+    .task-tabs { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px; }
+    .task-tab  { border:var(--line);box-shadow:3px 3px 0 var(--ink);border-radius:14px;background:white;padding:11px;font-weight:1000;cursor:pointer; }
+    .task-tab.active { background:var(--yellow); }
+    .wc-display { font-family:"Sora";font-size:22px;font-weight:800; }
+    .wc-good   { color:#047857; }
+    .wc-warn   { color:#b45309; }
+    .wc-danger { color:#dc2626; }
+  
+    .practice-guide-panel{display:none;background:#FFF7CC;border:var(--line);border-radius:22px;box-shadow:5px 5px 0 var(--ink);padding:16px;margin:14px 0}
+    .practice-guide-panel.show{display:block}
+    .practice-guide-panel h3{margin:0 0 10px;font-size:20px}
+    .guide-grid{display:grid;gap:10px}
+    .guide-card{background:#fff;border:2px solid var(--ink);border-radius:15px;padding:12px;font-weight:850;line-height:1.45}
+    .btn.practice-guide-btn{background:#fff !important;color:#111 !important}
+    .btn.vault-menu-btn{background:#f65ab8 !important;color:#111 !important}
+    .btn.submit-standard{background:var(--yellow)!important;color:#111!important}
+    .guide-action-stack{display:grid;gap:12px;margin-top:14px}
+    .guide-secondary-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .practice-guide-panel{width:100%;margin-top:12px}
+
+  
+    .strategy-steps{display:grid;gap:10px}
+    .step-card{display:grid;grid-template-columns:48px 1fr;gap:10px;align-items:start;background:#fff;border:2px solid var(--ink);border-radius:16px;padding:10px;box-shadow:3px 3px 0 var(--ink)}
+    .step-letter{width:42px;height:42px;border:2px solid var(--ink);border-radius:12px;display:grid;place-items:center;font-size:24px;font-weight:1000;box-shadow:2px 2px 0 var(--ink)}
+    .step-letter.pink{background:#f65ab8}
+    .step-letter.orange{background:#ff8a00}
+    .step-letter.blue{background:#2563eb;color:#fff}
+    .step-letter.green{background:#00ff00}
+    .step-letter.yellow{background:#ffc400}
+    .step-letter.teal{background:#00d1b2}
+    .step-letter.purple{background:#a78bfa}
+    .step-title{font-size:16px;font-weight:1000;margin-bottom:2px}
+    .step-desc{font-size:13px;font-weight:850;color:#374151;line-height:1.45}
+    .mini-tip{background:#fff;border:2px solid var(--ink);border-radius:14px;padding:10px;font-weight:900;line-height:1.45}
+    .guide-secondary-row .practice-guide-btn{background:#fff!important;color:#111!important}
+    .guide-secondary-row .vault-menu-btn{background:#f65ab8!important;color:#111!important}
+
+    /* ── Planning box PEEL / note badges ── */
+    .plan-letter{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border:2px solid var(--ink);border-radius:6px;font-weight:1000;font-size:12px;margin-right:6px;vertical-align:middle}
+    .plan-letter.p1{background:#2563eb;color:#fff}
+    .plan-letter.e1{background:#ff8a00}
+    .plan-letter.e2{background:#00ff00}
+    .plan-letter.l1{background:#f65ab8}
+    .plan-note-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border:2px solid var(--ink);border-radius:999px;background:#ffc400;font-weight:1000;font-size:11px;margin-right:6px;vertical-align:middle}
+
+  </style>
+  <link rel="stylesheet" href="css/responsive-fix.css?v=20260726-1">
+</head>
+<body>
+<main class="app-shell">
+<section class="screen active">
+
+  <div class="brand-bar">
+    <button class="icon-btn" onclick="location.href=vaultWelcomePage" style="margin-left:0;margin-right:8px">←</button>
+    <div><div class="bar-label">Vault 1 · Component 4 of 4</div><div class="bar-title">SmartWriting</div></div>
+    <button class="icon-btn">✍️</button>
+  </div>
+
+  <div style="background:var(--paper);border:var(--line);border-radius:16px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;gap:12px">
+    <div style="flex:1">
+      <div style="font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:4px">Vault 1 Progress</div>
+      <div class="prog-bar"><span id="vaultProgBar" style="width:0%"></span></div>
+    </div>
+    <div id="vaultProgLabel" style="font-weight:1000;font-size:13px;white-space:nowrap">0/4</div>
+  </div>
+
+  <div class="card wrt-hero">
+    <p class="tiny" style="color:rgba(0,0,0,.5)">Writing 800/4 · Vault 1</p>
+    <h1 style="margin-top:6px">Write with purpose.</h1>
+    <p style="margin-top:8px;font-weight:800">Task 1 email/letter + Task 2 essay with rubric-based practice.</p>
+  </div>
+
+  <!-- Task tabs -->
+  <div class="task-tabs">
+    <button id="tabT1" class="task-tab active" onclick="Wrt.setTask('T1')">Task 1 — Email/Letter</button>
+    <button id="tabT2" class="task-tab" onclick="Wrt.setTask('T2')">Task 2 — Essay</button>
+  </div>
+
+  <!-- Practice — direct entry -->
+
+      <div class="timer-card yellow">
+        <div>
+          <p class="tiny" id="timerLbl">Task 1 Timer — 25 min</p>
+          <div id="timerDisp" class="timer-big">25:00</div>
+        </div>
+        <button class="btn black" style="width:auto;min-width:80px" id="timerBtn" onclick="Wrt.toggleTimer()">Start</button>
+      </div>
+
+      <!-- Prompt -->
+      <div class="card" style="background:#FFF7CC">
+        <h3 id="promptLabel">Writing Prompt — Task 1</h3>
+        <p id="promptText" style="margin-top:10px;font-weight:800;font-size:14px;line-height:1.5"></p>
+        <div id="bulletPoints" style="margin-top:10px;font-weight:850;font-size:13px;line-height:1.6"></div>
+      </div>
+
+      <!-- Coach note -->
+      <div class="coach-note pink" style="background:#FFF0A8">
+        <div class="tag">COACH NOTE</div>
+        <p id="wrtCoach"></p>
+      </div>
+
+      <!-- PLANNING BOX (task-aware — filled in by Wrt.renderPlanningBox) -->
+      <div style="background:#fff7cc;border:var(--line);box-shadow:var(--shadow);border-radius:var(--r2);padding:18px;margin-bottom:16px">
+        <div style="font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:10px">&#128196; PLANNING BOX &mdash; Plan before you write</div>
+        <p id="planningIntro" style="font-size:13px;font-weight:800;margin-bottom:10px">Spend 3&ndash;5 minutes here. Students who plan write clearer, more focused answers.</p>
+        <div id="planningFields" style="display:grid;gap:8px"></div>
+        <div style="background:var(--yellow);border:2px solid var(--ink);border-radius:12px;padding:8px 12px;margin-top:10px;font-size:12px;font-weight:1000">
+          &#9888;&#65039; Planning box is for your notes only &mdash; it is NOT submitted. Write your full answer in the box below.
+        </div>
+      </div>
+
+      <!-- Answer box -->
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <h2>Your Answer <span class="req">Required</span></h2>
+          <div>
+            <span class="wc-display" id="wcDisplay">0</span>
+            <small style="display:block;text-align:center;font-size:10px">words</small>
+          </div>
+        </div>
+        <p style="font-size:13px;font-weight:800;color:var(--muted);margin-bottom:10px" id="wcGuide">Task 1: minimum 100 words required</p>
+        <textarea id="answerBox" rows="10" placeholder="Begin writing your response here..." oninput="Wrt.countWords()"></textarea>
+      </div>      <!-- Rubric -->
+
+      <!-- USEFUL LANGUAGE BANK -->
+      <div style="background:var(--ink);border:var(--line);box-shadow:var(--shadow);border-radius:var(--r2);padding:18px;margin-bottom:16px">
+        <div style="font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.6);margin-bottom:12px">&#128218; USEFUL LANGUAGE BANK</div>
+        <div style="display:grid;gap:10px">
+          <div style="background:rgba(255,255,255,.1);border-radius:14px;padding:12px">
+            <div style="font-size:11px;font-weight:1000;text-transform:uppercase;color:var(--yellow);margin-bottom:6px">TASK 1 &mdash; EMAIL OPENERS</div>
+            <div style="font-size:12px;font-weight:800;color:white;line-height:1.7">
+              &ldquo;I am writing to&hellip;&rdquo; &middot; &ldquo;Thank you for your email regarding&hellip;&rdquo;<br>
+              &ldquo;I hope this email finds you well.&rdquo; &middot; &ldquo;I am delighted to inform you that&hellip;&rdquo;<br>
+              Closing: &ldquo;Yours sincerely,&rdquo; &middot; &ldquo;Kind regards,&rdquo; &middot; &ldquo;Best wishes,&rdquo;
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,.1);border-radius:14px;padding:12px">
+            <div style="font-size:11px;font-weight:1000;text-transform:uppercase;color:var(--pink);margin-bottom:6px">TASK 2 &mdash; ESSAY CONNECTORS</div>
+            <div style="font-size:12px;font-weight:800;color:white;line-height:1.7">
+              Adding: &ldquo;Furthermore,&rdquo; &middot; &ldquo;Moreover,&rdquo; &middot; &ldquo;In addition to this,&rdquo;<br>
+              Contrasting: &ldquo;However,&rdquo; &middot; &ldquo;On the other hand,&rdquo; &middot; &ldquo;Despite this,&rdquo;<br>
+              Concluding: &ldquo;In conclusion,&rdquo; &middot; &ldquo;To sum up,&rdquo; &middot; &ldquo;Therefore, it is evident that&hellip;&rdquo;
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,.1);border-radius:14px;padding:12px">
+            <div style="font-size:11px;font-weight:1000;text-transform:uppercase;color:var(--green);margin-bottom:6px">ACADEMIC VOCABULARY</div>
+            <div style="font-size:12px;font-weight:800;color:white;line-height:1.7">
+              &ldquo;significantly&rdquo; &middot; &ldquo;consequently&rdquo; &middot; &ldquo;predominantly&rdquo; &middot; &ldquo;attributed to&rdquo;<br>
+              &ldquo;evident that&rdquo; &middot; &ldquo;substantial&rdquo; &middot; &ldquo;crucial&rdquo; &middot; &ldquo;implement&rdquo; &middot; &ldquo;facilitate&rdquo;
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WRITING CHECKLIST -->
+      <div style="background:var(--paper);border:var(--line);box-shadow:var(--shadow);border-radius:var(--r2);padding:18px;margin-bottom:16px">
+        <div style="font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:10px">&#9989; WRITING CHECKLIST &mdash; Before You Submit</div>
+        <div id="wrtChecklist">
+          <label style="display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;border:2px solid var(--ink);border-radius:13px;background:white;padding:12px;font-weight:900;cursor:pointer;margin-bottom:8px">
+            <input type="checkbox" id="wc1" style="width:20px;height:20px;margin-top:1px" onchange="Wrt.updateChecklist()">
+            <span>Task 1: I responded to ALL bullet points in the prompt</span>
+          </label>
+          <label style="display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;border:2px solid var(--ink);border-radius:13px;background:white;padding:12px;font-weight:900;cursor:pointer;margin-bottom:8px">
+            <input type="checkbox" id="wc2" style="width:20px;height:20px;margin-top:1px" onchange="Wrt.updateChecklist()">
+            <span>Task 2: My first sentence clearly states my thesis / stand</span>
+          </label>
+          <label style="display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;border:2px solid var(--ink);border-radius:13px;background:white;padding:12px;font-weight:900;cursor:pointer;margin-bottom:8px">
+            <input type="checkbox" id="wc3" style="width:20px;height:20px;margin-top:1px" onchange="Wrt.updateChecklist()">
+            <span>I used PEEL paragraphs: Point &rarr; Explain &rarr; Evidence &rarr; Link</span>
+          </label>
+          <label style="display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;border:2px solid var(--ink);border-radius:13px;background:white;padding:12px;font-weight:900;cursor:pointer;margin-bottom:8px">
+            <input type="checkbox" id="wc4" style="width:20px;height:20px;margin-top:1px" onchange="Wrt.updateChecklist()">
+            <span>I used connectors to link paragraphs and ideas clearly</span>
+          </label>
+          <label style="display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;border:2px solid var(--ink);border-radius:13px;background:white;padding:12px;font-weight:900;cursor:pointer;margin-bottom:8px">
+            <input type="checkbox" id="wc5" style="width:20px;height:20px;margin-top:1px" onchange="Wrt.updateChecklist()">
+            <span>My word count meets the minimum (100+ for Task 1, 250+ for Task 2)</span>
+          </label>
+          <label style="display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;border:2px solid var(--ink);border-radius:13px;background:white;padding:12px;font-weight:900;cursor:pointer;margin-bottom:8px">
+            <input type="checkbox" id="wc6" style="width:20px;height:20px;margin-top:1px" onchange="Wrt.updateChecklist()">
+            <span>I used appropriate tone (formal for Task 1, academic for Task 2)</span>
+          </label>
+        </div>
+        <div id="wrtCheckResult" style="display:none;background:var(--yellow);border:var(--line);border-radius:14px;padding:10px 14px;margin-top:10px;font-weight:1000;font-size:14px;text-align:center"></div>
+      </div>
+
+      <div class="guide-action-stack">
+        <button class="btn submit-standard wide" style="background:var(--yellow)!important;color:#111!important" onclick="Wrt.submit()">Submit Writing Practice</button>
+        <div class="guide-secondary-row">
+          <button class="btn practice-guide-btn white" onclick="Wrt.togglePracticeGuide()">Practice Guide</button>
+          <button class="btn vault-menu-btn pink" onclick="location.href=vaultWelcomePage">← Vault Menu</button>
+        </div>
+      </div>
+
+      
+      <div class="practice-guide-panel" id="practiceGuidePanel">
+        <h3>Writing Practice Guide — P.E.E.L.</h3>
+        <div class="strategy-steps">
+          <div class="step-card"><div class="step-letter pink">P</div><div><div class="step-title">Point</div><div class="step-desc">Write the main idea clearly at the start of the paragraph.</div></div></div>
+          <div class="step-card"><div class="step-letter orange">E</div><div><div class="step-title">Explain</div><div class="step-desc">Explain your point using clear reasoning. Use <b>because</b>, <b>therefore</b>, or <b>this means that</b>.</div></div></div>
+          <div class="step-card"><div class="step-letter blue">E</div><div><div class="step-title">Example</div><div class="step-desc">Support your idea with a relevant example, situation or evidence.</div></div></div>
+          <div class="step-card"><div class="step-letter green">L</div><div><div class="step-title">Link</div><div class="step-desc">Link the paragraph back to the question or your opinion.</div></div></div>
+          <div class="mini-tip">Before submitting: check task fulfilment, word count, paragraphing, connectors and vocabulary accuracy.</div>
+        </div>
+      </div>
+
+      </div>
+
+<!-- Result -->
+  <div id="resultCard" class="result-card pink">
+    <div class="tag">WRITING RESULT SAVED</div>
+    <span id="resultScore" class="result-score">0/90</span>
+    <span id="resultBand"  class="result-band">Band —</span>
+    <div id="resultDetails" style="margin:12px 0;border:var(--line);border-radius:14px;background:white;padding:12px;font-size:13px;font-weight:800;display:grid;gap:8px"></div>
+    <div style="background:var(--ink);color:white;border:var(--line);border-radius:14px;padding:12px;margin-bottom:12px;font-weight:900;font-size:14px">🏆 All four components complete! Check your Vault Round-Up.</div>
+    <div class="btn-row">
+      <button class="btn lime wide" id="roundupBtn">→ Round-Up</button>
+      <button class="btn vault-menu-btn white" id="vaultMenuBtn">← Vault Menu</button>
+    </div>
+  </div>
+
+</section>
+</main>
+<div id="toast" class="toast"></div>
+<script src="js/muet-shared.js?v=20260726-1"></script>
+<script src="js/backend-config.js?v=20260726-1"></script>
+<script>
+// Read vaultId from activeVault so Starter Vault and Vault 1 both work correctly
+const _activeVault = MUET.loadActiveVault();
+const VAULT_ID     = (_activeVault && _activeVault.vaultId) ? _activeVault.vaultId : 'VAULT-01';
+const VAULT_TITLE  = (_activeVault && _activeVault.vaultTitle) ? _activeVault.vaultTitle : 'Vault 1';
+const IS_STARTER      = VAULT_ID === 'VAULT-00';
+const vaultWelcomePage = IS_STARTER ? 'starter-welcome.html' : 'vault1-welcome.html';
+
+// ── VAULT 01 · MUET Session 3 2022 · Writing 800/4 ─────────────────
+const tasks = {"T1":{"label":"Task 1 — Email Reply (100+ words)","timerSecs":1500,"timerLabel":"Task 1 Timer — 25 min","wcMin":100,"wcGuide":"Task 1: minimum 100 words required","prompt":"Your classmate, Johan, missed your class year-end farewell party due to a family emergency and sent you an email asking about it. Write a reply to Johan using all the notes provided.","bullets":["📧 From: Johan (johan84@zmail.com)","📧 Subject: How’s the Party?","","── Johan’s Email Content ──","Johan apologizes for missing the party.","Johan asks if you enjoyed the party.","Johan explains that his grandmother is ill in Kedah.","Johan asks if everyone attended, how the food was, and what activities were held.","Johan suggests meeting up next week.","","── Your Reply Must Include These Notes ──","✅ Yes, ... — confirm you enjoyed the party.","✅ I am sorry... — express sympathy regarding his grandmother.","✅ Explain — describe the attendance, food and activities.","✅ No, I am afraid... — respond to his suggestion to meet next week."],"coach":"Task 1 is a semi-formal email reply to a classmate. Make sure you respond to ALL notes. Use a friendly tone, organise your reply clearly, and write at least 100 words within 25 minutes.","checklist":[],"sampleHtml":"<div class=\"card lime\"><h3>Sample Reply — Task 1</h3>       <div class=\"sample-box\" style=\"margin-top:8px;font-size:13px;line-height:1.7\"><b>Subject: Re: How’s the Party?</b><br><br> Hi Johan,<br><br> It was great to hear from you! <b>Yes, I really enjoyed the party</b>. It was a wonderful way to wrap up our school year together, though we all definitely noticed you weren't there.<br><br> <b>I am so sorry to hear about your grandmother’s illness</b>. It must have been a very stressful and exhausting seven-hour journey to Kedah for you and your family. I truly hope she recovers quickly and feels much better soon.<br><br> Regarding the party, almost everyone attended, so the atmosphere was very lively. The food was delicious; we had a huge spread of satay, fried noodles, and a variety of local desserts that everyone loved. We also had some really fun activities, including a lucky draw and a hilarious karaoke session where even the teachers joined in.<br><br> About meeting up, <b>no, I am afraid I cannot make it next week</b>. My family is planning a trip out of town during that time. Perhaps we can catch up once I am back?<br><br> Take care of yourself and your family.<br><br> Warm regards,<br>Karim</div></div>","rubric":[["task","Task Fulfilment","All notes and parts of the prompt are addressed completely",20],["org","Organisation","Clear greeting, logical flow, paragraphing and closing",20],["struct","Structure","Varied and correct sentence structures",20],["lexis","Lexis","Appropriate and precise vocabulary",15]]},"T2":{"label":"Task 2 — Academic Essay (250+ words)","timerSecs":3000,"timerLabel":"Task 2 Timer — 50 min","wcMin":250,"wcGuide":"Task 2: minimum 250 words required","prompt":"During a recent school forum, a guest speaker claimed that modern young adults lead \"protected and pampered\" lives. The following statement was made: \"Young adults today lack survival skills.\" Write an essay expressing your opinion on this comment.","bullets":["⏱ Time recommendation: 50 minutes","✍️ Word count: At least 250 words","State your opinion clearly.","Support your ideas with reasons and examples.","Organise your essay into introduction, body paragraphs and conclusion."],"coach":"This is an academic opinion essay. You may agree, disagree or partially agree, but your stand must be clear. Use PEEL paragraphs: Point, Explanation, Example and Link.","checklist":[],"sampleHtml":"<div class=\"card lime\"><h3>Sample Planning Guide — Task 2</h3>       <div class=\"sample-box\" style=\"margin-top:8px;font-size:13px;line-height:1.7\"><b>Possible stand:</b> Partially agree.<br><br> <b>Thesis idea:</b> Young adults today may lack some traditional survival skills because of comfort and technology, but they also possess modern survival skills such as digital literacy, adaptability and problem-solving.<br><br> <b>Body Paragraph 1:</b> Some young adults lack practical life skills such as cooking, budgeting and basic repairs because parents or services often handle these tasks for them.<br><br> <b>Body Paragraph 2:</b> However, many young adults are capable of surviving in modern society because they can learn quickly, use technology and adapt to new situations.<br><br> <b>Conclusion:</b> Young adults may need stronger practical life skills, but it is unfair to say they lack survival skills completely.</div></div>","rubric":[["task","Task Fulfilment","The essay addresses the prompt and gives a clear opinion",20],["org","Organisation","Ideas flow logically with clear paragraphing",20],["struct","Structure","Varied and correct sentence structures are used",20],["lexis","Lexis","Vocabulary is appropriate, precise and academic",15]]}};
+const Wrt = (() => {
+  let currentTask = 'T1', secs = 1500, timerId = null;
+
+  function setTask(t) {
+    currentTask = t;
+    document.getElementById('tabT1').classList.toggle('active', t === 'T1');
+    document.getElementById('tabT2').classList.toggle('active', t === 'T2');
+    const td = tasks[t];
+    secs = td.timerSecs;
+    stopTimer(); renderTimer();
+    // Prompt and coach — always present in vault direct practice
+    const pLabel = document.getElementById('promptLabel');
+    const pText  = document.getElementById('promptText');
+    const pBulls = document.getElementById('bulletPoints');
+    const coach  = document.getElementById('wrtCoach');
+    const wcG    = document.getElementById('wcGuide');
+    if (pLabel) pLabel.textContent = td.label;
+    if (pText)  pText.textContent  = td.prompt;
+    if (pBulls) pBulls.innerHTML   = (td.bullets || []).map(b => `<div style="margin-bottom:4px">${b || '&nbsp;'}</div>`).join('');
+    if (coach)  coach.textContent  = td.coach;
+    if (wcG)    wcG.textContent    = td.wcGuide;
+    renderPlanningBox(t, td);
+    countWords();
+  }
+
+  // ── Planning box: tailored per task type ─────────────────────────────
+  // Task 1 (email/letter) — one small note field per required response point,
+  // pulled straight from this task's own bullet notes so planning matches
+  // exactly what the email/letter asks for.
+  // Task 2 (essay) — explicit PEEL fields (Point, Explain, Evidence, Link).
+  function renderPlanningBox(t, td) {
+    const intro  = document.getElementById('planningIntro');
+    const fields = document.getElementById('planningFields');
+    if (!fields) return;
+
+    if (t === 'T1') {
+      if (intro) intro.textContent = 'Spend 3–5 minutes here. Jot a quick note for each point your reply must cover — taken directly from the notes above.';
+      const notes = (td.bullets || []).filter(b => b.trim().startsWith('✅'));
+      fields.innerHTML = notes.length
+        ? notes.map((b, i) => {
+            const clean = b.replace(/^✅\s*/, '').replace(/"/g, '&quot;');
+            return `<label style="font-size:12px;font-weight:900"><span class="plan-note-num">${i + 1}</span>${clean}<textarea id="planNote${i}" rows="2" style="margin-top:4px" placeholder="Jot a short note for this point..."></textarea></label>`;
+          }).join('')
+        : `<label style="font-size:12px;font-weight:900">Key points to cover:<textarea id="planNote0" rows="3" style="margin-top:4px" placeholder="List the points your reply must cover..."></textarea></label>`;
+    } else {
+      if (intro) intro.textContent = 'Spend 3–5 minutes here. Plan your essay using PEEL — Point → Explain → Evidence → Link.';
+      fields.innerHTML = `
+        <label style="font-size:12px;font-weight:900"><span class="plan-letter p1">P</span>Point — your stand / thesis:<textarea id="planStand" rows="2" style="margin-top:4px" placeholder="e.g. I agree that young adults lack survival skills because..."></textarea></label>
+        <label style="font-size:12px;font-weight:900"><span class="plan-letter e1">E</span>Explain — your main reasoning:<textarea id="planP1" rows="2" style="margin-top:4px" placeholder="e.g. Parents and services often handle daily tasks for them, so..."></textarea></label>
+        <label style="font-size:12px;font-weight:900"><span class="plan-letter e2">E</span>Evidence — a specific example:<textarea id="planP2" rows="2" style="margin-top:4px" placeholder="e.g. Many young adults are highly skilled in digital tools and adapt quickly..."></textarea></label>
+        <label style="font-size:12px;font-weight:900"><span class="plan-letter l1">L</span>Link — tie back to the question:<textarea id="planConc" rows="2" style="margin-top:4px" placeholder="e.g. Balance needed — build practical and digital skills together..."></textarea></label>`;
+    }
+  }
+
+  function t1Tips() {
+    return `<div class="coach-note lime"><div class="tag">TASK 1 RULE</div><p>Cover <b>all bullet points</b>. Missing even one bullet point significantly reduces your task fulfilment score. Use one paragraph per bullet if possible.</p></div>
+    <div class="card" style="background:#f8fafc"><h3>Email Format Checklist</h3><div class="sample-box">Subject line (if required)</div><div class="sample-box" style="margin-top:6px">Salutation: Dear Mr/Ms/Professor [Name],</div><div class="sample-box" style="margin-top:6px">Opening line: purpose of the email</div><div class="sample-box" style="margin-top:6px">Body: one paragraph per bullet point</div><div class="sample-box" style="margin-top:6px">Closing: Thank you / Kind regards / Yours sincerely</div></div>`;
+  }
+
+  function t2Tips() {
+    return `<div class="coach-note pink" style="background:#FFF0A8"><div class="tag">PEEL STRUCTURE</div><p><b>P</b> — Point: state one clear argument.<br><b>E</b> — Explain: elaborate with reasoning.<br><b>E</b> — Evidence: give a specific example (Malaysian context preferred).<br><b>L</b> — Link: tie the paragraph back to your thesis.</p></div>
+    <div class="coach-note lime"><div class="tag">THESIS FIRST</div><p>Your introduction must state your thesis clearly in one sentence. The examiner decides within 30 seconds whether you understand the question. Do not write background first — state your stand immediately.</p></div>`;
+  }
+
+  // renderRubric removed — no rubric UI in vault direct practice
+
+  function countWords() {
+    const text  = document.getElementById('answerBox').value.trim();
+    const wc    = text ? text.split(/\s+/).length : 0;
+    const min   = tasks[currentTask].wcMin;
+    const el    = document.getElementById('wcDisplay');
+    el.textContent = wc;
+    el.className   = 'wc-display ' + (wc >= min ? 'wc-good' : wc >= min * 0.7 ? 'wc-warn' : 'wc-danger');
+  }
+
+  function toggleTimer() {
+    if (timerId) { clearInterval(timerId); timerId = null; document.getElementById('timerBtn').textContent = 'Resume'; return; }
+    timerId = setInterval(() => {
+      secs--; renderTimer();
+      if (secs <= 300 && secs % 60 === 0) MUET.toast(`${Math.floor(secs/60)} minute${secs/60 === 1 ? '' : 's'} remaining.`);
+      if (secs <= 0) { clearInterval(timerId); MUET.toast('Time is up! Submit your writing now.'); }
+    }, 1000);
+    document.getElementById('timerBtn').textContent = 'Pause';
+  }
+
+  function stopTimer() { clearInterval(timerId); timerId = null; const b = document.getElementById('timerBtn'); if (b) b.textContent = 'Start'; }
+
+  function renderTimer() {
+    const m = String(Math.floor(secs/60)).padStart(2,'0');
+    const s = String(secs%60).padStart(2,'0');
+    document.getElementById('timerDisp').textContent = `${m}:${s}`;
+    document.getElementById('timerLbl').textContent  = tasks[currentTask].timerLabel;
+  }
+  function togglePracticeGuide() {
+    const panel = document.getElementById('practiceGuidePanel');
+    if (!panel) return;
+    panel.classList.toggle('show');
+    if (panel.classList.contains('show')) {
+      panel.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+  }
+  function getStudentProfile() {
+    try {
+      return JSON.parse(localStorage.getItem('muet_profile') || '{}');
+    } catch (err) {
+      return {};
+    }
+  }
+
+  function saveAttemptToBackend(payload) {
+    const profile = getStudentProfile();
+    const enriched = {
+      studentEmail: profile.email || profile.studentEmail || 'demo@student.local',
+      studentName: profile.name || profile.studentName || 'Demo Student',
+      studentRegNo: profile.regNo || profile.studentRegNo || '',
+      classGroup: profile.classGroup || profile.group || '',
+      vaultId: VAULT_ID,
+      ...payload
+    };
+
+    if (typeof saveSmartMuetAttempt === 'function') {
+      saveSmartMuetAttempt(enriched).then(res => {
+        console.log('Smart MUET backend save:', res);
+      }).catch(err => console.warn('Backend save failed:', err));
+    } else {
+      console.warn('Backend helper not loaded. Attempt saved locally only.', enriched);
+    }
+    return enriched;
+  }
+
+  function showFeedbackToast(score90, component) {
+    if (score90 >= 74) MUET.toast(`${component} submitted. Excellent work — Band 5 range!`);
+    else if (score90 >= 53) MUET.toast(`${component} submitted. Good progress — keep improving.`);
+    else MUET.toast(`${component} submitted. Review the Practice Guide and try again.`);
+  }
+
+
+
+
+
+  function submit() {
+    const answer = document.getElementById('answerBox').value.trim();
+    if (!answer || answer.split(/\s+/).length < 50) { MUET.toast('Please write at least 50 words before submitting.'); return; }
+
+    // ── Multi-dimension MUET rubric scoring ─────────────────────────
+    // Mirrors official MUET Writing rubric: Task Fulfilment (20) +
+    // Organisation (20) + Language Structure (20) + Lexis (15) = 75 max
+    // Scaled to /90 to match component total
+    const wc      = answer.split(/\s+/).length;
+    const min     = tasks[currentTask].wcMin;
+    const td      = tasks[currentTask];
+    const paraCount  = answer.split(/\n\s*\n|\n/).filter(p => p.trim().length > 20).length;
+    const connectors = (answer.match(/\b(firstly|secondly|thirdly|however|therefore|moreover|furthermore|in conclusion|in addition|on the other hand|because|although|for example|for instance|in contrast|as a result|consequently)\b/gi) || []).length;
+
+    // 1. Task Fulfilment /20
+    let taskFulfilmentScore;
+    if (currentTask === 'T1') {
+      const t1Needles = ['enjoyed','sorry','grandmother','party','food','activities','next week','afraid','cannot','meet'];
+      const t1Hits    = t1Needles.filter(k => answer.toLowerCase().includes(k)).length;
+      taskFulfilmentScore = Math.min(20, 6 + t1Hits * 2);  // 4 notes × ~2pts each + base
+    } else {
+      const hasStand   = /\b(i agree|i disagree|in my opinion|i believe|personally|i strongly|it is true|while some|although)\b/i.test(answer);
+      const hasPEEL    = /\b(for example|for instance|this shows|therefore|as a result|this proves)\b/i.test(answer);
+      const wordBonus  = wc >= 250 ? 3 : wc >= 180 ? 1 : 0;
+      taskFulfilmentScore = Math.min(20, (hasStand ? 8 : 4) + (hasPEEL ? 5 : 0) + wordBonus + 2);
+    }
+
+    // 2. Organisation /20 — paragraphing, greeting/closing (T1), intro-body-conclusion (T2)
+    const hasGreeting  = /\b(dear|hi |hello)\b/i.test(answer);
+    const hasClosing   = /\b(regards|sincerely|yours|thank you|take care)\b/i.test(answer);
+    const orgScore     = currentTask === 'T1'
+      ? Math.min(20, 8 + (hasGreeting ? 3 : 0) + (hasClosing ? 3 : 0) + Math.min(6, paraCount * 2))
+      : Math.min(20, 6 + Math.min(8, paraCount * 2) + (connectors >= 3 ? 4 : connectors >= 1 ? 2 : 0) + (wc >= 250 ? 2 : 0));
+
+    // 3. Language Structure /20 — sentence variety, connectors, no single-line answer
+    const avgSentLen   = wc / Math.max(1, (answer.match(/[.!?]+/g) || []).length);
+    const hasVariety   = avgSentLen > 8 && avgSentLen < 35;
+    const structScore  = Math.min(20, 8 + (hasVariety ? 4 : 0) + Math.min(6, connectors) + (wc >= min ? 2 : 0));
+
+    // 4. Lexis /15 — vocabulary range signal (unique word ratio)
+    const words      = answer.toLowerCase().match(/\b[a-z]{4,}\b/g) || [];
+    const uniqueRatio = words.length > 0 ? new Set(words).size / words.length : 0;
+    const lexisScore  = Math.min(15, Math.round(5 + uniqueRatio * 10));
+
+    // Total /75 → scale to /90
+    const rawTotal = taskFulfilmentScore + orgScore + structScore + lexisScore;
+    const score90  = Math.min(90, Math.round((rawTotal / 75) * 90));
+    const band     = MUET.scoreToBand(score90);
+
+    const session = {
+      vaultId: VAULT_ID, taskType: currentTask,
+      score90, score: score90, band, bandLabel: band,
+      wordCount: wc,
+      answer, date: new Date().toISOString(), xpEarned: 90
+    };
+    const list = MUET.loadSessions('writing');
+    list.push(session);
+    MUET.saveSessions('writing', list);
+    MUET.awardBadge('essay_builder');
+    MUET.addXP(session.xpEarned);
+
+    // Check if all 4 complete → award vault finisher
+    const prog = MUET.vaultProgress(VAULT_ID);
+    if (prog.count >= 4) MUET.awardBadge('vault_finisher');
+
+    document.getElementById('resultScore').textContent = `${score90}/90`;
+    document.getElementById('resultBand').textContent  = `Estimated Band ${band}`;
+    const fb = MUET.feedbackText('writing', score90);
+    const strength = score90 >= 64 ? 'Good response structure and sufficient development.' : 'You attempted the writing task and submitted enough content for feedback.';
+    const nextAction = currentTask === 'T1'
+      ? 'Check that all four notes are answered clearly: enjoyed, sympathy, party details and meeting response.'
+      : 'Strengthen your essay with a clear stand, PEEL paragraphs and specific examples.';
+    document.getElementById('resultDetails').innerHTML = `
+      <div>✅ <b>Strength:</b> ${strength}</div>
+      <div>⚡ <b>Feedback:</b> ${fb}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px">
+        <div style="background:#f0fdf4;border:2px solid var(--ink);border-radius:10px;padding:8px;font-size:12px"><b>Task Fulfilment</b><br>${taskFulfilmentScore}/20</div>
+        <div style="background:#eff6ff;border:2px solid var(--ink);border-radius:10px;padding:8px;font-size:12px"><b>Organisation</b><br>${orgScore}/20</div>
+        <div style="background:#fefce8;border:2px solid var(--ink);border-radius:10px;padding:8px;font-size:12px"><b>Language Structure</b><br>${structScore}/20</div>
+        <div style="background:#fdf4ff;border:2px solid var(--ink);border-radius:10px;padding:8px;font-size:12px"><b>Lexis</b><br>${lexisScore}/15</div>
+      </div>
+      <div style="margin-top:8px;font-size:12px;font-weight:900;color:var(--muted)">📝 Words: ${wc} · Paragraphs: ${paraCount} · Connectors: ${connectors}</div>
+      <div>🎯 <b>Next Action:</b> ${nextAction}</div>`;
+
+    saveAttemptToBackend({
+      component:'Writing',
+      taskType:currentTask,
+      rawScore:score90,
+      totalItems:90,
+      score90,
+      estimatedBand:band,
+      feedback:fb,
+      nextAction,
+      badgeEarned:'Essay Builder',
+      status:'Rule-based rubric auto-feedback v2',
+      answerText:answer,
+      wordCount:wc,
+      rubric:{
+        engine:'Rule-based MUET writing rubric v2',
+        reviewStatus:'Auto-feedback',
+        overallStrength:strength,
+        improvementFocus:nextAction,
+        rawTotal, maxTotal:75, score90,
+        criteria:[
+          {name:'Task Fulfilment', score:taskFulfilmentScore, max:20, feedback: currentTask === 'T1' ? `Key content signals detected in answer.` : 'Opinion/stand and evidence checked.'},
+          {name:'Organisation',    score:orgScore,            max:20, feedback:`Paragraph count: ${paraCount}. Connectors: ${connectors}.`},
+          {name:'Language Structure', score:structScore,      max:20, feedback:`Sentence variety and connector usage checked.`},
+          {name:'Lexis',           score:lexisScore,          max:15, feedback:`Vocabulary range (unique word ratio) assessed.`}
+        ]
+      }
+    });
+
+    document.getElementById('resultCard').classList.add('show');
+    showFeedbackToast(score90, 'Writing');
+    window.scrollTo({top: document.body.scrollHeight, behavior:'smooth'});
+    updateVaultProgress();
+  }
+
+  function resetPractice() {
+    document.getElementById('answerBox').value = '';
+    document.getElementById('resultCard').classList.remove('show');
+    secs = tasks[currentTask].timerSecs;
+    stopTimer(); renderTimer(); countWords();
+    MUET.toast('Practice reset.');
+  }
+
+  function openStep(id) {
+    toggle(id, true);
+    setTimeout(() => document.getElementById('body-'+id)?.scrollIntoView({behavior:'smooth',block:'start'}), 100);
+  }
+
+  function toggle(id, forceOpen = false) {
+    const body = document.getElementById('body-'+id);
+    const chev = document.getElementById('chev-'+id);
+    if (!body) return;
+    const open = forceOpen || body.style.display === 'none';
+    body.style.display = open ? 'block' : 'none';
+    if (chev) chev.textContent = open ? '▴' : '▾';
+  }
+
+
+  function updateChecklist() {
+    const boxes = ['wc1','wc2','wc3','wc4','wc5','wc6'];
+    const checked = boxes.filter(id => document.getElementById(id)?.checked).length;
+    const el = document.getElementById('wrtCheckResult');
+    if (el) {
+      el.style.display = 'block';
+      el.textContent = checked >= 5
+        ? `✅ ${checked}/6 checked — Ready to submit!`
+        : checked >= 3
+        ? `⚡ ${checked}/6 checked — Review the remaining items.`
+        : `⚠️ ${checked}/6 checked — Complete your checklist first.`;
+    }
+  }
+  return { setTask, countWords, toggleTimer, submit, resetPractice, openStep, toggle, togglePracticeGuide, updateChecklist };
+})();
+
+function updateVaultProgress() {
+  const prog = MUET.vaultProgress(VAULT_ID);
+  const pct  = Math.round(prog.count / 4 * 100);
+  const bar  = document.getElementById('vaultProgBar');
+  const lbl  = document.getElementById('vaultProgLabel');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) lbl.textContent = prog.count + '/4';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Issue #3: profile guard — redirect unregistered users
+  if (!MUET.loadProfile()) { location.href = 'index.html'; return; }
+  // Update brand bar label to reflect active vault
+  const barLabel = document.querySelector('.bar-label');
+  if (barLabel) barLabel.textContent = VAULT_TITLE + ' · Writing';
+  // Wire dynamic round-up and vault menu buttons
+  const roundupPage   = IS_STARTER ? 'starter-roundup.html' : 'vault1-roundup.html';
+  const vaultMenuPage = IS_STARTER ? 'starter-welcome.html' : 'vault1-welcome.html';
+  const roundupLabel  = IS_STARTER ? '→ Starter Round-Up' : '→ Vault 1 Round-Up';
+  const rbtn = document.getElementById('roundupBtn');
+  const mbtn = document.getElementById('vaultMenuBtn');
+  if (rbtn) { rbtn.textContent = roundupLabel; rbtn.onclick = () => location.href = roundupPage; }
+  if (mbtn) mbtn.onclick = () => location.href = vaultMenuPage;
+  Wrt.setTask('T1');
+  updateVaultProgress();
+});
+</script>
+</body>
+</html>

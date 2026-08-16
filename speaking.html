@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <title>Speaking Guide · Smart MUET Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/muet-guide.css?v=20260729-std1"/>
+  <style>
+    /* ── Flow steps ── */
+    .flow-step{background:white;border:var(--line);border-radius:var(--r2);box-shadow:var(--shadow);margin-bottom:14px}
+    .flow-step-head{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;font-weight:1000;user-select:none}
+    .flow-step-head:active{background:rgba(0,0,0,.04)}
+    .step-num{width:38px;height:38px;border:var(--line);border-radius:50%;background:var(--yellow);display:grid;place-items:center;font-weight:1000;font-size:16px;flex-shrink:0;box-shadow:2px 2px 0 var(--ink)}
+    .flow-body{display:none;padding:14px 16px 18px;border-top:2px solid rgba(0,0,0,.07)}
+    .flow-body.open{display:block}
+    .chev{margin-left:auto;font-size:16px;transition:transform .2s}
+    .chev.open{transform:rotate(180deg)}
+
+    /* ── Info tiles ── */
+    .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:4px 0 12px}
+    .info-tile{border:var(--line);border-radius:16px;padding:12px 10px;text-align:center;box-shadow:3px 3px 0 var(--ink)}
+    .info-tile .big{font-family:"Sora";font-size:22px;font-weight:800;display:block}
+    .info-tile .lbl{font-size:11px;font-weight:1000;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);display:block;margin-top:3px}
+    .info-tile.blue{background:var(--blue);color:white}.info-tile.blue .lbl{color:rgba(255,255,255,.7)}
+    .info-tile.yellow{background:var(--yellow)}.info-tile.lime{background:var(--lime)}
+
+    /* ── Task badges ── */
+    .task-badges{display:flex;gap:10px;margin:10px 0}
+    .task-badge{flex:1;border:var(--line);border-radius:16px;padding:12px 8px;text-align:center;box-shadow:3px 3px 0 var(--ink)}
+    .task-badge .icon{font-size:26px;display:block}
+    .task-badge b{font-family:"Sora";font-size:14px;display:block;margin-top:4px}
+    .task-badge small{font-size:11px;font-weight:900;display:block;margin-top:2px}
+    .tb-a{background:var(--blue);color:white}.tb-a small{color:rgba(255,255,255,.7)}
+    .tb-b{background:var(--lime)}
+
+    /* ── PREP strip ── */
+    .prep-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}
+    .prep-b{border:var(--line);border-radius:14px;padding:10px 4px;text-align:center;font-family:"Sora";font-size:22px;font-weight:800;box-shadow:3px 3px 0 var(--ink);line-height:1.1}
+    .prep-b small{display:block;font-family:"DM Sans";font-size:10px;font-weight:900;margin-top:3px}
+    .pb-p{background:var(--blue);color:white}
+    .pb-r{background:var(--yellow)}
+    .pb-e{background:var(--green)}
+    .pb-p2{background:var(--pink)}
+
+    /* -- PREP set-count pills -- */
+    .prep-count-pill{display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:4px 10px;font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap;box-shadow:2px 2px 0 var(--ink)}
+    .prep-count-pill.pill-solo{background:var(--blue);color:#fff}
+    .prep-count-pill.pill-multi{background:var(--pink);color:#111}
+    .prep-count-pill.on-color{background:rgba(255,255,255,.92);color:#111;border-color:rgba(0,0,0,.2);box-shadow:none}
+    .prep-usage-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .task-badge .prep-count-pill{margin-top:8px}
+
+    /* ── Language function chips ── */
+    .fn-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+    .fn-chip{border:2px solid var(--ink);border-radius:12px;padding:8px 10px;font-size:12px;font-weight:900;display:flex;align-items:center;gap:8px;background:white}
+    .fn-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;border:2px solid var(--ink)}
+
+    /* ── Phrase bank ── */
+    .phrase-bank{background:var(--blue);border:var(--line);border-radius:18px;padding:16px}
+    .phrase-section{background:rgba(255,255,255,.12);border-radius:12px;padding:12px;margin-bottom:8px}
+    .phrase-section:last-child{margin-bottom:0}
+    .phrase-label{font-size:10px;font-weight:1000;text-transform:uppercase;color:rgba(255,255,255,.65);letter-spacing:.1em;margin-bottom:6px}
+    .phrase-text{font-size:13px;font-weight:800;color:white;line-height:1.65}
+    .phrase-avoid{background:rgba(239,68,68,.25);border-radius:12px;padding:10px 12px;margin-top:8px}
+
+    /* ── Practice area ── */
+    .task-switcher{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+    .task-btn{border:var(--line);border-radius:14px;padding:12px;font-weight:1000;cursor:pointer;text-align:center;box-shadow:3px 3px 0 var(--ink);transition:.1s}
+    .task-btn.active-a{background:var(--blue);color:white}
+    .task-btn.active-b{background:var(--lime)}
+    .task-btn:not(.active-a):not(.active-b){background:white}
+
+    /* ── PREP notes ── */
+    .prep-grid{display:grid;gap:10px}
+    .prep-box{background:white;border:var(--line);border-radius:16px;padding:12px;box-shadow:var(--shadow-sm)}
+    .prep-box h3{font-size:14px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+    .prep-letter{width:28px;height:28px;border:2px solid var(--ink);border-radius:8px;display:grid;place-items:center;font-weight:1000;font-size:14px;flex-shrink:0}
+
+    /* ── Feedback card ── */
+    .feedback-card{display:none;border:var(--line);border-radius:var(--r2);overflow:hidden;margin-top:14px}
+    .feedback-card.show{display:block}
+    .fb-header{padding:14px 16px;font-family:"Sora";font-size:18px;font-weight:800}
+    .fb-body{padding:14px 16px;background:white}
+    .fb-fn-row{display:flex;align-items:flex-start;gap:10px;border:2px solid var(--ink);border-radius:12px;padding:10px;margin-bottom:8px}
+    .fb-fn-icon{font-size:20px;flex-shrink:0;margin-top:1px}
+    .fb-fn-label{font-size:11px;font-weight:1000;text-transform:uppercase;color:var(--muted);letter-spacing:.06em}
+    .fb-fn-text{font-size:13px;font-weight:800;margin-top:2px;line-height:1.4}
+    .fb-fn-row.pass{background:#f0fdf4;border-color:#16a34a}
+    .fb-fn-row.fail{background:#fff7ed;border-color:#ea580c}
+
+    /* ── Roundup card ── */
+    .roundup-card{display:none;border:var(--line);border-radius:var(--r2);overflow:hidden;margin-top:14px}
+    .roundup-card.show{display:block}
+    .roundup-header{background:var(--ink);color:white;padding:14px 16px}
+    .roundup-criteria{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 16px;background:white}
+    .crit-tile{border:2px solid var(--ink);border-radius:14px;padding:12px;text-align:center}
+    .crit-tile .crit-score{font-family:"Sora";font-size:26px;font-weight:800;display:block}
+    .crit-tile .crit-label{font-size:11px;font-weight:1000;text-transform:uppercase;color:var(--muted);display:block;margin-top:2px}
+    .crit-tile .crit-desc{font-size:11px;font-weight:800;margin-top:6px;line-height:1.4;color:var(--muted)}
+    .crit-tile.pass{background:#f0fdf4;border-color:#16a34a}.crit-tile.pass .crit-score{color:#16a34a}
+    .crit-tile.mid{background:#fff7ed;border-color:#ea580c}.crit-tile.mid .crit-score{color:#ea580c}
+    .crit-tile.fail{background:#fef2f2;border-color:#dc2626}.crit-tile.fail .crit-score{color:#dc2626}
+    .roundup-total{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#f8fafc;border-top:2px solid var(--ink)}
+
+    /* ── Submitted banner (intro only — no score) ── */
+    .submitted-banner{display:none;background:var(--lime);border:var(--line);border-radius:var(--r2);box-shadow:var(--shadow);padding:16px;margin-top:14px;text-align:center}
+    .submitted-banner.show{display:block}
+    .submitted-meta{background:white;border:2px solid var(--ink);border-radius:14px;padding:12px;margin:12px 0;font-size:13px;font-weight:800;line-height:1.7;text-align:left}
+
+    /* ── Next step buttons ── */
+    .next-btn{display:none;background:var(--yellow);border:var(--line);border-radius:14px;box-shadow:var(--shadow);padding:13px 16px;font-weight:1000;cursor:pointer;width:100%;margin-top:10px;font-size:14px}
+    .next-btn.show{display:block}
+    .next-btn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+
+    /* ── Responsive ── */
+    @media(min-width:640px){
+      .prep-grid{grid-template-columns:1fr 1fr}
+      .fn-grid{grid-template-columns:repeat(3,1fr)}
+      .roundup-criteria{grid-template-columns:repeat(4,1fr)}
+    }
+    @media(min-width:1024px){
+      .task-switcher{max-width:400px}
+    }
+  </style>
+  <link rel="stylesheet" href="css/responsive-fix.css?v=20260729-std1">
+<style>
+/* Smart MUET neopop v3 — shared hero & essentials (matches reading.html) */
+:root{
+  --np-blue:#215CF5;--np-green:#27D58A;--np-yellow:#FFD23F;
+  --np-pink:#F56AB4;--np-purple:#8F67FF;--np-orange:#FF6236;
+  --np-teal:#18C7B5;--np-soft:#F7F7FB;--np-black:#101116;
+}
+.neo-hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(270px,.75fr);gap:16px;margin-bottom:16px}
+.hero-main,.hero-stats{border:var(--line);border-radius:var(--r2);box-shadow:var(--shadow)}
+.hero-main{padding:22px;display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:185px}
+.hero-main h1{font-size:clamp(30px,4.2vw,48px);line-height:1.02;margin:5px 0 10px;max-width:650px}
+.hero-main p{font-weight:800;line-height:1.5;max-width:650px}
+.hero-art{width:112px;height:112px;border:var(--line);border-radius:26px;background:#fff;box-shadow:4px 4px 0 var(--ink);display:grid;place-items:center;flex:0 0 auto}
+.hero-art img{width:72px;height:72px;object-fit:contain}
+.hero-stats{background:#101116;padding:15px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stat-tile{border:var(--line);border-radius:15px;padding:12px;text-align:center;background:var(--np-soft);box-shadow:2px 2px 0 var(--ink)}
+.stat-tile strong{display:block;font-family:'Sora';font-size:23px;line-height:1}
+.stat-tile span{display:block;font-size:10px;font-weight:1000;text-transform:uppercase;color:#111;margin-top:5px}
+.stat-tile:nth-child(1){background:var(--np-yellow)}.stat-tile:nth-child(2){background:var(--np-green)}
+.stat-tile:nth-child(3){background:var(--np-orange);color:#fff}.stat-tile:nth-child(3) span{color:#fff}.stat-tile:nth-child(4){background:var(--np-pink)}
+.essentials{background:#fff;border:var(--line);border-radius:var(--r2);box-shadow:var(--shadow);padding:16px;margin-bottom:16px}
+.section-kicker{font-size:10px;font-weight:1000;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.section-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.section-top h2{font-size:21px;margin-top:3px}
+.section-top p{font-size:12px;font-weight:750;color:var(--muted);margin-top:4px}
+.essentials-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:12px}
+.prep-panel,.facts-panel{border:var(--line);border-radius:16px;padding:13px;background:#fff;box-shadow:3px 3px 0 var(--ink)}
+.prep-panel{border-top:12px solid var(--np-yellow)}.facts-panel{border-top:12px solid var(--np-green)}
+.prep-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:9px}
+.prep-step{border:2px solid var(--ink);border-radius:13px;padding:11px 8px;text-align:center;font-size:10px;font-weight:950;box-shadow:2px 2px 0 var(--ink)}
+.prep-step b{display:block;font-family:'Sora';font-size:20px;line-height:1;margin-bottom:4px}
+.prep-step-label{display:block;margin-bottom:5px}
+.prep-step-desc{display:block;font-size:9.5px;font-weight:700;line-height:1.4;opacity:.8;text-transform:none;letter-spacing:0}
+.prep-step:nth-child(1){background:var(--np-blue);color:#fff}.prep-step:nth-child(2){background:var(--np-yellow)}
+.prep-step:nth-child(3){background:var(--np-green)}.prep-step:nth-child(4){background:var(--np-pink)}
+.facts-list{display:grid;gap:8px;margin-top:9px}
+.fact-line{display:grid;grid-template-columns:34px 1fr;align-items:center;gap:9px;border:2px solid var(--ink);border-radius:12px;background:#fff;padding:8px 10px;font-size:11px;font-weight:800}
+.fact-line img{width:30px;height:30px;object-fit:contain}
+.fact-line:nth-child(1){background:#EEF0FF;border-left:10px solid var(--np-blue)}
+.fact-line:nth-child(2){background:#E9FFF7;border-left:10px solid var(--np-green)}
+.fact-line:nth-child(3){background:#FFF1F8;border-left:10px solid var(--np-pink)}
+details.more-guide{margin-top:12px;border:3px solid var(--ink);border-radius:14px;background:var(--np-yellow);box-shadow:3px 3px 0 var(--ink)}
+details.more-guide summary{cursor:pointer;padding:10px 12px;font-size:12px;font-weight:1000;list-style:none}
+details.more-guide summary::-webkit-details-marker{display:none}
+.guide-more-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;padding:0 12px 12px}
+.guide-mini{border:2px solid var(--ink);border-radius:12px;padding:10px;background:#fff;font-size:11px;font-weight:750;line-height:1.45}
+.guide-mini b{display:block;margin-bottom:4px}
+@media(max-width:900px){.neo-hero{grid-template-columns:1fr}.hero-main{min-height:auto}.hero-stats{grid-template-columns:repeat(4,minmax(0,1fr))}.essentials-grid{grid-template-columns:1fr}.guide-more-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.hero-main{padding:17px}.hero-art{display:none}.hero-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.prep-row{grid-template-columns:repeat(2,minmax(0,1fr))}.guide-more-grid{grid-template-columns:1fr}}
+</style>
+<style>
+.component-roadmap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 14px;padding:10px;background:#101116;border:3px solid #101116;border-radius:18px;box-shadow:5px 5px 0 #101116}
+.component-roadmap a{display:flex;align-items:center;justify-content:center;min-height:42px;border:2px solid #101116;border-radius:12px;background:#fff;color:#101116;text-decoration:none;font-size:11px;font-weight:1000;text-align:center;padding:7px}
+.component-roadmap a.current{background:#FFCA3A;box-shadow:3px 3px 0 #fff}
+.component-roadmap .state{font-size:9px;opacity:.7;display:block;margin-top:2px}
+.page-jump-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 16px}.page-jump-actions .btn{width:100%}
+.standard-flow-note{background:#fff;border:3px solid #101116;border-radius:18px;box-shadow:5px 5px 0 #101116;padding:14px 16px;margin-bottom:14px}
+.standard-flow-note h2{font-size:19px;margin:3px 0 6px}.standard-flow-note p{font-size:12px;font-weight:800;line-height:1.5;color:var(--muted)}
+.standard-flow-strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin-top:11px}
+.standard-flow-chip{border:2px solid #101116;border-radius:12px;padding:8px 6px;text-align:center;font-size:10px;font-weight:1000;box-shadow:2px 2px 0 #101116}
+.standard-flow-chip:nth-child(1){background:#FFCA3A}.standard-flow-chip:nth-child(2){background:#FF7043}.standard-flow-chip:nth-child(3){background:#19D39A}.standard-flow-chip:nth-child(4){background:#F76BB2}.standard-flow-chip:nth-child(5){background:#9C78FF}
+.standard-flow-chip b{display:block;font-family:"Sora";font-size:15px;margin-bottom:2px}
+.standard-footer-nav{margin-top:18px;border:3px solid #101116;border-radius:22px;background:#18C7BA;box-shadow:7px 7px 0 #101116;padding:16px}
+.standard-footer-nav .footer-kicker{font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.08em}.standard-footer-nav h2{font-size:20px;margin:4px 0 12px}
+.standard-footer-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.standard-footer-buttons a{display:flex;align-items:center;justify-content:center;min-height:50px;border:3px solid #101116;border-radius:15px;text-decoration:none;font-weight:1000;text-align:center;padding:10px;box-shadow:4px 4px 0 #101116;color:#101116;background:#fff}
+.standard-footer-buttons a.menu{background:#101116;color:#fff}.standard-footer-buttons a.next{background:#19D39A}.standard-footer-buttons a.disabled{opacity:.45;pointer-events:none}
+.standard-language-section{background:#fff;border:var(--line);border-radius:var(--r2);box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px}
+.standard-language-head{display:flex;align-items:center;gap:12px;padding:14px 16px}.standard-language-body{padding:14px 16px 18px;border-top:2px solid rgba(0,0,0,.08)}
+.language-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.language-card{border:2px solid #101116;border-radius:14px;padding:11px;background:#fff;box-shadow:2px 2px 0 #101116;font-size:12px;font-weight:800;line-height:1.55}
+.reading-standard-sections{margin-bottom:14px}.reading-standard-sections details{background:#fff;border:var(--line);border-radius:var(--r2);box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px}
+.reading-standard-sections summary{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;font-weight:1000;list-style:none}.reading-standard-sections summary::-webkit-details-marker{display:none}
+.reading-standard-sections .std-num{width:38px;height:38px;border:var(--line);border-radius:50%;display:grid;place-items:center;box-shadow:2px 2px 0 var(--ink);flex:0 0 auto}
+.reading-standard-sections .std-body{padding:14px 16px 18px;border-top:2px solid rgba(0,0,0,.08)}.reading-standard-sections .std-body p{font-size:12px;font-weight:800;line-height:1.55}
+@media(max-width:760px){.component-roadmap{grid-template-columns:repeat(2,minmax(0,1fr))}.page-jump-actions,.standard-footer-buttons,.language-grid{grid-template-columns:1fr}.standard-flow-strip{grid-template-columns:1fr}}
+</style>
+
+<style id="v5-card-upgrade">
+:root{
+  --card-white:#ffffff;
+  --card-mint:#f4fffb;
+  --card-lilac:#f8f5ff;
+  --card-yellow:#fff8dd;
+  --card-peach:#fff1ea;
+  --soft-shadow:0 10px 24px rgba(16,17,22,.08), 4px 4px 0 #101116;
+}
+
+/* softer modern card system */
+.component-roadmap{
+  border-radius:26px!important;
+  box-shadow:0 12px 28px rgba(16,17,22,.16), 5px 5px 0 #101116!important;
+  padding:14px!important;
+}
+.component-roadmap a{
+  border-radius:18px!important;
+  min-height:56px!important;
+  box-shadow:0 4px 10px rgba(16,17,22,.08)!important;
+}
+.component-roadmap a.current{
+  background:linear-gradient(180deg,#ffd860 0%, #f3c748 100%)!important;
+}
+.page-jump-actions .btn{
+  min-height:52px!important;
+  border-radius:16px!important;
+  border:3px solid #101116!important;
+  box-shadow:4px 4px 0 #101116!important;
+  font-weight:1000!important;
+  font-size:14px!important;
+}
+.page-jump-actions .btn:first-child{background:var(--neo-yellow)!important}
+.page-jump-actions .btn:last-child{background:var(--neo-green)!important}
+
+.standard-flow-note,
+.process-guide,
+.essentials,
+.flow-step,
+.standard-language-section,
+.practice-shell,
+.reading-standard-sections details,
+.standard-footer-nav,
+.part-card,
+.answer-final,
+.review-part{
+  border-radius:24px!important;
+  box-shadow:0 10px 26px rgba(16,17,22,.08), 6px 6px 0 #101116!important;
+  overflow:hidden;
+}
+.standard-flow-note{
+  background:linear-gradient(180deg,#ffffff 0%, #f7f8ff 100%)!important;
+}
+.standard-flow-strip{
+  gap:10px!important;
+}
+.standard-flow-chip{
+  border-radius:18px!important;
+  padding:12px 10px!important;
+  min-height:70px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  position:relative;
+}
+.standard-flow-chip::after{
+  content:"➜";
+  position:absolute;
+  right:-11px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:18px;
+  font-weight:1000;
+  color:#101116;
+}
+.standard-flow-chip:last-child::after{display:none}
+
+.process-guide{
+  background:linear-gradient(180deg,#ffffff 0%, #f8fffd 100%);
+  border:3px solid #101116;
+  padding:16px 18px;
+  margin-bottom:16px;
+}
+.process-guide h3{
+  font-size:20px;
+  margin:0 0 6px;
+}
+.process-guide p{
+  margin:0 0 12px;
+  font-size:12.5px;
+  font-weight:800;
+  color:var(--muted);
+  line-height:1.6;
+}
+.guide-alert{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:#101116;
+  color:#fff;
+  border-radius:999px;
+  padding:7px 12px;
+  font-size:11px;
+  font-weight:1000;
+  margin-bottom:12px;
+}
+.guide-alert .pulse{
+  width:10px;height:10px;border-radius:999px;background:#19D39A;
+  box-shadow:0 0 0 rgba(25,211,154,.8);
+  animation:pulseDot 1.4s infinite;
+}
+@keyframes pulseDot{
+  0%{box-shadow:0 0 0 0 rgba(25,211,154,.7)}
+  70%{box-shadow:0 0 0 12px rgba(25,211,154,0)}
+  100%{box-shadow:0 0 0 0 rgba(25,211,154,0)}
+}
+.guide-steps{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+.guide-step{
+  background:#fff;
+  border:2px solid #101116;
+  border-radius:18px;
+  padding:13px 12px;
+  box-shadow:0 4px 12px rgba(16,17,22,.06), 3px 3px 0 #101116;
+}
+.guide-step .num{
+  width:34px;height:34px;border-radius:12px;
+  display:grid;place-items:center;
+  font-weight:1000;
+  border:2px solid #101116;
+  margin-bottom:8px;
+  background:#fff;
+}
+.guide-step:nth-child(1) .num{background:#FFD860}
+.guide-step:nth-child(2) .num{background:#7CE5B9}
+.guide-step:nth-child(3) .num{background:#F7A7D0}
+.guide-step b{display:block;font-size:13px;margin-bottom:4px}
+.guide-step span{display:block;font-size:11.5px;font-weight:800;line-height:1.55;color:#374151}
+
+.hero-main,.hero-stats,.prep-panel,.facts-panel,.hear-panel,.task-badge,.listen-part-badge,.info-tile,.fact-line,.guide-mini,.question-card,.task-btn,.task-badge,.topic-item,.planner-box,.note-card,.tip-item,.part-audio,.dialogue-audio,.summary-tile,.crit-tile{
+  border-radius:20px!important;
+}
+.hero-main,.hero-stats,.prep-panel,.facts-panel,.hear-panel,.task-badge,.listen-part-badge,.info-tile,.fact-line,.guide-mini,.question-card,.task-btn,.topic-item,.planner-box,.note-card,.tip-item,.part-audio,.dialogue-audio,.summary-tile,.crit-tile{
+  box-shadow:0 8px 16px rgba(16,17,22,.06), 4px 4px 0 #101116!important;
+}
+.hero-main{
+  padding:26px!important;
+}
+.hero-main h1{
+  margin-bottom:12px!important;
+}
+.hero-main p{
+  font-size:14px!important;
+  line-height:1.6!important;
+}
+.hero-art{
+  width:128px!important;height:128px!important;border-radius:30px!important;
+  background:linear-gradient(180deg,#ffffff 0%, #f2f4ff 100%)!important;
+}
+.hero-emoji{font-size:60px; line-height:1; display:block; animation:floatEmoji 2.6s ease-in-out infinite;}
+@keyframes floatEmoji{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+.prep-step,.hear-step,.prep-b,.peel-b{
+  border-radius:18px!important;
+  padding:14px 10px!important;
+  min-height:92px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  box-shadow:0 6px 14px rgba(16,17,22,.06), 3px 3px 0 #101116!important;
+}
+.prep-step b,.hear-step b,.prep-b,.peel-b{
+  margin-bottom:6px!important;
+}
+.prep-step small,.hear-step small,.prep-b small,.peel-b small,
+.prep-step .prep-step-desc,.hear-step .hear-step-desc{
+  font-size:10.5px!important;
+  line-height:1.45!important;
+  opacity:1!important;
+}
+.fact-line{
+  padding:12px 14px!important;
+  grid-template-columns:42px 1fr!important;
+  background:#fff!important;
+}
+.fact-line:nth-child(1){background:#eef3ff!important}
+.fact-line:nth-child(2){background:#ebfff5!important}
+.fact-line:nth-child(3){background:#fff2f8!important}
+
+.img-fallback{
+  width:32px;height:32px;border-radius:12px;border:2px solid #101116;background:#fff;
+  display:grid;place-items:center;font-size:18px;box-shadow:2px 2px 0 #101116
+}
+.fact-line img,.part-icon img,.hero-art img{border-radius:10px}
+.guide-mini{
+  background:#fff!important;
+}
+.guide-mini b::before{content:"✨ ";}
+
+.flow-step-head,.standard-language-head,.reading-standard-sections summary{
+  background:linear-gradient(180deg,#ffffff 0%, #f8f8ff 100%);
+}
+.flow-body,.standard-language-body,.reading-standard-sections .std-body{
+  background:#fff;
+}
+.flow-step-head b,.standard-language-head b,.reading-standard-sections summary span{
+  font-size:18px;
+}
+.flow-step-head small,.standard-language-head small,.reading-standard-sections summary small{
+  font-size:12px!important;
+  line-height:1.45;
+}
+.step-num,.std-num{
+  border-radius:14px!important;
+}
+
+.language-card{
+  background:linear-gradient(180deg,#ffffff 0%,#fafcff 100%);
+}
+.language-card b::before{content:"💬 ";}
+
+.part-card-head,.standard-language-head{
+  align-items:flex-start!important;
+}
+.part-card-head h3,.standard-footer-nav h2{
+  line-height:1.25!important;
+}
+.part-audio,.dialogue-audio{
+  background:var(--neo-black)!important;
+}
+.part-audio-title::before{content:"🔊 "}
+
+.option{
+  border-radius:14px!important;
+}
+.question-card p,.question-card span{
+  line-height:1.55!important;
+}
+.review-item{
+  background:#fffdf6;
+  border:2px dashed rgba(16,17,22,.12);
+  border-radius:14px;
+  padding:10px 12px!important;
+}
+.standard-footer-nav{
+  background:linear-gradient(180deg,#e9fffa 0%, #c9fff1 100%)!important;
+}
+.standard-footer-buttons a{
+  border-radius:18px!important;
+  min-height:58px!important;
+}
+
+@media(max-width:900px){
+  .guide-steps{grid-template-columns:1fr}
+  .standard-flow-chip::after{display:none}
+}
+</style>
+
+
+<style id="smart-muet-v9-solid-neopop">
+/* ===== SMART MUET V9: SOLID NEOpop COLORS, NO GRADIENTS ===== */
+:root{
+  --neo-blue:#215CF5;
+  --neo-yellow:#FFD23F;
+  --neo-green:#27D58A;
+  --neo-pink:#F56AB4;
+  --neo-orange:#FF6236;
+  --neo-purple:#8F67FF;
+  --neo-black:#101116;
+  --neo-white:#FFFFFF;
+  --neo-cream:#F8F8F8;
+}
+
+/* Global cleanup */
+*{text-shadow:none!important}
+body{
+  background:#20C8BE !important;
+}
+.section-kicker,.tiny,.muted,small{
+  letter-spacing:.02em!important;
+}
+.btn,.task-choice,.route-item,.model-tag,.tag,.task-choice .badge,.task-rule{
+  font-weight:1000!important;
+}
+
+/* Generic card appearance */
+.hero-main,.writing-overview-main,.writing-overview-side,.writing-stat,
+.standard-flow-note,.process-guide,.flow-step,.standard-language-section,
+.practice-shell,.reading-standard-sections details,.standard-footer-nav,
+.task-distinction,.compact-route,.task-choice,.language-card,.peel-build,
+.peel-planner-box,.planner-box,.coach-note,.model-section,
+.fact-line,.guide-step,.guide-mini,.task2-overview-card,.task2-fact,
+.essay-process-step,.peel-learning-card,.peel-build-row,.model-section{
+  background-image:none!important;
+  border-color:var(--neo-black)!important;
+  box-shadow:6px 6px 0 var(--neo-black)!important;
+}
+
+/* Roadmap / navigation */
+.component-roadmap{
+  background:var(--neo-black)!important;
+}
+.component-roadmap a{
+  background:var(--neo-white)!important;
+  color:var(--neo-black)!important;
+}
+.component-roadmap a.current{
+  background:var(--neo-yellow)!important;
+  color:var(--neo-black)!important;
+  box-shadow:4px 4px 0 var(--neo-white)!important;
+}
+
+/* Buttons */
+.btn.yellow{background:var(--neo-yellow)!important;color:var(--neo-black)!important}
+.btn.green{background:var(--neo-green)!important;color:var(--neo-black)!important}
+.btn.pink{background:var(--neo-pink)!important;color:var(--neo-black)!important}
+.btn.orange{background:var(--neo-orange)!important;color:var(--neo-white)!important}
+.btn.dark,.standard-footer-buttons a.menu{background:var(--neo-black)!important;color:var(--neo-white)!important}
+.standard-footer-buttons a.next{background:var(--neo-green)!important;color:var(--neo-black)!important}
+.standard-footer-nav{background:#D7F4F1!important;color:var(--neo-black)!important}
+
+/* Top instruction / overview cards */
+.standard-flow-note,.process-guide,.task-distinction,.compact-route{
+  background:var(--neo-white)!important;
+  color:var(--neo-black)!important;
+}
+.standard-flow-chip:nth-child(1){background:var(--neo-yellow)!important}
+.standard-flow-chip:nth-child(2){background:var(--neo-orange)!important;color:#fff!important}
+.standard-flow-chip:nth-child(3){background:var(--neo-green)!important}
+.standard-flow-chip:nth-child(4){background:var(--neo-pink)!important}
+.standard-flow-chip:nth-child(5){background:var(--neo-purple)!important;color:#fff!important}
+
+/* Guide alert */
+.guide-alert{
+  background:var(--neo-black)!important;color:#fff!important
+}
+.guide-step:nth-child(1) .num{background:var(--neo-yellow)!important}
+.guide-step:nth-child(2) .num{background:var(--neo-green)!important}
+.guide-step:nth-child(3) .num{background:var(--neo-pink)!important}
+
+/* Hero / stat blocks */
+.hero-main,.writing-overview-main{
+  color:var(--neo-white)!important;
+}
+.hero-main h1,.hero-main p,.writing-overview-main h1,.writing-overview-main p{
+  color:var(--neo-white)!important;
+}
+.hero-main{background:var(--neo-orange)!important}
+.reading-wrap .hero-main,.reading-overview-main,.read-hero,.reading-hero{background:var(--neo-green)!important}
+.listen-wrap .hero-main,.hear-panel,.listening-hero{background:var(--neo-blue)!important}
+.writing-overview-main{background:var(--neo-pink)!important}
+.writing-overview-icon,.hero-art{
+  background:var(--neo-white)!important;color:var(--neo-black)!important
+}
+.hero-stats,.writing-overview-side{
+  background:var(--neo-black)!important;
+}
+.writing-stat:nth-child(1), .hero-stats .summary-tile:nth-child(1), .hero-stats > div:nth-child(1){background:var(--neo-yellow)!important;color:#111!important}
+.writing-stat:nth-child(2), .hero-stats .summary-tile:nth-child(2), .hero-stats > div:nth-child(2){background:var(--neo-green)!important;color:#111!important}
+.writing-stat:nth-child(3), .hero-stats .summary-tile:nth-child(3), .hero-stats > div:nth-child(3){background:var(--neo-orange)!important;color:#fff!important}
+.writing-stat:nth-child(4), .hero-stats .summary-tile:nth-child(4), .hero-stats > div:nth-child(4){background:var(--neo-pink)!important;color:#111!important}
+
+/* Essentials / technique blocks */
+.essentials,.flow-step,.standard-language-section,.practice-shell,.reading-standard-sections details{
+  background:var(--neo-cream)!important;
+}
+.flow-step-head,.standard-language-head,.reading-standard-sections summary{
+  background:var(--neo-cream)!important;
+  color:var(--neo-black)!important;
+}
+.flow-body,.standard-language-body,.reading-standard-sections .std-body{
+  background:var(--neo-white)!important;
+}
+.step-num,.std-num{
+  color:var(--neo-black)!important;
+  border-color:var(--neo-black)!important;
+}
+#s1 .step-num, .flow-step:nth-of-type(1) .step-num{background:var(--neo-yellow)!important}
+#s2 .step-num, .flow-step:nth-of-type(2) .step-num{background:var(--neo-orange)!important;color:#fff!important}
+#s3 .step-num, .flow-step:nth-of-type(3) .step-num{background:var(--neo-green)!important}
+#s4 .step-num, .flow-step:nth-of-type(4) .step-num{background:var(--neo-pink)!important}
+#s5 .step-num, .flow-step:nth-of-type(5) .step-num{background:var(--neo-purple)!important;color:#fff!important}
+
+/* Technique letter cards */
+.prep-step:nth-child(1), .hear-step:nth-child(1), .prep-b:nth-child(1), .peel-b:nth-child(1),
+.peel-learning-card:nth-child(1){background:var(--neo-blue)!important;color:#fff!important}
+.prep-step:nth-child(2), .hear-step:nth-child(2), .prep-b:nth-child(2), .peel-b:nth-child(2),
+.peel-learning-card:nth-child(2){background:var(--neo-yellow)!important;color:#111!important}
+.prep-step:nth-child(3), .hear-step:nth-child(3), .prep-b:nth-child(3), .peel-b:nth-child(3),
+.peel-learning-card:nth-child(3){background:var(--neo-green)!important;color:#111!important}
+.prep-step:nth-child(4), .hear-step:nth-child(4), .prep-b:nth-child(4), .peel-b:nth-child(4),
+.peel-learning-card:nth-child(4){background:var(--neo-pink)!important;color:#111!important}
+.prep-b small,.peel-b small,.prep-step small,.hear-step small,.prep-step .prep-step-desc,.hear-step .hear-step-desc{
+  color:inherit!important
+}
+
+/* Info lines / language */
+.fact-line:nth-child(1), .language-card:nth-child(1), .guide-mini:nth-child(1){background:#EEF3FF!important}
+.fact-line:nth-child(2), .language-card:nth-child(2), .guide-mini:nth-child(2){background:#ECFFF4!important}
+.fact-line:nth-child(3), .language-card:nth-child(3), .guide-mini:nth-child(3){background:#FFF0F7!important}
+.language-card:nth-child(4){background:#FFF8DD!important}
+.language-card:nth-child(5){background:#F1EAFF!important}
+
+/* Writing-specific */
+.task-choice.t1{background:var(--neo-yellow)!important}
+.task-choice.t2{background:var(--neo-green)!important}
+.task-choice.active{outline:5px solid var(--neo-blue)!important}
+.task-choice .badge{background:var(--neo-white)!important;color:var(--neo-black)!important}
+.task-rule{background:#F1EAFF!important;color:var(--neo-black)!important}
+.route-item{background:var(--neo-white)!important}
+.task2-fact:nth-child(1){background:#FFF0F7!important}
+.task2-fact:nth-child(2){background:#FFF8DD!important}
+.task2-fact:nth-child(3){background:#ECFFF4!important}
+.essay-process-step:nth-child(1){background:var(--neo-yellow)!important}
+.essay-process-step:nth-child(2){background:var(--neo-pink)!important}
+.essay-process-step:nth-child(3){background:#89D7FF!important}
+.essay-process-step:nth-child(4){background:var(--neo-green)!important}
+.essay-process-step:nth-child(5){background:var(--neo-purple)!important;color:#fff!important}
+.essay-process-step:nth-child(6){background:var(--neo-orange)!important;color:#fff!important}
+.peel-build{background:#EEF7FF!important}
+.peel-build-row:nth-child(2) .peel-build-label{background:var(--neo-blue)!important;color:#fff!important}
+.peel-build-row:nth-child(3) .peel-build-label{background:var(--neo-yellow)!important}
+.peel-build-row:nth-child(4) .peel-build-label{background:var(--neo-green)!important}
+.peel-build-row:nth-child(5) .peel-build-label{background:var(--neo-pink)!important}
+.model-section.intro .model-tag{background:var(--neo-yellow)!important}
+.model-section.point .model-tag{background:var(--neo-blue)!important;color:#fff!important}
+.model-section.explain .model-tag{background:var(--neo-yellow)!important}
+.model-section.example .model-tag{background:var(--neo-green)!important}
+.model-section.link .model-tag{background:var(--neo-pink)!important}
+.model-section.conclusion .model-tag{background:var(--neo-purple)!important;color:#fff!important}
+
+/* Prevent iOS zoom on form focus, without overriding designed text hierarchy */
+textarea, input{font-size:16px}
+</style>
+
+</head>
+<body>
+<main class="app-shell">
+<section class="screen active">
+
+  <!-- Brand bar -->
+  <div class="brand-bar">
+    <button class="icon-btn" onclick="location.href='index.html'" style="margin-left:0;margin-right:8px">&#8592;</button>
+    <div><div class="bar-label">Skill Module · Introduction</div><div class="bar-title">Speaking 800/2</div></div>
+    <button class="icon-btn">&#127908;</button>
+  </div>
+
+  <nav class="component-roadmap"><a href="speaking.html" class="current"><span>🎤 Speaking<span class="state">Current component</span></span></a><a href="listening.html" class=""><span>🎧 Listening<span class="state">Open component</span></span></a><a href="reading.html" class=""><span>📖 Reading<span class="state">Open component</span></span></a><a href="writing.html" class=""><span>✍️ Writing<span class="state">Open component</span></span></a></nav><div class="page-jump-actions"><button class="btn yellow" onclick="document.querySelector('.flow-step, .reading-standard-sections')?.scrollIntoView({behavior:'smooth'})">Learn the Technique</button><button class="btn green" onclick="document.querySelector('.practice-shell, .task-switcher, [id=&quot;s4&quot;], [id=&quot;s5&quot;]')?.scrollIntoView({behavior:'smooth'})">Go Directly to Practice</button></div><section class="standard-flow-note"><div class="section-kicker">Standard Learning Sequence</div><h2>Speaking page overview</h2><p>Follow the same five-step flow used throughout Smart MUET.</p><div class="standard-flow-strip"><div class="standard-flow-chip"><b>1</b>Before You Start</div><div class="standard-flow-chip"><b>2</b>Tips &amp; PREP</div><div class="standard-flow-chip"><b>3</b>Worked Sample</div><div class="standard-flow-chip"><b>4</b>Language Support</div><div class="standard-flow-chip"><b>5</b>Your Practice</div></div></section>
+
+<section class="process-guide">
+  <div class="guide-alert"><span class="pulse"></span> Smart Flow · Follow the steps one by one</div>
+  <h3>🎤 How to use this Speaking page</h3>
+  <p>🗣️ Use keywords, not a full script. PREP helps you speak naturally and clearly.</p>
+  <div class="guide-steps">
+    <div class="guide-step">
+      <div class="num">1</div>
+      <b>Start here</b>
+      <span>Read the overview card first 👉 understand the test format, marks and important reminders.</span>
+    </div>
+    <div class="guide-step">
+      <div class="num">2</div>
+      <b>Learn the method</b>
+      <span>Study the technique section carefully ➜ then review the worked sample and language support.</span>
+    </div>
+    <div class="guide-step">
+      <div class="num">3</div>
+      <b>Go to practice</b>
+      <span>➡️ Start with Task A, then continue to Task B before you submit. ✅ Finally submit and read the feedback before moving to the next component.</span>
+    </div>
+  </div>
+</section>
+
+<section class="neo-hero">
+    <div class="hero-main" style="background:var(--np-orange);color:#fff">
+      <div>
+        <div class="section-kicker" style="color:var(--np-yellow)">MUET Speaking Guide · 800/2</div>
+        <h1>Speak clearly<br>with PREP.</h1>
+        <p>Use PREP for Task A and purposeful interaction for Task B. There is no single correct script — structure and language functions earn the marks.</p>
+      </div>
+      <div class="hero-art"><img src="assets/heroes/small-muet-logo.svg" alt="Smart MUET Guide"></div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-tile"><strong>2</strong><span>Tasks</span></div><div class="stat-tile"><strong>90</strong><span>Marks</span></div><div class="stat-tile"><strong>45</strong><span>Per Task</span></div><div class="stat-tile"><strong>25%</strong><span>of MUET</span></div>
+    </div>
+  </section>
+
+  <section class="essentials">
+    <div class="section-top"><div><div class="section-kicker">Before You Start</div><h2>Speaking Essentials</h2><p>Only the information students need before beginning practice.</p></div></div>
+    <div class="essentials-grid">
+      <div class="prep-panel"><b>Speaking technique — PREP</b>
+        <div class="prep-row"><div class="prep-step"><b>P</b><span class="prep-step-label">Point</span><span class="prep-step-desc">State your stand in sentence 1.</span></div><div class="prep-step"><b>R</b><span class="prep-step-label">Reason</span><span class="prep-step-desc">Give one strong reason why.</span></div><div class="prep-step"><b>E</b><span class="prep-step-label">Example</span><span class="prep-step-desc">Add a specific Malaysian example.</span></div><div class="prep-step"><b>P</b><span class="prep-step-label">Point again</span><span class="prep-step-desc">Restate your stand to close.</span></div></div>
+        <div class="prep-usage-row">
+          <span class="prep-count-pill pill-solo">Task A &middot; 1&times; full PREP cycle</span>
+          <span class="prep-count-pill pill-multi">Task B &middot; mini-PREP every turn</span>
+        </div>
+      </div>
+      <div class="facts-panel"><b>What the test measures</b>
+        <div class="facts-list"><div class="fact-line"><img src="assets/heroes/icon-muet-intro.svg" alt=""><span>Express opinions, give reasons and elaborate.</span></div><div class="fact-line"><img src="assets/heroes/icon-why-muet.svg" alt=""><span>Justify, summarise and conclude your response.</span></div><div class="fact-line"><img src="assets/heroes/icon-app-facts.svg" alt=""><span>Task B: initiate, prompt, negotiate and turn-take.</span></div></div>
+      </div>
+    </div>
+    <details class="more-guide">
+      <summary>＋ View question types and exam reminders</summary>
+      <div class="guide-more-grid"><div class="guide-mini"><b>Session flow</b>Task A (individual) runs first, then you move straight into a group of 3–4 for Task B — same sitting, same room.</div><div class="guide-mini"><b>Task A — Individual</b>2 min prep + 2 min speaking · CEFR B1–B2.</div><div class="guide-mini"><b>Task B — Group</b>3 min prep · 8–12 min discussion · max 4 people · CEFR B2.</div><div class="guide-mini"><b>No fixed script</b>Speaking has no single correct answer — feedback checks structure, relevance and language functions.</div><div class="guide-mini"><b>Four criteria</b>Task fulfilment · accuracy · range · fluency.</div><div class="guide-mini"><b>Local examples</b>Malaysian examples (PTPTN, campus life, EPF) score better than vague ones.</div></div>
+    </details>
+  </section>
+
+  <!-- ══ STEP 1: BEFORE YOU START ══════════════════════════════════ -->
+  <div class="flow-step" id="step1">
+    <div class="flow-step-head" onclick="S.toggle(1)">
+      <div class="step-num">1</div>
+      <div style="flex:1">
+        <b>Before You Start</b>
+        <br><small style="color:var(--muted)">What Speaking 800/2 tests</small>
+      </div>
+      <span class="chev open" id="chev1">&#9660;</span>
+    </div>
+    <div class="flow-body open" id="body1">
+      <div class="info-grid">
+        <div class="info-tile blue"><span class="big">2</span><span class="lbl">Tasks</span></div>
+        <div class="info-tile blue"><span class="big">90</span><span class="lbl">Marks</span></div>
+        <div class="info-tile blue"><span class="big">45</span><span class="lbl">Marks / Task</span></div>
+        <div class="info-tile blue"><span class="big">25%</span><span class="lbl">of MUET</span></div>
+      </div>
+
+      <div class="task-badges">
+        <div class="task-badge tb-a">
+          <span class="icon">&#127908;</span>
+          <b>Task A</b>
+          <small>Individual · 2 min<br>2 min prep + 2 min speak<br>CEFR B1–B2</small>
+          <span class="prep-count-pill on-color">1&times; PREP cycle</span>
+        </div>
+        <div class="task-badge tb-b">
+          <span class="icon">&#128101;</span>
+          <b>Task B</b>
+          <small>Group · 8–12 min<br>3 min prep · max 4 people<br>CEFR B2</small>
+          <span class="prep-count-pill on-color">Mini-PREP · every turn</span>
+        </div>
+      </div>
+
+      <!-- MPM Language Functions -->
+      <div style="background:#f0f9ff;border:2px solid var(--ink);border-radius:16px;padding:14px;margin-top:10px">
+        <p style="font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px">&#127919; WHAT THE EXAMINER LOOKS FOR (MPM official)</p>
+        <div class="fn-grid">
+          <div class="fn-chip"><div class="fn-dot" style="background:var(--blue)"></div>Expressing opinions</div>
+          <div class="fn-chip"><div class="fn-dot" style="background:var(--orange)"></div>Giving reasons</div>
+          <div class="fn-chip"><div class="fn-dot" style="background:var(--green)"></div>Elaborating</div>
+          <div class="fn-chip"><div class="fn-dot" style="background:var(--pink)"></div>Justifying</div>
+          <div class="fn-chip"><div class="fn-dot" style="background:var(--yellow)"></div>Summarising</div>
+          <div class="fn-chip"><div class="fn-dot" style="background:var(--ink)"></div>Concluding</div>
+        </div>
+        <p style="font-size:12px;font-weight:800;color:var(--muted);margin-top:8px">Task B also: initiating · prompting · negotiating · turn-taking · evaluating · interrupting · inferring</p>
+      </div>
+
+      <!-- Linguistic knowledge pillars -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px">
+        <div style="background:var(--yellow);border:var(--line);border-radius:14px;padding:10px;text-align:center;box-shadow:3px 3px 0 var(--ink)">
+          <div style="font-size:18px">&#127919;</div>
+          <div style="font-size:12px;font-weight:1000;margin-top:4px">Accuracy</div>
+          <div style="font-size:10px;font-weight:800;color:rgba(0,0,0,.55);margin-top:2px">Grammar · pronunciation</div>
+        </div>
+        <div style="background:var(--lime);border:var(--line);border-radius:14px;padding:10px;text-align:center;box-shadow:3px 3px 0 var(--ink)">
+          <div style="font-size:18px">&#128221;</div>
+          <div style="font-size:12px;font-weight:1000;margin-top:4px">Range</div>
+          <div style="font-size:10px;font-weight:800;color:rgba(0,0,0,.55);margin-top:2px">Varied sentence structures</div>
+        </div>
+        <div style="background:#fce7f3;border:var(--line);border-radius:14px;padding:10px;text-align:center;box-shadow:3px 3px 0 var(--ink)">
+          <div style="font-size:18px">&#9889;</div>
+          <div style="font-size:12px;font-weight:1000;margin-top:4px">Fluency</div>
+          <div style="font-size:10px;font-weight:800;color:rgba(0,0,0,.55);margin-top:2px">Confidence · no hesitation</div>
+        </div>
+        <div style="background:#dbeafe;border:var(--line);border-radius:14px;padding:10px;text-align:center;box-shadow:3px 3px 0 var(--ink)">
+          <div style="font-size:18px">&#128483;</div>
+          <div style="font-size:12px;font-weight:1000;margin-top:4px">Task Fulfilment</div>
+          <div style="font-size:10px;font-weight:800;color:rgba(0,0,0,.55);margin-top:2px">Answer the prompt fully</div>
+        </div>
+      </div>
+
+      <button class="next-btn show" onclick="S.next(2)">I understand &#8212; go to Tips &amp; Tricks &#8594;</button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 2: TIPS & TRICKS ══════════════════════════════════════ -->
+  <div class="flow-step" id="step2">
+    <div class="flow-step-head" onclick="S.toggle(2)">
+      <div class="step-num" style="background:var(--orange)">2</div>
+      <div style="flex:1"><b>Tips &amp; Technique</b><br><small style="color:var(--muted)">PREP strategy before you practise</small></div>
+      <span class="chev" id="chev2">&#9660;</span>
+    </div>
+    <div class="flow-body" id="body2">
+
+      <!-- PREP visual -->
+      <div class="prep-usage-row">
+        <span class="prep-count-pill pill-solo">Task A: run this PREP cycle ONCE for your full 2-minute response</span>
+      </div>
+      <div class="prep-strip">
+        <div class="prep-b pb-p">P<small>Point</small></div>
+        <div class="prep-b pb-r">R<small>Reason</small></div>
+        <div class="prep-b pb-e">E<small>Example</small></div>
+        <div class="prep-b pb-p2">P<small>Point<br>again</small></div>
+      </div>
+      <div class="prep-usage-row">
+        <span class="prep-count-pill pill-multi">Task B: use mini P-R-E moments across several turns, save "Point again" for the group's final decision</span>
+      </div>
+
+      <!-- PREP explanation cards -->
+      <div style="display:grid;gap:8px">
+        <div style="background:#dbeafe;border:2px solid var(--ink);border-radius:14px;padding:12px;box-shadow:3px 3px 0 var(--ink)">
+          <div style="font-weight:1000;font-size:14px;margin-bottom:4px;color:var(--blue)">P &#8212; Point: State your stand <em>clearly in sentence 1</em></div>
+          <div style="font-size:13px;font-weight:800;color:#1e3a5f;line-height:1.5">Start with a complete opinion. The examiner decides your band within the first sentence.<br><b>Use:</b> &ldquo;I believe…&rdquo; · &ldquo;In my opinion…&rdquo; · &ldquo;I strongly feel that…&rdquo;</div>
+        </div>
+        <div style="background:#fef3c7;border:2px solid var(--ink);border-radius:14px;padding:12px;box-shadow:3px 3px 0 var(--ink)">
+          <div style="font-weight:1000;font-size:14px;margin-bottom:4px">R &#8212; Reason: Explain <em>why</em> — one strong reason only</div>
+          <div style="font-size:13px;font-weight:800;color:#78350f;line-height:1.5">One strong reason scores more than three weak ones.<br><b>Use:</b> &ldquo;This is because…&rdquo; · &ldquo;The reason is…&rdquo; · &ldquo;Due to the fact that…&rdquo;</div>
+        </div>
+        <div style="background:#dcfce7;border:2px solid var(--ink);border-radius:14px;padding:12px;box-shadow:3px 3px 0 var(--ink)">
+          <div style="font-weight:1000;font-size:14px;margin-bottom:4px;color:#166534">E &#8212; Example: Elaborate with a Malaysian example</div>
+          <div style="font-size:13px;font-weight:800;color:#166534;line-height:1.5">Local examples score better. Use PTPTN, campus life, EPF, Malaysian companies.<br><b>Use:</b> &ldquo;For example…&rdquo; · &ldquo;Take Malaysia as an example…&rdquo;</div>
+        </div>
+        <div style="background:#fce7f3;border:2px solid var(--ink);border-radius:14px;padding:12px;box-shadow:3px 3px 0 var(--ink)">
+          <div style="font-weight:1000;font-size:14px;margin-bottom:4px;color:#be185d">P &#8212; Point Again: Conclude confidently</div>
+          <div style="font-size:13px;font-weight:800;color:#be185d;line-height:1.5">Restate your stand. This signals the examiner you have finished your response cleanly.<br><b>Use:</b> &ldquo;Therefore, I strongly believe that…&rdquo; · &ldquo;In conclusion…&rdquo;</div>
+        </div>
+      </div>
+
+      <!-- Task B tips -->
+      <div style="background:var(--lime);border:var(--line);border-radius:16px;padding:14px;margin-top:12px">
+        <p style="font-size:11px;font-weight:1000;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:8px">&#128101; TASK B &#8212; GROUP DISCUSSION TIPS</p>
+        <div style="display:grid;gap:8px;font-size:13px;font-weight:850">
+          <div style="display:flex;gap:10px"><span style="font-size:16px">&#127919;</span><span><b>Initiate:</b> Be the first to speak. &ldquo;Shall we begin by looking at the first option?&rdquo;</span></div>
+          <div style="display:flex;gap:10px"><span style="font-size:16px">&#128483;</span><span><b>Prompt:</b> Ask others. &ldquo;What do you think, [name]?&rdquo; · &ldquo;[Name], do you agree?&rdquo;</span></div>
+          <div style="display:flex;gap:10px"><span style="font-size:16px">&#9889;</span><span><b>Turn-take:</b> &ldquo;Building on what [name] said…&rdquo; · &ldquo;I would like to add…&rdquo;</span></div>
+          <div style="display:flex;gap:10px"><span style="font-size:16px">&#9878;&#65039;</span><span><b>Negotiate:</b> &ldquo;That is a valid point, however…&rdquo; · &ldquo;I see it differently because…&rdquo;</span></div>
+          <div style="display:flex;gap:10px"><span style="font-size:16px">&#9989;</span><span><b>Conclude:</b> Help the group decide. &ldquo;So as a group, we have decided that the best option is…&rdquo;</span></div>
+        </div>
+      </div>
+
+      <!-- Quick reminders -->
+      <div style="background:#f8fafc;border:var(--line);border-radius:14px;padding:14px;margin-top:12px">
+        <h3 style="margin-bottom:10px">Quick Reminders</h3>
+        <div style="display:grid;gap:8px;font-size:13px;font-weight:850">
+          <div style="display:flex;gap:10px"><span style="font-size:16px">&#127919;</span><span>One strong reason beats three weak ones</span></div>
+          <div style="display:flex;gap:10px"><span style="font-size:16px">&#127474;&#127486;</span><span>Use Malaysian examples: PTPTN, campus life, EPF, cost of living in KL</span></div>
+          <div style="display:flex;gap:10px"><span style="font-size:16px">&#128683;</span><span>Replace fillers (erm, like, you know) with a 1-second pause</span></div>
+          <div style="display:flex;gap:10px"><span style="font-size:16px">&#128100;</span><span>Task B: refer to others by name at least twice</span></div>
+        </div>
+      </div>
+
+      <button class="next-btn show" onclick="S.next(3)">I&apos;ve read the tips &#8212; show me a sample &#8594;</button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 3: SAMPLE ANSWER ══════════════════════════════════════ -->
+  <div class="flow-step" id="step3">
+    <div class="flow-step-head" onclick="S.toggle(3)">
+      <div class="step-num" style="background:var(--green)">3</div>
+      <div style="flex:1"><b>Worked Sample</b><br><small style="color:var(--muted)">See what a good PREP response looks like</small></div>
+      <span class="chev" id="chev3">&#9660;</span>
+    </div>
+    <div class="flow-body" id="body3">
+      <div class="prep-strip">
+        <div class="prep-b pb-p">P<small>Point</small></div>
+        <div class="prep-b pb-r">R<small>Reason</small></div>
+        <div class="prep-b pb-e">E<small>Example</small></div>
+        <div class="prep-b pb-p2">P<small>Again</small></div>
+      </div>
+      <div style="background:#f0f9ff;border:var(--line);border-radius:16px;padding:14px">
+        <p style="font-size:11px;font-weight:1000;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:12px">Sample topic: Salary as reason for choosing a job</p>
+        <div class="sample-box"><span class="sample-label">P &#8212; Point (Expressing opinion)</span>I believe salary is the most important reason when choosing a job because it directly determines financial security.</div>
+        <div class="sample-box" style="margin-top:8px"><span class="sample-label">R &#8212; Reason (Giving reasons / Justifying)</span>A good salary allows a graduate to repay education loans, cover living expenses and begin saving &#8212; all at once.</div>
+        <div class="sample-box" style="margin-top:8px"><span class="sample-label">E &#8212; Example (Elaborating)</span>Many Malaysian graduates with PTPTN loans must prioritise salary because repayment starts six months after graduation. A salary below RM2,000 in KL makes this extremely difficult.</div>
+        <div class="sample-box" style="margin-top:8px"><span class="sample-label">P &#8212; Point Again (Concluding / Summarising)</span>Therefore, salary is the most critical factor as it forms the foundation of financial independence.</div>
+      </div>
+      <div class="coach-note lime" style="margin-top:12px">
+        <div class="tag">&#128221; EXAMINER NOTE</div>
+        <p>Direct answer &middot; one clear reason &middot; specific local example &middot; strong closing. About 90 seconds. No fillers. This response demonstrates: expressing opinions, giving reasons, elaborating and concluding &#8212; all 4 key language functions.</p>
+      </div>
+      <button class="next-btn show" onclick="S.next(4)">I&apos;m ready &#8212; show me the Phrase Bank &#8594;</button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 4: PHRASE BANK (from vault1) ════════════════════════ -->
+  <div class="flow-step" id="step4">
+    <div class="flow-step-head" onclick="S.toggle(4)">
+      <div class="step-num" style="background:var(--pink)">4</div>
+      <div style="flex:1"><b>Phrase Bank</b><br><small style="color:var(--muted)">Ready-made phrases for Task A &amp; Task B</small></div>
+      <span class="chev" id="chev4">&#9660;</span>
+    </div>
+    <div class="flow-body" id="body4">
+      <div class="phrase-bank">
+        <div class="phrase-section">
+          <div class="phrase-label">&#128483; TASK A &#8212; EXPRESSING YOUR POINT (P)</div>
+          <div class="phrase-text">&ldquo;I believe that&#8230;&rdquo; &middot; &ldquo;In my opinion&#8230;&rdquo; &middot; &ldquo;I strongly feel that&#8230;&rdquo;<br>&ldquo;From my perspective&#8230;&rdquo; &middot; &ldquo;I would argue that&#8230;&rdquo;</div>
+        </div>
+        <div class="phrase-section">
+          <div class="phrase-label">&#128161; GIVING YOUR REASON (R)</div>
+          <div class="phrase-text">&ldquo;This is because&#8230;&rdquo; &middot; &ldquo;The reason is&#8230;&rdquo; &middot; &ldquo;Due to the fact that&#8230;&rdquo;<br>&ldquo;This can be attributed to&#8230;&rdquo; &middot; &ldquo;One major reason is&#8230;&rdquo;</div>
+        </div>
+        <div class="phrase-section">
+          <div class="phrase-label">&#127981; ELABORATING WITH AN EXAMPLE (E)</div>
+          <div class="phrase-text">&ldquo;For example&#8230;&rdquo; &middot; &ldquo;For instance&#8230;&rdquo; &middot; &ldquo;A clear example of this is&#8230;&rdquo;<br>&ldquo;Take Malaysia as an example&#8230;&rdquo; &middot; &ldquo;To illustrate this point&#8230;&rdquo;</div>
+        </div>
+        <div class="phrase-section">
+          <div class="phrase-label">&#9989; CONCLUDING (P again)</div>
+          <div class="phrase-text">&ldquo;Therefore, I strongly believe that&#8230;&rdquo; &middot; &ldquo;In conclusion&#8230;&rdquo;<br>&ldquo;To summarise my point&#8230;&rdquo; &middot; &ldquo;This is why I feel that&#8230;&rdquo;</div>
+        </div>
+        <div class="phrase-section">
+          <div class="phrase-label">&#128101; TASK B &#8212; INTERACTION PHRASES</div>
+          <div class="phrase-text">Initiate: &ldquo;Shall we start by looking at&#8230;?&rdquo;<br>Prompt: &ldquo;What do you think, [name]?&rdquo; &middot; &ldquo;[Name], do you agree?&rdquo;<br>Turn-take: &ldquo;Building on what [name] said&#8230;&rdquo; &middot; &ldquo;I would like to add&#8230;&rdquo;<br>Negotiate: &ldquo;That is a valid point, however&#8230;&rdquo;<br>Conclude: &ldquo;So as a group, we have decided&#8230;&rdquo;</div>
+        </div>
+        <div class="phrase-avoid">
+          <div class="phrase-label" style="color:rgba(255,200,200,.9)">&#10060; AVOID THESE FILLERS</div>
+          <div class="phrase-text" style="color:rgba(255,220,220,.9)">erm&#8230; &middot; like&#8230; &middot; you know&#8230; &middot; so yeah&#8230; &middot; actually actually&#8230;<br>Replace with a 1-second pause. A pause sounds confident. Fillers lose marks.</div>
+        </div>
+      </div>
+      <button class="next-btn show" onclick="S.next(5)">I&apos;ve read the phrases &#8212; go to practice &#8594;</button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 5: YOUR PRACTICE ══════════════════════════════════════ -->
+  <div class="flow-step" id="step5">
+    <div class="flow-step-head" onclick="S.toggle(5)">
+      <div class="step-num" style="background:var(--ink);color:white">5</div>
+      <div style="flex:1"><b>Your Practice</b><br><small style="color:var(--muted)">PREP notes + transcript + submit</small></div>
+      <span class="chev" id="chev5">&#9660;</span>
+    </div>
+    <div class="flow-body" id="body5">
+
+      <!-- Task switcher -->
+      <div class="task-switcher">
+        <button id="btnA" class="task-btn active-a" onclick="setTask('A')">&#127908; Task A<br><small style="font-weight:800">Individual</small></button>
+        <button id="btnB" class="task-btn" onclick="setTask('B')">&#128101; Task B<br><small style="font-weight:800">Group</small></button>
+      </div>
+
+      <!-- Topic prompt -->
+      <div style="background:#fce7f3;border:var(--line);border-radius:16px;padding:14px;margin-bottom:14px">
+        <p class="tiny" style="color:var(--muted)">Practice Topic</p>
+        <h3 id="taskTitle" style="margin-top:6px">Task A &#8212; Individual Response</h3>
+        <span id="taskPrepPill" class="prep-count-pill pill-solo" style="margin-top:8px">1&times; PREP cycle for this response</span>
+        <select id="topicSel" style="margin-top:10px" onchange="changeTopic()"></select>
+        <p id="topicPrompt" style="margin-top:10px;font-weight:800;font-size:14px;line-height:1.45"></p>
+      </div>
+
+      <!-- Coach tip -->
+      <div class="coach-note pink"><div class="tag">COACH TIP</div><p id="coachTip"></p></div>
+
+      <!-- Timer -->
+      <div class="timer-card yellow" style="margin-top:12px">
+        <div>
+          <p class="tiny" id="timerLbl">2-Minute Prep Timer</p>
+          <div id="timerDisp" style="font-family:'Sora';font-size:36px;font-weight:800">02:00</div>
+        </div>
+        <button class="btn black" style="width:auto;min-width:80px" id="timerBtn" onclick="toggleTimer()">Start</button>
+      </div>
+
+      <!-- PREP notes -->
+      <div class="card" style="margin-top:4px">
+        <h2>PREP Notes <span class="req">Required</span></h2>
+        <p style="font-size:13px;font-weight:800;color:var(--muted);margin-top:4px">Keywords only &#8212; not full sentences. This is your plan before you speak.</p>
+        <div class="prep-grid" style="margin-top:12px">
+          <div class="prep-box"><h3><span class="prep-letter" style="background:var(--blue);color:white">P</span>Point</h3><textarea id="prepP" placeholder="My stand is..."></textarea></div>
+          <div class="prep-box"><h3><span class="prep-letter" style="background:var(--yellow)">R</span>Reason</h3><textarea id="prepR" placeholder="This is because..."></textarea></div>
+          <div class="prep-box"><h3><span class="prep-letter" style="background:var(--green)">E</span>Example</h3><textarea id="prepE" placeholder="For example..."></textarea></div>
+          <div class="prep-box"><h3><span class="prep-letter" style="background:var(--pink)">P</span>Point Again</h3><textarea id="prepClose" placeholder="Therefore..."></textarea></div>
+        </div>
+      </div>
+
+      <!-- Transcript -->
+      <div class="card">
+        <h2>Transcript <span class="req">Required</span></h2>
+        <p style="font-size:13px;font-weight:800;color:var(--muted);margin-top:4px">Speak aloud first. Then type what you said here.</p>
+        <textarea id="transcript" rows="5" style="margin-top:10px" placeholder="I believe..."></textarea>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="btn-row" style="margin-top:4px">
+        <button class="btn yellow wide" onclick="submitPractice()">Submit Practice</button>
+        <button class="btn white" onclick="resetPractice()">Reset</button>
+        <button class="btn pink" onclick="location.href='index.html'">&#8592; Home</button>
+      </div>
+
+      <!-- Feedback card (MPM language functions) -->
+      <div id="feedbackCard" class="feedback-card">
+        <div class="fb-header" style="background:var(--ink);color:white">
+          &#127919; Language Function Feedback
+        </div>
+        <div class="fb-body" id="fbBody"></div>
+      </div>
+
+      <!-- Round-up card (4 criteria) -->
+      <div id="roundupCard" class="roundup-card">
+        <div class="roundup-header">
+          <p class="tiny" style="color:rgba(255,255,255,.6)">Practice Round-Up &#8212; Speaking 800/2</p>
+          <h2 style="margin-top:4px">Your 4 Criteria</h2>
+        </div>
+        <div class="roundup-criteria" id="roundupCriteria"></div>
+        <div class="roundup-total" id="roundupTotal"></div>
+        <div style="padding:14px 16px;background:white;border-top:2px solid var(--ink)">
+          <p style="font-size:13px;font-weight:800;color:var(--muted);margin-bottom:10px">&#128161; There is no single correct speaking answer. This instant feedback checks PREP, relevance, interaction and language functions. Your lecturer provides the official performance judgement.</p>
+          <div class="btn-row">
+            <button class="btn black wide" onclick="location.href='index.html'">&#8592; Back to Home</button>
+            <button class="btn yellow" onclick="location.href='vault1-speaking.html'">Vault 1 Practice &#8594;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submitted banner -->
+      <div id="submittedBanner" class="submitted-banner">
+        <span style="font-size:36px;display:block;margin-bottom:8px">&#9989;</span>
+        <h2>Practice Submitted!</h2>
+        <p id="submittedMsg">Your speaking practice has been saved. Instant criterion feedback is shown below; your lecturer provides the official judgement.</p>
+        <div id="submittedMeta" class="submitted-meta"></div>
+        <button class="btn yellow" style="margin-top:10px" onclick="location.href='vault1-speaking.html'">Continue to Vault 1 Practice &#8594;</button>
+        <button class="btn black" style="margin-top:8px" onclick="location.href='index.html'">&#8592; Back to Home</button>
+      </div>
+
+    </div>
+  </div>
+
+<section class="standard-footer-nav"><div class="footer-kicker">Continue Your Smart MUET Journey</div><h2>Speaking complete — choose your next step</h2><div class="standard-footer-buttons"><a class="disabled" href="#">← Previous Component</a><a class="menu" href="index.html">⌂ Back to Main Menu</a><a class="next" href="listening.html">Next: Listening →</a></div></section>
+</section>
+</main>
+<div id="toast" class="toast"></div>
+<script src="js/muet-shared.js?v=20260729-std1"></script>
+<script src="js/backend-config.js?v=20260729-std1"></script>
+<script>
+/* ═══════════════════════════════════════════════════════
+   Topic data
+═══════════════════════════════════════════════════════ */
+const topicsA = [
+  {id:'A1',title:'Candidate A \u2014 Location',
+   prompt:'Everyone has different reasons when choosing a job. Talk about: LOCATION. Explain why location is an important reason when choosing a job.',
+   tip:'Use PREP. State one clear stand about location. Give a specific local example \u2014 commute, family proximity, cost of living in KL vs. your hometown.'},
+  {id:'A2',title:'Candidate B \u2014 Salary',
+   prompt:'Everyone has different reasons when choosing a job. Talk about: SALARY. Explain why salary is an important reason when choosing a job.',
+   tip:'Use PREP. Link salary to PTPTN repayment, cost of living in cities, financial independence after graduation.'},
+  {id:'A3',title:'Candidate C \u2014 Working Hours',
+   prompt:'Everyone has different reasons when choosing a job. Talk about: WORKING HOURS. Explain why working hours are an important reason when choosing a job.',
+   tip:'Use PREP. Think about work-life balance, shift work, flexible arrangements. Use a local example \u2014 hospital shift workers, factory overtime.'},
+  {id:'A4',title:'Candidate D \u2014 Facilities',
+   prompt:'Everyone has different reasons when choosing a job. Talk about: FACILITIES. Explain why workplace facilities are an important reason when choosing a job.',
+   tip:'Use PREP. Give specific examples: gym, childcare, medical benefits, remote work tools, canteen. Link to employee wellbeing.'}
+];
+const topicsB = [
+  {id:'B1',title:'Career Guidance \u2014 Group Discussion',
+   prompt:'It is very important for students to choose the right career. Discuss: How can universities provide better career guidance for students? Mind map ideas: relevant clubs \u2022 internship programmes \u2022 professional courses \u2022 career guidance advisers \u2022 talks by professionals. Decide the BEST way.',
+   tip:'Task B: Initiate the discussion, invite others by name, evaluate each option with a reason, negotiate, then help the group decide the BEST option in the final 2 minutes.'}
+];
+
+/* ═══════════════════════════════════════════════════════
+   Step navigation
+═══════════════════════════════════════════════════════ */
+const S = {
+  toggle(n) {
+    const body = document.getElementById('body'+n);
+    const chev = document.getElementById('chev'+n);
+    const open = body.classList.toggle('open');
+    if(chev){ chev.classList.toggle('open', open); }
+    if(open) setTimeout(() => body.scrollIntoView({behavior:'smooth', block:'start'}), 100);
+  },
+  next(n) {
+    const body = document.getElementById('body'+n);
+    const chev = document.getElementById('chev'+n);
+    if(body){ body.classList.add('open'); }
+    if(chev){ chev.classList.add('open'); }
+    setTimeout(() => body?.scrollIntoView({behavior:'smooth', block:'start'}), 150);
+  }
+};
+
+/* ═══════════════════════════════════════════════════════
+   Task / topic
+═══════════════════════════════════════════════════════ */
+let currentTask = 'A', secs = 120, timerId = null;
+
+function setTask(t) {
+  currentTask = t;
+  document.getElementById('btnA').className = 'task-btn' + (t==='A' ? ' active-a' : '');
+  document.getElementById('btnB').className = 'task-btn' + (t==='B' ? ' active-b' : '');
+  document.getElementById('taskTitle').textContent = t==='A'
+    ? 'Task A \u2014 Individual Response' : 'Task B \u2014 Group Discussion';
+  const prepPill = document.getElementById('taskPrepPill');
+  if(prepPill){
+    prepPill.className = 'prep-count-pill ' + (t==='A' ? 'pill-solo' : 'pill-multi');
+    prepPill.textContent = t==='A' ? '1\u00d7 PREP cycle for this response' : 'Mini-PREP \u00b7 use it every turn';
+  }
+  secs = t==='A' ? 120 : 180;
+  stopTimer(); renderTimer(); renderTopics(); changeTopic();
+  document.getElementById('submittedBanner').classList.remove('show');
+  document.getElementById('feedbackCard').classList.remove('show');
+  document.getElementById('roundupCard').classList.remove('show');
+}
+
+function renderTopics() {
+  const data = currentTask==='A' ? topicsA : topicsB;
+  document.getElementById('topicSel').innerHTML =
+    data.map(x=>`<option value="${x.id}">${x.title}</option>`).join('');
+}
+
+function getTopic() {
+  const id = document.getElementById('topicSel').value;
+  const data = currentTask==='A' ? topicsA : topicsB;
+  return data.find(x=>x.id===id) || data[0];
+}
+
+function changeTopic() {
+  const t = getTopic();
+  document.getElementById('topicPrompt').textContent = t.prompt;
+  document.getElementById('coachTip').textContent    = t.tip;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Timer
+═══════════════════════════════════════════════════════ */
+function toggleTimer() {
+  if(timerId){ stopTimer(); return; }
+  timerId = setInterval(()=>{ secs--; renderTimer();
+    if(secs<=0){ stopTimer(); MUET.toast('Prep time up \u2014 start speaking now!'); }
+  }, 1000);
+  document.getElementById('timerBtn').textContent = 'Pause';
+}
+function stopTimer() {
+  clearInterval(timerId); timerId = null;
+  const b = document.getElementById('timerBtn');
+  if(b) b.textContent = 'Start';
+}
+function renderTimer() {
+  const m = String(Math.floor(secs/60)).padStart(2,'0');
+  const s = String(secs%60).padStart(2,'0');
+  document.getElementById('timerDisp').textContent = `${m}:${s}`;
+  document.getElementById('timerLbl').textContent  = currentTask==='A' ? '2-Minute Prep Timer' : '3-Minute Prep Timer';
+}
+
+/* ═══════════════════════════════════════════════════════
+   MPM Language Function Feedback Engine
+═══════════════════════════════════════════════════════ */
+function analyseFunctions(transcript, task) {
+  const t = transcript.toLowerCase();
+  if(task === 'A') {
+    return [
+      {
+        fn: 'Expressing Opinions (P \u2014 Point)',
+        pass: /\b(i believe|i think|in my opinion|personally|i strongly feel|i would argue|from my perspective)\b/.test(t),
+        passMsg: 'Opinion phrase detected. Good start \u2014 you stated your stand clearly.',
+        failMsg: 'No opinion phrase found. Start with: \u201cI believe\u2026\u201d or \u201cIn my opinion\u2026\u201d'
+      },
+      {
+        fn: 'Giving Reasons (R \u2014 Reason)',
+        pass: /\b(because|this is because|the reason is|due to the fact|one major reason|since)\b/.test(t),
+        passMsg: 'Reasoning language detected. You explained your point well.',
+        failMsg: 'Add a reason using \u201cbecause\u2026\u201d or \u201cthe reason is\u2026\u201d'
+      },
+      {
+        fn: 'Elaborating (E \u2014 Example)',
+        pass: /\b(for example|for instance|such as|take .{1,20} as an example|to illustrate|a clear example)\b/.test(t),
+        passMsg: 'Example language detected. You elaborated your point well.',
+        failMsg: 'Add an example using \u201cFor example\u2026\u201d or \u201cTake Malaysia as an example\u2026\u201d'
+      },
+      {
+        fn: 'Justifying',
+        pass: /\b(this shows|this proves|this means that|this demonstrates|which means|therefore|thus)\b/.test(t),
+        passMsg: 'Justification language detected. You linked your example back to your argument.',
+        failMsg: 'After your example, link it back: \u201cThis shows that\u2026\u201d or \u201cThis means that\u2026\u201d'
+      },
+      {
+        fn: 'Concluding / Summarising (P again)',
+        pass: /\b(therefore|thus|hence|in conclusion|to conclude|to summarise|this is why i|i strongly believe)\b/.test(t),
+        passMsg: 'Closing language detected. You ended your response clearly.',
+        failMsg: 'Close with: \u201cTherefore, I strongly believe that\u2026\u201d or \u201cIn conclusion\u2026\u201d'
+      }
+    ];
+  } else {
+    return [
+      {
+        fn: 'Initiating Discussion',
+        pass: /\b(shall we|let us begin|let\u2019s start|i would like to start|can we discuss)\b/.test(t),
+        passMsg: 'You initiated the discussion. Well done.',
+        failMsg: 'Try to initiate: \u201cShall we begin by looking at\u2026?\u201d'
+      },
+      {
+        fn: 'Prompting Others (Turn-taking)',
+        pass: /\b(what do you think|do you agree|[a-z]+, what|your thoughts|would you like to add)\b/.test(t),
+        passMsg: 'You prompted other speakers. Good interaction.',
+        failMsg: 'Prompt others: \u201cWhat do you think, [name]?\u201d or \u201c[Name], do you agree?\u201d'
+      },
+      {
+        fn: 'Expressing Opinions',
+        pass: /\b(i believe|i think|in my opinion|i feel|i would|personally)\b/.test(t),
+        passMsg: 'You expressed your opinions clearly.',
+        failMsg: 'State your view: \u201cI believe\u2026\u201d or \u201cIn my opinion\u2026\u201d'
+      },
+      {
+        fn: 'Negotiating / Evaluating',
+        pass: /\b(however|on the other hand|i see it differently|that is a valid point|i agree but|i disagree because|compared to)\b/.test(t),
+        passMsg: 'You negotiated and evaluated ideas. Excellent group discussion skills.',
+        failMsg: 'Negotiate: \u201cThat is a valid point, however\u2026\u201d or \u201cI agree but\u2026\u201d'
+      },
+      {
+        fn: 'Concluding / Reaching Consensus',
+        pass: /\b(as a group|we have decided|we agree|the best option is|to conclude|in conclusion|we chose)\b/.test(t),
+        passMsg: 'You helped the group reach a conclusion. Good leadership.',
+        failMsg: 'Conclude: \u201cSo as a group, we have decided that\u2026\u201d'
+      }
+    ];
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   4-Criteria Round-Up (MPM linguistic knowledge)
+═══════════════════════════════════════════════════════ */
+function buildRoundup(transcript, prep, fnResults) {
+  const t  = transcript.toLowerCase();
+  const wc = transcript.split(/\s+/).filter(Boolean).length;
+  const filledPrep = Object.values(prep).filter(v=>v.length>0).length;
+  const fnPassed   = fnResults.filter(f=>f.pass).length;
+  const fnTotal    = fnResults.length;
+
+  // Task Fulfilment /25
+  const tfScore = Math.min(25, Math.round(
+    (filledPrep / 4) * 12 + (fnPassed / fnTotal) * 13
+  ));
+
+  // Accuracy /25 — grammar signals
+  const hasVariedGrammar = /\b(although|despite|however|which|that|who|because|if|unless|since)\b/.test(t);
+  const hasComplexSentence = (t.match(/[,]/g)||[]).length >= 1;
+  const accScore = Math.min(25, Math.round(8 + (hasVariedGrammar?8:0) + (hasComplexSentence?5:0) + Math.min(4, Math.floor(wc/20))));
+
+  // Range /25 — varied structures
+  const hasComparison = /\b(more|less|better|worse|rather than|compared to|not only|but also)\b/.test(t);
+  const hasConditional = /\b(if|unless|should|would|could|might)\b/.test(t);
+  const rangeScore = Math.min(25, Math.round(8 + (hasComparison?8:0) + (hasConditional?5:0) + Math.min(4, Math.floor(wc/25))));
+
+  // Fluency /25 — length, no fillers
+  const fillerCount = (t.match(/\b(erm|uhh|umm|like,|you know|so yeah)\b/g)||[]).length;
+  const fluencyScore = Math.min(25, Math.round(Math.min(20, wc/4) + 5 - fillerCount*2));
+
+  const total = tfScore + accScore + rangeScore + fluencyScore;
+
+  return {
+    criteria: [
+      {label:'Task Fulfilment', score:tfScore, max:25,
+       desc:filledPrep>=3 ? 'PREP plan complete. Prompt addressed.' : 'Complete more PREP boxes and address the prompt fully.',
+       grade: tfScore>=20?'pass':tfScore>=12?'mid':'fail'},
+      {label:'Accuracy', score:accScore, max:25,
+       desc:hasVariedGrammar ? 'Varied grammar detected.' : 'Use complex sentences: although, because, which, that.',
+       grade: accScore>=20?'pass':accScore>=12?'mid':'fail'},
+      {label:'Range', score:rangeScore, max:25,
+       desc:hasComparison ? 'Sentence variety detected.' : 'Add comparisons or conditionals: if, compared to, not only.',
+       grade: rangeScore>=20?'pass':rangeScore>=12?'mid':'fail'},
+      {label:'Fluency', score:fluencyScore, max:25,
+       desc:fluencyScore>=18 ? `Word count: ${wc}. No major fillers detected.` : `Word count: ${wc}. Remove fillers (erm, like). Aim for 80+ words.`,
+       grade: fluencyScore>=20?'pass':fluencyScore>=12?'mid':'fail'}
+    ],
+    total, max:100
+  };
+}
+
+/* ═══════════════════════════════════════════════════════
+   Submit
+═══════════════════════════════════════════════════════ */
+function submitPractice() {
+  const tr        = document.getElementById('transcript').value.trim();
+  const prepP     = document.getElementById('prepP').value.trim();
+  const prepR     = document.getElementById('prepR').value.trim();
+  const prepE     = document.getElementById('prepE').value.trim();
+  const prepClose = document.getElementById('prepClose').value.trim();
+  const prep      = {point:prepP, reason:prepR, example:prepE, close:prepClose};
+
+  if(!tr){ MUET.toast('Please type your transcript before submitting.'); return; }
+  const filledPrep = Object.values(prep).filter(Boolean).length;
+  if(filledPrep < 2){ MUET.toast('Please fill at least 2 PREP boxes before submitting.'); return; }
+
+  const topic    = getTopic();
+  const wc       = tr.split(/\s+/).filter(Boolean).length;
+  const taskLabel= currentTask==='A' ? 'Task A' : 'Task B';
+  const fnResults= analyseFunctions(tr, currentTask);
+  const roundup  = buildRoundup(tr, prep, fnResults);
+
+  // Save session
+  const session = {
+    vaultId:'SKILL-MODULE', type:taskLabel,
+    topicId:topic.id, topicTitle:topic.title,
+    prep, transcript:tr, wordCount:wc,
+    fnPassed: fnResults.filter(f=>f.pass).length,
+    roundupTotal: roundup.total,
+    date: new Date().toISOString()
+  };
+  const list = MUET.loadSessions('speaking');
+  list.push(session);
+  MUET.saveSessions('speaking', list);
+  MUET.awardBadge('first_step');
+  MUET.awardBadge(currentTask==='A' ? 'prep_starter' : 'discussion_builder');
+  MUET.addXP(80);
+
+  // Backend — send to Apps Script / Google Sheet
+  if(typeof saveSmartMuetAttempt==='function') {
+    const p = MUET.loadProfile()||{};
+    const score90 = Math.round(roundup.total * 0.9);
+    saveSmartMuetAttempt({
+      studentName:p.name||'', studentEmail:p.email||'', studentRegNo:p.regNo||'', classGroup:p.group||'',
+      component:'speaking', vaultId:'SKILL-MODULE', taskType:taskLabel,
+      topicId:topic.id, topicTitle:topic.title, prompt:topic.prompt,
+      answerText:tr, wordCount:wc, prep,
+      fnPassed:fnResults.filter(f=>f.pass).length,
+      score90, estimatedBand:MUET.scoreToBand(score90),
+      xpEarned:80, status:'Auto-feedback — lecturer marks officially',
+      date:new Date().toISOString()
+    });
+  }
+
+  // Render feedback
+  const fbBody = document.getElementById('fbBody');
+  fbBody.innerHTML = fnResults.map(fn=>`
+    <div class="fb-fn-row ${fn.pass?'pass':'fail'}">
+      <div class="fb-fn-icon">${fn.pass?'&#9989;':'&#9888;&#65039;'}</div>
+      <div>
+        <div class="fb-fn-label">${fn.fn}</div>
+        <div class="fb-fn-text">${fn.pass?fn.passMsg:fn.failMsg}</div>
+      </div>
+    </div>`).join('');
+  document.getElementById('feedbackCard').classList.add('show');
+
+  // Render roundup
+  const rc = document.getElementById('roundupCriteria');
+  rc.innerHTML = roundup.criteria.map(c=>`
+    <div class="crit-tile ${c.grade}">
+      <span class="crit-score">${c.score}</span>
+      <span class="crit-label">${c.label}</span>
+      <div class="crit-desc">${c.desc}</div>
+    </div>`).join('');
+  document.getElementById('roundupTotal').innerHTML =
+    `<div><b style="font-family:'Sora';font-size:13px">Practice Indicator</b><br><small style="font-weight:800;color:var(--muted)">Indicative only \u2014 lecturer marks officially</small></div>
+     <div style="font-family:'Sora';font-size:28px;font-weight:800;color:var(--blue)">${roundup.total}<small style="font-size:14px">/100</small></div>`;
+  document.getElementById('roundupCard').classList.add('show');
+
+  // Submitted banner
+  document.getElementById('submittedMsg').textContent =
+    `Your ${taskLabel} practice has been saved. Review the instant criterion feedback below. Your lecturer provides the official performance judgement.`;
+  document.getElementById('submittedMeta').innerHTML =
+    `<b>Topic:</b> ${topic.title}<br>
+     <b>Transcript words:</b> ${wc}<br>
+     <b>PREP boxes filled:</b> ${filledPrep}/4<br>
+     <b>Language functions passed:</b> ${fnResults.filter(f=>f.pass).length}/${fnResults.length}<br>
+     <b>Saved:</b> ${new Date().toLocaleString('en-MY')}`;
+  document.getElementById('submittedBanner').classList.add('show');
+  MUET.toast('Speaking practice saved! \u2713');
+  setTimeout(()=>document.getElementById('feedbackCard').scrollIntoView({behavior:'smooth',block:'start'}), 200);
+}
+
+function resetPractice() {
+  ['prepP','prepR','prepE','prepClose','transcript'].forEach(id=>{
+    const el=document.getElementById(id); if(el)el.value='';
+  });
+  ['submittedBanner','feedbackCard','roundupCard'].forEach(id=>
+    document.getElementById(id)?.classList.remove('show'));
+  secs = currentTask==='A' ? 120 : 180;
+  stopTimer(); renderTimer();
+  MUET.toast('Reset.');
+}
+
+/* ═══════════════════════════════════════════════════════
+   Init
+═══════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', ()=>{
+  setTask('A');
+  // Step 1 is open by default
+  document.getElementById('body1').classList.add('open');
+  document.getElementById('chev1').classList.add('open');
+});
+</script>
+
+<script id="v5-enhanced-cards-js">
+document.addEventListener('DOMContentLoaded', ()=>{
+  const heroEmoji = '🎤';
+  const factEmojis = ['💡','✅','🧭','📌','📝','🔎','⏱️','📘','🎯'];
+  const partEmojis = ['🎧','📖','✍️','🎤','🗂️','📚'];
+
+  function replaceWithEmoji(el, emoji){
+    if(!el) return;
+    const span = document.createElement('span');
+    span.className = 'img-fallback';
+    span.textContent = emoji;
+    el.replaceWith(span);
+  }
+
+  const heroArt = document.querySelector('.hero-art');
+  if(heroArt){
+    const heroImg = heroArt.querySelector('img');
+    if(!heroImg || !heroImg.complete || heroImg.naturalWidth === 0){
+      heroArt.innerHTML = '<span class="hero-emoji">'+ heroEmoji +'</span>';
+    }else{
+      heroImg.onerror = ()=> heroArt.innerHTML = '<span class="hero-emoji">'+ heroEmoji +'</span>';
+    }
+  }
+
+  document.querySelectorAll('.fact-line img').forEach((img, idx)=>{
+    if(!img.complete || img.naturalWidth === 0){
+      replaceWithEmoji(img, factEmojis[idx % factEmojis.length]);
+    }else{
+      img.onerror = ()=> replaceWithEmoji(img, factEmojis[idx % factEmojis.length]);
+    }
+  });
+
+  document.querySelectorAll('.part-icon img').forEach((img, idx)=>{
+    if(!img.complete || img.naturalWidth === 0){
+      replaceWithEmoji(img, partEmojis[idx % partEmojis.length]);
+    }else{
+      img.onerror = ()=> replaceWithEmoji(img, partEmojis[idx % partEmojis.length]);
+    }
+  });
+});
+</script>
+
+</body>
+</html>
