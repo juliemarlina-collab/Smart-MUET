@@ -1,0 +1,326 @@
+/* Smart MUET Guide Phase 1 — Exam Ready extension
+   Uses the ORIGINAL Neo-Academic variables from css/muet-guide.css.
+   No new theme is introduced. */
+
+.exam-help{
+  display:block;
+  margin-top:2px;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
+  line-height:1.35;
+  text-transform:none;
+  letter-spacing:0;
+}
+.exam-settings-block{
+  border:var(--line);
+  border-radius:var(--r);
+  background:#fff7cc;
+  box-shadow:3px 3px 0 rgba(16,16,20,.2);
+  padding:12px;
+  display:grid;
+  gap:10px;
+}
+.exam-section-tag{
+  display:inline-block;
+  width:max-content;
+  background:var(--ink);
+  color:white;
+  border:2px solid var(--ink);
+  border-radius:999px;
+  padding:5px 9px;
+  font-size:10px;
+  font-weight:1000;
+  letter-spacing:.07em;
+}
+.optional-label{
+  background:white;
+  border:2px solid var(--ink);
+  border-radius:999px;
+  padding:2px 6px;
+  font-size:9px;
+  margin-left:4px;
+}
+
+.exam-ready-countdown{
+  background:var(--yellow);
+  border:var(--line);
+  box-shadow:var(--shadow);
+  border-radius:var(--r2);
+  padding:16px;
+  margin:0 0 20px;
+  overflow:hidden;
+  position:relative;
+}
+.exam-ready-countdown::after{
+  content:'';
+  position:absolute;
+  width:92px;height:92px;
+  right:-38px;top:-42px;
+  border:var(--line);
+  border-radius:50%;
+  background:var(--pink);
+  opacity:.92;
+}
+.exam-ready-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  background:var(--ink);
+  color:white;
+  border:2px solid var(--ink);
+  border-radius:999px;
+  padding:5px 9px;
+  font-size:9px;
+  font-weight:1000;
+  letter-spacing:.09em;
+  position:relative;
+  z-index:2;
+}
+.exam-ready-kicker.dark{
+  background:var(--ink);
+  color:white;
+}
+.exam-ready-head{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:flex-start;
+  margin:10px 0 12px;
+  position:relative;
+  z-index:2;
+}
+.exam-session-label{
+  font-size:11px;
+  font-weight:1000;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+.exam-ready-head h2{
+  font-size:26px;
+  margin-top:3px;
+}
+.exam-edit-btn{
+  border:2px solid var(--ink);
+  background:white;
+  border-radius:999px;
+  box-shadow:2px 2px 0 var(--ink);
+  padding:7px 11px;
+  font-size:10px;
+  font-weight:1000;
+  cursor:pointer;
+}
+.exam-time-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+  position:relative;
+  z-index:2;
+}
+.exam-time-box{
+  background:var(--paper);
+  border:var(--line);
+  box-shadow:3px 3px 0 var(--ink);
+  border-radius:14px;
+  text-align:center;
+  padding:9px 3px 7px;
+}
+.exam-time-box b{
+  display:block;
+  font-family:'Sora',sans-serif;
+  font-size:clamp(22px,8vw,34px);
+  letter-spacing:-.06em;
+  line-height:1;
+}
+.exam-time-box span{
+  display:block;
+  margin-top:4px;
+  font-size:8px;
+  font-weight:1000;
+  letter-spacing:.08em;
+}
+.exam-date-strip{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:12px;
+  position:relative;
+  z-index:2;
+}
+.exam-date-strip>div{
+  background:white;
+  border:2px solid var(--ink);
+  border-radius:12px;
+  padding:9px;
+}
+.exam-date-strip small{
+  display:block;
+  color:var(--muted);
+  font-size:8px;
+  letter-spacing:.08em;
+}
+.exam-date-strip strong{
+  display:block;
+  margin-top:2px;
+  font-size:11px;
+  line-height:1.25;
+}
+.exam-official-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:9px;
+  position:relative;
+  z-index:2;
+}
+.exam-official-row a{
+  background:var(--blue);
+  color:white;
+  border:2px solid var(--ink);
+  border-radius:11px;
+  padding:9px 7px;
+  font-size:10px;
+  font-weight:1000;
+  text-align:center;
+}
+
+.exam-readiness-card{
+  background:var(--paper);
+  border:var(--line);
+  box-shadow:var(--shadow);
+  border-radius:var(--r2);
+  padding:16px;
+  margin-bottom:20px;
+}
+.readiness-top{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px;
+  align-items:center;
+}
+.readiness-top h2{
+  margin-top:7px;
+  font-size:21px;
+}
+.readiness-top p{
+  margin-top:5px;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:800;
+  line-height:1.45;
+}
+.readiness-disc{
+  --readiness:0;
+  width:78px;height:78px;
+  border:var(--line);
+  border-radius:50%;
+  background:conic-gradient(var(--lime) calc(var(--readiness)*1%),white 0);
+  box-shadow:3px 3px 0 var(--ink);
+  display:grid;
+  place-items:center;
+}
+.readiness-disc span{
+  width:52px;height:52px;
+  border:2px solid var(--ink);
+  border-radius:50%;
+  background:white;
+  display:grid;
+  place-items:center;
+  font-family:'Sora',sans-serif;
+  font-size:16px;
+  font-weight:800;
+}
+.readiness-bars{
+  display:grid;
+  gap:9px;
+  margin-top:14px;
+}
+.readiness-row>div:first-child{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  font-size:10px;
+  font-weight:1000;
+}
+.readiness-line{
+  height:9px;
+  border:2px solid var(--ink);
+  border-radius:99px;
+  background:white;
+  overflow:hidden;
+  margin-top:4px;
+}
+.readiness-line i{
+  display:block;
+  height:100%;
+  background:var(--blue);
+}
+.next-best-step{
+  background:var(--lime);
+  border:2px solid var(--ink);
+  border-radius:12px;
+  padding:10px;
+  margin-top:12px;
+}
+.next-best-step small{
+  display:block;
+  font-size:8px;
+  letter-spacing:.09em;
+}
+.next-best-step strong{
+  display:block;
+  margin-top:3px;
+  font-size:12px;
+  line-height:1.35;
+}
+
+.exam-checklist-card{
+  background:#fff7cc;
+  border:var(--line);
+  box-shadow:var(--shadow);
+  border-radius:var(--r2);
+  padding:16px;
+  margin-bottom:20px;
+}
+.exam-checklist-card h2{
+  margin:8px 0 7px;
+  font-size:20px;
+}
+.exam-checklist-card label{
+  grid-template-columns:auto 1fr;
+  align-items:start;
+  gap:8px;
+  background:white;
+  border:2px solid var(--ink);
+  border-radius:11px;
+  padding:9px;
+  margin-top:7px;
+  font-size:11px;
+  line-height:1.35;
+}
+.exam-checklist-card input[type="checkbox"]{
+  width:18px;height:18px;
+  box-shadow:none;
+  margin-top:0;
+}
+.result-link-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:10px;
+}
+.result-link-row a{
+  border:2px solid var(--ink);
+  background:var(--pink);
+  border-radius:11px;
+  padding:9px 7px;
+  font-size:10px;
+  font-weight:1000;
+  text-align:center;
+}
+
+@media(max-width:360px){
+  .exam-time-grid{gap:5px}
+  .exam-time-box{padding:8px 2px 6px}
+  .exam-date-strip,.exam-official-row,.result-link-row{grid-template-columns:1fr}
+}
