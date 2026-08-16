@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Writing · Vault 1 · Smart MUET Guide</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/muet-guide.css?v=20260726-1"/>
+  <link rel="stylesheet" href="css/muet-guide.css?v=3"/>
   <style>
     .wrt-hero { background:var(--pink); }
     .flow-step { background:white;border:var(--line);border-radius:var(--r2);box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px; }
@@ -50,16 +50,7 @@
     .guide-secondary-row .practice-guide-btn{background:#fff!important;color:#111!important}
     .guide-secondary-row .vault-menu-btn{background:#f65ab8!important;color:#111!important}
 
-    /* ── Planning box PEEL / note badges ── */
-    .plan-letter{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border:2px solid var(--ink);border-radius:6px;font-weight:1000;font-size:12px;margin-right:6px;vertical-align:middle}
-    .plan-letter.p1{background:#2563eb;color:#fff}
-    .plan-letter.e1{background:#ff8a00}
-    .plan-letter.e2{background:#00ff00}
-    .plan-letter.l1{background:#f65ab8}
-    .plan-note-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border:2px solid var(--ink);border-radius:999px;background:#ffc400;font-weight:1000;font-size:11px;margin-right:6px;vertical-align:middle}
-
   </style>
-  <link rel="stylesheet" href="css/responsive-fix.css?v=20260726-1">
 </head>
 <body>
 <main class="app-shell">
@@ -114,16 +105,6 @@
         <p id="wrtCoach"></p>
       </div>
 
-      <!-- PLANNING BOX (task-aware — filled in by Wrt.renderPlanningBox) -->
-      <div style="background:#fff7cc;border:var(--line);box-shadow:var(--shadow);border-radius:var(--r2);padding:18px;margin-bottom:16px">
-        <div style="font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:10px">&#128196; PLANNING BOX &mdash; Plan before you write</div>
-        <p id="planningIntro" style="font-size:13px;font-weight:800;margin-bottom:10px">Spend 3&ndash;5 minutes here. Students who plan write clearer, more focused answers.</p>
-        <div id="planningFields" style="display:grid;gap:8px"></div>
-        <div style="background:var(--yellow);border:2px solid var(--ink);border-radius:12px;padding:8px 12px;margin-top:10px;font-size:12px;font-weight:1000">
-          &#9888;&#65039; Planning box is for your notes only &mdash; it is NOT submitted. Write your full answer in the box below.
-        </div>
-      </div>
-
       <!-- Answer box -->
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
@@ -136,6 +117,21 @@
         <p style="font-size:13px;font-weight:800;color:var(--muted);margin-bottom:10px" id="wcGuide">Task 1: minimum 100 words required</p>
         <textarea id="answerBox" rows="10" placeholder="Begin writing your response here..." oninput="Wrt.countWords()"></textarea>
       </div>      <!-- Rubric -->
+
+      <!-- PLANNING BOX -->
+      <div style="background:#fff7cc;border:var(--line);box-shadow:var(--shadow);border-radius:var(--r2);padding:18px;margin-bottom:16px">
+        <div style="font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:10px">&#128196; PLANNING BOX &mdash; Plan before you write</div>
+        <p style="font-size:13px;font-weight:800;margin-bottom:10px">Spend 3&ndash;5 minutes here. Students who plan write clearer, more focused answers.</p>
+        <div style="display:grid;gap:8px">
+          <label style="font-size:12px;font-weight:900">My main stand / purpose:<textarea id="planStand" rows="2" style="margin-top:4px" placeholder="e.g. I agree that young adults lack survival skills because..."></textarea></label>
+          <label style="font-size:12px;font-weight:900">Body point 1 (with example):<textarea id="planP1" rows="2" style="margin-top:4px" placeholder="e.g. Lack practical skills → parents handle cooking, finances..."></textarea></label>
+          <label style="font-size:12px;font-weight:900">Body point 2 (with example):<textarea id="planP2" rows="2" style="margin-top:4px" placeholder="e.g. However, young adults have digital survival skills..."></textarea></label>
+          <label style="font-size:12px;font-weight:900">Conclusion idea:<textarea id="planConc" rows="2" style="margin-top:4px" placeholder="e.g. Balance needed — build practical and digital skills..."></textarea></label>
+        </div>
+        <div style="background:var(--yellow);border:2px solid var(--ink);border-radius:12px;padding:8px 12px;margin-top:10px;font-size:12px;font-weight:1000">
+          &#9888;&#65039; Planning box is for your notes only &mdash; it is NOT submitted. Write your full answer in the box below.
+        </div>
+      </div>
 
       <!-- USEFUL LANGUAGE BANK -->
       <div style="background:var(--ink);border:var(--line);box-shadow:var(--shadow);border-radius:var(--r2);padding:18px;margin-bottom:16px">
@@ -237,8 +233,8 @@
 </section>
 </main>
 <div id="toast" class="toast"></div>
-<script src="js/muet-shared.js?v=20260726-1"></script>
-<script src="js/backend-config.js?v=20260726-1"></script>
+<script src="js/muet-shared.js?v=2"></script>
+<script src="js/backend-config.js?v=2"></script>
 <script>
 // Read vaultId from activeVault so Starter Vault and Vault 1 both work correctly
 const _activeVault = MUET.loadActiveVault();
@@ -270,37 +266,7 @@ const Wrt = (() => {
     if (pBulls) pBulls.innerHTML   = (td.bullets || []).map(b => `<div style="margin-bottom:4px">${b || '&nbsp;'}</div>`).join('');
     if (coach)  coach.textContent  = td.coach;
     if (wcG)    wcG.textContent    = td.wcGuide;
-    renderPlanningBox(t, td);
     countWords();
-  }
-
-  // ── Planning box: tailored per task type ─────────────────────────────
-  // Task 1 (email/letter) — one small note field per required response point,
-  // pulled straight from this task's own bullet notes so planning matches
-  // exactly what the email/letter asks for.
-  // Task 2 (essay) — explicit PEEL fields (Point, Explain, Evidence, Link).
-  function renderPlanningBox(t, td) {
-    const intro  = document.getElementById('planningIntro');
-    const fields = document.getElementById('planningFields');
-    if (!fields) return;
-
-    if (t === 'T1') {
-      if (intro) intro.textContent = 'Spend 3–5 minutes here. Jot a quick note for each point your reply must cover — taken directly from the notes above.';
-      const notes = (td.bullets || []).filter(b => b.trim().startsWith('✅'));
-      fields.innerHTML = notes.length
-        ? notes.map((b, i) => {
-            const clean = b.replace(/^✅\s*/, '').replace(/"/g, '&quot;');
-            return `<label style="font-size:12px;font-weight:900"><span class="plan-note-num">${i + 1}</span>${clean}<textarea id="planNote${i}" rows="2" style="margin-top:4px" placeholder="Jot a short note for this point..."></textarea></label>`;
-          }).join('')
-        : `<label style="font-size:12px;font-weight:900">Key points to cover:<textarea id="planNote0" rows="3" style="margin-top:4px" placeholder="List the points your reply must cover..."></textarea></label>`;
-    } else {
-      if (intro) intro.textContent = 'Spend 3–5 minutes here. Plan your essay using PEEL — Point → Explain → Evidence → Link.';
-      fields.innerHTML = `
-        <label style="font-size:12px;font-weight:900"><span class="plan-letter p1">P</span>Point — your stand / thesis:<textarea id="planStand" rows="2" style="margin-top:4px" placeholder="e.g. I agree that young adults lack survival skills because..."></textarea></label>
-        <label style="font-size:12px;font-weight:900"><span class="plan-letter e1">E</span>Explain — your main reasoning:<textarea id="planP1" rows="2" style="margin-top:4px" placeholder="e.g. Parents and services often handle daily tasks for them, so..."></textarea></label>
-        <label style="font-size:12px;font-weight:900"><span class="plan-letter e2">E</span>Evidence — a specific example:<textarea id="planP2" rows="2" style="margin-top:4px" placeholder="e.g. Many young adults are highly skilled in digital tools and adapt quickly..."></textarea></label>
-        <label style="font-size:12px;font-weight:900"><span class="plan-letter l1">L</span>Link — tie back to the question:<textarea id="planConc" rows="2" style="margin-top:4px" placeholder="e.g. Balance needed — build practical and digital skills together..."></textarea></label>`;
-    }
   }
 
   function t1Tips() {
@@ -352,7 +318,7 @@ const Wrt = (() => {
   }
   function getStudentProfile() {
     try {
-      return JSON.parse(localStorage.getItem('muet_profile') || '{}');
+      return JSON.parse(localStorage.getItem('smartMuetProfile') || '{}');
     } catch (err) {
       return {};
     }
@@ -391,120 +357,88 @@ const Wrt = (() => {
 
   function submit() {
     const answer = document.getElementById('answerBox').value.trim();
-    if (!answer || answer.split(/\s+/).length < 50) { MUET.toast('Please write at least 50 words before submitting.'); return; }
+    const wc = answer ? answer.split(/\s+/).filter(Boolean).length : 0;
+    const td = tasks[currentTask];
+    const min = td.wcMin;
+    if (!answer || wc < Math.min(50,min)) { MUET.toast(`Please develop your response further before submitting.`); return; }
 
-    // ── Multi-dimension MUET rubric scoring ─────────────────────────
-    // Mirrors official MUET Writing rubric: Task Fulfilment (20) +
-    // Organisation (20) + Language Structure (20) + Lexis (15) = 75 max
-    // Scaled to /90 to match component total
-    const wc      = answer.split(/\s+/).length;
-    const min     = tasks[currentTask].wcMin;
-    const td      = tasks[currentTask];
-    const paraCount  = answer.split(/\n\s*\n|\n/).filter(p => p.trim().length > 20).length;
-    const connectors = (answer.match(/\b(firstly|secondly|thirdly|however|therefore|moreover|furthermore|in conclusion|in addition|on the other hand|because|although|for example|for instance|in contrast|as a result|consequently)\b/gi) || []).length;
+    const lower=answer.toLowerCase();
+    const paraCount=answer.split(/\n\s*\n|\n/).filter(p=>p.trim().length>20).length;
+    const connectors=(answer.match(/\b(firstly|secondly|however|therefore|moreover|furthermore|in conclusion|in addition|on the other hand|because|although|for example|for instance|as a result|consequently)\b/gi)||[]).length;
+    const sentences=Math.max(1,(answer.match(/[.!?]+/g)||[]).length);
+    const avgSent=wc/sentences;
+    const words=lower.match(/\b[a-z]{4,}\b/g)||[];
+    const uniqueRatio=words.length ? new Set(words).size/words.length : 0;
 
-    // 1. Task Fulfilment /20
-    let taskFulfilmentScore;
-    if (currentTask === 'T1') {
-      const t1Needles = ['enjoyed','sorry','grandmother','party','food','activities','next week','afraid','cannot','meet'];
-      const t1Hits    = t1Needles.filter(k => answer.toLowerCase().includes(k)).length;
-      taskFulfilmentScore = Math.min(20, 6 + t1Hits * 2);  // 4 notes × ~2pts each + base
-    } else {
-      const hasStand   = /\b(i agree|i disagree|in my opinion|i believe|personally|i strongly|it is true|while some|although)\b/i.test(answer);
-      const hasPEEL    = /\b(for example|for instance|this shows|therefore|as a result|this proves)\b/i.test(answer);
-      const wordBonus  = wc >= 250 ? 3 : wc >= 180 ? 1 : 0;
-      taskFulfilmentScore = Math.min(20, (hasStand ? 8 : 4) + (hasPEEL ? 5 : 0) + wordBonus + 2);
+    // Practice evidence mapped to the attached 1–6 rubric. This is not an examiner/AI semantic judgement.
+    let tf6=1;
+    if(currentTask==='T1'){
+      const groups=[
+        ['enjoyed','great','happy','glad'],
+        ['sorry','sympathy','grandmother'],
+        ['party','food','activities'],
+        ['meet','next week','cannot','afraid']
+      ];
+      const hits=groups.filter(g=>g.some(k=>lower.includes(k))).length;
+      tf6 = hits===4 ? (wc>=min?5:4) : hits===3?4 : hits===2?3 : hits===1?2 : 1;
+      if(hits===4 && wc>=130) tf6=6;
+    }else{
+      const hasStand=/\b(i agree|i disagree|in my opinion|i believe|personally|i strongly|although|while some)\b/i.test(answer);
+      const support=(answer.match(/\b(for example|for instance|because|this shows|therefore|as a result)\b/gi)||[]).length;
+      tf6 = hasStand ? 3 : 2;
+      if(hasStand&&support>=2)tf6=4;
+      if(hasStand&&support>=3&&wc>=min)tf6=5;
+      if(hasStand&&support>=4&&wc>=300)tf6=6;
     }
 
-    // 2. Organisation /20 — paragraphing, greeting/closing (T1), intro-body-conclusion (T2)
-    const hasGreeting  = /\b(dear|hi |hello)\b/i.test(answer);
-    const hasClosing   = /\b(regards|sincerely|yours|thank you|take care)\b/i.test(answer);
-    const orgScore     = currentTask === 'T1'
-      ? Math.min(20, 8 + (hasGreeting ? 3 : 0) + (hasClosing ? 3 : 0) + Math.min(6, paraCount * 2))
-      : Math.min(20, 6 + Math.min(8, paraCount * 2) + (connectors >= 3 ? 4 : connectors >= 1 ? 2 : 0) + (wc >= 250 ? 2 : 0));
+    let co6=1;
+    if(paraCount>=2)co6=3;
+    if(paraCount>=3&&connectors>=2)co6=4;
+    if(paraCount>=4&&connectors>=4)co6=5;
+    if(paraCount>=5&&connectors>=6)co6=6;
 
-    // 3. Language Structure /20 — sentence variety, connectors, no single-line answer
-    const avgSentLen   = wc / Math.max(1, (answer.match(/[.!?]+/g) || []).length);
-    const hasVariety   = avgSentLen > 8 && avgSentLen < 35;
-    const structScore  = Math.min(20, 8 + (hasVariety ? 4 : 0) + Math.min(6, connectors) + (wc >= min ? 2 : 0));
+    let lg6=2;
+    if(avgSent>=8&&avgSent<=30)lg6=3;
+    if(uniqueRatio>=.48&&wc>=min*.8)lg6=4;
+    if(uniqueRatio>=.55&&wc>=min&&connectors>=3)lg6=5;
+    if(uniqueRatio>=.62&&wc>=min&&connectors>=5)lg6=6;
 
-    // 4. Lexis /15 — vocabulary range signal (unique word ratio)
-    const words      = answer.toLowerCase().match(/\b[a-z]{4,}\b/g) || [];
-    const uniqueRatio = words.length > 0 ? new Set(words).size / words.length : 0;
-    const lexisScore  = Math.min(15, Math.round(5 + uniqueRatio * 10));
+    let rs6=null;
+    if(currentTask==='T2'){
+      const informal=(answer.match(/\b(gonna|wanna|kinda|lol|btw|u|ur|yeah|stuff)\b/gi)||[]).length;
+      rs6=informal>=4?2:informal>=2?3:4;
+      if(informal===0&&wc>=min)rs6=5;
+      if(informal===0&&wc>=300&&connectors>=4)rs6=6;
+    }
 
-    // Total /75 → scale to /90
-    const rawTotal = taskFulfilmentScore + orgScore + structScore + lexisScore;
-    const score90  = Math.min(90, Math.round((rawTotal / 75) * 90));
-    const band     = MUET.scoreToBand(score90);
+    const raw = currentTask==='T1' ? tf6+co6+lg6 : tf6+co6+lg6+rs6;
+    const rawMax = currentTask==='T1' ? 18 : 24;
+    const scaledMax = currentTask==='T1' ? 30 : 60;
+    const scaled = Math.round((raw/rawMax)*scaledMax);
 
-    const session = {
-      vaultId: VAULT_ID, taskType: currentTask,
-      score90, score: score90, band, bandLabel: band,
-      wordCount: wc,
-      answer, date: new Date().toISOString(), xpEarned: 90
-    };
-    const list = MUET.loadSessions('writing');
-    list.push(session);
-    MUET.saveSessions('writing', list);
-    MUET.awardBadge('essay_builder');
-    MUET.addXP(session.xpEarned);
+    const session={vaultId:VAULT_ID,taskType:currentTask,score90:scaled,score:scaled,wordCount:wc,answer,date:new Date().toISOString(),xpEarned:90,
+      rubric:{type:'official-aligned-practice',tf:tf6,co:co6,lg:lg6,rs:rs6,raw,rawMax,scaled,scaledMax}};
+    const list=MUET.loadSessions('writing'); list.push(session); MUET.saveSessions('writing',list);
+    MUET.awardBadge('essay_builder'); MUET.addXP(session.xpEarned);
 
-    // Check if all 4 complete → award vault finisher
-    const prog = MUET.vaultProgress(VAULT_ID);
-    if (prog.count >= 4) MUET.awardBadge('vault_finisher');
+    document.getElementById('resultScore').textContent=`${scaled}/${scaledMax}`;
+    document.getElementById('resultBand').textContent='Rubric Practice Evaluation';
+    const rows=[
+      ['Task Fulfilment',tf6,'How fully the task requirements/content points were addressed.'],
+      ['Organisation & Coherence',co6,'Paragraphing, progression and cohesive links.'],
+      ['Language',lg6,'Grammar/vocabulary range and clarity signals.']
+    ];
+    if(currentTask==='T2')rows.push(['Register & Style',rs6,'Appropriateness of formal academic style.']);
+    document.getElementById('resultDetails').innerHTML=`
+      <div style="background:#fff7cc;border:2px solid var(--ink);border-radius:10px;padding:8px;margin-bottom:8px"><b>After-submit evaluation</b><br>This uses observable writing signals mapped to the attached 1–6 rubric. It is a practice estimate, not an official examiner score.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">${rows.map(r=>`<div style="background:#fff;border:2px solid var(--ink);border-radius:10px;padding:8px;font-size:12px"><b>${r[0]}</b><br><span style="font-family:Sora;font-size:20px;font-weight:900">${r[1]}/6</span><br><small>${r[2]}</small></div>`).join('')}</div>
+      <div style="margin-top:8px;font-size:12px;font-weight:900">Raw ${raw}/${rawMax} → ${scaled}/${scaledMax} · ${wc} words</div>
+      <div style="margin-top:8px">🎯 <b>Next action:</b> ${currentTask==='T1'?'Check all four notes are clearly and naturally integrated.':'Strengthen argument development, paragraph cohesion, language control and formal register.'}</div>`;
 
-    document.getElementById('resultScore').textContent = `${score90}/90`;
-    document.getElementById('resultBand').textContent  = `Estimated Band ${band}`;
-    const fb = MUET.feedbackText('writing', score90);
-    const strength = score90 >= 64 ? 'Good response structure and sufficient development.' : 'You attempted the writing task and submitted enough content for feedback.';
-    const nextAction = currentTask === 'T1'
-      ? 'Check that all four notes are answered clearly: enjoyed, sympathy, party details and meeting response.'
-      : 'Strengthen your essay with a clear stand, PEEL paragraphs and specific examples.';
-    document.getElementById('resultDetails').innerHTML = `
-      <div>✅ <b>Strength:</b> ${strength}</div>
-      <div>⚡ <b>Feedback:</b> ${fb}</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px">
-        <div style="background:#f0fdf4;border:2px solid var(--ink);border-radius:10px;padding:8px;font-size:12px"><b>Task Fulfilment</b><br>${taskFulfilmentScore}/20</div>
-        <div style="background:#eff6ff;border:2px solid var(--ink);border-radius:10px;padding:8px;font-size:12px"><b>Organisation</b><br>${orgScore}/20</div>
-        <div style="background:#fefce8;border:2px solid var(--ink);border-radius:10px;padding:8px;font-size:12px"><b>Language Structure</b><br>${structScore}/20</div>
-        <div style="background:#fdf4ff;border:2px solid var(--ink);border-radius:10px;padding:8px;font-size:12px"><b>Lexis</b><br>${lexisScore}/15</div>
-      </div>
-      <div style="margin-top:8px;font-size:12px;font-weight:900;color:var(--muted)">📝 Words: ${wc} · Paragraphs: ${paraCount} · Connectors: ${connectors}</div>
-      <div>🎯 <b>Next Action:</b> ${nextAction}</div>`;
+    if(typeof saveSmartMuetAttempt==='function') saveSmartMuetAttempt({component:'Writing',vaultId:VAULT_ID,taskType:currentTask,rawScore:raw,totalItems:rawMax,score90:scaled,answerText:answer,wordCount:wc,rubric:session.rubric,status:'Official-rubric aligned practice evaluation'});
 
-    saveAttemptToBackend({
-      component:'Writing',
-      taskType:currentTask,
-      rawScore:score90,
-      totalItems:90,
-      score90,
-      estimatedBand:band,
-      feedback:fb,
-      nextAction,
-      badgeEarned:'Essay Builder',
-      status:'Rule-based rubric auto-feedback v2',
-      answerText:answer,
-      wordCount:wc,
-      rubric:{
-        engine:'Rule-based MUET writing rubric v2',
-        reviewStatus:'Auto-feedback',
-        overallStrength:strength,
-        improvementFocus:nextAction,
-        rawTotal, maxTotal:75, score90,
-        criteria:[
-          {name:'Task Fulfilment', score:taskFulfilmentScore, max:20, feedback: currentTask === 'T1' ? `Key content signals detected in answer.` : 'Opinion/stand and evidence checked.'},
-          {name:'Organisation',    score:orgScore,            max:20, feedback:`Paragraph count: ${paraCount}. Connectors: ${connectors}.`},
-          {name:'Language Structure', score:structScore,      max:20, feedback:`Sentence variety and connector usage checked.`},
-          {name:'Lexis',           score:lexisScore,          max:15, feedback:`Vocabulary range (unique word ratio) assessed.`}
-        ]
-      }
-    });
-
-    document.getElementById('resultCard').classList.add('show');
-    showFeedbackToast(score90, 'Writing');
-    window.scrollTo({top: document.body.scrollHeight, behavior:'smooth'});
-    updateVaultProgress();
+    document.getElementById('resultCard').style.display='block';
+    document.getElementById('resultCard').scrollIntoView({behavior:'smooth',block:'start'});
   }
 
   function resetPractice() {
