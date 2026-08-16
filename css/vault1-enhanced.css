@@ -1,0 +1,489 @@
+
+/* ============================================================
+   SMART MUET GUIDE · VAULT 1 ENHANCED
+   Shared visual layer for:
+   - vault1-speaking.html
+   - vault1-reading.html
+   - vault1-listening.html
+   - vault1-writing.html
+
+   Add AFTER muet-guide.css / responsive-fix.css:
+   <link rel="stylesheet" href="css/vault1-enhanced.css">
+   ============================================================ */
+
+:root{
+  --v1-ink:#111111;
+  --v1-white:#ffffff;
+  --v1-soft:#f4f7f8;
+
+  --v1-cyan:#12D7D7;
+  --v1-hotpink:#FF4FA3;
+  --v1-azure:#0D78E8;
+  --v1-orange:#FF5A00;
+  --v1-gold:#F4C400;
+  --v1-lime:#48F000;
+  --v1-violet:#7C25DA;
+  --v1-turquoise:#00C9C0;
+
+  --v1-line:3px solid var(--v1-ink);
+  --v1-shadow:5px 5px 0 var(--v1-ink);
+}
+
+/* Scope only to Vault 1 component practice pages */
+body:has(#vaultProgBar){
+  background:var(--v1-turquoise) !important;
+  font-family:"DM Sans",sans-serif !important;
+  color:var(--v1-ink) !important;
+}
+
+body:has(#vaultProgBar) .app-shell{
+  width:100% !important;
+  max-width:560px !important;
+  min-height:100dvh !important;
+  margin:0 auto !important;
+  padding:
+    max(15px,env(safe-area-inset-top))
+    max(14px,env(safe-area-inset-right))
+    max(110px,calc(94px + env(safe-area-inset-bottom)))
+    max(14px,env(safe-area-inset-left)) !important;
+  background:var(--v1-soft) !important;
+}
+
+body:has(#vaultProgBar) .screen{
+  max-width:none !important;
+}
+
+/* --------------------------------
+   Brand / top bar
+   -------------------------------- */
+body:has(#vaultProgBar) .brand-bar{
+  min-height:64px !important;
+  margin-bottom:14px !important;
+  padding:7px 8px !important;
+  background:var(--v1-white) !important;
+  border:var(--v1-line) !important;
+  border-radius:18px !important;
+  box-shadow:4px 4px 0 var(--v1-ink) !important;
+}
+
+body:has(#vaultProgBar) .brand-bar .bar-label{
+  font-size:10px !important;
+  font-weight:900 !important;
+  letter-spacing:.07em !important;
+  color:#555a62 !important;
+}
+
+body:has(#vaultProgBar) .brand-bar .bar-title{
+  font-family:"Sora",sans-serif !important;
+  font-size:18px !important;
+  line-height:1.1 !important;
+  font-weight:800 !important;
+}
+
+body:has(#vaultProgBar) .icon-btn{
+  min-width:44px !important;
+  min-height:44px !important;
+  border:2px solid var(--v1-ink) !important;
+  border-radius:12px !important;
+  background:var(--v1-white) !important;
+  box-shadow:2px 2px 0 var(--v1-ink) !important;
+  color:var(--v1-ink) !important;
+}
+
+/* --------------------------------
+   Vault progress — cleaner
+   -------------------------------- */
+body:has(#vaultProgBar) .prog-bar{
+  height:12px !important;
+  background:#e9edef !important;
+  border:2px solid var(--v1-ink) !important;
+  border-radius:999px !important;
+  overflow:hidden !important;
+}
+
+body:has(#vaultProgBar) .prog-bar > span{
+  background:var(--v1-lime) !important;
+}
+
+/* --------------------------------
+   Common cards
+   -------------------------------- */
+body:has(#vaultProgBar) .card,
+body:has(#vaultProgBar) .sec,
+body:has(#vaultProgBar) .flow-step,
+body:has(#vaultProgBar) .timer-card,
+body:has(#vaultProgBar) .coach-note,
+body:has(#vaultProgBar) .practice-guide-panel,
+body:has(#vaultProgBar) .reading-article-card{
+  border:var(--v1-line) !important;
+  border-radius:20px !important;
+  box-shadow:var(--v1-shadow) !important;
+}
+
+body:has(#vaultProgBar) .card,
+body:has(#vaultProgBar) .sec,
+body:has(#vaultProgBar) .flow-step{
+  margin-bottom:15px !important;
+}
+
+/* --------------------------------
+   Component colour identity
+   -------------------------------- */
+
+/* Speaking */
+body:has(.phrase-bank):has(#vaultProgBar) .card:first-of-type,
+body:has(.prep-grid):has(#vaultProgBar) .card:first-of-type{
+  background:var(--v1-hotpink) !important;
+  color:var(--v1-ink) !important;
+}
+
+/* Reading */
+body:has(.read-hero):has(#vaultProgBar) .read-hero{
+  background:var(--v1-azure) !important;
+  color:var(--v1-white) !important;
+}
+
+body:has(.read-hero):has(#vaultProgBar) .read-hero p{
+  color:rgba(255,255,255,.88) !important;
+}
+
+/* Listening: cover common existing hero classes */
+body:has(#vaultProgBar) .listen-hero,
+body:has(#vaultProgBar) .listening-hero{
+  background:var(--v1-cyan) !important;
+  color:var(--v1-ink) !important;
+}
+
+/* Writing */
+body:has(#vaultProgBar) .write-hero,
+body:has(#vaultProgBar) .writing-hero{
+  background:var(--v1-orange) !important;
+  color:var(--v1-ink) !important;
+}
+
+/* --------------------------------
+   Typography
+   -------------------------------- */
+body:has(#vaultProgBar) h1{
+  font-family:"Sora",sans-serif !important;
+  font-size:clamp(30px,8vw,44px) !important;
+  line-height:.98 !important;
+  letter-spacing:-.045em !important;
+  font-weight:800 !important;
+}
+
+body:has(#vaultProgBar) h2{
+  font-family:"Sora",sans-serif !important;
+  font-size:21px !important;
+  line-height:1.1 !important;
+  font-weight:800 !important;
+}
+
+body:has(#vaultProgBar) h3{
+  font-family:"Sora",sans-serif !important;
+}
+
+body:has(#vaultProgBar) p,
+body:has(#vaultProgBar) .step-desc,
+body:has(#vaultProgBar) .fb-text{
+  font-size:14px !important;
+  line-height:1.5 !important;
+}
+
+/* --------------------------------
+   Section accordions
+   -------------------------------- */
+body:has(#vaultProgBar) .sec-head,
+body:has(#vaultProgBar) .flow-step-head{
+  min-height:72px !important;
+  padding:13px 14px !important;
+  gap:11px !important;
+  background:var(--v1-white) !important;
+}
+
+body:has(#vaultProgBar) .sec-num,
+body:has(#vaultProgBar) .step-num{
+  width:38px !important;
+  height:38px !important;
+  border:2px solid var(--v1-ink) !important;
+  border-radius:11px !important;
+  background:var(--v1-gold) !important;
+  box-shadow:2px 2px 0 var(--v1-ink) !important;
+}
+
+body:has(#vaultProgBar) .sec-body,
+body:has(#vaultProgBar) .flow-step-body{
+  padding:14px !important;
+  border-top:2px solid var(--v1-ink) !important;
+  background:var(--v1-white) !important;
+}
+
+/* --------------------------------
+   Strategy visual cards
+   -------------------------------- */
+body:has(#vaultProgBar) .strategy-steps{
+  gap:9px !important;
+}
+
+body:has(#vaultProgBar) .step-card{
+  border:2px solid var(--v1-ink) !important;
+  border-radius:15px !important;
+  box-shadow:3px 3px 0 var(--v1-ink) !important;
+  padding:11px !important;
+  background:var(--v1-white) !important;
+}
+
+body:has(#vaultProgBar) .step-letter{
+  border:2px solid var(--v1-ink) !important;
+  border-radius:11px !important;
+  box-shadow:2px 2px 0 var(--v1-ink) !important;
+}
+
+body:has(#vaultProgBar) .step-letter.pink{background:var(--v1-hotpink) !important}
+body:has(#vaultProgBar) .step-letter.orange{background:var(--v1-orange) !important}
+body:has(#vaultProgBar) .step-letter.blue{background:var(--v1-azure) !important;color:white !important}
+body:has(#vaultProgBar) .step-letter.green{background:var(--v1-lime) !important}
+body:has(#vaultProgBar) .step-letter.yellow{background:var(--v1-gold) !important}
+body:has(#vaultProgBar) .step-letter.teal{background:var(--v1-cyan) !important}
+body:has(#vaultProgBar) .step-letter.purple{background:var(--v1-violet) !important;color:white !important}
+
+body:has(#vaultProgBar) .step-title{
+  font-size:15px !important;
+  font-weight:1000 !important;
+}
+
+body:has(#vaultProgBar) .step-desc{
+  color:#3e434a !important;
+  font-weight:700 !important;
+}
+
+/* --------------------------------
+   Timers — task-specific only
+   -------------------------------- */
+body:has(#vaultProgBar) .timer-card{
+  background:var(--v1-ink) !important;
+  color:var(--v1-white) !important;
+  padding:14px !important;
+}
+
+body:has(#vaultProgBar) .timer-card .tiny{
+  color:#d7d7d7 !important;
+  font-size:11px !important;
+}
+
+body:has(#vaultProgBar) .timer-big{
+  font-family:"Sora",sans-serif !important;
+  font-size:34px !important;
+  line-height:1 !important;
+  color:var(--v1-white) !important;
+}
+
+/* --------------------------------
+   Buttons
+   -------------------------------- */
+body:has(#vaultProgBar) .btn,
+body:has(#vaultProgBar) .guide-next,
+body:has(#vaultProgBar) .article-btn{
+  min-height:50px !important;
+  border:var(--v1-line) !important;
+  border-radius:13px !important;
+  box-shadow:4px 4px 0 var(--v1-ink) !important;
+  font-size:14px !important;
+  font-weight:1000 !important;
+}
+
+body:has(#vaultProgBar) .btn:active,
+body:has(#vaultProgBar) .guide-next:active,
+body:has(#vaultProgBar) .article-btn:active{
+  transform:translate(3px,3px) !important;
+  box-shadow:1px 1px 0 var(--v1-ink) !important;
+}
+
+body:has(#vaultProgBar) .btn.yellow,
+body:has(#vaultProgBar) .submit-standard{
+  background:var(--v1-gold) !important;
+  color:var(--v1-ink) !important;
+}
+
+body:has(#vaultProgBar) .btn.green{
+  background:var(--v1-lime) !important;
+  color:var(--v1-ink) !important;
+}
+
+body:has(#vaultProgBar) .btn.black{
+  background:var(--v1-ink) !important;
+  color:var(--v1-white) !important;
+}
+
+body:has(#vaultProgBar) .vault-menu-btn{
+  background:var(--v1-hotpink) !important;
+  color:var(--v1-ink) !important;
+}
+
+/* --------------------------------
+   Reading practice surfaces
+   -------------------------------- */
+body:has(#vaultProgBar) .reading-article-card{
+  background:#e8f1ff !important;
+  padding:14px !important;
+}
+
+body:has(#vaultProgBar) .article-scroll-box,
+body:has(#vaultProgBar) .passage-box{
+  border:2px solid var(--v1-ink) !important;
+  border-radius:14px !important;
+  background:var(--v1-white) !important;
+  font-size:15px !important;
+  line-height:1.7 !important;
+}
+
+body:has(#vaultProgBar) .qtag{
+  background:var(--v1-hotpink) !important;
+  border:2px solid var(--v1-ink) !important;
+  font-size:11px !important;
+}
+
+/* --------------------------------
+   Speaking phrase bank
+   -------------------------------- */
+body:has(#vaultProgBar) .phrase-bank{
+  background:var(--v1-hotpink) !important;
+  color:var(--v1-ink) !important;
+  border:var(--v1-line) !important;
+  border-radius:18px !important;
+  box-shadow:var(--v1-shadow) !important;
+}
+
+body:has(#vaultProgBar) .phrase-section{
+  background:rgba(255,255,255,.75) !important;
+  border:2px solid var(--v1-ink) !important;
+  color:var(--v1-ink) !important;
+}
+
+body:has(#vaultProgBar) .phrase-label,
+body:has(#vaultProgBar) .phrase-text{
+  color:var(--v1-ink) !important;
+}
+
+/* --------------------------------
+   Feedback / self-assessment
+   -------------------------------- */
+body:has(#vaultProgBar) .sc-item,
+body:has(#vaultProgBar) .fb-row,
+body:has(#vaultProgBar) .crit-tile{
+  border:2px solid var(--v1-ink) !important;
+  border-radius:13px !important;
+}
+
+body:has(#vaultProgBar) .sc-item{
+  min-height:52px !important;
+  font-size:14px !important;
+}
+
+body:has(#vaultProgBar) .result-card{
+  background:var(--v1-lime) !important;
+  border:var(--v1-line) !important;
+  border-radius:18px !important;
+  box-shadow:var(--v1-shadow) !important;
+}
+
+/* --------------------------------
+   Coach / practice guide
+   -------------------------------- */
+body:has(#vaultProgBar) .coach-note{
+  background:#fff7c9 !important;
+  color:var(--v1-ink) !important;
+  padding:13px !important;
+}
+
+body:has(#vaultProgBar) .practice-guide-panel{
+  background:#fff7c9 !important;
+  padding:15px !important;
+}
+
+/* --------------------------------
+   Bottom navigation
+   -------------------------------- */
+body:has(#vaultProgBar) .nav{
+  position:fixed !important;
+  left:50% !important;
+  transform:translateX(-50%) !important;
+  bottom:max(10px,env(safe-area-inset-bottom)) !important;
+  width:calc(100% - 20px) !important;
+  max-width:540px !important;
+  z-index:80 !important;
+
+  display:grid !important;
+  grid-template-columns:repeat(5,1fr) !important;
+
+  background:var(--v1-white) !important;
+  border:var(--v1-line) !important;
+  border-radius:18px !important;
+  box-shadow:5px 5px 0 var(--v1-ink) !important;
+  padding:6px !important;
+}
+
+body:has(#vaultProgBar) .nav a{
+  min-height:58px !important;
+  display:grid !important;
+  place-items:center !important;
+  align-content:center !important;
+  gap:3px !important;
+  border-radius:10px !important;
+  font-size:10px !important;
+  font-weight:1000 !important;
+}
+
+body:has(#vaultProgBar) .nav a.active{
+  background:var(--v1-gold) !important;
+  border:2px solid var(--v1-ink) !important;
+}
+
+body:has(#vaultProgBar) .nav img{
+  width:27px !important;
+  height:27px !important;
+}
+
+/* --------------------------------
+   Tablet / desktop
+   -------------------------------- */
+@media(min-width:700px){
+  body:has(#vaultProgBar) .app-shell{
+    max-width:840px !important;
+    padding:24px 24px 120px !important;
+  }
+
+  body:has(#vaultProgBar) .strategy-steps{
+    grid-template-columns:1fr 1fr !important;
+  }
+
+  body:has(#vaultProgBar) .nav{
+    max-width:800px !important;
+  }
+}
+
+@media(min-width:1024px){
+  body:has(#vaultProgBar) .app-shell{
+    max-width:1100px !important;
+    padding:30px 32px 122px !important;
+  }
+
+  body:has(#vaultProgBar) .nav{
+    max-width:1040px !important;
+  }
+}
+
+@media(max-width:360px){
+  body:has(#vaultProgBar) .app-shell{
+    padding-inline:10px !important;
+  }
+
+  body:has(#vaultProgBar) h1{
+    font-size:30px !important;
+  }
+
+  body:has(#vaultProgBar) p,
+  body:has(#vaultProgBar) .step-desc{
+    font-size:13px !important;
+  }
+}
