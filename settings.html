@@ -1,838 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#000000">
-    <meta name="description" content="Smart MUET Guide V2 - Settings & Profile">
-    <title>Smart MUET Guide - Settings</title>
-    
-    <!-- Google Fonts: Sora + DM Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <style>
-        /* ============================================
-           DESIGN TOKENS (CSS Custom Properties)
-           ============================================ */
-        :root {
-            /* Colors */
-            --color-primary: #008080;
-            --color-primary-dark: #006666;
-            --color-black: #000000;
-            --color-cream: #FFFBF0;
-            --color-gray: #666666;
-            --color-gray-light: #EEEEEE;
-            --color-error: #E63946;
-            --color-success: #2A9D8F;
-            
-            /* Typography */
-            --font-heading: 'Sora', sans-serif;
-            --font-body: 'DM Sans', sans-serif;
-            
-            --text-xs: 12px;
-            --text-sm: 14px;
-            --text-base: 16px;
-            --text-lg: 18px;
-            --text-xl: 24px;
-            --text-2xl: 32px;
-            
-            --line-height-tight: 1.3;
-            --line-height-normal: 1.5;
-            
-            /* Spacing (8dp rhythm) */
-            --spacing-2: 4px;
-            --spacing-4: 8px;
-            --spacing-6: 12px;
-            --spacing-8: 16px;
-            --spacing-10: 20px;
-            --spacing-12: 24px;
-            --spacing-16: 32px;
-            
-            /* Shadows */
-            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.15);
-            --shadow-lg: 0 8px 12px rgba(0, 0, 0, 0.25);
-            
-            /* Transitions */
-            --transition-micro: 150ms ease-out;
-            --transition-short: 200ms ease-out;
-            
-            /* Focus */
-            --focus-ring: 3px solid var(--color-primary);
-            --focus-offset: 2px;
-        }
-        
-        /* ============================================
-           RESET & BASE
-           ============================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            font-size: 16px;
-            line-height: var(--line-height-normal);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        
-        body {
-            font-family: var(--font-body);
-            background-color: var(--color-black);
-            color: var(--color-cream);
-            min-height: 100vh;
-            min-height: 100dvh;
-        }
-        
-        /* ============================================
-           SETTINGS LAYOUT
-           ============================================ */
-        .settings-container {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(60px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
-            min-height: 100vh;
-        }
-        
-        /* ============================================
-           HEADER
-           ============================================ */
-        .settings-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--spacing-16);
-            padding-bottom: var(--spacing-12);
-            border-bottom: 1px solid rgba(255, 251, 240, 0.1);
-        }
-        
-        .settings-header h1 {
-            font-family: var(--font-heading);
-            font-size: var(--text-xl);
-            font-weight: 700;
-            color: var(--color-primary);
-            letter-spacing: -0.01em;
-        }
-        
-        .btn-back {
-            padding: var(--spacing-4) var(--spacing-6);
-            background-color: transparent;
-            border: 2px solid var(--color-cream);
-            color: var(--color-cream);
-            font-family: var(--font-body);
-            font-size: var(--text-sm);
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all var(--transition-short);
-            min-height: 44px;
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-4);
-        }
-        
-        .btn-back:hover {
-            background-color: rgba(255, 251, 240, 0.1);
-        }
-        
-        .btn-back:active {
-            transform: scale(0.95);
-        }
-        
-        .btn-back:focus-visible {
-            outline: var(--focus-ring);
-            outline-offset: var(--focus-offset);
-        }
-        
-        /* ============================================
-           FORM SECTIONS
-           ============================================ */
-        .form-section {
-            margin-bottom: var(--spacing-16);
-        }
-        
-        .form-section-title {
-            font-family: var(--font-heading);
-            font-size: var(--text-lg);
-            font-weight: 700;
-            color: var(--color-cream);
-            margin-bottom: var(--spacing-8);
-            letter-spacing: -0.01em;
-        }
-        
-        .form-group {
-            margin-bottom: var(--spacing-12);
-        }
-        
-        /* ============================================
-           FORM LABELS & INPUTS
-           ============================================ */
-        label {
-            display: block;
-            font-size: var(--text-sm);
-            font-weight: 600;
-            color: var(--color-cream);
-            margin-bottom: var(--spacing-6);
-        }
-        
-        .required-indicator {
-            color: var(--color-error);
-            margin-left: var(--spacing-2);
-        }
-        
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="date"],
-        select,
-        textarea {
-            width: 100%;
-            padding: var(--spacing-6) var(--spacing-8);
-            font-family: var(--font-body);
-            font-size: var(--text-base);
-            background-color: var(--color-cream);
-            color: var(--color-black);
-            border: 2px solid var(--color-black);
-            border-radius: 4px;
-            transition: all var(--transition-short);
-            min-height: 44px;
-            outline: none;
-        }
-        
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="tel"]:focus,
-        input[type="date"]:focus,
-        select:focus,
-        textarea:focus {
-            border-color: var(--color-primary);
-            box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.1);
-        }
-        
-        input[type="text"]:focus-visible,
-        input[type="email"]:focus-visible,
-        input[type="tel"]:focus-visible,
-        input[type="date"]:focus-visible,
-        select:focus-visible,
-        textarea:focus-visible {
-            outline: var(--focus-ring);
-            outline-offset: var(--focus-offset);
-        }
-        
-        input[type="text"]:invalid:not(:placeholder-shown),
-        input[type="email"]:invalid:not(:placeholder-shown),
-        input[type="tel"]:invalid:not(:placeholder-shown) {
-            border-color: var(--color-error);
-            background-color: rgba(230, 57, 70, 0.05);
-        }
-        
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-        
-        .helper-text {
-            display: block;
-            font-size: var(--text-xs);
-            color: var(--color-gray);
-            margin-top: var(--spacing-4);
-            line-height: var(--line-height-normal);
-        }
-        
-        .error-message {
-            display: block;
-            font-size: var(--text-sm);
-            color: var(--color-error);
-            margin-top: var(--spacing-4);
-            font-weight: 500;
-        }
-        
-        /* ============================================
-           CHECKBOX & RADIO
-           ============================================ */
-        .checkbox-group,
-        .radio-group {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-8);
-        }
-        
-        .checkbox-item,
-        .radio-item {
-            display: flex;
-            align-items: flex-start;
-            gap: var(--spacing-8);
-        }
-        
-        input[type="checkbox"],
-        input[type="radio"] {
-            width: 20px;
-            height: 20px;
-            min-width: 20px;
-            min-height: 20px;
-            margin-top: 2px;
-            cursor: pointer;
-            accent-color: var(--color-primary);
-        }
-        
-        .checkbox-label,
-        .radio-label {
-            font-size: var(--text-sm);
-            font-weight: 400;
-            color: var(--color-cream);
-            cursor: pointer;
-            flex: 1;
-            line-height: var(--line-height-normal);
-            margin: 0;
-        }
-        
-        /* ============================================
-           BUTTONS
-           ============================================ */
-        .btn {
-            padding: var(--spacing-6) var(--spacing-12);
-            font-family: var(--font-body);
-            font-size: var(--text-base);
-            font-weight: 600;
-            border: 2px solid var(--color-primary);
-            background-color: var(--color-primary);
-            color: var(--color-black);
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all var(--transition-short);
-            display: inline-flex;
-            align-items: center;
-            gap: var(--spacing-4);
-            min-height: 48px;
-            width: 100%;
-            justify-content: center;
-        }
-        
-        .btn:hover {
-            background-color: var(--color-primary-dark);
-            border-color: var(--color-primary-dark);
-        }
-        
-        .btn:active {
-            transform: scale(0.95);
-        }
-        
-        .btn:focus-visible {
-            outline: var(--focus-ring);
-            outline-offset: var(--focus-offset);
-        }
-        
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        
-        .btn-danger {
-            background-color: transparent;
-            color: var(--color-error);
-            border-color: var(--color-error);
-            margin-top: var(--spacing-12);
-        }
-        
-        .btn-danger:hover {
-            background-color: rgba(230, 57, 70, 0.1);
-        }
-        
-        /* ============================================
-           TOAST NOTIFICATION
-           ============================================ */
-        .toast {
-            position: fixed;
-            bottom: max(20px, env(safe-area-inset-bottom));
-            right: max(20px, env(safe-area-inset-right));
-            padding: var(--spacing-8) var(--spacing-12);
-            background-color: var(--color-success);
-            color: var(--color-black);
-            font-size: var(--text-sm);
-            font-weight: 600;
-            border-radius: 4px;
-            box-shadow: var(--shadow-lg);
-            z-index: 1000;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: slideIn 300ms ease-out forwards;
-            animation-delay: 0ms;
-        }
-        
-        .toast.show {
-            animation: slideIn 300ms ease-out forwards;
-        }
-        
-        .toast.hide {
-            animation: slideOut 300ms ease-in forwards;
-        }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes slideOut {
-            from {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            to {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-        }
-        
-        /* ============================================
-           RESPONSIVE
-           ============================================ */
-        @media (max-width: 768px) {
-            .settings-container {
-                padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(60px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
-            }
-            
-            .settings-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: var(--spacing-8);
-            }
-            
-            .btn-back {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-        
-        /* ============================================
-           REDUCED MOTION
-           ============================================ */
-        @media (prefers-reduced-motion: reduce) {
-            .btn,
-            input,
-            .toast {
-                transition: none;
-            }
-            
-            .toast {
-                animation: none;
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Profile & Settings · Smart MUET Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/phase1-clean.css">
 </head>
 <body>
-    <main class="settings-container">
-        <!-- Header -->
-        <header class="settings-header">
-            <h1>Settings</h1>
-            <button class="btn-back" onclick="window.location.href='dashboard.html';" aria-label="Go back to dashboard">
-                ← Back
-            </button>
-        </header>
-        
-        <form id="settingsForm">
-            <!-- PERSONAL SECTION -->
-            <section class="form-section">
-                <h2 class="form-section-title">Personal Information</h2>
-                
-                <!-- Matric Number -->
-                <div class="form-group">
-                    <label for="matricNumber">
-                        Matric Number
-                        <span class="required-indicator">*</span>
-                    </label>
-                    <input
-                        type="text"
-                        id="matricNumber"
-                        name="matricNumber"
-                        placeholder="e.g., M2023001234"
-                        required
-                    />
-                    <span class="helper-text">Your matriculation student ID</span>
-                </div>
-                
-                <!-- Full Name -->
-                <div class="form-group">
-                    <label for="fullName">
-                        Full Name
-                        <span class="required-indicator">*</span>
-                    </label>
-                    <input
-                        type="text"
-                        id="fullName"
-                        name="fullName"
-                        placeholder="Enter your full name"
-                        required
-                    />
-                </div>
-                
-                <!-- Email -->
-                <div class="form-group">
-                    <label for="email">
-                        Email Address
-                        <span class="required-indicator">*</span>
-                    </label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="you@example.com"
-                        required
-                    />
-                    <span class="helper-text">For session reminders and feedback</span>
-                </div>
-                
-                <!-- Institution -->
-                <div class="form-group">
-                    <label for="institution">
-                        Institution
-                        <span class="required-indicator">*</span>
-                    </label>
-                    <input
-                        type="text"
-                        id="institution"
-                        name="institution"
-                        placeholder="e.g., Politeknik Port Dickson"
-                        required
-                    />
-                </div>
-            </section>
-            
-            <!-- EXAM SECTION -->
-            <section class="form-section">
-                <h2 class="form-section-title">Exam Details</h2>
-                
-                <!-- Exam Date -->
-                <div class="form-group">
-                    <label for="examDate">
-                        MUET Exam Date
-                        <span class="required-indicator">*</span>
-                    </label>
-                    <input
-                        type="date"
-                        id="examDate"
-                        name="examDate"
-                        required
-                    />
-                    <span class="helper-text">Your exam session (updates countdown timer on dashboard)</span>
-                </div>
-                
-                <!-- Target Band -->
-                <div class="form-group">
-                    <label for="targetBand">
-                        Target MUET Band
-                        <span class="required-indicator">*</span>
-                    </label>
-                    <select id="targetBand" name="targetBand" required>
-                        <option value="">Select target band...</option>
-                        <option value="band1">Band 1 (Score: 0–59)</option>
-                        <option value="band2">Band 2 (Score: 60–74)</option>
-                        <option value="band3">Band 3 (Score: 75–84)</option>
-                        <option value="band4">Band 4 (Score: 85–100)</option>
-                    </select>
-                </div>
-                
-                <!-- Current Band (Self-Assessment) -->
-                <div class="form-group">
-                    <label for="currentBand">
-                        Current Band (Self-Assessment)
-                    </label>
-                    <select id="currentBand" name="currentBand">
-                        <option value="">Select current band...</option>
-                        <option value="band1">Band 1 (Score: 0–59)</option>
-                        <option value="band2">Band 2 (Score: 60–74)</option>
-                        <option value="band3">Band 3 (Score: 75–84)</option>
-                        <option value="band4">Band 4 (Score: 85–100)</option>
-                    </select>
-                </div>
-            </section>
-            
-            <!-- LEARNING PREFERENCES SECTION -->
-            <section class="form-section">
-                <h2 class="form-section-title">Learning Preferences</h2>
-                
-                <!-- Daily Practice Time -->
-                <div class="form-group">
-                    <label for="dailyTime">
-                        Preferred Daily Practice Time
-                    </label>
-                    <select id="dailyTime" name="dailyTime">
-                        <option value="">Select time commitment...</option>
-                        <option value="15min">15 minutes</option>
-                        <option value="30min">30 minutes</option>
-                        <option value="60min">1 hour</option>
-                        <option value="90min">1.5 hours</option>
-                        <option value="120min">2 hours+</option>
-                    </select>
-                </div>
-                
-                <!-- Weak Areas -->
-                <div class="form-group">
-                    <label>
-                        Areas to Focus On
-                    </label>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="weakSpeaking" name="weakAreas" value="speaking" />
-                            <label for="weakSpeaking" class="checkbox-label">Speaking</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="weakReading" name="weakAreas" value="reading" />
-                            <label for="weakReading" class="checkbox-label">Reading</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="weakListening" name="weakAreas" value="listening" />
-                            <label for="weakListening" class="checkbox-label">Listening</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="weakWriting" name="weakAreas" value="writing" />
-                            <label for="weakWriting" class="checkbox-label">Writing</label>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- PRIVACY & DATA SECTION -->
-            <section class="form-section">
-                <h2 class="form-section-title">Privacy & Data</h2>
-                
-                <!-- PDPA Consent -->
-                <div class="form-group">
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="pdpaConsent" name="pdpaConsent" required />
-                        <label for="pdpaConsent" class="checkbox-label">
-                            I consent to the collection and use of my personal data for MUET preparation research and learning analytics
-                        </label>
-                    </div>
-                    <span class="helper-text">
-                        Your data is used only for improving your learning experience and research purposes. See <a href="#" style="color: var(--color-primary);">privacy policy</a>.
-                    </span>
-                </div>
-                
-                <!-- Session Reminders -->
-                <div class="form-group">
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="emailReminders" name="emailReminders" />
-                        <label for="emailReminders" class="checkbox-label">
-                            Send me email reminders before exam date
-                        </label>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- ACTION BUTTONS -->
-            <div class="form-group" style="margin-top: var(--spacing-16);">
-                <button type="submit" class="btn" id="submitBtn">
-                    ✓ Save Profile
-                </button>
-            </div>
-            
-            <!-- DATA MANAGEMENT -->
-            <section class="form-section">
-                <h2 class="form-section-title">Data Management</h2>
-                
-                <button type="button" class="btn btn-danger" id="exportBtn">
-                    ⬇️ Export My Data
-                </button>
-                
-                <button type="button" class="btn btn-danger" id="clearBtn">
-                    🗑️ Clear All Progress
-                </button>
-            </section>
-        </form>
-    </main>
-    
-    <!-- Toast Notification -->
-    <div class="toast" id="toast"></div>
-    
-    <script>
-        // ============================================
-        // SETTINGS FORM LOGIC
-        // ============================================
-        
-        const form = document.getElementById('settingsForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const exportBtn = document.getElementById('exportBtn');
-        const clearBtn = document.getElementById('clearBtn');
-        const toast = document.getElementById('toast');
-        
-        // Set default exam date to 17 October 2026
-        const examDateInput = document.getElementById('examDate');
-        if (!localStorage.getItem('examDate')) {
-            examDateInput.value = '2026-10-17';
-        } else {
-            const stored = localStorage.getItem('examDate');
-            if (stored) {
-                examDateInput.value = stored.split('T')[0]; // Extract date only
-            }
-        }
-        
-        // Load saved form data from LocalStorage
-        function loadFormData() {
-            const saved = localStorage.getItem('studentProfile');
-            if (saved) {
-                try {
-                    const data = JSON.parse(saved);
-                    
-                    // Populate form fields
-                    Object.keys(data).forEach(key => {
-                        const field = form.querySelector(`[name="${key}"]`);
-                        if (!field) return;
-                        
-                        if (field.type === 'checkbox') {
-                            if (Array.isArray(data[key])) {
-                                data[key].forEach(val => {
-                                    const checkbox = form.querySelector(`[name="${key}"][value="${val}"]`);
-                                    if (checkbox) checkbox.checked = true;
-                                });
-                            } else {
-                                field.checked = data[key];
-                            }
-                        } else {
-                            field.value = data[key];
-                        }
-                    });
-                } catch (e) {
-                    console.error('Error loading form data:', e);
-                }
-            }
-        }
-        
-        // Save form data to LocalStorage
-        function saveFormData(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(form);
-            const data = {};
-            
-            formData.forEach((value, key) => {
-                if (form.querySelector(`[name="${key}"]`).type === 'checkbox') {
-                    if (!data[key]) {
-                        data[key] = [];
-                    }
-                    data[key].push(value);
-                } else {
-                    data[key] = value;
-                }
-            });
-            
-            // Handle weak areas (checkboxes)
-            const weakAreasCheckboxes = form.querySelectorAll('input[name="weakAreas"]:checked');
-            if (weakAreasCheckboxes.length > 0) {
-                data.weakAreas = Array.from(weakAreasCheckboxes).map(cb => cb.value);
-            } else {
-                data.weakAreas = [];
-            }
-            
-            // Save to LocalStorage
-            localStorage.setItem('studentProfile', JSON.stringify(data));
-            
-            // Save exam date separately (for countdown timer)
-            localStorage.setItem('examDate', data.examDate);
-            
-            // Show success toast
-            showToast('Profile saved ✓', 'success');
-            
-            // Redirect to dashboard after 1.5 seconds
-            setTimeout(() => {
-                window.location.href = 'dashboard.html';
-            }, 1500);
-        }
-        
-        // Show toast notification
-        function showToast(message, type = 'success') {
-            toast.textContent = message;
-            toast.classList.add('show');
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-                toast.classList.add('hide');
-                setTimeout(() => {
-                    toast.classList.remove('hide');
-                }, 300);
-            }, 3000);
-        }
-        
-        // Export data as CSV
-        exportBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            const saved = localStorage.getItem('studentProfile');
-            if (!saved) {
-                showToast('No data to export', 'error');
-                return;
-            }
-            
-            try {
-                const data = JSON.parse(saved);
-                const csv = Object.entries(data)
-                    .map(([key, value]) => `${key},${Array.isArray(value) ? value.join(';') : value}`)
-                    .join('\n');
-                
-                const blob = new Blob([csv], { type: 'text/csv' });
-                const url = window.URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = 'smart-muet-profile.csv';
-                link.click();
-                
-                showToast('Data exported ✓');
-            } catch (e) {
-                showToast('Error exporting data', 'error');
-            }
-        });
-        
-        // Clear all progress
-        clearBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            if (confirm('⚠️ Are you sure? This will clear all your profile and progress data. This cannot be undone.')) {
-                localStorage.removeItem('studentProfile');
-                localStorage.removeItem('examDate');
-                showToast('All data cleared');
-                
-                setTimeout(() => {
-                    window.location.href = 'dashboard.html';
-                }, 1500);
-            }
-        });
-        
-        // Form submit
-        form.addEventListener('submit', saveFormData);
-        
-        // Save on blur (auto-save)
-        const inputs = form.querySelectorAll('input, select, textarea');
-        inputs.forEach(input => {
-            input.addEventListener('blur', () => {
-                // Optional: Auto-save on blur (commented out for now)
-                // Uncomment if you want real-time auto-save
-                // saveFormData(new Event('submit'));
-            });
-        });
-        
-        // Load data on page load
-        loadFormData();
-        
-        // Accessibility: Announce form ready
-        document.addEventListener('DOMContentLoaded', () => {
-            const ariaLive = document.createElement('div');
-            ariaLive.setAttribute('role', 'status');
-            ariaLive.setAttribute('aria-live', 'polite');
-            ariaLive.setAttribute('aria-atomic', 'true');
-            ariaLive.style.position = 'absolute';
-            ariaLive.style.left = '-10000px';
-            ariaLive.textContent = 'Settings form loaded. Fill in your profile and click Save Profile.';
-            document.body.appendChild(ariaLive);
-        });
-    </script>
+<main class="app">
+  <div class="brandbar">
+    <img src="assets/heroes/small-muet-logo.svg" alt="Smart MUET Guide">
+    <div><small>SMART MUET GUIDE · PHASE 1</small><b>Profile & Settings</b></div>
+    <a class="back" href="muet-hub.html">Home</a>
+  </div>
+
+  <section class="profile-hero">
+    <img src="assets/heroes/profile-hero.svg" alt="Smart MUET Profile">
+  </section>
+
+  <section class="profile-summary">
+    <div class="profile-avatar" id="profileInitials">MU</div>
+    <div>
+      <h2 id="profileSummaryName">MUET Candidate</h2>
+      <p id="profileSummaryMeta">Set your profile and examination session below.</p>
+    </div>
+  </section>
+
+  <form id="profileSettingsForm">
+    <section class="form-card">
+      <span class="kicker">👤 MY PROFILE</span>
+      <h2 style="margin-top:8px">Student details</h2>
+
+      <label class="field">Full name
+        <input id="profileName" type="text" autocomplete="name" required>
+      </label>
+
+      <label class="field">Email address
+        <input id="profileEmail" type="email" autocomplete="email" placeholder="student@example.com" required>
+        <span class="help">This will be the progress-restore key when Apps Script login is connected.</span>
+      </label>
+
+      <label class="field">Student number
+        <input id="profileRegNo" type="text">
+      </label>
+
+      <label class="field">Class / Group
+        <input id="profileGroup" type="text">
+      </label>
+
+      <label class="field">Institution
+        <input id="profileInstitution" type="text" placeholder="e.g. Politeknik / Matriculation College">
+      </label>
+
+      <label class="field">Target MUET band
+        <select id="profileTarget">
+          <option value="3.5">Band 3.5</option>
+          <option value="4.0">Band 4.0</option>
+          <option value="4.5">Band 4.5</option>
+          <option value="5.0">Band 5.0</option>
+          <option value="5+">Band 5+</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="form-card">
+      <span class="kicker">🗓️ MY MUET EXAM</span>
+      <h2 style="margin-top:8px">Exam session</h2>
+
+      <label class="field">MUET session
+        <select id="profileExamSession">
+          <option value="S1-2026">MUET Session 1 · 2026</option>
+          <option value="S2-2026">MUET Session 2 · 2026</option>
+          <option value="S3-2026">MUET Session 3 · 2026</option>
+        </select>
+        <span class="help">The Home countdown follows this session.</span>
+      </label>
+
+      <label class="field">My Speaking date
+        <input id="profileSpeakingDate" type="date">
+        <span class="help">Enter the exact date shown on your MUET/D slip.</span>
+      </label>
+
+      <div class="mini" id="examSummary">Your selected exam information will appear here.</div>
+    </section>
+
+    <section class="form-card">
+      <span class="kicker">⚙️ PREFERENCES</span>
+      <h2 style="margin-top:8px">Learning settings</h2>
+
+      <label class="toggle-row"><span>Progress reminders</span><input id="prefProgress" type="checkbox"></label>
+      <label class="toggle-row"><span>Exam checklist reminders</span><input id="prefExam" type="checkbox"></label>
+      <label class="toggle-row"><span>Reduce motion</span><input id="prefMotion" type="checkbox"></label>
+    </section>
+
+    <button class="btn green" type="submit">Save Profile & Settings</button>
+    <div class="save-status" id="saveStatus">Saved ✓ Your Home countdown has been updated.</div>
+  </form>
+
+  <section class="form-card" style="margin-top:13px">
+    <span class="kicker">MORE</span>
+    <h2 style="margin-top:8px">Your Smart MUET journey</h2>
+    <div class="profile-links">
+      <a class="profile-link" href="badges.html"><span>🏆 My Badges</span><span>→</span></a>
+      <a class="profile-link" href="feedback.html"><span>💬 Give Feedback</span><span>→</span></a>
+      <a class="profile-link" href="https://www.mpm.edu.my/en/muet/muet-timetable" target="_blank" rel="noopener"><span>📅 Official MPM Timetable</span><span>↗</span></a>
+    </div>
+  </section>
+
+  <section class="danger-zone">
+    <span class="kicker">DATA</span>
+    <h2 style="margin-top:8px">Reset options</h2>
+    <p class="lead" style="color:var(--ink)">Use carefully. Reset Progress keeps your profile but removes practice history. Reset Everything removes all locally saved Smart MUET data.</p>
+    <button class="btn danger" type="button" id="resetProgressBtn" style="margin-top:9px">Reset Progress Only</button>
+    <button class="btn black" type="button" id="resetAllBtn" style="margin-top:9px">Reset Everything</button>
+  </section>
+</main>
+
+<nav class="nav"><a href="muet-hub.html" class=""><img src="assets/heroes/nav-home.svg" alt=""><span>Home</span></a><a href="guidance.html" class=""><img src="assets/heroes/icon-muet-intro.svg" alt=""><span>Guide</span></a><a href="vault.html" class=""><img src="assets/heroes/nav-vault.svg" alt=""><span>Vault</span></a><a href="progress.html" class=""><img src="assets/heroes/nav-progress.svg" alt=""><span>Progress</span></a><a href="settings.html" class="active"><img src="assets/heroes/nav-profile.svg" alt=""><span>Profile</span></a></nav>
+
+<script src="js/phase1-state.js"></script>
+<script>
+const EXAMS = {
+  "S1-2026":{label:"MUET Session 1 · 2026",date:"25 April 2026"},
+  "S2-2026":{label:"MUET Session 2 · 2026",date:"27 June 2026"},
+  "S3-2026":{label:"MUET Session 3 · 2026",date:"17 October 2026"}
+};
+
+function updateSummary() {
+  const name = document.getElementById('profileName').value.trim() || 'MUET Candidate';
+  const session = document.getElementById('profileExamSession').value || 'S3-2026';
+  const target = document.getElementById('profileTarget').value || '4.0';
+  const group = document.getElementById('profileGroup').value.trim();
+
+  document.getElementById('profileSummaryName').textContent = name;
+  document.getElementById('profileSummaryMeta').textContent =
+    (group ? group + ' · ' : '') + EXAMS[session].label + ' · Target Band ' + target;
+
+  const parts = name.split(/\s+/).filter(Boolean).slice(0,2);
+  document.getElementById('profileInitials').textContent =
+    parts.map(x=>x[0]).join('').toUpperCase() || 'MU';
+
+  const speak = document.getElementById('profileSpeakingDate').value;
+  document.getElementById('examSummary').textContent =
+    EXAMS[session].label + ' · Written test: ' + EXAMS[session].date +
+    (speak ? ' · My Speaking: ' + new Date(speak+'T12:00:00+08:00').toLocaleDateString('en-MY',{day:'numeric',month:'short',year:'numeric'}) : '');
+}
+
+function loadSettings() {
+  const p = SmartMUET.loadProfile();
+  const prefs = SmartMUET.loadPreferences();
+
+  document.getElementById('profileName').value = p.name || '';
+  document.getElementById('profileEmail').value = p.email || '';
+  document.getElementById('profileRegNo').value = p.regNo || '';
+  document.getElementById('profileGroup').value = p.group || '';
+  document.getElementById('profileInstitution').value = p.institution || '';
+  document.getElementById('profileTarget').value = p.targetBand || '4.0';
+  document.getElementById('profileExamSession').value = p.examSession || 'S3-2026';
+  document.getElementById('profileSpeakingDate').value = p.speakingDate || '';
+
+  document.getElementById('prefProgress').checked = prefs.progressReminders !== false;
+  document.getElementById('prefExam').checked = prefs.examChecklistReminders !== false;
+  document.getElementById('prefMotion').checked = !!prefs.reducedMotion;
+
+  updateSummary();
+}
+
+document.getElementById('profileSettingsForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const old = SmartMUET.loadProfile();
+
+  const profile = {
+    ...old,
+    name:document.getElementById('profileName').value.trim(),
+    email:document.getElementById('profileEmail').value.trim().toLowerCase(),
+    regNo:document.getElementById('profileRegNo').value.trim(),
+    group:document.getElementById('profileGroup').value.trim(),
+    institution:document.getElementById('profileInstitution').value.trim(),
+    targetBand:document.getElementById('profileTarget').value,
+    examSession:document.getElementById('profileExamSession').value,
+    speakingDate:document.getElementById('profileSpeakingDate').value,
+    lastUpdated:new Date().toISOString()
+  };
+
+  SmartMUET.saveProfile(profile);
+  SmartMUET.savePreferences({
+    progressReminders:document.getElementById('prefProgress').checked,
+    examChecklistReminders:document.getElementById('prefExam').checked,
+    reducedMotion:document.getElementById('prefMotion').checked
+  });
+
+  updateSummary();
+  const status=document.getElementById('saveStatus');
+  status.classList.add('show');
+  setTimeout(()=>status.classList.remove('show'),2500);
+});
+
+['profileName','profileGroup','profileTarget','profileExamSession','profileSpeakingDate']
+  .forEach(id=>document.getElementById(id).addEventListener('input',updateSummary));
+
+document.getElementById('resetProgressBtn').addEventListener('click',()=>{
+  if(confirm('Reset practice progress and scores but keep your profile?')) {
+    SmartMUET.resetProgressOnly();
+    alert('Progress reset. Your profile and exam settings were kept.');
+  }
+});
+
+document.getElementById('resetAllBtn').addEventListener('click',()=>{
+  if(confirm('Remove ALL locally saved Smart MUET data? This cannot be undone.')) {
+    SmartMUET.resetAll();
+    location.href='splash.html';
+  }
+});
+
+loadSettings();
+</script>
 </body>
 </html>

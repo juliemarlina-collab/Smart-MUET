@@ -18,6 +18,45 @@
     .bottom-nav button{padding:7px 3px!important}
     .bottom-nav .nav-icon{width:28px;height:28px;object-fit:contain;display:block;margin:auto}
     .bottom-nav button span{display:block;margin-top:2px}
+  
+    .exam-countdown{
+      background:#ffd23f;border:3px solid #101014;border-radius:20px;
+      box-shadow:5px 5px 0 #101014;padding:14px;margin:0 0 16px
+    }
+    .exam-countdown-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+    .exam-countdown .tag{
+      display:inline-block;background:#101014;color:#fff;border-radius:999px;
+      padding:5px 8px;font-size:9px;font-weight:1000;letter-spacing:.08em
+    }
+    .exam-countdown h2{font-size:19px;margin:7px 0 2px}
+    .exam-countdown .date-label{font-size:11px;font-weight:900}
+    .exam-time-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px}
+    .exam-time-box{
+      background:#fff;border:2px solid #101014;border-radius:12px;
+      padding:9px 3px;text-align:center;box-shadow:2px 2px 0 #101014
+    }
+    .exam-time-box b{
+      display:block;font-family:'Sora';font-size:25px;line-height:1;letter-spacing:-.04em
+    }
+    .exam-time-box span{display:block;font-size:8px;font-weight:1000;margin-top:4px}
+    .exam-countdown-foot{
+      display:flex;justify-content:space-between;gap:8px;align-items:center;
+      margin-top:10px;font-size:10px;font-weight:900
+    }
+    .exam-countdown-foot a{
+      border:2px solid #101014;border-radius:10px;background:#fff;padding:7px 8px;
+      box-shadow:2px 2px 0 #101014
+    }
+    .bottom-nav{grid-template-columns:repeat(5,1fr)!important}
+    .bottom-nav a{
+      display:grid;place-items:center;align-content:center;gap:2px;
+      padding:7px 2px;color:#101014;text-decoration:none;font-size:9px;font-weight:1000
+    }
+    .bottom-nav a.active{background:#ffd23f;border:2px solid #101014;border-radius:10px}
+    @media(max-width:380px){
+      .exam-time-box b{font-size:21px}
+      .exam-countdown-foot{align-items:stretch;flex-direction:column}
+    }
   </style>
 </head>
 <body>
@@ -44,6 +83,14 @@
         <label>Full Name<input id="name" required placeholder="e.g. Aisyah Ahmad"></label>
         <label>Student No.<input id="regNo" required placeholder="e.g. 06DPR23F1001"></label>
         <label>Class / Group<input id="group" required placeholder="e.g. DPR3A"></label>
+
+        <label>MUET Exam Session
+          <select id="examSession" required>
+            <option value="S1-2026">MUET Session 1 · 2026</option>
+            <option value="S2-2026">MUET Session 2 · 2026</option>
+            <option value="S3-2026" selected>MUET Session 3 · 2026</option>
+          </select>
+        </label>
         <label>Target Band
           <select id="targetBand">
             <option value="3.5">Band 3.5</option>
@@ -66,12 +113,33 @@
         <div class="brand-small">Welcome back</div>
         <div id="welcomeName" class="brand-title">MUET Learner</div>
       </div>
-      <button onclick="MuetNeo.show('profileScreen')" class="hamb">👤</button>
+      <button onclick="location.href='settings.html'" class="hamb">👤</button>
     </div>
 
     <div class="asset-hero">
       <img src="assets/heroes/home-hero-banner-main.svg" alt="Smart MUET Guide — Your MUET band starts here">
     </div>
+
+
+    <section class="exam-countdown" id="examCountdown">
+      <div class="exam-countdown-head">
+        <div>
+          <span class="tag">⏱️ MY MUET EXAM COUNTDOWN</span>
+          <h2 id="examCountdownTitle">MUET Session 3 · 2026</h2>
+          <div class="date-label" id="examWrittenDate">Written test · 17 October 2026</div>
+        </div>
+      </div>
+      <div class="exam-time-grid" aria-label="Live MUET exam countdown">
+        <div class="exam-time-box"><b id="examDays">--</b><span>DAYS</span></div>
+        <div class="exam-time-box"><b id="examHours">--</b><span>HRS</span></div>
+        <div class="exam-time-box"><b id="examMinutes">--</b><span>MIN</span></div>
+        <div class="exam-time-box"><b id="examSeconds">--</b><span>SEC</span></div>
+      </div>
+      <div class="exam-countdown-foot">
+        <span id="speakingWindow">Speaking: check your MUET/D slip</span>
+        <a href="https://www.mpm.edu.my/en/muet/muet-timetable" target="_blank" rel="noopener">Official MPM ↗</a>
+      </div>
+    </section>
 
     <div class="dashboard-card">
       <div>
@@ -97,19 +165,19 @@
 
     <div class="section-head"><h2>Skill Modules</h2></div>
     <div class="module-grid">
-      <button class="module-card m-speaking" onclick="MuetNeo.openModule('speaking.html')">
+      <button class="module-card m-speaking" onclick="location.href='speaking-guidance.html'">
         <div class="module-icon">🎤</div><h3>Speaking</h3><p>Guide · PREP</p>
         <div class="scorebar"><span id="speakingBar"></span></div><small id="speakingScore">No attempt</small>
       </button>
-      <button class="module-card m-reading" onclick="MuetNeo.openModule('reading.html')">
+      <button class="module-card m-reading" onclick="location.href='reading-guidance.html'">
         <div class="module-icon">📖</div><h3>Reading</h3><p>Guide · Strategy</p>
         <div class="scorebar"><span id="readingBar"></span></div><small id="readingScore">No attempt</small>
       </button>
-      <button class="module-card m-listening" onclick="MuetNeo.openModule('listening.html')">
+      <button class="module-card m-listening" onclick="location.href='listening-guidance.html'">
         <div class="module-icon">🎧</div><h3>Listening</h3><p>Guide · Keywords</p>
         <div class="scorebar"><span id="listeningBar"></span></div><small id="listeningScore">No attempt</small>
       </button>
-      <button class="module-card m-writing" onclick="MuetNeo.openModule('writing.html')">
+      <button class="module-card m-writing" onclick="location.href='writing-guidance.html'">
         <div class="module-icon">✍️</div><h3>Writing</h3><p>Guide · PEEL</p>
         <div class="scorebar"><span id="writingBar"></span></div><small id="writingScore">No attempt</small>
       </button>
@@ -119,7 +187,7 @@
       <div class="section-head no-margin"><h2>Study Vault Journey</h2><span class="mini-badge">PHASE 1</span></div>
       <p class="sub" style="margin-bottom:10px">Complete all four MUET components in each vault.</p>
       <div class="cycle-strip" id="cycleStrip"></div>
-      <button class="neo-btn yellow" onclick="MuetNeo.show('vaultScreen')" style="margin-top:14px">Open Study Vault →</button>
+      <button class="neo-btn yellow" onclick="location.href='vault.html'" style="margin-top:14px">Open Study Vault →</button>
     </div>
   </section>
 
@@ -165,6 +233,17 @@
         <label>Full Name<input id="editName"></label>
         <label>Student No.<input id="editRegNo"></label>
         <label>Class / Group<input id="editGroup"></label>
+
+        <label>MUET Exam Session
+          <select id="editExamSession">
+            <option value="S1-2026">MUET Session 1 · 2026</option>
+            <option value="S2-2026">MUET Session 2 · 2026</option>
+            <option value="S3-2026">MUET Session 3 · 2026</option>
+          </select>
+        </label>
+        <label>My Speaking Date
+          <input id="editSpeakingDate" type="date">
+        </label>
         <label>Target Band
           <select id="editTarget">
             <option value="3.5">Band 3.5</option><option value="4.0">Band 4.0</option>
@@ -177,23 +256,30 @@
     </div>
   </section>
 
+  
   <nav id="nav" class="bottom-nav">
-    <button class="active" onclick="MuetNeo.show('homeScreen')">
+    <a href="muet-hub.html" class="active">
       <img src="assets/heroes/nav-home.svg" alt="" class="nav-icon"><span>Home</span>
-    </button>
-    <button onclick="MuetNeo.show('vaultScreen')">
+    </a>
+    <a href="guidance.html">
+      <img src="assets/heroes/icon-muet-intro.svg" alt="" class="nav-icon"><span>Guide</span>
+    </a>
+    <a href="vault.html">
       <img src="assets/heroes/nav-vault.svg" alt="" class="nav-icon"><span>Vault</span>
-    </button>
-    <button onclick="MuetNeo.show('progressScreen')">
+    </a>
+    <a href="progress.html">
       <img src="assets/heroes/nav-progress.svg" alt="" class="nav-icon"><span>Progress</span>
-    </button>
-    <button onclick="MuetNeo.show('profileScreen')">
+    </a>
+    <a href="settings.html">
       <img src="assets/heroes/nav-profile.svg" alt="" class="nav-icon"><span>Profile</span>
-    </button>
+    </a>
   </nav>
+
 
   <div id="toast" class="toast">Saved</div>
 </main>
+<script src="js/phase1-state.js"></script>
 <script src="js/muet-neopop.js?v=20260816-2"></script>
+<script src="js/phase1-exam-timer.js?v=20260816-1"></script>
 </body>
 </html>
