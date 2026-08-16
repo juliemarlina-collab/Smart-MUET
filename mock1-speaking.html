@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FFC400">
+<title>Mock 1 Speaking · Smart MUET Guide</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#111;
+  --white:#fff;
+  --soft:#f4f7f8;
+  --muted:#555b63;
+  --gold:#FFC400;
+  --pink:#FF4FA3;
+  --cyan:#12D7D7;
+  --lime:#48F000;
+  --red:#ff3b30;
+  --line:3px solid var(--ink);
+  --shadow:5px 5px 0 var(--ink);
+  --fh:"Sora",sans-serif;
+  --fb:"DM Sans",sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:var(--fb);
+  background:var(--gold);
+  color:var(--ink);
+  overflow-x:hidden;
+}
+
+a{color:inherit;text-decoration:none}
+button,select,input{font:inherit}
+
+.app{
+  width:100%;
+  max-width:580px;
+  min-height:100dvh;
+  margin:auto;
+  background:var(--soft);
+  padding:15px 14px 112px;
+}
+
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:14px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.brand img{
+  width:54px;
+  height:54px;
+}
+
+.brand small{
+  display:block;
+  font-size:9px;
+  font-weight:1000;
+  color:var(--muted);
+  letter-spacing:.08em;
+}
+
+.brand b{
+  display:block;
+  margin-top:3px;
+  font-family:var(--fh);
+  font-size:17px;
+}
+
+.back{
+  border:2px solid var(--ink);
+  border-radius:999px;
+  background:#fff;
+  box-shadow:2px 2px 0 var(--ink);
+  padding:8px 11px;
+  font-size:11px;
+  font-weight:1000;
+}
+
+.hero{
+  background:#fff;
+  border:var(--line);
+  border-radius:22px;
+  box-shadow:var(--shadow);
+  padding:18px;
+  margin-bottom:14px;
+}
+
+.tag{
+  display:inline-block;
+  background:var(--ink);
+  color:#fff;
+  border-radius:999px;
+  padding:6px 9px;
+  font-size:9px;
+  font-weight:1000;
+  letter-spacing:.08em;
+}
+
+.hero h1{
+  font-family:var(--fh);
+  font-size:clamp(34px,9vw,48px);
+  line-height:.98;
+  letter-spacing:-.04em;
+  margin-top:9px;
+}
+
+.hero h1 span{
+  display:block;
+  color:#d89b00;
+}
+
+.hero p{
+  margin-top:9px;
+  font-size:14px;
+  line-height:1.45;
+  font-weight:700;
+  color:#40454c;
+}
+
+.exambar{
+  background:var(--ink);
+  color:#fff;
+  border:var(--line);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:13px;
+  margin-bottom:14px;
+}
+
+.examrow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.exambar h2{
+  font-family:var(--fh);
+  font-size:16px;
+}
+
+.exambar p{
+  color:#ddd;
+  font-size:10px;
+  line-height:1.4;
+  font-weight:700;
+  margin-top:4px;
+}
+
+.timer{
+  font-family:var(--fh);
+  font-size:30px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.startbtn{
+  width:100%;
+  min-height:48px;
+  margin-top:10px;
+  border:2px solid #fff;
+  border-radius:11px;
+  background:var(--gold);
+  color:#111;
+  font-size:11px;
+  font-weight:1000;
+  cursor:pointer;
+}
+
+.mock-note{
+  background:#fff7cc;
+  border:var(--line);
+  border-radius:15px;
+  box-shadow:4px 4px 0 var(--ink);
+  padding:11px;
+  margin-bottom:12px;
+  font-size:11px;
+  line-height:1.45;
+  font-weight:800;
+}
+
+.task{
+  background:#fff;
+  border:var(--line);
+  border-radius:20px;
+  box-shadow:var(--shadow);
+  padding:13px;
+  margin-bottom:14px;
+}
+
+.task-head{
+  display:flex;
+  align-items:start;
+  justify-content:space-between;
+  gap:10px;
+  padding-bottom:10px;
+  border-bottom:2px solid var(--ink);
+}
+
+.task-tag{
+  font-size:9px;
+  font-weight:1000;
+  color:var(--muted);
+  letter-spacing:.08em;
+}
+
+.task h2{
+  font-family:var(--fh);
+  font-size:19px;
+  margin-top:2px;
+}
+
+.task-head p{
+  margin-top:3px;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
+}
+
+.badge{
+  border:2px solid var(--ink);
+  border-radius:999px;
+  background:var(--gold);
+  padding:4px 7px;
+  font-size:8px;
+  font-weight:1000;
+  white-space:nowrap;
+}
+
+label.field-label{
+  display:block;
+  margin-top:12px;
+  margin-bottom:6px;
+  font-size:10px;
+  font-weight:1000;
+  color:var(--muted);
+  letter-spacing:.06em;
+}
+
+select{
+  width:100%;
+  min-height:48px;
+  border:2px solid var(--ink);
+  border-radius:11px;
+  background:#fff;
+  padding:9px 10px;
+  font-size:12px;
+  font-weight:800;
+}
+
+.prompt{
+  margin-top:10px;
+  border:2px solid var(--ink);
+  border-radius:13px;
+  background:#fff7c9;
+  padding:11px;
+  font-size:13px;
+  line-height:1.5;
+  font-weight:750;
+}
+
+.prompt b{
+  font-family:var(--fh);
+}
+
+.topic-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  margin-top:10px;
+}
+
+.topic{
+  border:2px solid var(--ink);
+  border-radius:11px;
+  background:#fff;
+  padding:9px;
+  font-size:11px;
+  line-height:1.35;
+  font-weight:800;
+}
+
+.topic.main{
+  background:#eefcff;
+}
+
+.task-timer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:10px;
+  border:2px solid var(--ink);
+  border-radius:12px;
+  background:#111;
+  color:#fff;
+  padding:9px 10px;
+}
+
+.task-timer b{
+  font-family:var(--fh);
+  font-size:19px;
+}
+
+.task-timer button{
+  border:2px solid #fff;
+  border-radius:9px;
+  background:var(--pink);
+  padding:7px 9px;
+  font-size:9px;
+  font-weight:1000;
+  cursor:pointer;
+}
+
+.checklist{
+  display:none;
+  gap:7px;
+  margin-top:10px;
+}
+
+.checklist.show{
+  display:grid;
+}
+
+.check{
+  display:grid;
+  grid-template-columns:20px 1fr;
+  gap:8px;
+  align-items:start;
+  border:2px solid var(--ink);
+  border-radius:11px;
+  background:#fff;
+  padding:9px;
+  font-size:12px;
+  line-height:1.35;
+  font-weight:750;
+}
+
+.check input{
+  width:18px;
+  height:18px;
+}
+
+.complete{
+  width:100%;
+  min-height:48px;
+  margin-top:10px;
+  border:var(--line);
+  border-radius:11px;
+  background:var(--gold);
+  box-shadow:3px 3px 0 var(--ink);
+  font-size:10px;
+  font-weight:1000;
+  cursor:pointer;
+}
+
+.result{
+  display:none;
+  margin-top:9px;
+  border:2px solid var(--ink);
+  border-radius:11px;
+  background:#e7fff5;
+  padding:9px;
+  font-size:12px;
+  line-height:1.45;
+  font-weight:800;
+}
+
+.result.show{display:block}
+
+.finish{
+  background:#fff;
+  border:var(--line);
+  border-radius:20px;
+  box-shadow:var(--shadow);
+  padding:14px;
+  margin-top:14px;
+}
+
+.finish h2{
+  font-family:var(--fh);
+  font-size:20px;
+}
+
+.finish p{
+  margin-top:5px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.45;
+  font-weight:700;
+}
+
+.finish button{
+  width:100%;
+  min-height:50px;
+  margin-top:10px;
+  border:var(--line);
+  border-radius:11px;
+  background:var(--red);
+  color:#fff;
+  box-shadow:4px 4px 0 var(--ink);
+  font-size:11px;
+  font-weight:1000;
+  cursor:pointer;
+}
+
+.nav{
+  position:fixed;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:10px;
+  width:calc(100% - 20px);
+  max-width:560px;
+  z-index:70;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  background:#fff;
+  border:var(--line);
+  border-radius:18px;
+  box-shadow:5px 5px 0 var(--ink);
+  padding:6px;
+}
+
+.nav a{
+  min-height:58px;
+  display:grid;
+  place-items:center;
+  align-content:center;
+  gap:3px;
+  border-radius:10px;
+  font-size:9px;
+  font-weight:1000;
+}
+
+.nav a.active{
+  background:var(--gold);
+  border:2px solid var(--ink);
+}
+
+.nav img{
+  width:26px;
+  height:26px;
+}
+
+@media(min-width:700px){
+  .app{max-width:850px;padding:24px 24px 120px}
+  .nav{max-width:810px}
+  .topic-grid{grid-template-columns:repeat(5,1fr)}
+}
+</style>
+</head>
+
+<body>
+
+<main class="app">
+
+<header class="top">
+  <div class="brand">
+    <img src="assets/heroes/small-muet-logo.svg" alt="">
+    <div>
+      <small>MOCK 1 · 800/2 · SPEAKING</small>
+      <b>Session 1 · 2022</b>
+    </div>
+  </div>
+
+  <a class="back" href="mock1.html">← Mock 1</a>
+</header>
+
+
+<section class="hero">
+  <span class="tag">EXAM MODE · BOOKLET 1</span>
+
+  <h1>
+    Think quickly.
+    <span>Speak naturally.</span>
+  </h1>
+
+  <p>
+    Complete Task A and Task B under mock conditions.
+    Technique prompts are not shown during the task.
+  </p>
+</section>
+
+
+<section class="exambar">
+  <div class="examrow">
+    <div>
+      <h2>Speaking Paper 800/2</h2>
+      <p>Task A + Task B · Mock session</p>
+    </div>
+
+    <div class="timer" id="mainTimer">30:00</div>
+  </div>
+
+  <button class="startbtn" id="startMock">START MOCK SPEAKING</button>
+</section>
+
+
+<div class="mock-note" id="mockNote">
+  Start the timer when you are ready. Choose one candidate prompt for Task A.
+  For Task B, practise with your group or simulate your own responses to the discussion points.
+</div>
+
+
+<div id="paper" style="pointer-events:none;opacity:.55">
+
+<section class="task">
+
+  <div class="task-head">
+    <div>
+      <span class="task-tag">TASK A · INDIVIDUAL PRESENTATION</span>
+      <h2>Children spend too much time indoors.</h2>
+      <p>Suggest some outdoor activities for them.</p>
+    </div>
+
+    <span class="badge">BOOKLET 1</span>
+  </div>
+
+
+  <label class="field-label" for="candidate">SELECT YOUR CANDIDATE</label>
+
+  <select id="candidate">
+    <option value="A">Candidate A · Taking part in sports</option>
+    <option value="B">Candidate B · Camping</option>
+    <option value="C">Candidate C · Gardening</option>
+    <option value="D">Candidate D · Doing recycling projects</option>
+  </select>
+
+
+  <div class="prompt" id="candidatePrompt"></div>
+
+
+  <div class="task-timer">
+    <span>Task A practice timer</span>
+    <b id="taskATimer">04:00</b>
+    <button id="startA">START A</button>
+  </div>
+
+
+  <div class="checklist" id="checkA">
+    <label class="check"><input type="checkbox" class="aCheck"><span>I presented a clear response to my assigned topic.</span></label>
+    <label class="check"><input type="checkbox" class="aCheck"><span>I developed my ideas with reasons or examples.</span></label>
+    <label class="check"><input type="checkbox" class="aCheck"><span>I spoke clearly and continuously.</span></label>
+    <label class="check"><input type="checkbox" class="aCheck"><span>I completed the task without reading a prepared script.</span></label>
+  </div>
+
+  <button class="complete" id="completeA">COMPLETE TASK A →</button>
+  <div class="result" id="resultA"></div>
+
+</section>
+
+
+<section class="task">
+
+  <div class="task-head">
+    <div>
+      <span class="task-tag">TASK B · GROUP DISCUSSION</span>
+      <h2>Children's attitudes towards health</h2>
+      <p>Discuss the factors that influence them.</p>
+    </div>
+
+    <span class="badge">DISCUSSION</span>
+  </div>
+
+
+  <div class="prompt">
+    <b>Part 2</b><br><br>
+    It is important to encourage children to be healthy from young.
+    In your group, discuss the factors that influence children's attitudes towards health.
+    <br><br>
+    At the end of the discussion, try to decide the <b>main factor</b>
+    that influences children's attitudes towards health.
+  </div>
+
+
+  <div class="topic-grid">
+    <div class="topic">Family members</div>
+    <div class="topic">Friends</div>
+    <div class="topic main">Media</div>
+    <div class="topic">Celebrities</div>
+    <div class="topic">Education</div>
+  </div>
+
+
+  <div class="task-timer">
+    <span>Task B discussion timer</span>
+    <b id="taskBTimer">12:00</b>
+    <button id="startB">START B</button>
+  </div>
+
+
+  <div class="checklist" id="checkB">
+    <label class="check"><input type="checkbox" class="bCheck"><span>I contributed relevant ideas to the discussion.</span></label>
+    <label class="check"><input type="checkbox" class="bCheck"><span>I responded to or built on another point.</span></label>
+    <label class="check"><input type="checkbox" class="bCheck"><span>I expressed agreement or disagreement appropriately.</span></label>
+    <label class="check"><input type="checkbox" class="bCheck"><span>I helped reach a final decision on the main factor.</span></label>
+  </div>
+
+  <button class="complete" id="completeB">COMPLETE TASK B →</button>
+  <div class="result" id="resultB"></div>
+
+</section>
+
+
+<section class="finish">
+  <h2>Finish Mock 1 Speaking</h2>
+
+  <p>
+    Complete both speaking tasks before recording this Mock 1 component as finished.
+  </p>
+
+  <button id="finishMock">SAVE MOCK SPEAKING COMPLETION →</button>
+  <div class="result" id="finishResult"></div>
+</section>
+
+</div>
+
+</main>
+
+
+<nav class="nav">
+<a href="muet-hub.html"><img src="assets/heroes/nav-home.svg" alt=""><span>Home</span></a>
+<a href="guidance.html"><img src="assets/heroes/icon-muet-intro.svg" alt=""><span>Guide</span></a>
+<a class="active" href="vault.html"><img src="assets/heroes/nav-vault.svg" alt=""><span>Vault</span></a>
+<a href="progress.html"><img src="assets/heroes/nav-progress.svg" alt=""><span>Progress</span></a>
+<a href="settings.html"><img src="assets/heroes/nav-profile.svg" alt=""><span>Profile</span></a>
+</nav>
+
+
+<script>
+const prompts={
+  A:"You have to give a presentation to your class. Talk about taking part in sports.",
+  B:"You have to give a presentation to your class. Talk about camping.",
+  C:"You have to give a presentation to your class. Talk about gardening.",
+  D:"You have to give a presentation to your class. Talk about doing recycling projects."
+};
+
+const candidate=document.getElementById("candidate");
+const candidatePrompt=document.getElementById("candidatePrompt");
+
+function renderCandidate(){
+  candidatePrompt.textContent=prompts[candidate.value];
+}
+candidate.addEventListener("change",renderCandidate);
+renderCandidate();
+
+let mainRemaining=1800;
+let mainInterval=null;
+let started=false;
+
+function showTime(el,seconds){
+  const m=Math.floor(seconds/60);
+  const s=seconds%60;
+  el.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+document.getElementById("startMock").addEventListener("click",()=>{
+  if(started)return;
+  started=true;
+
+  document.getElementById("paper").style.pointerEvents="auto";
+  document.getElementById("paper").style.opacity="1";
+  document.getElementById("mockNote").style.display="none";
+  document.getElementById("startMock").textContent="MOCK IN PROGRESS";
+
+  mainInterval=setInterval(()=>{
+    mainRemaining--;
+    showTime(document.getElementById("mainTimer"),mainRemaining);
+
+    if(mainRemaining<=0){
+      clearInterval(mainInterval);
+      alert("Mock Speaking time has ended.");
+    }
+  },1000);
+});
+
+function subTimer(buttonId,timerId,seconds,checkId){
+  let remaining=seconds;
+  let running=false;
+  let interval=null;
+
+  const btn=document.getElementById(buttonId);
+  const timer=document.getElementById(timerId);
+
+  btn.addEventListener("click",()=>{
+    if(running)return;
+
+    running=true;
+    btn.textContent="RUNNING";
+
+    interval=setInterval(()=>{
+      remaining--;
+      showTime(timer,remaining);
+
+      if(remaining<=0){
+        clearInterval(interval);
+        btn.textContent="TIME";
+        document.getElementById(checkId).classList.add("show");
+      }
+    },1000);
+  });
+}
+
+subTimer("startA","taskATimer",240,"checkA");
+subTimer("startB","taskBTimer",720,"checkB");
+
+let doneA=false;
+let doneB=false;
+
+document.getElementById("completeA").addEventListener("click",()=>{
+  document.getElementById("checkA").classList.add("show");
+
+  const n=[...document.querySelectorAll(".aCheck")].filter(x=>x.checked).length;
+  doneA=n>=3;
+
+  const box=document.getElementById("resultA");
+  box.classList.add("show");
+
+  box.innerHTML=doneA
+    ? "<b>Task A completed ✓</b><br>Your individual presentation self-check is complete."
+    : "<b>Review Task A.</b><br>Complete at least three self-check items.";
+});
+
+document.getElementById("completeB").addEventListener("click",()=>{
+  document.getElementById("checkB").classList.add("show");
+
+  const n=[...document.querySelectorAll(".bCheck")].filter(x=>x.checked).length;
+  doneB=n>=3;
+
+  const box=document.getElementById("resultB");
+  box.classList.add("show");
+
+  box.innerHTML=doneB
+    ? "<b>Task B completed ✓</b><br>Your group discussion self-check is complete."
+    : "<b>Review Task B.</b><br>Complete at least three self-check items.";
+});
+
+document.getElementById("finishMock").addEventListener("click",()=>{
+  const box=document.getElementById("finishResult");
+  box.classList.add("show");
+
+  if(doneA && doneB){
+    localStorage.setItem("muet_mock1_speaking","true");
+
+    box.innerHTML=
+      "<b>Mock 1 Speaking completed ✓</b><br>Task A and Task B have both been completed.";
+  }else{
+    box.innerHTML=
+      "<b>Complete both tasks first.</b><br>Finish the Task A and Task B self-checks before saving.";
+  }
+});
+
+showTime(document.getElementById("mainTimer"),mainRemaining);
+</script>
+
+</body>
+</html>
