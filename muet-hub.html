@@ -1,285 +1,804 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-  <title>Smart MUET Guide 2026</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#18C7B5">
+  <meta name="description" content="Smart MUET Guide — Home Dashboard">
+  <title>Home · Smart MUET Guide</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/muet-neopop.css?v=20260816-2"/>
-  <link rel="stylesheet" href="css/responsive-fix.css?v=20260816-2"/>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@500;700;800;900&display=swap" rel="stylesheet">
+
   <style>
-    .asset-hero{border:3px solid #101014;border-radius:20px;overflow:hidden;box-shadow:5px 5px 0 #101014;margin-bottom:16px;background:#fff}
-    .asset-hero img{display:block;width:100%;height:auto}
-    .brand-logo-img{width:48px;height:48px;object-fit:contain;border:3px solid #101014;border-radius:12px;background:#fff;box-shadow:3px 3px 0 #ffc400}
-    .clean-intro{background:#fffaf2;border:3px solid #101014;border-radius:20px;box-shadow:5px 5px 0 #101014;padding:16px;margin-bottom:16px}
-    .clean-intro h2{margin-bottom:6px}.clean-intro p{font-size:13px;font-weight:800;line-height:1.5}
-    .bottom-nav button{padding:7px 3px!important}
-    .bottom-nav .nav-icon{width:28px;height:28px;object-fit:contain;display:block;margin:auto}
-    .bottom-nav button span{display:block;margin-top:2px}
-  
-    .exam-countdown{
-      background:#ffd23f;border:3px solid #101014;border-radius:20px;
-      box-shadow:5px 5px 0 #101014;padding:14px;margin:0 0 16px
+    :root{
+      --ink:#101014;
+      --paper:#FFFAF2;
+      --white:#FFFFFF;
+      --teal:#18C7B5;
+      --yellow:#FFD23F;
+      --pink:#F56AB4;
+      --green:#27D58A;
+      --blue:#215CF5;
+      --muted:#62656F;
+      --line:3px solid var(--ink);
+      --shadow:5px 5px 0 var(--ink);
+      --font-heading:"Sora",sans-serif;
+      --font-body:"DM Sans",sans-serif;
     }
-    .exam-countdown-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-    .exam-countdown .tag{
-      display:inline-block;background:#101014;color:#fff;border-radius:999px;
-      padding:5px 8px;font-size:9px;font-weight:1000;letter-spacing:.08em
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{width:100%;min-height:100%}
+
+    body{
+      font-family:var(--font-body);
+      background:var(--teal);
+      color:var(--ink);
+      overflow-x:hidden;
     }
-    .exam-countdown h2{font-size:19px;margin:7px 0 2px}
-    .exam-countdown .date-label{font-size:11px;font-weight:900}
-    .exam-time-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px}
-    .exam-time-box{
-      background:#fff;border:2px solid #101014;border-radius:12px;
-      padding:9px 3px;text-align:center;box-shadow:2px 2px 0 #101014
+
+    a{text-decoration:none;color:inherit}
+
+    .app{
+      width:100%;
+      max-width:480px;
+      min-height:100vh;
+      min-height:100dvh;
+      margin:0 auto;
+      padding:
+        max(16px,env(safe-area-inset-top))
+        max(14px,env(safe-area-inset-right))
+        max(110px,calc(94px + env(safe-area-inset-bottom)))
+        max(14px,env(safe-area-inset-left));
+      background:#F6FBFA;
     }
-    .exam-time-box b{
-      display:block;font-family:'Sora';font-size:25px;line-height:1;letter-spacing:-.04em
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:13px;
     }
-    .exam-time-box span{display:block;font-size:8px;font-weight:1000;margin-top:4px}
-    .exam-countdown-foot{
-      display:flex;justify-content:space-between;gap:8px;align-items:center;
-      margin-top:10px;font-size:10px;font-weight:900
+
+    .identity{
+      display:flex;
+      align-items:center;
+      gap:9px;
+      min-width:0;
     }
-    .exam-countdown-foot a{
-      border:2px solid #101014;border-radius:10px;background:#fff;padding:7px 8px;
-      box-shadow:2px 2px 0 #101014
+
+    .identity img{
+      width:46px;
+      height:46px;
+      object-fit:contain;
+      border:var(--line);
+      border-radius:12px;
+      background:var(--white);
+      box-shadow:3px 3px 0 var(--yellow);
+      flex:0 0 auto;
     }
-    .bottom-nav{grid-template-columns:repeat(5,1fr)!important}
+
+    .identity small{
+      display:block;
+      font-size:8px;
+      font-weight:1000;
+      letter-spacing:.07em;
+      text-transform:uppercase;
+      color:#52545C;
+    }
+
+    .identity b{
+      display:block;
+      margin-top:2px;
+      font-family:var(--font-heading);
+      font-size:15px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .profile-btn{
+      width:44px;
+      height:44px;
+      border:var(--line);
+      border-radius:12px;
+      background:var(--yellow);
+      box-shadow:3px 3px 0 var(--ink);
+      display:grid;
+      place-items:center;
+    }
+
+    .profile-btn img{
+      width:26px;
+      height:26px;
+      object-fit:contain;
+    }
+
+    .hero{
+      border:var(--line);
+      border-radius:22px;
+      background:var(--white);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      margin-bottom:14px;
+    }
+
+    .hero img{
+      width:100%;
+      display:block;
+    }
+
+    .welcome-copy{
+      padding:14px 15px 15px;
+    }
+
+    .kicker{
+      display:inline-block;
+      background:var(--ink);
+      color:var(--white);
+      border:2px solid var(--ink);
+      border-radius:999px;
+      padding:5px 8px;
+      font-size:9px;
+      font-weight:1000;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    h1,h2,h3{font-family:var(--font-heading)}
+
+    h1{
+      margin-top:7px;
+      font-size:31px;
+      line-height:1;
+      letter-spacing:-.045em;
+    }
+
+    .welcome-copy p{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:11px;
+      line-height:1.45;
+      font-weight:800;
+    }
+
+    .countdown-card{
+      background:var(--yellow);
+      border:var(--line);
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      padding:14px;
+      margin-bottom:14px;
+    }
+
+    .countdown-head{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-start;
+    }
+
+    .countdown-head h2{
+      margin-top:6px;
+      font-size:19px;
+      line-height:1.05;
+    }
+
+    .exam-date{
+      margin-top:4px;
+      font-size:10px;
+      font-weight:900;
+      line-height:1.35;
+    }
+
+    .edit-link{
+      flex:0 0 auto;
+      border:2px solid var(--ink);
+      border-radius:999px;
+      background:var(--white);
+      box-shadow:2px 2px 0 var(--ink);
+      padding:6px 8px;
+      font-size:9px;
+      font-weight:1000;
+    }
+
+    .time-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:6px;
+      margin-top:11px;
+    }
+
+    .time-box{
+      background:var(--white);
+      border:2px solid var(--ink);
+      border-radius:11px;
+      box-shadow:2px 2px 0 var(--ink);
+      padding:9px 2px 7px;
+      text-align:center;
+    }
+
+    .time-box b{
+      display:block;
+      font-family:var(--font-heading);
+      font-size:24px;
+      line-height:1;
+      letter-spacing:-.05em;
+    }
+
+    .time-box span{
+      display:block;
+      margin-top:4px;
+      font-size:7px;
+      font-weight:1000;
+      letter-spacing:.07em;
+    }
+
+    .countdown-foot{
+      margin-top:9px;
+      border-top:2px dashed var(--ink);
+      padding-top:8px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      font-size:9px;
+      font-weight:900;
+      line-height:1.35;
+    }
+
+    .countdown-foot a{
+      width:max-content;
+      border:2px solid var(--ink);
+      border-radius:9px;
+      background:var(--white);
+      box-shadow:2px 2px 0 var(--ink);
+      padding:6px 8px;
+    }
+
+    .readiness-card{
+      background:var(--paper);
+      border:var(--line);
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      padding:14px;
+      margin-bottom:14px;
+    }
+
+    .readiness-top{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:12px;
+      align-items:center;
+    }
+
+    .readiness-top h2{
+      margin-top:6px;
+      font-size:19px;
+    }
+
+    .readiness-top p{
+      margin-top:4px;
+      color:var(--muted);
+      font-size:10px;
+      font-weight:850;
+      line-height:1.4;
+    }
+
+    .readiness-ring{
+      --score:0;
+      width:78px;
+      height:78px;
+      border:var(--line);
+      border-radius:50%;
+      background:conic-gradient(var(--green) calc(var(--score)*1%), var(--white) 0);
+      display:grid;
+      place-items:center;
+      box-shadow:3px 3px 0 var(--ink);
+    }
+
+    .readiness-ring span{
+      width:52px;
+      height:52px;
+      border:2px solid var(--ink);
+      border-radius:50%;
+      background:var(--paper);
+      display:grid;
+      place-items:center;
+      font-family:var(--font-heading);
+      font-size:15px;
+      font-weight:800;
+    }
+
+    .readiness-bar{
+      margin-top:11px;
+      height:11px;
+      border:2px solid var(--ink);
+      border-radius:999px;
+      background:var(--white);
+      overflow:hidden;
+    }
+
+    .readiness-bar i{
+      display:block;
+      height:100%;
+      width:0%;
+      background:var(--green);
+      border-right:2px solid var(--ink);
+    }
+
+    .next-card{
+      background:#DFE8FF;
+      border:var(--line);
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      padding:14px;
+      margin-bottom:14px;
+    }
+
+    .next-card h2{
+      margin-top:6px;
+      font-size:20px;
+    }
+
+    .next-card p{
+      margin:5px 0 11px;
+      color:#34363D;
+      font-size:11px;
+      font-weight:850;
+      line-height:1.45;
+    }
+
+    .next-btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      min-height:46px;
+      border:var(--line);
+      border-radius:12px;
+      background:var(--yellow);
+      box-shadow:4px 4px 0 var(--ink);
+      font-size:11px;
+      font-weight:1000;
+    }
+
+    .journey-card{
+      background:var(--paper);
+      border:var(--line);
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      padding:14px;
+      margin-bottom:14px;
+    }
+
+    .journey-card h2{
+      font-size:18px;
+      margin-bottom:9px;
+    }
+
+    .journey-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:8px;
+    }
+
+    .journey-item{
+      min-height:88px;
+      border:2px solid var(--ink);
+      border-radius:13px;
+      box-shadow:2px 2px 0 var(--ink);
+      padding:10px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      font-size:10px;
+      font-weight:900;
+    }
+
+    .journey-item:nth-child(1){background:var(--yellow)}
+    .journey-item:nth-child(2){background:#E8FFF4}
+    .journey-item:nth-child(3){background:#FFF0F8}
+    .journey-item:nth-child(4){background:#E8EFFF}
+
+    .journey-item b{
+      font-family:var(--font-heading);
+      font-size:14px;
+    }
+
+    .journey-item span{
+      color:#44464D;
+      line-height:1.25;
+    }
+
+    .official-card{
+      background:var(--paper);
+      border:var(--line);
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+
+    .official-card h2{
+      margin-top:6px;
+      font-size:18px;
+    }
+
+    .official-card p{
+      margin:4px 0 9px;
+      color:var(--muted);
+      font-size:10px;
+      font-weight:850;
+      line-height:1.4;
+    }
+
+    .official-links{
+      display:grid;
+      gap:7px;
+    }
+
+    .official-links a{
+      border:2px solid var(--ink);
+      border-radius:11px;
+      background:var(--white);
+      box-shadow:2px 2px 0 var(--ink);
+      padding:9px;
+      font-size:10px;
+      font-weight:1000;
+    }
+
+    .bottom-nav{
+      position:fixed;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:max(10px,env(safe-area-inset-bottom));
+      width:calc(100% - 20px);
+      max-width:460px;
+      z-index:50;
+
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+
+      background:var(--white);
+      border:var(--line);
+      border-radius:17px;
+      box-shadow:5px 5px 0 var(--ink);
+      padding:6px;
+    }
+
     .bottom-nav a{
-      display:grid;place-items:center;align-content:center;gap:2px;
-      padding:7px 2px;color:#101014;text-decoration:none;font-size:9px;font-weight:1000
+      display:grid;
+      place-items:center;
+      gap:2px;
+      min-width:0;
+      padding:5px 2px;
+      border-radius:9px;
+      font-size:8px;
+      font-weight:1000;
     }
-    .bottom-nav a.active{background:#ffd23f;border:2px solid #101014;border-radius:10px}
-    @media(max-width:380px){
-      .exam-time-box b{font-size:21px}
-      .exam-countdown-foot{align-items:stretch;flex-direction:column}
+
+    .bottom-nav a.active{
+      background:var(--yellow);
+      border:2px solid var(--ink);
+    }
+
+    .bottom-nav img{
+      width:25px;
+      height:25px;
+      object-fit:contain;
+    }
+
+    @media(max-width:360px){
+      .app{padding-inline:10px}
+      .time-box b{font-size:21px}
+      .journey-grid{grid-template-columns:1fr 1fr}
     }
   </style>
 </head>
+
 <body>
-<main class="phone-shell">
+  <main class="app">
 
-  <!-- REGISTER -->
-  <section id="registerScreen" class="screen active">
-    <div class="brand-bar">
-      <img src="assets/heroes/small-muet-logo.svg" alt="Smart MUET Guide" class="brand-logo-img">
-      <div>
-        <div class="brand-small">ELU · JPA · PPD · 2026</div>
-        <div class="brand-title">Smart MUET Guide</div>
-      </div>
-    </div>
-
-    <div class="asset-hero">
-      <img src="assets/heroes/welcome-hero.svg" alt="Welcome to Smart MUET Guide">
-    </div>
-
-    <div class="neo-panel">
-      <h2>Create Your Profile</h2>
-      <p class="sub">Register once. Your progress will follow your MUET journey.</p>
-      <form id="profileForm" class="form">
-        <label>Full Name<input id="name" required placeholder="e.g. Aisyah Ahmad"></label>
-        <label>Student No.<input id="regNo" required placeholder="e.g. 06DPR23F1001"></label>
-        <label>Class / Group<input id="group" required placeholder="e.g. DPR3A"></label>
-
-        <label>MUET Exam Session
-          <select id="examSession" required>
-            <option value="S1-2026">MUET Session 1 · 2026</option>
-            <option value="S2-2026">MUET Session 2 · 2026</option>
-            <option value="S3-2026" selected>MUET Session 3 · 2026</option>
-          </select>
-        </label>
-        <label>Target Band
-          <select id="targetBand">
-            <option value="3.5">Band 3.5</option>
-            <option value="4.0" selected>Band 4.0</option>
-            <option value="4.5">Band 4.5</option>
-            <option value="5.0">Band 5.0</option>
-            <option value="5+">Band 5+</option>
-          </select>
-        </label>
-        <button class="neo-btn yellow" type="submit">Start My Journey →</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- HOME -->
-  <section id="homeScreen" class="screen">
-    <div class="brand-bar dark">
-      <img src="assets/heroes/small-muet-logo.svg" alt="" class="brand-logo-img">
-      <div style="flex:1">
-        <div class="brand-small">Welcome back</div>
-        <div id="welcomeName" class="brand-title">MUET Learner</div>
-      </div>
-      <button onclick="location.href='settings.html'" class="hamb">👤</button>
-    </div>
-
-    <div class="asset-hero">
-      <img src="assets/heroes/home-hero-banner-main.svg" alt="Smart MUET Guide — Your MUET band starts here">
-    </div>
-
-
-    <section class="exam-countdown" id="examCountdown">
-      <div class="exam-countdown-head">
+    <header class="topbar">
+      <div class="identity">
+        <img src="assets/heroes/small-muet-logo.svg" alt="Smart MUET Guide">
         <div>
-          <span class="tag">⏱️ MY MUET EXAM COUNTDOWN</span>
-          <h2 id="examCountdownTitle">MUET Session 3 · 2026</h2>
-          <div class="date-label" id="examWrittenDate">Written test · 17 October 2026</div>
+          <small>Welcome back</small>
+          <b id="studentName">MUET Candidate</b>
         </div>
       </div>
-      <div class="exam-time-grid" aria-label="Live MUET exam countdown">
-        <div class="exam-time-box"><b id="examDays">--</b><span>DAYS</span></div>
-        <div class="exam-time-box"><b id="examHours">--</b><span>HRS</span></div>
-        <div class="exam-time-box"><b id="examMinutes">--</b><span>MIN</span></div>
-        <div class="exam-time-box"><b id="examSeconds">--</b><span>SEC</span></div>
-      </div>
-      <div class="exam-countdown-foot">
-        <span id="speakingWindow">Speaking: check your MUET/D slip</span>
-        <a href="https://www.mpm.edu.my/en/muet/muet-timetable" target="_blank" rel="noopener">Official MPM ↗</a>
+
+      <a class="profile-btn" href="settings.html" aria-label="Open profile settings">
+        <img src="assets/heroes/nav-profile.svg" alt="">
+      </a>
+    </header>
+
+    <section class="hero">
+      <img
+        src="assets/heroes/home-hero-banner-main.svg"
+        alt="Smart MUET Guide home"
+      >
+
+      <div class="welcome-copy">
+        <div class="kicker">YOUR MUET JOURNEY</div>
+        <h1 id="greeting">Good morning 👋</h1>
+        <p>Let’s focus on what matters most for your next step towards Exam Ready.</p>
       </div>
     </section>
 
-    <div class="dashboard-card">
-      <div>
-        <p class="tiny">Overall Band Estimate</p>
-        <h1 id="overallBand">Band 0.0</h1>
-        <p id="bandMessage">Complete your first task to activate tracking.</p>
+    <section class="countdown-card">
+      <div class="countdown-head">
+        <div>
+          <div class="kicker">⏱️ MY EXAM COUNTDOWN</div>
+          <h2 id="sessionLabel">MUET Session 3 · 2026</h2>
+          <div class="exam-date" id="writtenLabel">Written test · 17 October 2026</div>
+        </div>
+
+        <a class="edit-link" href="settings.html">Edit</a>
       </div>
-      <div class="band-disc"><span id="overallPercent">0%</span></div>
-    </div>
 
-    <div class="stat-row">
-      <div class="stat-card red"><span>🔥</span><b id="streak">0</b><small>Streak</small></div>
-      <div class="stat-card blue"><span>⭐</span><b id="xp">0</b><small>XP</small></div>
-      <div class="stat-card green"><span>🎯</span><b id="targetDisplay">4.0</b><small>Target</small></div>
-    </div>
+      <div class="time-grid" aria-label="MUET examination countdown">
+        <div class="time-box"><b id="days">--</b><span>DAYS</span></div>
+        <div class="time-box"><b id="hours">--</b><span>HRS</span></div>
+        <div class="time-box"><b id="minutes">--</b><span>MIN</span></div>
+        <div class="time-box"><b id="seconds">--</b><span>SEC</span></div>
+      </div>
 
-    <div id="focusBox" class="focus-box">
-      <div class="tag">TODAY'S FOCUS</div>
-      <h2 id="focusTitle">Start with Speaking</h2>
-      <p id="focusText">Complete one short Task A using PREP structure.</p>
-      <button id="focusBtn" class="neo-btn black">Open Focus Skill</button>
-    </div>
+      <div class="countdown-foot">
+        <span id="speakingLabel">Speaking date: check your MUET/D slip.</span>
+        <a
+          href="https://www.mpm.edu.my/en/muet/muet-timetable"
+          target="_blank"
+          rel="noopener"
+        >
+          Official MPM Timetable ↗
+        </a>
+      </div>
+    </section>
 
-    <div class="section-head"><h2>Skill Modules</h2></div>
-    <div class="module-grid">
-      <button class="module-card m-speaking" onclick="location.href='speaking-guidance.html'">
-        <div class="module-icon">🎤</div><h3>Speaking</h3><p>Guide · PREP</p>
-        <div class="scorebar"><span id="speakingBar"></span></div><small id="speakingScore">No attempt</small>
-      </button>
-      <button class="module-card m-reading" onclick="location.href='reading-guidance.html'">
-        <div class="module-icon">📖</div><h3>Reading</h3><p>Guide · Strategy</p>
-        <div class="scorebar"><span id="readingBar"></span></div><small id="readingScore">No attempt</small>
-      </button>
-      <button class="module-card m-listening" onclick="location.href='listening-guidance.html'">
-        <div class="module-icon">🎧</div><h3>Listening</h3><p>Guide · Keywords</p>
-        <div class="scorebar"><span id="listeningBar"></span></div><small id="listeningScore">No attempt</small>
-      </button>
-      <button class="module-card m-writing" onclick="location.href='writing-guidance.html'">
-        <div class="module-icon">✍️</div><h3>Writing</h3><p>Guide · PEEL</p>
-        <div class="scorebar"><span id="writingBar"></span></div><small id="writingScore">No attempt</small>
-      </button>
-    </div>
+    <section class="readiness-card">
+      <div class="readiness-top">
+        <div>
+          <div class="kicker">🎯 EXAM READINESS</div>
+          <h2>How ready are you today?</h2>
+          <p id="readinessText">Start your journey to build your Exam Readiness score.</p>
+        </div>
 
-    <div class="neo-panel">
-      <div class="section-head no-margin"><h2>Study Vault Journey</h2><span class="mini-badge">PHASE 1</span></div>
-      <p class="sub" style="margin-bottom:10px">Complete all four MUET components in each vault.</p>
-      <div class="cycle-strip" id="cycleStrip"></div>
-      <button class="neo-btn yellow" onclick="location.href='vault.html'" style="margin-top:14px">Open Study Vault →</button>
-    </div>
-  </section>
+        <div class="readiness-ring" id="readinessRing">
+          <span id="readinessScore">0%</span>
+        </div>
+      </div>
 
-  <!-- VAULT -->
-  <section id="vaultScreen" class="screen">
-    <div class="brand-bar dark">
-      <button onclick="MuetNeo.show('homeScreen')" class="hamb">←</button>
-      <div style="flex:1"><div class="brand-small">Guided Practice</div><div class="brand-title">Study Vault</div></div>
-      <img src="assets/heroes/small-muet-logo.svg" alt="" class="brand-logo-img">
-    </div>
-    <div class="asset-hero"><img src="assets/heroes/study-vault-hero.svg" alt="Study Vault"></div>
-    <div class="clean-intro">
-      <h2>How to use the Vault</h2>
-      <p>Start with the first available vault. Complete Speaking, Reading, Listening and Writing before moving forward.</p>
-    </div>
-    <div id="vaultList" class="vault-list"></div>
-  </section>
+      <div class="readiness-bar">
+        <i id="readinessFill"></i>
+      </div>
+    </section>
 
-  <!-- PROGRESS -->
-  <section id="progressScreen" class="screen">
-    <div class="brand-bar dark">
-      <button onclick="MuetNeo.show('homeScreen')" class="hamb">←</button>
-      <div style="flex:1"><div class="brand-small">Analytics</div><div class="brand-title">Progress</div></div>
-      <img src="assets/heroes/small-muet-logo.svg" alt="" class="brand-logo-img">
-    </div>
-    <div class="asset-hero"><img src="assets/heroes/progress-hero.svg" alt="Your MUET progress"></div>
-    <div class="neo-panel"><h2>Component Performance</h2><div id="progressRows"></div></div>
-    <div class="neo-panel"><h2>Completion Badges</h2><div id="badges" class="badge-grid"></div></div>
-  </section>
+    <section class="next-card">
+      <div class="kicker">YOUR NEXT BEST STEP</div>
+      <h2 id="nextTitle">Know Your Exam</h2>
+      <p id="nextText">Start with MUET General Info before moving into component strategies and practice.</p>
+      <a class="next-btn" id="nextBtn" href="intro-guidance.html">CONTINUE →</a>
+    </section>
 
-  <!-- PROFILE -->
-  <section id="profileScreen" class="screen">
-    <div class="brand-bar dark">
-      <button onclick="MuetNeo.show('homeScreen')" class="hamb">←</button>
-      <div style="flex:1"><div class="brand-small">Settings</div><div class="brand-title">Profile</div></div>
-      <img src="assets/heroes/small-muet-logo.svg" alt="" class="brand-logo-img">
-    </div>
-    <div class="asset-hero"><img src="assets/heroes/profile-hero.svg" alt="Smart MUET profile"></div>
+    <section class="journey-card">
+      <h2>Your Exam Ready Journey</h2>
 
-    <div class="neo-panel">
-      <h2>Student Profile</h2>
-      <form id="editForm" class="form">
-        <label>Full Name<input id="editName"></label>
-        <label>Student No.<input id="editRegNo"></label>
-        <label>Class / Group<input id="editGroup"></label>
+      <div class="journey-grid">
+        <a class="journey-item" href="intro-guidance.html">
+          <b>01 · KNOW</b>
+          <span>MUET General Info</span>
+        </a>
 
-        <label>MUET Exam Session
-          <select id="editExamSession">
-            <option value="S1-2026">MUET Session 1 · 2026</option>
-            <option value="S2-2026">MUET Session 2 · 2026</option>
-            <option value="S3-2026">MUET Session 3 · 2026</option>
-          </select>
-        </label>
-        <label>My Speaking Date
-          <input id="editSpeakingDate" type="date">
-        </label>
-        <label>Target Band
-          <select id="editTarget">
-            <option value="3.5">Band 3.5</option><option value="4.0">Band 4.0</option>
-            <option value="4.5">Band 4.5</option><option value="5.0">Band 5.0</option><option value="5+">Band 5+</option>
-          </select>
-        </label>
-        <button class="neo-btn yellow" type="submit">Save Profile</button>
-        <button class="neo-btn pink" type="button" onclick="MuetNeo.resetAll()">Reset App</button>
-      </form>
-    </div>
-  </section>
+        <a class="journey-item" href="guidance.html">
+          <b>02 · LEARN</b>
+          <span>4 Component Guides</span>
+        </a>
 
-  
-  <nav id="nav" class="bottom-nav">
-    <a href="muet-hub.html" class="active">
-      <img src="assets/heroes/nav-home.svg" alt="" class="nav-icon"><span>Home</span>
+        <a class="journey-item" href="vault.html">
+          <b>03 · PRACTISE</b>
+          <span>Vault 1 · Vault 2 · Mock 1</span>
+        </a>
+
+        <a class="journey-item" href="progress.html">
+          <b>04 · TRACK</b>
+          <span>Progress & Readiness</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="official-card">
+      <div class="kicker">OFFICIAL MUET SERVICES</div>
+      <h2>Keep the official source close.</h2>
+      <p>Use MPM for official examination documents, dates and results.</p>
+
+      <div class="official-links">
+        <a href="https://www.mpm.edu.my/en/muet/muet-timetable" target="_blank" rel="noopener">📅 MUET Timetable ↗</a>
+        <a href="https://www.mpm.edu.my/en/muet/registration-slip-muet-d-checking" target="_blank" rel="noopener">🎫 MUET/D Exam Slip ↗</a>
+        <a href="https://mecea.mpm.edu.my/MUETR" target="_blank" rel="noopener">📊 MUET Results ↗</a>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <a class="active" href="muet-hub.html">
+      <img src="assets/heroes/nav-home.svg" alt="">
+      <span>Home</span>
     </a>
+
     <a href="guidance.html">
-      <img src="assets/heroes/icon-muet-intro.svg" alt="" class="nav-icon"><span>Guide</span>
+      <img src="assets/heroes/icon-muet-intro.svg" alt="">
+      <span>Guide</span>
     </a>
+
     <a href="vault.html">
-      <img src="assets/heroes/nav-vault.svg" alt="" class="nav-icon"><span>Vault</span>
+      <img src="assets/heroes/nav-vault.svg" alt="">
+      <span>Vault</span>
     </a>
+
     <a href="progress.html">
-      <img src="assets/heroes/nav-progress.svg" alt="" class="nav-icon"><span>Progress</span>
+      <img src="assets/heroes/nav-progress.svg" alt="">
+      <span>Progress</span>
     </a>
+
     <a href="settings.html">
-      <img src="assets/heroes/nav-profile.svg" alt="" class="nav-icon"><span>Profile</span>
+      <img src="assets/heroes/nav-profile.svg" alt="">
+      <span>Profile</span>
     </a>
   </nav>
 
+  <script>
+    const EXAM_SESSIONS = {
+      "S1-2026":{
+        label:"MUET Session 1 · 2026",
+        target:"2026-04-25T08:00:00+08:00",
+        written:"25 April 2026",
+        speaking:"Speaking date: refer to your MUET/D slip."
+      },
+      "S2-2026":{
+        label:"MUET Session 2 · 2026",
+        target:"2026-06-27T08:00:00+08:00",
+        written:"27 June 2026",
+        speaking:"Speaking date: refer to your MUET/D slip."
+      },
+      "S3-2026":{
+        label:"MUET Session 3 · 2026",
+        target:"2026-10-17T08:00:00+08:00",
+        written:"17 October 2026",
+        speaking:"Speaking window: 6, 7, 8, 12, 13 & 14 October 2026."
+      }
+    };
 
-  <div id="toast" class="toast">Saved</div>
-</main>
-<script src="js/phase1-state.js"></script>
-<script src="js/muet-neopop.js?v=20260816-2"></script>
-<script src="js/phase1-exam-timer.js?v=20260816-1"></script>
+    function loadProfile(){
+      try{
+        return JSON.parse(localStorage.getItem("muet_profile") || "{}");
+      }catch(_){
+        return {};
+      }
+    }
+
+    function getGreeting(){
+      const hour = new Date().getHours();
+      if(hour < 12) return "Good morning";
+      if(hour < 18) return "Good afternoon";
+      return "Good evening";
+    }
+
+    function setProfileUI(){
+      const p = loadProfile();
+      const name = p.name || "MUET Candidate";
+
+      document.getElementById("studentName").textContent = name;
+      document.getElementById("greeting").textContent = `${getGreeting()}, ${name.split(" ")[0]} 👋`;
+
+      const sessionId = p.examSession || "S3-2026";
+      const cfg = EXAM_SESSIONS[sessionId] || EXAM_SESSIONS["S3-2026"];
+
+      document.getElementById("sessionLabel").textContent = cfg.label;
+      document.getElementById("writtenLabel").textContent = `Written test · ${cfg.written}`;
+
+      if(p.speakingDate){
+        const d = new Date(p.speakingDate + "T12:00:00+08:00");
+        document.getElementById("speakingLabel").textContent =
+          `My Speaking date · ${d.toLocaleDateString("en-MY",{day:"numeric",month:"short",year:"numeric"})}`;
+      }else{
+        document.getElementById("speakingLabel").textContent = cfg.speaking;
+      }
+
+      startCountdown(cfg.target);
+      renderReadiness(p);
+    }
+
+    function startCountdown(targetValue){
+      const target = new Date(targetValue).getTime();
+
+      function tick(){
+        let diff = Math.max(0, target - Date.now());
+
+        const days = Math.floor(diff / 86400000);
+        diff %= 86400000;
+
+        const hours = Math.floor(diff / 3600000);
+        diff %= 3600000;
+
+        const minutes = Math.floor(diff / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
+
+        document.getElementById("days").textContent = String(days).padStart(2,"0");
+        document.getElementById("hours").textContent = String(hours).padStart(2,"0");
+        document.getElementById("minutes").textContent = String(minutes).padStart(2,"0");
+        document.getElementById("seconds").textContent = String(seconds).padStart(2,"0");
+      }
+
+      tick();
+      setInterval(tick,1000);
+    }
+
+    function renderReadiness(profile){
+      /*
+        Prototype readiness:
+        Keep simple until Apps Script + real progress data are connected.
+
+        guideStarted = 15
+        profileComplete = 10
+        sessionSelected = 10
+        speakingDate = 5
+        checklist = up to 20
+        practice progress = up to 40
+
+        Later this should be replaced by the real readiness engine.
+      */
+
+      let score = 0;
+
+      if(profile.name && profile.email) score += 10;
+      if(profile.examSession) score += 10;
+      if(profile.targetBand) score += 5;
+      if(profile.speakingDate) score += 5;
+
+      try{
+        const checklist = JSON.parse(localStorage.getItem("muet_exam_checklist") || "{}");
+        const done = Object.values(checklist).filter(Boolean).length;
+        score += Math.min(20, done * 5);
+      }catch(_){}
+
+      try{
+        const sessions = JSON.parse(localStorage.getItem("muet_attempt_log") || "[]");
+        score += Math.min(40, sessions.length * 5);
+      }catch(_){}
+
+      score = Math.min(100, score);
+
+      document.getElementById("readinessScore").textContent = score + "%";
+      document.getElementById("readinessRing").style.setProperty("--score", score);
+      document.getElementById("readinessFill").style.width = score + "%";
+
+      let message = "Start your journey to build your Exam Readiness score.";
+      let nextTitle = "Know Your Exam";
+      let nextText = "Start with MUET General Info before moving into component strategies and practice.";
+      let nextHref = "intro-guidance.html";
+
+      if(score >= 70){
+        message = "You’re building strong readiness. Keep sharpening your weakest component.";
+        nextTitle = "Continue Practice";
+        nextText = "Move into the Study Vault and strengthen the component that needs the most attention.";
+        nextHref = "vault.html";
+      }else if(score >= 35){
+        message = "Good progress. Keep building consistency across all four components.";
+        nextTitle = "Continue Your Guide";
+        nextText = "Review the four component strategies before your next practice attempt.";
+        nextHref = "guidance.html";
+      }
+
+      document.getElementById("readinessText").textContent = message;
+      document.getElementById("nextTitle").textContent = nextTitle;
+      document.getElementById("nextText").textContent = nextText;
+      document.getElementById("nextBtn").href = nextHref;
+    }
+
+    setProfileUI();
+  </script>
 </body>
 </html>
