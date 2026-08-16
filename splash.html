@@ -3,29 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#18C7B5">
+  <meta name="theme-color" content="#ffffff">
   <meta name="description" content="Smart MUET Guide — Your Journey to Exam Ready">
   <title>Smart MUET Guide</title>
 
-  <!-- Existing Smart MUET typography -->
+  <!-- Keep existing Smart MUET typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --ink:#101014;
-      --paper:#FFFAF2;
-      --teal:#18C7B5;
-      --yellow:#FFD23F;
-      --pink:#F56AB4;
-      --blue:#215CF5;
-
-      --line:3px solid var(--ink);
-      --shadow:6px 6px 0 var(--ink);
+      --ink:#111111;
+      --white:#ffffff;
+      --red:#ff2525;
+      --yellow:#ffd31f;
+      --blue:#1f5eff;
+      --teal:#5bd0c8;
+      --muted:#5f6368;
 
       --font-heading:"Sora",sans-serif;
       --font-body:"DM Sans",sans-serif;
+
+      --line:3px solid var(--ink);
+      --shadow:6px 6px 0 var(--ink);
     }
 
     *{
@@ -42,266 +43,267 @@
 
     body{
       font-family:var(--font-body);
-      background:var(--teal);
+      background:var(--white);
       color:var(--ink);
       overflow:hidden;
     }
 
     .splash{
       width:100%;
-      max-width:480px;
       min-height:100vh;
       min-height:100dvh;
-      margin:0 auto;
-      padding:
-        max(18px,env(safe-area-inset-top))
-        max(18px,env(safe-area-inset-right))
-        max(18px,env(safe-area-inset-bottom))
-        max(18px,env(safe-area-inset-left));
-
-      display:grid;
-      place-items:center;
       position:relative;
+      display:grid;
+      grid-template-rows:1fr auto;
       overflow:hidden;
+      background:
+        radial-gradient(circle at 82% 18%, rgba(0,0,0,.09) 1.5px, transparent 1.6px) 0 0/14px 14px,
+        var(--white);
     }
 
-    /* Decorative Neo-Brutalist shapes */
+    /* --- Neo-brutalist decorative shapes --- */
     .shape{
       position:absolute;
       border:var(--line);
-      box-shadow:var(--shadow);
-      pointer-events:none;
       z-index:0;
+      pointer-events:none;
     }
 
-    .shape-pink{
-      width:118px;
-      height:118px;
-      border-radius:50%;
-      background:var(--pink);
-      right:-34px;
-      top:8%;
-      transform:rotate(8deg);
+    .shape-yellow{
+      width:clamp(82px,12vw,150px);
+      height:clamp(118px,17vw,190px);
+      background:var(--yellow);
+      left:-18px;
+      top:-12px;
+      clip-path:polygon(0 0,100% 0,100% 46%,72% 46%,72% 72%,44% 72%,44% 100%,0 100%);
+    }
+
+    .shape-red{
+      width:clamp(112px,16vw,190px);
+      height:clamp(170px,24vw,260px);
+      background:var(--red);
+      left:-18px;
+      bottom:72px;
+      clip-path:polygon(0 0,38% 0,38% 32%,58% 32%,58% 56%,78% 56%,78% 100%,0 100%);
     }
 
     .shape-blue{
-      width:92px;
-      height:92px;
+      width:clamp(28px,4vw,52px);
+      height:clamp(150px,24vh,260px);
       background:var(--blue);
-      left:-46px;
-      bottom:11%;
-      transform:rotate(14deg);
+      right:-8px;
+      top:28%;
     }
 
-    .splash-card{
-      width:100%;
+    .shape-teal{
+      width:clamp(92px,15vw,170px);
+      height:clamp(128px,20vw,220px);
+      background:var(--teal);
+      right:-18px;
+      bottom:72px;
+      clip-path:polygon(62% 0,100% 0,100% 100%,0 100%,0 72%,26% 72%,26% 46%,48% 46%,48% 22%,62% 22%);
+    }
+
+    .content{
       position:relative;
       z-index:2;
-
-      background:var(--paper);
-      border:var(--line);
-      border-radius:28px;
-      box-shadow:9px 9px 0 var(--ink);
-
-      padding:30px 24px 26px;
+      width:min(92vw,720px);
+      margin:auto;
+      padding:
+        max(28px,env(safe-area-inset-top))
+        24px
+        30px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
       text-align:center;
-
-      opacity:0;
-      transform:translateY(18px) scale(.98);
-      animation:cardIn .65s cubic-bezier(.2,.8,.2,1) .18s forwards;
     }
 
-    .logo-box{
-      width:132px;
-      height:132px;
-      margin:0 auto 20px;
-
-      background:white;
-      border:var(--line);
-      border-radius:26px;
-      box-shadow:5px 5px 0 var(--yellow);
-
+    .logo-wrap{
+      width:clamp(92px,13vw,138px);
+      aspect-ratio:1;
       display:grid;
       place-items:center;
-      overflow:hidden;
+      margin-bottom:22px;
 
       opacity:0;
-      transform:scale(.85) rotate(-3deg);
-      animation:logoIn .7s cubic-bezier(.2,.8,.2,1) .55s forwards;
+      transform:translateY(-10px) scale(.94);
+      animation:logoIn .65s cubic-bezier(.2,.8,.2,1) .25s forwards;
     }
 
-    .logo-box img{
+    .logo-wrap img{
       width:100%;
       height:100%;
       object-fit:contain;
       display:block;
     }
 
-    .brand{
-      opacity:0;
-      transform:translateY(10px);
-      animation:textIn .55s ease 1.15s forwards;
-    }
-
-    .brand-kicker{
-      display:inline-block;
-      margin-bottom:11px;
-
-      background:var(--ink);
-      color:white;
-      border:2px solid var(--ink);
-      border-radius:999px;
-
-      padding:6px 10px;
-
-      font-size:10px;
-      font-weight:1000;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-    }
-
-    h1{
+    .title{
       font-family:var(--font-heading);
-      font-size:clamp(32px,9vw,45px);
-      line-height:.96;
-      letter-spacing:-.055em;
       font-weight:800;
+      line-height:.90;
+      letter-spacing:-.055em;
+      text-transform:uppercase;
+
+      opacity:0;
+      transform:translateY(18px);
+      animation:titleIn .65s cubic-bezier(.2,.8,.2,1) .7s forwards;
     }
+
+    .title-line{
+      display:block;
+      font-size:clamp(52px,12vw,122px);
+    }
+
+    .title-line.red{
+      color:var(--red);
+    }
+
+    .divider{
+      margin:24px auto 20px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+
+      opacity:0;
+      animation:fadeIn .45s ease 1.25s forwards;
+    }
+
+    .divider::before,
+    .divider::after{
+      content:"";
+      width:clamp(42px,10vw,86px);
+      height:3px;
+      background:var(--ink);
+    }
+
+    .sq{
+      width:13px;
+      height:13px;
+      border:2px solid var(--ink);
+    }
+
+    .sq.yellow{background:var(--yellow)}
+    .sq.blue{background:var(--blue)}
+    .sq.red{background:var(--red)}
 
     .tagline{
-      display:inline-block;
-      margin-top:13px;
-
-      background:var(--yellow);
-      border:var(--line);
-      border-radius:11px;
-      box-shadow:3px 3px 0 var(--ink);
-
-      padding:8px 11px;
-
       font-family:var(--font-heading);
-      font-size:14px;
+      font-size:clamp(24px,5vw,46px);
       font-weight:800;
-      transform:rotate(-1deg);
+      line-height:1.05;
+      letter-spacing:-.035em;
+      text-transform:uppercase;
+
+      opacity:0;
+      transform:translateY(12px);
+      animation:titleIn .55s ease 1.45s forwards;
+    }
+
+    .tagline strong{
+      color:var(--blue);
     }
 
     .subline{
-      margin:17px auto 0;
-      max-width:330px;
-
-      font-size:12px;
-      font-weight:800;
-      line-height:1.5;
-      color:#4B4D54;
-
-      opacity:0;
-      animation:textIn .5s ease 1.65s forwards;
-    }
-
-    .loading{
-      margin-top:22px;
-
-      display:flex;
-      justify-content:center;
-      gap:8px;
+      margin-top:14px;
+      max-width:560px;
+      color:var(--muted);
+      font-size:clamp(15px,2.2vw,20px);
+      line-height:1.45;
+      font-weight:700;
 
       opacity:0;
-      animation:textIn .4s ease 2s forwards;
+      animation:fadeIn .45s ease 1.85s forwards;
     }
 
-    .dot{
-      width:9px;
-      height:9px;
+    .footer{
+      position:relative;
+      z-index:3;
+      min-height:88px;
+      padding:
+        14px
+        max(20px,env(safe-area-inset-right))
+        max(16px,env(safe-area-inset-bottom))
+        max(20px,env(safe-area-inset-left));
 
       background:var(--ink);
-      border:2px solid var(--ink);
-      border-radius:50%;
+      color:var(--white);
 
-      animation:dotPulse 1.2s infinite ease-in-out;
-    }
-
-    .dot:nth-child(2){
-      background:var(--yellow);
-      animation-delay:.15s;
-    }
-
-    .dot:nth-child(3){
-      background:var(--pink);
-      animation-delay:.30s;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:7px;
     }
 
     .skip-btn{
-      position:absolute;
-      top:max(18px,env(safe-area-inset-top));
-      right:max(18px,env(safe-area-inset-right));
-      z-index:5;
+      min-width:145px;
+      min-height:48px;
+      padding:10px 20px;
 
-      border:var(--line);
-      border-radius:999px;
-      background:white;
-      color:var(--ink);
-      box-shadow:3px 3px 0 var(--ink);
+      background:transparent;
+      color:var(--white);
+      border:2px solid var(--white);
+      border-radius:7px;
 
-      padding:8px 12px;
-
-      font-family:var(--font-body);
-      font-size:11px;
-      font-weight:1000;
+      font-family:var(--font-heading);
+      font-size:18px;
+      font-weight:800;
+      letter-spacing:.01em;
 
       cursor:pointer;
 
       opacity:0;
       pointer-events:none;
+      transform:translateY(6px);
       transition:
-        transform .12s ease,
-        box-shadow .12s ease,
-        opacity .25s ease;
+        opacity .25s ease,
+        transform .25s ease,
+        background .15s ease,
+        color .15s ease;
     }
 
     .skip-btn.show{
       opacity:1;
       pointer-events:auto;
+      transform:translateY(0);
     }
 
-    .skip-btn:active{
-      transform:translate(2px,2px);
-      box-shadow:1px 1px 0 var(--ink);
+    .skip-btn:hover,
+    .skip-btn:focus-visible{
+      background:var(--white);
+      color:var(--ink);
+      outline:none;
+    }
+
+    .skip-note{
+      font-size:13px;
+      color:#d7d7d7;
+      font-weight:600;
     }
 
     .splash.exit{
       animation:splashOut .35s ease forwards;
     }
 
-    @keyframes cardIn{
+    @keyframes logoIn{
       to{
         opacity:1;
         transform:translateY(0) scale(1);
       }
     }
 
-    @keyframes logoIn{
-      to{
-        opacity:1;
-        transform:scale(1) rotate(0);
-      }
-    }
-
-    @keyframes textIn{
+    @keyframes titleIn{
       to{
         opacity:1;
         transform:translateY(0);
       }
     }
 
-    @keyframes dotPulse{
-      0%,100%{
-        transform:translateY(0);
-        opacity:.5;
-      }
-      50%{
-        transform:translateY(-5px);
-        opacity:1;
-      }
+    @keyframes fadeIn{
+      to{opacity:1}
     }
 
     @keyframes splashOut{
@@ -311,18 +313,125 @@
       }
     }
 
-    @media (max-width:360px){
-      .splash-card{
-        padding:26px 19px 22px;
+    /* ===== SMALL PHONE ===== */
+    @media (max-width:380px){
+      .content{
+        width:94vw;
+        padding-inline:16px;
       }
 
-      .logo-box{
-        width:112px;
-        height:112px;
+      .logo-wrap{
+        width:84px;
+        margin-bottom:18px;
       }
 
-      h1{
-        font-size:34px;
+      .title-line{
+        font-size:48px;
+      }
+
+      .tagline{
+        font-size:22px;
+      }
+
+      .subline{
+        font-size:14px;
+      }
+
+      .shape-blue{
+        height:132px;
+      }
+
+      .footer{
+        min-height:82px;
+      }
+    }
+
+    /* ===== LARGE MOBILE / TABLET ===== */
+    @media (min-width:600px){
+      .content{
+        width:min(82vw,760px);
+      }
+
+      .logo-wrap{
+        width:120px;
+        margin-bottom:26px;
+      }
+
+      .footer{
+        min-height:100px;
+      }
+    }
+
+    /* ===== DESKTOP ===== */
+    @media (min-width:1024px){
+      .content{
+        width:min(76vw,900px);
+      }
+
+      .logo-wrap{
+        width:138px;
+      }
+
+      .title-line{
+        font-size:112px;
+      }
+
+      .tagline{
+        font-size:42px;
+      }
+
+      .subline{
+        font-size:18px;
+      }
+
+      .footer{
+        min-height:106px;
+      }
+    }
+
+    /* ===== SHORT LANDSCAPE SCREENS ===== */
+    @media (orientation:landscape) and (max-height:600px){
+      .splash{
+        grid-template-rows:1fr 70px;
+      }
+
+      .content{
+        padding-block:18px;
+      }
+
+      .logo-wrap{
+        width:72px;
+        margin-bottom:10px;
+      }
+
+      .title-line{
+        font-size:clamp(42px,8vw,78px);
+      }
+
+      .divider{
+        margin:12px auto;
+      }
+
+      .tagline{
+        font-size:clamp(18px,3vw,30px);
+      }
+
+      .subline{
+        display:none;
+      }
+
+      .footer{
+        min-height:70px;
+        padding-block:8px;
+      }
+
+      .skip-btn{
+        min-height:40px;
+        font-size:15px;
+      }
+
+      .skip-note{
+        display:none;
       }
     }
 
@@ -332,7 +441,7 @@
       *::after{
         animation-duration:.01ms !important;
         animation-iteration-count:1 !important;
-        scroll-behavior:auto !important;
+        transition:none !important;
       }
     }
   </style>
@@ -341,100 +450,104 @@
 <body>
   <main class="splash" id="splash">
 
-    <div class="shape shape-pink"></div>
-    <div class="shape shape-blue"></div>
+    <!-- decorative blocks -->
+    <div class="shape shape-yellow" aria-hidden="true"></div>
+    <div class="shape shape-red" aria-hidden="true"></div>
+    <div class="shape shape-blue" aria-hidden="true"></div>
+    <div class="shape shape-teal" aria-hidden="true"></div>
 
-    <button
-      class="skip-btn"
-      id="skipBtn"
-      type="button"
-      aria-label="Skip splash screen"
-    >
-      Skip →
-    </button>
+    <section class="content">
 
-    <section class="splash-card" aria-label="Smart MUET Guide splash screen">
-
-      <!-- Real Smart MUET logo from your assets folder -->
-      <div class="logo-box">
+      <!-- Use the SMALL MUET logo from existing assets -->
+      <div class="logo-wrap">
         <img
-          src="assets/heroes/smart-muet-logo.svg"
+          src="assets/heroes/small-muet-logo.svg"
           alt="Smart MUET Guide"
         >
       </div>
 
-      <div class="brand">
-        <div class="brand-kicker">SMART MUET GUIDE</div>
+      <h1 class="title" aria-label="Smart MUET Guide">
+        <span class="title-line">SMART</span>
+        <span class="title-line red">MUET</span>
+        <span class="title-line">GUIDE</span>
+      </h1>
 
-        <h1>
-          Your Journey to
-          <br>
-          Exam Ready.
-        </h1>
-
-        <div class="tagline">
-          Prepare with Purpose.
-        </div>
+      <div class="divider" aria-hidden="true">
+        <span class="sq yellow"></span>
+        <span class="sq blue"></span>
+        <span class="sq red"></span>
       </div>
 
-      <p class="subline">
-        A smarter, more focused journey towards your MUET exam.
+      <p class="tagline">
+        Your Journey to
+        <br>
+        <strong>Exam Ready.</strong>
       </p>
 
-      <div class="loading" aria-hidden="true">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
+      <p class="subline">
+        Prepare with purpose. Build confidence. Walk into MUET ready.
+      </p>
 
     </section>
+
+    <footer class="footer">
+      <button
+        class="skip-btn"
+        id="skipBtn"
+        type="button"
+        aria-label="Skip splash screen"
+      >
+        SKIP →
+      </button>
+
+      <div class="skip-note" id="skipNote">
+        Skip available in 2s
+      </div>
+    </footer>
+
   </main>
 
   <script>
     /*
       SMART MUET SPLASH
       -----------------
-      Duration: 6 seconds
-      Flow: code.html / splash.html → welcome.html
-      Skip button appears after 2 seconds.
-      No tap-anywhere skip.
+      Total duration : 6 seconds
+      Skip available : after 2 seconds
+      Next page      : welcome.html
+      No tap-anywhere skip
     */
 
     const SPLASH_DURATION = 6000;
-    const SKIP_SHOW_DELAY = 2000;
-    const NEXT_PAGE = 'welcome.html';
+    const SKIP_DELAY = 2000;
+    const NEXT_PAGE = "welcome.html";
 
-    const splash = document.getElementById('splash');
-    const skipBtn = document.getElementById('skipBtn');
+    const splash = document.getElementById("splash");
+    const skipBtn = document.getElementById("skipBtn");
+    const skipNote = document.getElementById("skipNote");
 
     let leaving = false;
 
-    function goToWelcome() {
-      if (leaving) return;
+    function goNext(){
+      if(leaving) return;
       leaving = true;
 
-      splash.classList.add('exit');
+      splash.classList.add("exit");
 
       setTimeout(() => {
         window.location.replace(NEXT_PAGE);
       }, 350);
     }
 
-    /* Show Skip after student has seen the brand moment */
+    const autoTimer = setTimeout(goNext, SPLASH_DURATION);
+
     setTimeout(() => {
-      skipBtn.classList.add('show');
-    }, SKIP_SHOW_DELAY);
+      skipBtn.classList.add("show");
+      skipNote.textContent = "Skip anytime";
+    }, SKIP_DELAY);
 
-    /* Automatic transition after 6 seconds */
-    const splashTimer = setTimeout(
-      goToWelcome,
-      SPLASH_DURATION
-    );
-
-    /* Explicit skip only */
-    skipBtn.addEventListener('click', () => {
-      clearTimeout(splashTimer);
-      goToWelcome();
+    skipBtn.addEventListener("click", () => {
+      clearTimeout(autoTimer);
+      goNext();
     });
   </script>
 </body>
