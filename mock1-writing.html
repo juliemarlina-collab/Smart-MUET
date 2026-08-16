@@ -584,6 +584,211 @@ textarea:focus{
     min-height:500px;
   }
 }
+
+.rubric-panel{
+  margin-top:14px;
+  background:#fff;
+  border:var(--line);
+  border-radius:20px;
+  box-shadow:var(--shadow);
+  padding:14px;
+}
+.rubric-panel h2{
+  font-family:var(--fh);
+  font-size:20px;
+}
+.rubric-panel>p{
+  margin-top:5px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.45;
+  font-weight:750;
+}
+.rubric-note{
+  margin-top:9px;
+  border:2px solid var(--ink);
+  border-radius:11px;
+  background:#fff7cc;
+  padding:9px;
+  font-size:10px;
+  line-height:1.42;
+  font-weight:800;
+}
+.score-block{
+  margin-top:10px;
+  border:2px solid var(--ink);
+  border-radius:14px;
+  background:#fafafa;
+  padding:10px;
+}
+.score-block h3{
+  font-family:var(--fh);
+  font-size:14px;
+}
+.score-block small{
+  display:block;
+  margin-top:2px;
+  color:var(--muted);
+  font-size:9px;
+  font-weight:800;
+}
+.criteria-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
+  margin-top:9px;
+}
+.criterion{
+  display:grid;
+  grid-template-columns:1fr 88px;
+  gap:8px;
+  align-items:center;
+  border:2px solid var(--ink);
+  border-radius:10px;
+  background:#fff;
+  padding:8px;
+}
+.criterion b{
+  font-size:11px;
+  line-height:1.3;
+}
+.criterion select{
+  width:100%;
+  min-height:38px;
+  border:2px solid var(--ink);
+  border-radius:8px;
+  background:#fff;
+  padding:5px;
+  font-size:10px;
+  font-weight:900;
+}
+.score-summary{
+  margin-top:10px;
+  border:3px solid var(--ink);
+  border-radius:14px;
+  background:#e7fff5;
+  padding:11px;
+}
+.score-summary .score-big{
+  font-family:var(--fh);
+  font-size:31px;
+  font-weight:800;
+}
+.score-summary p{
+  margin-top:3px;
+  font-size:10px;
+  line-height:1.4;
+  font-weight:800;
+}
+.rubric-toggle{
+  margin-top:10px;
+  width:100%;
+  min-height:44px;
+  border:var(--line);
+  border-radius:10px;
+  background:var(--cyan);
+  box-shadow:3px 3px 0 var(--ink);
+  font-size:10px;
+  font-weight:1000;
+  cursor:pointer;
+}
+.rubric-guide{
+  display:none;
+  margin-top:10px;
+}
+.rubric-guide.show{display:block}
+.rubric-guide details{
+  border:2px solid var(--ink);
+  border-radius:10px;
+  background:#fff;
+  margin-top:6px;
+  overflow:hidden;
+}
+.rubric-guide summary{
+  cursor:pointer;
+  padding:8px;
+  font-size:10px;
+  font-weight:1000;
+  background:#eef4ff;
+}
+.rubric-guide .guide-body{
+  padding:8px;
+  font-size:9px;
+  line-height:1.45;
+  font-weight:700;
+}
+
+
+.mock-eval{display:none;margin-top:10px}.mock-eval.show{display:block}
+.criteria{display:grid;gap:7px;margin-top:8px}
+.criterion{border:2px solid var(--ink);border-radius:11px;background:#fff;padding:9px}
+.criterion-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.criterion b{font-family:var(--fh);font-size:11px}
+.criterion-score{font-family:var(--fh);font-size:22px;font-weight:900}
+.criterion p{margin-top:4px;color:var(--muted);font-size:10px;line-height:1.4;font-weight:750}
+.score-card{margin-top:8px;border:3px solid var(--ink);border-radius:12px;background:#e7fff5;padding:10px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.score-card b{font-family:var(--fh);font-size:12px}.score-card strong{font-family:var(--fh);font-size:28px}
+.coach{margin-top:8px;border:2px solid var(--ink);border-radius:11px;background:#fff7cc;padding:9px;font-size:11px;line-height:1.45;font-weight:800}
+.save-state2{margin-top:8px;border:2px solid var(--ink);border-radius:10px;background:#fff;padding:8px;font-size:10px;font-weight:850}
+
+
+.mock-task{
+  overflow:hidden;
+  background:#fff;
+  border:var(--line);
+  border-radius:19px;
+  box-shadow:var(--shadow);
+  margin-bottom:12px;
+}
+.mock-task-head{
+  width:100%;
+  min-height:76px;
+  border:0;
+  background:#fff3e8;
+  padding:11px;
+  display:grid;
+  grid-template-columns:46px 1fr auto;
+  gap:9px;
+  align-items:center;
+  text-align:left;
+  cursor:pointer;
+}
+.mock-task-num{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border:2px solid var(--ink);
+  border-radius:11px;
+  background:#fff;
+  font-family:var(--fh);
+  font-size:17px;
+  font-weight:800;
+}
+.mock-task-title b{
+  display:block;
+  font-family:var(--fh);
+  font-size:14px;
+}
+.mock-task-title span{
+  display:block;
+  margin-top:3px;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:750;
+}
+.mock-task-plus{
+  font-size:24px;
+  font-weight:1000;
+  transition:.15s;
+}
+.mock-task.open .mock-task-plus{transform:rotate(45deg)}
+.mock-task-body{
+  display:none;
+  border-top:2px solid var(--ink);
+}
+.mock-task.open .mock-task-body{display:block}
+
 </style>
 </head>
 
@@ -649,23 +854,20 @@ textarea:focus{
 </div>
 
 
-<div id="paper" style="pointer-events:none;opacity:.52">
+<div id="paper" style="pointer-events:auto;opacity:1">
 
-<section class="task">
-
-  <header class="task-head">
-    <div class="task-no">1</div>
-
-    <div class="task-meta">
-      <small>TASK 1 · GUIDED WRITING</small>
-      <b>Reply to Sabrina</b>
+<section class="mock-task open" id="writingTask1">
+  <button class="mock-task-head" type="button">
+    <div class="mock-task-num">1</div>
+    <div class="mock-task-title">
+      <b>Task 1 · Guided Writing</b>
+      <span>Email reply · 100+ words</span>
     </div>
+    <div class="mock-task-plus">+</div>
+  </button>
+  <div class="mock-task-body">
+    <div class="task-body">
 
-    <span class="weight">30 MARKS</span>
-  </header>
-
-
-  <div class="task-body">
 
     <span class="time-chip">
       ADVISED TIME · ABOUT 25 MINUTES
@@ -753,35 +955,33 @@ textarea:focus{
         Autosave ready
       </div>
 
-      <button class="complete-btn" id="complete1">
-        COMPLETE TASK 1 →
+      <button class="complete-btn" id="readyTask1">
+        MARK TASK 1 READY →
       </button>
 
-      <div class="task-result" id="result1"></div>
+      <div class="task-result" id="readyMsg1"></div>
 
     </div>
 
+  
+    </div>
   </div>
-
 </section>
 
 
 
-<section class="task">
-
-  <header class="task-head">
-    <div class="task-no">2</div>
-
-    <div class="task-meta">
-      <small>TASK 2 · EXTENDED WRITING</small>
-      <b>Opinion Essay</b>
+<section class="mock-task " id="writingTask2">
+  <button class="mock-task-head" type="button">
+    <div class="mock-task-num">2</div>
+    <div class="mock-task-title">
+      <b>Task 2 · Extended Writing</b>
+      <span>Opinion essay · 250+ words</span>
     </div>
+    <div class="mock-task-plus">+</div>
+  </button>
+  <div class="mock-task-body">
+    <div class="task-body">
 
-    <span class="weight">60 MARKS</span>
-  </header>
-
-
-  <div class="task-body">
 
     <span class="time-chip">
       ADVISED TIME · ABOUT 50 MINUTES
@@ -822,22 +1022,24 @@ textarea:focus{
         Autosave ready
       </div>
 
-      <button class="complete-btn" id="complete2">
-        COMPLETE TASK 2 →
+      <button class="complete-btn" id="readyTask2">
+        MARK TASK 2 READY →
       </button>
 
-      <div class="task-result" id="result2"></div>
+      <div class="task-result" id="readyMsg2"></div>
 
     </div>
 
+  
+    </div>
   </div>
-
 </section>
+
 
 
 <section class="final">
 
-  <h2>Finish Mock Practice 1 Writing</h2>
+  <h2>Submit Mock Practice 1 Writing</h2>
 
   <p>
     This mock does not automatically grade the quality of your writing.
@@ -845,10 +1047,10 @@ textarea:focus{
   </p>
 
   <button id="finishMock">
-    SAVE MOCK WRITING COMPLETION →
+    SUBMIT & EVALUATE WRITING →
   </button>
 
-  <div class="final-result" id="finalResult"></div>
+  <div class="mock-eval" id="finalResult"></div>
 
 </section>
 
@@ -887,294 +1089,75 @@ textarea:focus{
 </nav>
 
 
+<script src="js/backend-config.js"></script>
 <script>
 
-const task1 = document.getElementById("task1Text");
-const task2 = document.getElementById("task2Text");
-
-const KEY1 = "muet_mock1_writing_task1_text";
-const KEY2 = "muet_mock1_writing_task2_text";
-
-let started = false;
-let remaining = 75 * 60;
-let timerId = null;
-
-let done1 = false;
-let done2 = false;
-
-
-function wordCount(text){
-  const cleaned = text.trim();
-
-  if(!cleaned) return 0;
-
-  return cleaned
-    .split(/\s+/)
-    .filter(Boolean)
-    .length;
-}
-
-
-function updateWordCounts(){
-
-  const w1 = wordCount(task1.value);
-  const w2 = wordCount(task2.value);
-
-  const c1 = document.getElementById("count1");
-  const c2 = document.getElementById("count2");
-
-  c1.textContent = w1 + " / 100 words";
-  c2.textContent = w2 + " / 250 words";
-
-  c1.classList.toggle("ok", w1 >= 100);
-  c2.classList.toggle("ok", w2 >= 250);
-
-  document.getElementById("progress1")
-    .classList.toggle("done", w1 >= 100);
-
-  document.getElementById("progress2")
-    .classList.toggle("done", w2 >= 250);
-
-  return {w1,w2};
-}
-
-
-function saveDraft(which){
-
-  if(which === 1){
-    localStorage.setItem(KEY1, task1.value);
-
-    document.getElementById("save1").textContent =
-      "Saved locally ✓";
-  }
-
-  if(which === 2){
-    localStorage.setItem(KEY2, task2.value);
-
-    document.getElementById("save2").textContent =
-      "Saved locally ✓";
-  }
-}
-
-
-let saveTimer1 = null;
-let saveTimer2 = null;
-
-
-task1.addEventListener("input",()=>{
-
-  updateWordCounts();
-
-  document.getElementById("save1").textContent =
-    "Saving...";
-
-  clearTimeout(saveTimer1);
-
-  saveTimer1 = setTimeout(()=>{
-    saveDraft(1);
-  },450);
-
-});
-
-
-task2.addEventListener("input",()=>{
-
-  updateWordCounts();
-
-  document.getElementById("save2").textContent =
-    "Saving...";
-
-  clearTimeout(saveTimer2);
-
-  saveTimer2 = setTimeout(()=>{
-    saveDraft(2);
-  },450);
-
-});
-
-
-function drawTimer(){
-
-  const m = Math.floor(remaining / 60);
-  const s = remaining % 60;
-
-  document.getElementById("timer").textContent =
-    String(m).padStart(2,"0") +
-    ":" +
-    String(s).padStart(2,"0");
-}
-
-
-document.getElementById("startExam")
-.addEventListener("click",()=>{
-
-  if(started) return;
-
-  started = true;
-
-  document.getElementById("paper").style.pointerEvents = "auto";
-  document.getElementById("paper").style.opacity = "1";
-
-  document.getElementById("startExam").textContent =
-    "MOCK IN PROGRESS";
-
-  timerId = setInterval(()=>{
-
-    remaining--;
-
-    drawTimer();
-
-    if(remaining <= 0){
-
-      clearInterval(timerId);
-
-      document.getElementById("finalResult")
-        .classList.add("show");
-
-      document.getElementById("finalResult")
-        .innerHTML =
-        "<b>Time has ended.</b><br>Your drafts remain saved on this device. Complete the final submission when ready.";
-
+document.querySelectorAll(".mock-task-head").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const current=btn.closest(".mock-task");
+    document.querySelectorAll(".mock-task").forEach(task=>{
+      if(task!==current) task.classList.remove("open");
+    });
+    current.classList.toggle("open");
+    if(current.classList.contains("open")){
+      setTimeout(()=>current.scrollIntoView({behavior:"smooth",block:"start"}),60);
     }
-
-  },1000);
-
+  });
 });
 
+const task1=document.getElementById("task1Text");
+const task2=document.getElementById("task2Text");
+const KEY1="muet_mock1_writing_task1_text";
+const KEY2="muet_mock1_writing_task2_text";
+let started=false,remaining=75*60,timerId=null,ready1=false,ready2=false;
 
-document.getElementById("complete1")
-.addEventListener("click",()=>{
+function wc(text){const v=(text||"").trim();return v?v.split(/\s+/).filter(Boolean).length:0}
+function drawTimer(){const m=Math.floor(remaining/60),s=remaining%60;document.getElementById("timer").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}
+function updateCounts(){const w1=wc(task1.value),w2=wc(task2.value);const c1=document.getElementById("count1"),c2=document.getElementById("count2");c1.textContent=w1+" / 100 words";c2.textContent=w2+" / 250 words";c1.classList.toggle("ok",w1>=100);c2.classList.toggle("ok",w2>=250);document.getElementById("progress1").classList.toggle("done",w1>=100);document.getElementById("progress2").classList.toggle("done",w2>=250);return{w1,w2}}
+function saveDraft(which){if(which===1){localStorage.setItem(KEY1,task1.value);document.getElementById("save1").textContent="Saved locally ✓"}else{localStorage.setItem(KEY2,task2.value);document.getElementById("save2").textContent="Saved locally ✓"}}
+let st1=null,st2=null;
+task1.addEventListener("input",()=>{updateCounts();document.getElementById("save1").textContent="Saving...";clearTimeout(st1);st1=setTimeout(()=>saveDraft(1),350)});
+task2.addEventListener("input",()=>{updateCounts();document.getElementById("save2").textContent="Saving...";clearTimeout(st2);st2=setTimeout(()=>saveDraft(2),350)});
 
-  const words = wordCount(task1.value);
+document.getElementById("startExam").onclick=()=>{if(started)return;started=true;document.getElementById("paper").style.pointerEvents="auto";document.getElementById("paper").style.opacity="1";document.getElementById("startExam").textContent="TIMER RUNNING";timerId=setInterval(()=>{remaining--;drawTimer();if(remaining<=0){clearInterval(timerId);timerId=null;alert("Writing time has ended. Your drafts remain available for final submission.")}},1000)};
 
-  const box =
-    document.getElementById("result1");
+document.getElementById("readyTask1").onclick=()=>{const n=wc(task1.value);if(n<50){alert("Develop Task 1 further before marking it ready.");return}ready1=true;const b=document.getElementById("readyMsg1");b.classList.add("show");b.innerHTML=`<b>Task 1 ready ✓</b><br>${n} words. No rubric feedback will be shown until final submission.`;document.getElementById("writingTask1").classList.remove("open");document.getElementById("writingTask2").classList.add("open");setTimeout(()=>document.getElementById("writingTask2").scrollIntoView({behavior:"smooth",block:"start"}),80)};
+document.getElementById("readyTask2").onclick=()=>{const n=wc(task2.value);if(n<100){alert("Develop Task 2 further before marking it ready.");return}ready2=true;const b=document.getElementById("readyMsg2");b.classList.add("show");b.innerHTML=`<b>Task 2 ready ✓</b><br>${n} words. No rubric feedback will be shown until final submission.`};
 
-  box.classList.add("show");
+function evaluateWriting(text,task){
+ const lower=text.toLowerCase(),words=wc(text),paras=text.split(/\n\s*\n|\n/).filter(p=>p.trim().length>20).length,connectors=(lower.match(/\b(firstly|secondly|however|therefore|moreover|furthermore|in addition|on the other hand|because|although|for example|for instance|as a result|consequently|in conclusion)\b/g)||[]).length,sents=Math.max(1,(text.match(/[.!?]+/g)||[]).length),avg=words/sents,wl=lower.match(/\b[a-z]{4,}\b/g)||[],uniq=wl.length?new Set(wl).size/wl.length:0;
+ let tf=1;
+ if(task===1){
+   const groups=[['great','happy','glad'],['sorry','cannot','unable','take part','join'],['agree','environment','plastic'],['family','friends','bring','tell']];
+   const hits=groups.filter(g=>g.some(k=>lower.includes(k))).length;
+   tf=hits===4?(words>=100?5:4):hits===3?4:hits===2?3:hits===1?2:1;if(hits===4&&words>=130)tf=6;
+ }else{
+   const stand=/\b(i agree|i disagree|in my opinion|i believe|i strongly|i partially|although|while some)\b/i.test(text),support=(lower.match(/\b(for example|for instance|because|therefore|as a result|this shows|this means)\b/g)||[]).length;
+   tf=stand?3:2;if(stand&&support>=2)tf=4;if(stand&&support>=3&&words>=250)tf=5;if(stand&&support>=4&&words>=300)tf=6;
+ }
+ let co=1;if(paras>=2)co=3;if(paras>=3&&connectors>=2)co=4;if(paras>=4&&connectors>=4)co=5;if(paras>=5&&connectors>=6)co=6;
+ let lg=2;if(avg>=8&&avg<=30)lg=3;if(uniq>=.48&&words>=(task===1?80:200))lg=4;if(uniq>=.55&&words>=(task===1?100:250)&&connectors>=3)lg=5;if(uniq>=.62&&words>=(task===1?130:300)&&connectors>=5)lg=6;
+ let rs=null;if(task===2){const informal=(lower.match(/\b(gonna|wanna|kinda|lol|btw|yeah|stuff|u|ur)\b/g)||[]).length;rs=informal>=4?2:informal>=2?3:4;if(informal===0&&words>=250)rs=5;if(informal===0&&words>=300&&connectors>=4)rs=6}
+ const raw=task===1?tf+co+lg:tf+co+lg+rs,rawMax=task===1?18:24,scaledMax=task===1?30:60,scaled=Math.round(raw/rawMax*scaledMax);
+ const strength=tf>=5?"Strong task coverage and development.":co>=4?"Your response is generally organised and connected.":"You completed a substantial writing response.";
+ const focus=tf<4?"Address every required content point more explicitly.":co<4?"Improve paragraph progression and linking.":lg<4?"Improve grammatical control and vocabulary range.":task===2&&rs<4?"Keep the register consistently formal.":"Refine precision, development and language control.";
+ return{tf,co,lg,rs,raw,rawMax,scaled,scaledMax,words,strength,focus}
+}
+async function saveAttempt(payload){localStorage.setItem("muet_mock1_writing_task"+payload.taskNumber,JSON.stringify(payload));if(typeof window.saveSmartMuetAttempt==="function"){try{window.saveSmartMuetAttempt(payload)}catch(e){}}const endpoint=window.SMART_MUET_APPS_SCRIPT_URL||window.SMART_MUET_BACKEND_URL||window.MUET_BACKEND_URL||"";if(!endpoint)return{ok:false,message:"Saved locally · cloud endpoint not configured"};try{const r=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"saveWritingAttempt",...payload})});return await r.json()}catch(e){return{ok:false,message:"Saved locally · cloud save pending"}}}
+function section(name,e,task){const rows=[["Task Fulfilment",e.tf],["Organisation & Coherence",e.co],["Language",e.lg]].concat(task===2?[["Register & Style",e.rs]]:[]);return `<div class="score-block"><h3>${name}</h3><div class="criteria">${rows.map(r=>`<div class="criterion"><div class="criterion-top"><b>${r[0]}</b><span class="criterion-score">${r[1]}/6</span></div><p>Rubric-aligned practice estimate based on the submitted response.</p></div>`).join("")}</div><div class="coach"><b>💪 Strength:</b> ${e.strength}<br><br><b>🎯 Focus:</b> ${e.focus}</div></div>`}
 
-  if(words >= 100){
+document.getElementById("finishMock").onclick=async()=>{
+ if(!ready1||!ready2){alert("Mark both Task 1 and Task 2 ready before final submission.");return}
+ const e1=evaluateWriting(task1.value,1),e2=evaluateWriting(task2.value,2),profile=(()=>{try{return JSON.parse(localStorage.getItem("smartMuetProfile")||"{}")}catch(e){return{}}})();
+ const p1={vaultId:"MOCK-01",component:"Writing",taskNumber:1,taskType:"Task 1",questionId:"sabrina_plastic_bags",questionText:"Reply to Sabrina about the neighbourhood programme to reduce plastic bags.",studentName:profile.name||"",studentRegNo:profile.regNo||"",classGroup:profile.group||"",answerText:task1.value.trim(),wordCount:e1.words,rubric:{taskFulfilment:e1.tf,organisationCoherence:e1.co,language:e1.lg,registerStyle:null},rawScore:e1.raw,rawMax:e1.rawMax,scaledScore:e1.scaled,scaledMax:30,status:"Mock rubric-aligned practice evaluation",createdAt:new Date().toISOString()};
+ const p2={vaultId:"MOCK-01",component:"Writing",taskNumber:2,taskType:"Task 2",questionId:"modernisation_peace_of_mind",questionText:"Modernisation has robbed us of our peace of mind.",studentName:profile.name||"",studentRegNo:profile.regNo||"",classGroup:profile.group||"",answerText:task2.value.trim(),wordCount:e2.words,rubric:{taskFulfilment:e2.tf,organisationCoherence:e2.co,language:e2.lg,registerStyle:e2.rs},rawScore:e2.raw,rawMax:e2.rawMax,scaledScore:e2.scaled,scaledMax:60,status:"Mock rubric-aligned practice evaluation",createdAt:new Date().toISOString()};
+ const [s1,s2]=await Promise.all([saveAttempt(p1),saveAttempt(p2)]);
+ const total=e1.scaled+e2.scaled;
+ const box=document.getElementById("finalResult");box.classList.add("show");box.innerHTML=section("Task 1 · Guided Writing",e1,1)+section("Task 2 · Extended Writing",e2,2)+`<div class="score-card"><div><b>Mock 1 Writing Practice Score</b><br><small>Task 1 ${e1.scaled}/30 · Task 2 ${e2.scaled}/60</small></div><strong>${total}/90</strong></div><div class="save-state2">${s1.ok&&s2.ok?"☁️ Both writing attempts saved to Google Sheet":"💾 Mock saved locally; cloud save may still be pending"}</div>`;
+ localStorage.setItem("muet_mock1_writing","true");localStorage.setItem("muet_mock1_writing_score90",String(total));if(timerId){clearInterval(timerId);timerId=null}
+};
 
-    done1 = true;
-
-    saveDraft(1);
-
-    box.innerHTML =
-      "<b>Task 1 completed ✓</b><br>" +
-      words +
-      " words written.";
-
-  }else{
-
-    done1 = false;
-
-    box.innerHTML =
-      "<b>Task 1 is below the required length.</b><br>" +
-      words +
-      " words written. Minimum: 100 words.";
-
-  }
-
-});
-
-
-document.getElementById("complete2")
-.addEventListener("click",()=>{
-
-  const words = wordCount(task2.value);
-
-  const box =
-    document.getElementById("result2");
-
-  box.classList.add("show");
-
-  if(words >= 250){
-
-    done2 = true;
-
-    saveDraft(2);
-
-    box.innerHTML =
-      "<b>Task 2 completed ✓</b><br>" +
-      words +
-      " words written.";
-
-  }else{
-
-    done2 = false;
-
-    box.innerHTML =
-      "<b>Task 2 is below the required length.</b><br>" +
-      words +
-      " words written. Minimum: 250 words.";
-
-  }
-
-});
-
-
-document.getElementById("finishMock")
-.addEventListener("click",()=>{
-
-  const counts = updateWordCounts();
-
-  done1 = counts.w1 >= 100;
-  done2 = counts.w2 >= 250;
-
-  const box =
-    document.getElementById("finalResult");
-
-  box.classList.add("show");
-
-  if(done1 && done2){
-
-    clearInterval(timerId);
-
-    localStorage.setItem(
-      "muet_mock1_writing",
-      "true"
-    );
-
-    localStorage.setItem(
-      "muet_mock1_writing_task1_words",
-      String(counts.w1)
-    );
-
-    localStorage.setItem(
-      "muet_mock1_writing_task2_words",
-      String(counts.w2)
-    );
-
-    saveDraft(1);
-    saveDraft(2);
-
-    box.innerHTML =
-      "<b>Mock Practice 1 Writing completed ✓</b><br>" +
-      "Task 1: " + counts.w1 + " words · " +
-      "Task 2: " + counts.w2 + " words<br>" +
-      "Time remaining: " +
-      document.getElementById("timer").textContent;
-
-  }else{
-
-    box.innerHTML =
-      "<b>Both tasks must meet the minimum word requirement.</b><br>" +
-      "Task 1: " + counts.w1 + "/100 · " +
-      "Task 2: " + counts.w2 + "/250";
-
-  }
-
-});
-
-
-task1.value =
-  localStorage.getItem(KEY1) || "";
-
-task2.value =
-  localStorage.getItem(KEY2) || "";
-
-updateWordCounts();
-drawTimer();
-
+task1.value=localStorage.getItem(KEY1)||"";task2.value=localStorage.getItem(KEY2)||"";updateCounts();drawTimer();
 </script>
 
 </body>
