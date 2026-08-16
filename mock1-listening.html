@@ -16,7 +16,7 @@
 .hero{background:#fff;border:var(--line);border-radius:22px;box-shadow:var(--shadow);padding:18px;margin-bottom:14px}.hero .tag{display:inline-block;background:var(--ink);color:#fff;border-radius:999px;padding:6px 9px;font-size:9px;font-weight:1000}.hero h1{font-family:var(--fh);font-size:clamp(34px,9vw,48px);line-height:.98;letter-spacing:-.04em;margin-top:9px}.hero h1 span{color:#d89b00;display:block}.hero p{margin-top:9px;font-size:14px;line-height:1.45;font-weight:700;color:#40454c}
 .exambar{background:var(--ink);color:#fff;border:var(--line);border-radius:18px;box-shadow:var(--shadow);padding:13px;margin-bottom:14px}.examrow{display:flex;align-items:center;justify-content:space-between;gap:12px}.exambar h2{font-family:var(--fh);font-size:16px}.exambar p{color:#ddd;font-size:10px;line-height:1.4;font-weight:700;margin-top:4px}.timer{font-family:var(--fh);font-size:30px;font-weight:800;white-space:nowrap}.startbtn{width:100%;min-height:48px;margin-top:10px;border:2px solid #fff;border-radius:11px;background:var(--gold);color:#111;font-size:11px;font-weight:1000;cursor:pointer}
 .progress{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:14px}.pstep{height:7px;border:2px solid var(--ink);border-radius:999px;background:#fff}.pstep.on{background:var(--lime)}
-.part{display:none;background:#fff;border:var(--line);border-radius:20px;box-shadow:var(--shadow);padding:13px;margin-bottom:14px}.part.active{display:block}.part-head{display:flex;align-items:start;justify-content:space-between;gap:10px;padding-bottom:10px;border-bottom:2px solid var(--ink)}.part-label{font-size:9px;font-weight:1000;color:var(--muted);letter-spacing:.08em}.part-head h2{font-family:var(--fh);font-size:18px;margin-top:2px}.part-head p{font-size:10px;font-weight:800;color:var(--muted);margin-top:3px}.status{border:2px solid var(--ink);border-radius:999px;background:var(--gold);padding:4px 7px;font-size:8px;font-weight:1000}
+.part{display:block;background:#fff;border:var(--line);border-radius:20px;box-shadow:var(--shadow);padding:13px;margin-bottom:14px}.part.active{display:block}.part-head{display:flex;align-items:start;justify-content:space-between;gap:10px;padding-bottom:10px;border-bottom:2px solid var(--ink)}.part-label{font-size:9px;font-weight:1000;color:var(--muted);letter-spacing:.08em}.part-head h2{font-family:var(--fh);font-size:18px;margin-top:2px}.part-head p{font-size:10px;font-weight:800;color:var(--muted);margin-top:3px}.status{border:2px solid var(--ink);border-radius:999px;background:var(--gold);padding:4px 7px;font-size:8px;font-weight:1000}
 .audio-wrap{display:grid;gap:8px;margin-top:10px}.audio-card{border:2px solid var(--ink);border-radius:12px;background:#111;padding:8px;color:#fff}.audio-title{font-family:var(--fh);font-size:11px;margin-bottom:6px}.audio-card iframe{width:100%;height:82px;border:2px solid #fff;border-radius:9px;background:#fff}
 .qcard{border:2px solid var(--ink);border-radius:14px;background:#fafafa;padding:11px;margin-top:9px}.qtag{display:inline-block;border:2px solid var(--ink);border-radius:999px;background:var(--gold);padding:4px 7px;font-size:9px;font-weight:1000}.stem{font-size:13px;line-height:1.4;font-weight:900;margin:8px 0}.opts{display:grid;gap:6px}.opt{display:grid;grid-template-columns:20px 1fr;gap:7px;align-items:start;border:2px solid var(--ink);border-radius:10px;background:#fff;padding:9px;font-size:12px;line-height:1.35;font-weight:750}.opt input{margin-top:2px}.opt.correct{background:#dcfce7;border-color:#16803c}.opt.wrong{background:#ffe4e6;border-color:#d92d20}.q7map{display:block;width:100%;max-height:430px;object-fit:contain;border:2px solid var(--ink);border-radius:10px;background:#fff;margin:8px 0}
 .part-nav{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.navbtn{min-height:46px;border:var(--line);border-radius:11px;background:var(--gold);box-shadow:3px 3px 0 var(--ink);font-size:10px;font-weight:1000;cursor:pointer}.navbtn.ghost{background:#fff}.part-nav>span{display:block}
@@ -24,25 +24,80 @@
 .locked-note{display:block;background:#fff7cc;border:2px solid var(--ink);border-radius:12px;padding:9px;margin-bottom:12px;font-size:11px;font-weight:800}
 .nav{position:fixed;left:50%;transform:translateX(-50%);bottom:10px;width:calc(100% - 20px);max-width:560px;z-index:70;display:grid;grid-template-columns:repeat(5,1fr);background:#fff;border:var(--line);border-radius:18px;box-shadow:5px 5px 0 var(--ink);padding:6px}.nav a{min-height:58px;display:grid;place-items:center;align-content:center;gap:3px;border-radius:10px;font-size:9px;font-weight:1000}.nav a.active{background:var(--gold);border:2px solid var(--ink)}.nav img{width:26px;height:26px}
 @media(min-width:700px){.app{max-width:850px;padding:24px 24px 120px}.nav{max-width:810px}}
-</style>
-</head>
-<body>
-<main class="app">
-<header class="top"><div class="brand"><img src="assets/heroes/small-muet-logo.svg" alt=""><div><small>MOCK 1 · 800/1 · LISTENING</small><b>Session 1 · 2022</b></div></div><a class="back" href="mock1.html">← Mock 1</a></header>
 
-<section class="hero"><span class="tag">EXAM MODE · NO TECHNIQUE PROMPTS</span><h1>Listen twice.<span>Answer under time.</span></h1><p>Complete all five Parts in 50 minutes. Your score and correct answers appear only after final submission.</p></section>
+/* ===== Listening Part accordion — aligned with Mock Reading ===== */
+.listen-part{
+  overflow:hidden;
+  background:#fff;
+  border:var(--line);
+  border-radius:19px;
+  box-shadow:var(--shadow);
+  margin-bottom:11px;
+}
+.listen-part-head{
+  width:100%;
+  min-height:76px;
+  border:0;
+  background:#eef4ff;
+  padding:11px;
+  display:grid;
+  grid-template-columns:48px 1fr auto;
+  gap:9px;
+  align-items:center;
+  text-align:left;
+  cursor:pointer;
+}
+.listen-part-no{
+  width:46px;height:46px;
+  display:grid;place-items:center;
+  border:2px solid var(--ink);
+  border-radius:12px;
+  background:#fff;
+  font-family:var(--fh);
+  font-size:18px;font-weight:800;
+}
+.listen-part-meta small{
+  display:block;
+  font-size:9px;
+  color:var(--muted);
+  font-weight:900;
+  letter-spacing:.05em;
+}
+.listen-part-meta b{
+  display:block;
+  margin-top:3px;
+  font-family:var(--fh);
+  font-size:14px;
+  line-height:1.24;
+}
+.listen-part-plus{
+  font-size:25px;
+  font-weight:1000;
+  transition:.15s;
+}
+.listen-part.open .listen-part-plus{transform:rotate(45deg)}
+.listen-part-body{
+  display:none;
+  border-top:2px solid var(--ink);
+}
+.listen-part.open .listen-part-body{display:block}
 
-<section class="exambar">
-<div class="examrow"><div><h2>Listening Paper 800/1</h2><p>5 Parts · 30 questions · Session 1 2022</p></div><div class="timer" id="timer">50:00</div></div>
-<button class="startbtn" id="startExam">START MOCK LISTENING</button>
-</section>
-
-<div class="progress"><div class="pstep on" id="pstep-1"></div><div class="pstep " id="pstep-2"></div><div class="pstep " id="pstep-3"></div><div class="pstep " id="pstep-4"></div><div class="pstep " id="pstep-5"></div></div>
-<div class="locked-note" id="lockedNote">Start the mock timer before answering. Once started, complete the paper in one sitting where possible.</div>
-
-<div id="paper" style="pointer-events:none;opacity:.55">
-
-    <section class="part active" id="part-1">
+/* Neutralise older screen-style hiding. */
+.listen-part .part{
+  display:block!important;
+  margin:0;
+  border:0;
+  box-shadow:<section class="listen-part open" id="listen-accordion-1">
+  <button class="listen-part-head" type="button">
+    <div class="listen-part-no">1</div>
+    <div class="listen-part-meta">
+      <small>Questions 1–7</small>
+      <b>Conversation · Lily & Shafiq</b>
+    </div>
+    <div class="listen-part-plus">+</div>
+  </button>
+  <div class="listen-part-body">
+<section class="part" id="part-1">
       <div class="part-head">
         <div><span class="part-label">Part I</span><h2>Conversation · Lily & Shafiq</h2><p>Questions 1–7</p></div>
         <span class="status" id="status-1">CURRENT</span>
@@ -114,10 +169,22 @@
         <button class='navbtn next' data-target='2'>NEXT PART →</button>
       </div>
     </section>
-    <section class="part " id="part-2">
+  </div>
+</section>
+<section class="listen-part " id="listen-accordion-2">
+  <button class="listen-part-head" type="button">
+    <div class="listen-part-no">2</div>
+    <div class="listen-part-meta">
+      <small>Questions 8–14</small>
+      <b>Talk · Students Working Part-time</b>
+    </div>
+    <div class="listen-part-plus">+</div>
+  </button>
+  <div class="listen-part-body">
+<section class="part " id="part-2">
       <div class="part-head">
         <div><span class="part-label">Part II</span><h2>Talk · Students Working Part-time</h2><p>Questions 8–14</p></div>
-        <span class="status" id="status-2">LOCKED</span>
+        <span class="status" id="status-2">READY</span>
       </div>
       <div class="audio-wrap">
       <div class="audio-card">
@@ -186,10 +253,22 @@
         <button class='navbtn next' data-target='3'>NEXT PART →</button>
       </div>
     </section>
-    <section class="part " id="part-3">
+  </div>
+</section>
+<section class="listen-part " id="listen-accordion-3">
+  <button class="listen-part-head" type="button">
+    <div class="listen-part-no">3</div>
+    <div class="listen-part-meta">
+      <small>Questions 15–17</small>
+      <b>Three Speakers · Weekend Activities</b>
+    </div>
+    <div class="listen-part-plus">+</div>
+  </button>
+  <div class="listen-part-body">
+<section class="part " id="part-3">
       <div class="part-head">
         <div><span class="part-label">Part III</span><h2>Three Speakers · Weekend Activities</h2><p>Questions 15–17</p></div>
-        <span class="status" id="status-3">LOCKED</span>
+        <span class="status" id="status-3">READY</span>
       </div>
       <div class="audio-wrap">
       <div class="audio-card">
@@ -226,10 +305,22 @@
         <button class='navbtn next' data-target='4'>NEXT PART →</button>
       </div>
     </section>
-    <section class="part " id="part-4">
+  </div>
+</section>
+<section class="listen-part " id="listen-accordion-4">
+  <button class="listen-part-head" type="button">
+    <div class="listen-part-no">4</div>
+    <div class="listen-part-meta">
+      <small>Questions 18–24</small>
+      <b>Radio Interview · Indoor Gardening</b>
+    </div>
+    <div class="listen-part-plus">+</div>
+  </button>
+  <div class="listen-part-body">
+<section class="part " id="part-4">
       <div class="part-head">
         <div><span class="part-label">Part IV</span><h2>Radio Interview · Indoor Gardening</h2><p>Questions 18–24</p></div>
-        <span class="status" id="status-4">LOCKED</span>
+        <span class="status" id="status-4">READY</span>
       </div>
       <div class="audio-wrap">
       <div class="audio-card">
@@ -298,10 +389,22 @@
         <button class='navbtn next' data-target='5'>NEXT PART →</button>
       </div>
     </section>
-    <section class="part " id="part-5">
+  </div>
+</section>
+<section class="listen-part " id="listen-accordion-5">
+  <button class="listen-part-head" type="button">
+    <div class="listen-part-no">5</div>
+    <div class="listen-part-meta">
+      <small>Questions 25–30</small>
+      <b>Three Dialogues</b>
+    </div>
+    <div class="listen-part-plus">+</div>
+  </button>
+  <div class="listen-part-body">
+<section class="part " id="part-5">
       <div class="part-head">
         <div><span class="part-label">Part V</span><h2>Three Dialogues</h2><p>Questions 25–30</p></div>
-        <span class="status" id="status-5">LOCKED</span>
+        <span class="status" id="status-5">READY</span>
       </div>
       <div class="audio-wrap">
       <div class="audio-card">
@@ -370,19 +473,64 @@
         <button class='navbtn finish-open' id='finishOpen'>REVIEW & SUBMIT →</button>
       </div>
     </section>
+  </div>
+</section>
+>The main reason Madam Rajeswari rejected Diana's proposal was because</p>
+      
+      <div class="opts">
+        <label class="opt" id="opt-28-0"><input type="radio" name="q28" value="0"><span>A. the project was costly</span></label><label class="opt" id="opt-28-1"><input type="radio" name="q28" value="1"><span>B. there were mistakes in it</span></label><label class="opt" id="opt-28-2"><input type="radio" name="q28" value="2"><span>C. it was not submitted on time</span></label>
+      </div>
+    </div>
+    <div class="qcard">
+      <span class="qtag">Q30</span>
+      <p class="stem">Weather-bond paint is not suitable for their project because it</p>
+      
+      <div class="opts">
+        <label class="opt" id="opt-29-0"><input type="radio" name="q29" value="0"><span>A. can easily be washed off by heavy rain</span></label><label class="opt" id="opt-29-1"><input type="radio" name="q29" value="1"><span>B. has to be painted in several layers to last longer</span></label><label class="opt" id="opt-29-2"><input type="radio" name="q29" value="2"><span>C. can only be used on vertical walls and not the floor</span></label>
+      </div>
+    </div></div>
+      <div class="part-nav">
+        <button class='navbtn ghost prev' data-target='4'>← PREVIOUS</button>
+        <button class='navbtn finish-open' id='finishOpen'>REVIEW & SUBMIT →</button>
+      </div>
+    </section>
 </div>
 
-<section class="submit-panel" id="submitPanel">
-<h2>Ready to submit?</h2>
-<p id="answeredCount">0 of 30 questions answered.</p>
-<button class="submitbtn" id="submitExam">SUBMIT MOCK LISTENING →</button>
-<div class="result" id="result"></div>
+<section class="mock-finish" id="finishListening">
+  <h2>Finish Mock Practice 1 · Listening</h2>
+  <p>Submit all 30 questions together to complete the Listening mock and calculate your score.</p>
+  <button class="mock-submit-btn" id="submitExam">SUBMIT FULL LISTENING MOCK →</button>
+  <span class="submit-note">Your score and answer review appear after final submission.</span>
+  <div class="result" id="result"></div>
 </section>
 </main>
 
 <nav class="nav"><a href="muet-hub.html"><img src="assets/heroes/nav-home.svg"><span>Home</span></a><a href="guidance.html"><img src="assets/heroes/icon-muet-intro.svg"><span>Guide</span></a><a class="active" href="vault.html"><img src="assets/heroes/nav-vault.svg"><span>Vault</span></a><a href="progress.html"><img src="assets/heroes/nav-progress.svg"><span>Progress</span></a><a href="settings.html"><img src="assets/heroes/nav-profile.svg"><span>Profile</span></a></nav>
 
 <script>
+document.querySelectorAll(".listen-part-head").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const current=btn.closest(".listen-part");
+    document.querySelectorAll(".listen-part").forEach(p=>{
+      if(p!==current)p.classList.remove("open");
+    });
+    current.classList.toggle("open");
+    if(current.classList.contains("open")){
+      setTimeout(()=>current.scrollIntoView({behavior:"smooth",block:"start"}),60);
+    }
+  });
+});
+
+function openListeningPart(n){
+  document.querySelectorAll(".listen-part").forEach(p=>p.classList.remove("open"));
+  const target=document.getElementById("listen-accordion-"+n);
+  if(target){
+    target.classList.add("open");
+    setTimeout(()=>target.scrollIntoView({behavior:"smooth",block:"start"}),60);
+  }
+}
+
+
 const answers=[0, 2, 2, 1, 0, 0, 1, 1, 1, 2, 0, 2, 1, 2, 4, 2, 1, 0, 1, 0, 1, 2, 1, 0, 1, 1, 2, 1, 0, 0];
 let currentPart=1,remaining=3000,timerId=null,started=false,submitted=false;
 
@@ -390,7 +538,7 @@ function showPart(n){
  currentPart=n;
  document.querySelectorAll(".part").forEach((p,i)=>p.classList.toggle("active",i===n-1));
  document.querySelectorAll(".pstep").forEach((p,i)=>p.classList.toggle("on",i<n));
- for(let i=1;i<=5;i++) document.getElementById("status-"+i).textContent=i===n?"CURRENT":i<n?"VISITED":"LOCKED";
+ for(let i=1;i<=5;i++) document.getElementById("status-"+i).textContent=i===n?"CURRENT":i<n?"VISITED":"READY";
  window.scrollTo({top:document.querySelector("#part-"+n).offsetTop-15,behavior:"smooth"});
 }
 document.querySelectorAll(".next,.prev").forEach(btn=>btn.addEventListener("click",()=>showPart(Number(btn.dataset.target))));
@@ -407,10 +555,7 @@ function drawTimer(){
 document.getElementById("startExam").addEventListener("click",()=>{
  if(started)return;
  started=true;
- document.getElementById("paper").style.pointerEvents="auto";
- document.getElementById("paper").style.opacity="1";
- document.getElementById("lockedNote").style.display="none";
- document.getElementById("startExam").textContent="MOCK IN PROGRESS";
+ document.getElementById("startExam").textContent="TIMER RUNNING";
  timerId=setInterval(()=>{
    remaining--; drawTimer();
    if(remaining<=0){

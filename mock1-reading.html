@@ -123,6 +123,55 @@ button,input{font:inherit}
 .passage-text{max-height:520px;font-size:14px}
 .mini-grid{grid-template-columns:repeat(3,1fr)}
 }
+
+/* ===== STANDARD MOCK 1 FINISH / SUBMIT CARD ===== */
+.mock-finish{
+  background:#fff;
+  border:var(--line);
+  border-radius:19px;
+  box-shadow:var(--shadow);
+  padding:13px;
+  margin-top:14px;
+}
+.mock-finish h2{
+  font-family:var(--fh);
+  font-size:20px;
+  line-height:1.15;
+}
+.mock-finish p{
+  margin-top:6px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.45;
+  font-weight:750;
+}
+.mock-submit-btn{
+  width:100%;
+  min-height:52px;
+  margin-top:11px;
+  border:var(--line);
+  border-radius:11px;
+  background:var(--gold);
+  color:var(--ink);
+  box-shadow:4px 4px 0 var(--ink);
+  font-size:11px;
+  font-weight:1000;
+  letter-spacing:.01em;
+  cursor:pointer;
+}
+.mock-submit-btn:active{
+  transform:translate(2px,2px);
+  box-shadow:2px 2px 0 var(--ink);
+}
+.mock-finish .submit-note{
+  display:block;
+  margin-top:7px;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.4;
+  font-weight:800;
+}
+
 </style>
 </head>
 
@@ -154,7 +203,7 @@ button,input{font:inherit}
     </div>
     <div class="timer" id="timer">75:00</div>
   </div>
-  <button class="start" id="startExam">START MOCK READING</button>
+  <button class="start" id="startExam">START 75-MIN TIMER</button>
 </section>
 
 <div class="progress">
@@ -162,10 +211,10 @@ button,input{font:inherit}
 </div>
 
 <div class="mock-note" id="mockNote">
-  Start the timer only when you are ready. Read each Part, select your answers, then continue. There is no answer checking until you submit the full paper.
+  <b>TESTING MODE:</b> The full Reading paper is open immediately. The 75-minute timer is optional. Read each Part, select your answers, then submit the full paper when ready.
 </div>
 
-<div id="paper" style="pointer-events:none;opacity:.52">
+<div id="paper" style="pointer-events:auto;opacity:1">
 
     <article class="part open" id="part-1">
       <button class="part-head" type="button">
@@ -764,10 +813,11 @@ button,input{font:inherit}
     
 </div>
 
-<section class="submit" id="submitPanel">
-  <h2>Submit Mock Practice 1 Reading</h2>
+<section class="mock-finish" id="submitPanel">
+  <h2>Finish Mock Practice 1 · Reading</h2>
   <p id="answeredCount">0 of 40 questions answered.</p>
-  <button id="submitExam">SUBMIT FULL READING PAPER →</button>
+  <button class="mock-submit-btn" id="submitExam">SUBMIT FULL READING MOCK →</button>
+  <span class="submit-note">Your score and correct-answer review appear after final submission.</span>
   <div class="result" id="result"></div>
 </section>
 
@@ -800,10 +850,7 @@ document.getElementById("startExam").addEventListener("click",()=>{
   if(started)return;
   started=true;
 
-  document.getElementById("paper").style.pointerEvents="auto";
-  document.getElementById("paper").style.opacity="1";
-  document.getElementById("mockNote").style.display="none";
-  document.getElementById("startExam").textContent="MOCK IN PROGRESS";
+  document.getElementById("startExam").textContent="TIMER RUNNING";
 
   timerId=setInterval(()=>{
     remaining--;

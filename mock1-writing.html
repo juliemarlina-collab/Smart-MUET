@@ -789,6 +789,55 @@ textarea:focus{
 }
 .mock-task.open .mock-task-body{display:block}
 
+
+/* ===== STANDARD MOCK 1 FINISH / SUBMIT CARD ===== */
+.mock-finish{
+  background:#fff;
+  border:var(--line);
+  border-radius:19px;
+  box-shadow:var(--shadow);
+  padding:13px;
+  margin-top:14px;
+}
+.mock-finish h2{
+  font-family:var(--fh);
+  font-size:20px;
+  line-height:1.15;
+}
+.mock-finish p{
+  margin-top:6px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.45;
+  font-weight:750;
+}
+.mock-submit-btn{
+  width:100%;
+  min-height:52px;
+  margin-top:11px;
+  border:var(--line);
+  border-radius:11px;
+  background:var(--gold);
+  color:var(--ink);
+  box-shadow:4px 4px 0 var(--ink);
+  font-size:11px;
+  font-weight:1000;
+  letter-spacing:.01em;
+  cursor:pointer;
+}
+.mock-submit-btn:active{
+  transform:translate(2px,2px);
+  box-shadow:2px 2px 0 var(--ink);
+}
+.mock-finish .submit-note{
+  display:block;
+  margin-top:7px;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.4;
+  font-weight:800;
+}
+
 </style>
 </head>
 
@@ -1037,21 +1086,12 @@ textarea:focus{
 
 
 
-<section class="final">
-
-  <h2>Submit Mock Practice 1 Writing</h2>
-
-  <p>
-    This mock does not automatically grade the quality of your writing.
-    Completion records that you attempted both original tasks and met the minimum word requirements.
-  </p>
-
-  <button id="finishMock">
-    SUBMIT & EVALUATE WRITING →
-  </button>
-
+<section class="mock-finish" id="finishWriting">
+  <h2>Finish Mock Practice 1 · Writing</h2>
+  <p>Submit Task 1 and Task 2 together for your post-test Writing rubric evaluation and overall score.</p>
+  <button class="mock-submit-btn" id="finishMock">SUBMIT FULL WRITING MOCK →</button>
+  <span class="submit-note">No rubric feedback is shown before final submission.</span>
   <div class="mock-eval" id="finalResult"></div>
-
 </section>
 
 </div>

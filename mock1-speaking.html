@@ -86,6 +86,55 @@
 }
 .accordion-task.open .accordion-body{display:block}
 
+
+/* ===== STANDARD MOCK 1 FINISH / SUBMIT CARD ===== */
+.mock-finish{
+  background:#fff;
+  border:var(--line);
+  border-radius:19px;
+  box-shadow:var(--shadow);
+  padding:13px;
+  margin-top:14px;
+}
+.mock-finish h2{
+  font-family:var(--fh);
+  font-size:20px;
+  line-height:1.15;
+}
+.mock-finish p{
+  margin-top:6px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.45;
+  font-weight:750;
+}
+.mock-submit-btn{
+  width:100%;
+  min-height:52px;
+  margin-top:11px;
+  border:var(--line);
+  border-radius:11px;
+  background:var(--gold);
+  color:var(--ink);
+  box-shadow:4px 4px 0 var(--ink);
+  font-size:11px;
+  font-weight:1000;
+  letter-spacing:.01em;
+  cursor:pointer;
+}
+.mock-submit-btn:active{
+  transform:translate(2px,2px);
+  box-shadow:2px 2px 0 var(--ink);
+}
+.mock-finish .submit-note{
+  display:block;
+  margin-top:7px;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.4;
+  font-weight:800;
+}
+
 </style>
 </head>
 <body>
@@ -163,10 +212,11 @@
   </div>
 </section>
 
-<section class="submit-panel">
-  <h2>Submit Mock Practice 1 Speaking</h2>
-  <p>Rubric feedback is generated only now. Task B's fourth criterion is shown as <b>Interaction Readiness</b> unless a human examiner reviews the actual interaction.</p>
-  <button class="submit-final" id="submitMock">SUBMIT & EVALUATE SPEAKING →</button>
+<section class="mock-finish" id="finishSpeaking">
+  <h2>Finish Mock Practice 1 · Speaking</h2>
+  <p>Submit Task A and Task B together for your post-test Speaking rubric evaluation.</p>
+  <button class="mock-submit-btn" id="submitMock">SUBMIT FULL SPEAKING MOCK →</button>
+  <span class="submit-note">Your rubric feedback appears only after final submission.</span>
   <div class="report" id="report"></div>
 </section>
 </main>
