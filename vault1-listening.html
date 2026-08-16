@@ -1,885 +1,430 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-  <title>Listening · Vault 1 · Smart MUET Guide</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/muet-guide.css?v=20260726-1"/>
-  <style>
-    .lst-hero { background:var(--yellow); }
-    .flow-step { background:white;border:var(--line);border-radius:var(--r2);box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px; }
-    .flow-step-head { display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;font-weight:1000; }
-    .step-num { width:36px;height:36px;border:var(--line);border-radius:50%;background:var(--yellow);display:grid;place-items:center;font-weight:1000;font-size:16px;flex-shrink:0; }
-    .flow-step-body { padding:0 16px 16px;border-top:2px solid rgba(0,0,0,.07); }
-    .audio-mock { background:var(--ink);color:white;border:var(--line);border-radius:var(--r2);padding:14px;margin-bottom:14px; }
-    .wave { height:48px;border:2px solid rgba(255,255,255,.3);border-radius:14px;background:repeating-linear-gradient(90deg,var(--yellow) 0 6px,transparent 6px 12px);margin:10px 0;opacity:.6; }
-
-    .audio-part-card{background:#fff;border:var(--line);border-radius:18px;box-shadow:4px 4px 0 var(--ink);padding:12px;margin-bottom:12px}
-    .audio-part-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
-    .audio-part-title{font-weight:1000;font-size:13px}
-    .audio-drive-link{display:inline-block;border:2px solid var(--ink);border-radius:999px;background:var(--yellow);padding:5px 9px;font-size:11px;font-weight:1000;text-decoration:none;color:var(--ink)}
-    .audio-frame{width:100%;height:88px;border:2px solid var(--ink);border-radius:14px;background:#f8fafc}
-    .part-note{font-size:11px;font-weight:900;color:var(--muted);margin-top:7px}
-
-    .qtag { display:inline-block;background:var(--blue);color:white;border:2px solid var(--ink);border-radius:999px;padding:3px 8px;font-size:11px;font-weight:1000;margin-bottom:8px; }
-  
-    .practice-guide-panel{display:none;background:#FFF7CC;border:var(--line);border-radius:22px;box-shadow:5px 5px 0 var(--ink);padding:16px;margin:14px 0}
-    .practice-guide-panel.show{display:block}
-    .practice-guide-panel h3{margin:0 0 10px;font-size:20px}
-    .guide-grid{display:grid;gap:10px}
-    .guide-card{background:#fff;border:2px solid var(--ink);border-radius:15px;padding:12px;font-weight:850;line-height:1.45}
-    .btn.practice-guide-btn{background:#fff !important;color:#111 !important}
-    .btn.vault-menu-btn{background:#f65ab8 !important;color:#111 !important}
-    .btn.submit-standard{background:var(--yellow)!important;color:#111!important}
-    .guide-action-stack{display:grid;gap:12px;margin-top:14px}
-    .guide-secondary-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .practice-guide-panel{width:100%;margin-top:12px}
-
-  
-    .strategy-steps{display:grid;gap:10px}
-    .step-card{display:grid;grid-template-columns:48px 1fr;gap:10px;align-items:start;background:#fff;border:2px solid var(--ink);border-radius:16px;padding:10px;box-shadow:3px 3px 0 var(--ink)}
-    .step-letter{width:42px;height:42px;border:2px solid var(--ink);border-radius:12px;display:grid;place-items:center;font-size:24px;font-weight:1000;box-shadow:2px 2px 0 var(--ink)}
-    .step-letter.pink{background:#f65ab8}
-    .step-letter.orange{background:#ff8a00}
-    .step-letter.blue{background:#2563eb;color:#fff}
-    .step-letter.green{background:#00ff00}
-    .step-letter.yellow{background:#ffc400}
-    .step-letter.teal{background:#00d1b2}
-    .step-letter.purple{background:#a78bfa}
-    .step-title{font-size:16px;font-weight:1000;margin-bottom:2px}
-    .step-desc{font-size:13px;font-weight:850;color:#374151;line-height:1.45}
-    .mini-tip{background:#fff;border:2px solid var(--ink);border-radius:14px;padding:10px;font-weight:900;line-height:1.45}
-    .guide-secondary-row .practice-guide-btn{background:#fff!important;color:#111!important}
-    .guide-secondary-row .vault-menu-btn{background:#f65ab8!important;color:#111!important}
-
-  </style>
-  <link rel="stylesheet" href="css/responsive-fix.css?v=20260726-1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Listening · Vault 1 · Smart MUET Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#111;--white:#fff;--soft:#f3f7f8;--muted:#555b63;--cyan:#12D7D7;--gold:#FFC400;--lime:#19ef14;--blue:#1186f2;--pink:#ff41a4;--orange:#ff5a00;--line:3px solid var(--ink);--shadow:5px 5px 0 var(--ink);--fh:"Sora",sans-serif;--fb:"DM Sans",sans-serif}
+*{box-sizing:border-box;margin:0;padding:0} body{font-family:var(--fb);background:var(--cyan);color:var(--ink);overflow-x:hidden} a{color:inherit;text-decoration:none} button,input{font:inherit}
+.app{width:100%;max-width:560px;min-height:100dvh;margin:auto;background:var(--soft);padding:15px 14px 112px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px} .brand{display:flex;align-items:center;gap:9px} .brand img{width:54px;height:54px} .brand small{display:block;font-size:9px;font-weight:1000;color:var(--muted);letter-spacing:.08em} .brand b{font-family:var(--fh);font-size:17px} .back{border:2px solid var(--ink);border-radius:999px;background:#fff;box-shadow:2px 2px 0 var(--ink);padding:8px 11px;font-size:11px;font-weight:1000}
+.hero{background:#fff;border:var(--line);border-radius:24px;box-shadow:var(--shadow);padding:22px 18px 20px;margin-bottom:15px;position:relative;overflow:hidden} .hero:after{content:"";position:absolute;width:96px;height:96px;border:var(--line);border-radius:50%;background:var(--cyan);right:-25px;top:-28px} .hero .tag{position:relative;z-index:2;display:inline-block;background:var(--ink);color:#fff;border-radius:999px;padding:6px 9px;font-size:10px;font-weight:1000;letter-spacing:.08em} .hero h1{position:relative;z-index:2;font-family:var(--fh);font-size:clamp(36px,9vw,52px);line-height:.96;letter-spacing:-.05em;margin-top:11px} .hero h1 span{display:block;color:var(--cyan)} .hero p{position:relative;z-index:2;margin-top:12px;font-size:16px;line-height:1.5;font-weight:700;color:#3c4148}
+.tech{background:var(--ink);color:#fff;border:var(--line);border-radius:20px;box-shadow:var(--shadow);padding:14px;margin-bottom:15px} .tech h2{font-family:var(--fh);font-size:20px} .tech p{margin-top:4px;font-size:13px;font-weight:700;color:#ddd} .techgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px} .techgrid div{border:2px solid #fff;border-radius:12px;padding:9px 4px;text-align:center;color:#111;font-weight:1000;font-size:9px} .techgrid div:nth-child(1){background:var(--cyan)} .techgrid div:nth-child(2){background:var(--gold)} .techgrid div:nth-child(3){background:#18d9ff} .techgrid div:nth-child(4){background:var(--lime)} .techgrid b{display:block;font-family:var(--fh);font-size:22px}
+.paperbar{background:#fff;border:var(--line);border-radius:18px;box-shadow:var(--shadow);padding:13px;margin-bottom:14px} .paperbar h2{font-family:var(--fh);font-size:19px} .paperstats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:9px} .paperstats div{border:2px solid var(--ink);border-radius:11px;padding:8px;text-align:center;background:#fafafa} .paperstats b{display:block;font-family:var(--fh);font-size:18px} .paperstats span{font-size:9px;font-weight:900;color:var(--muted)}
+.part{border:var(--line);border-radius:18px;box-shadow:var(--shadow);background:#fff;overflow:hidden;margin-bottom:11px} .part-head{width:100%;min-height:74px;border:0;background:#fff7c9;padding:12px;display:grid;grid-template-columns:48px 1fr auto;gap:10px;align-items:center;text-align:left;cursor:pointer} .part-num{width:46px;height:46px;display:grid;place-items:center;border:2px solid var(--ink);border-radius:12px;background:#fff;font-family:var(--fh);font-size:18px;font-weight:800} .part-title b{display:block;font-family:var(--fh);font-size:16px} .part-title span{display:block;margin-top:3px;font-size:11px;font-weight:750;color:var(--muted)} .chev{font-size:24px;font-weight:1000} .part.open .chev{transform:rotate(45deg)} .part-body{display:none;border-top:2px solid var(--ink);padding:12px;background:#fff} .part.open .part-body{display:block}
+.audio{border:2px solid var(--ink);border-radius:14px;background:#0f1115;color:#fff;padding:10px;margin-bottom:10px} .audio-head{display:flex;align-items:start;justify-content:space-between;gap:8px} .audio-head b{font-family:var(--fh);font-size:13px} .audio-head span{display:block;font-size:10px;color:#ddd;margin-top:2px} .audio-pill{border:2px solid #fff;border-radius:999px;padding:4px 7px!important;background:var(--cyan);color:#111!important;font-weight:1000!important;white-space:nowrap} .audio iframe{width:100%;height:84px;border:2px solid #fff;border-radius:11px;margin-top:8px;background:#fff} .audio p{font-size:10px;color:#ddd;font-weight:700;margin-top:6px}
+.clue-mini{border:2px solid var(--ink);border-radius:12px;background:#e9ffff;padding:9px;margin-bottom:10px;font-size:11px;line-height:1.4;font-weight:700} .clue-mini b{display:block;font-family:var(--fh);font-size:12px;margin-bottom:2px}
+.qcard{border:2px solid var(--ink);border-radius:14px;background:#fafafa;padding:11px;margin-top:9px} .qtag{display:inline-block;border:2px solid var(--ink);border-radius:999px;background:var(--cyan);padding:4px 7px;font-size:9px;font-weight:1000} .stem{font-size:13px;line-height:1.4;font-weight:900;margin:8px 0} .opt{display:grid;grid-template-columns:20px 1fr;gap:7px;align-items:start;border:2px solid var(--ink);border-radius:11px;background:#fff;padding:9px;margin-top:6px;font-size:12px;line-height:1.35;font-weight:750;cursor:pointer} .opt input{margin-top:2px} .opt.correct{background:#dcfce7;border-color:#16803c} .opt.wrong{background:#ffe4e6;border-color:#d92d20} .explain{display:none;border:2px dashed var(--ink);border-radius:10px;background:#fff7c9;padding:8px;margin-top:7px;font-size:11px;line-height:1.4;font-weight:700} .explain.show{display:block}
+.part-submit,.final-submit{display:flex;align-items:center;justify-content:center;width:100%;min-height:50px;border:var(--line);border-radius:12px;box-shadow:4px 4px 0 var(--ink);font-weight:1000;font-size:12px;cursor:pointer;margin-top:11px} .part-submit{background:var(--cyan)} .final-submit{background:var(--gold);margin-top:14px} .part-result{display:none;border:2px solid var(--ink);border-radius:11px;background:#e7fff5;padding:9px;margin-top:9px;font-size:12px;font-weight:800} .part-result.show{display:block}
+.summary{background:#fff;border:var(--line);border-radius:18px;box-shadow:var(--shadow);padding:14px;margin-top:14px} .summary h2{font-family:var(--fh);font-size:20px} .summary-result{display:none;margin-top:10px;border:2px solid var(--ink);border-radius:12px;background:#e7fff5;padding:11px} .summary-result.show{display:block} .bigscore{font-family:var(--fh);font-size:30px;font-weight:800}
+.nav{position:fixed;left:50%;transform:translateX(-50%);bottom:10px;width:calc(100% - 20px);max-width:540px;z-index:70;display:grid;grid-template-columns:repeat(5,1fr);background:#fff;border:var(--line);border-radius:18px;box-shadow:5px 5px 0 var(--ink);padding:6px} .nav a{min-height:58px;display:grid;place-items:center;align-content:center;gap:3px;border-radius:10px;font-size:9px;font-weight:1000} .nav a.active{background:var(--gold);border:2px solid var(--ink)} .nav img{width:26px;height:26px}
+@media(min-width:700px){.app{max-width:850px;padding:24px 24px 120px} .nav{max-width:810px}}
+</style>
 </head>
 <body>
-<main class="app-shell">
-<section class="screen active">
-
-  <div class="brand-bar">
-    <button class="icon-btn" onclick="location.href=vaultWelcomePage" style="margin-left:0;margin-right:8px">←</button>
-    <div><div class="bar-label">Vault 1 · Component 3 of 4</div><div class="bar-title">SmartListening</div></div>
-    <button class="icon-btn">🎧</button>
-  </div>
-
-  <div style="background:var(--paper);border:var(--line);border-radius:16px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;gap:12px">
-    <div style="flex:1">
-      <div style="font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:4px">Vault 1 Progress</div>
-      <div class="prog-bar"><span id="vaultProgBar" style="width:0%"></span></div>
+<main class="app">
+<header class="top"><div class="brand"><img src="assets/heroes/small-muet-logo.svg" alt="Smart MUET"><div><small>VAULT 1 · 800/1 · LISTENING</small><b>Listening Practice</b></div></div><a class="back" href="vault1.html">← Vault 1</a></header>
+<section class="hero"><span class="tag">MUET 800/1 · LISTENING</span><h1>Listen for meaning.<span>Catch the real clue.</span></h1><p>Complete the full 30-question practice by Part. Open one Part, play its audio, answer the questions, then check your work.</p></section>
+<section class="tech"><h2>Use CLUE while you practise</h2><p>Keep the technique visible, but let the test remain the main activity.</p><div class="techgrid"><div><b>C</b>CHECK</div><div><b>L</b>LISTEN</div><div><b>U</b>UNDERSTAND</div><div><b>E</b>ELIMINATE</div></div></section>
+<section class="paperbar"><h2>Complete Listening Practice</h2><div class="paperstats"><div><b>5</b><span>PARTS</span></div><div><b>30</b><span>QUESTIONS</span></div><div><b>50</b><span>MINUTES</span></div></div></section>
+<section>
+    <article class="part open" data-part-name="Part I — Conversation">
+      <button class="part-head">
+        <div class="part-num">1</div>
+        <div class="part-title"><b>Part I — Conversation</b><span>Questions 1–7</span></div>
+        <div class="chev">+</div>
+      </button>
+      <div class="part-body">
+      <div class="audio">
+        <div class="audio-head"><div><b>Part I · Conversation</b><span>Leanne and Amir</span></div><span class="audio-pill">Questions 1–7</span></div>
+        <iframe src="https://drive.google.com/file/d/1QQj-1FvvZUddWZwo8LeipWk55mPePYum/preview" allow="autoplay"></iframe>
+        <p>Play the audio first, then answer the questions in this Part.</p>
+      </div>
+      <div class="clue-mini">
+        <b>Need CLUE?</b>
+        <span>Check the question → Listen for clues → Understand the final meaning → Eliminate distractors.</span>
+      </div>
+    
+    <div class="qcard" data-q="0">
+      <div class="qtag">L1</div>
+      <p class="stem">Leanne is happy because she can</p>
+      <div class="opts">
+        <label class="opt" id="opt-0-0"><input type="radio" name="q0" value="0"><span>A. bring her pet to school</span></label><label class="opt" id="opt-0-1"><input type="radio" name="q0" value="1"><span>B. be in charge of her club</span></label><label class="opt" id="opt-0-2"><input type="radio" name="q0" value="2"><span>C. talk to Amir about her pet</span></label>
+      </div>
+      <div class="explain" id="exp-0">Leanne says she is the president of the Pet Club — she is in charge of the club.</div>
     </div>
-    <div id="vaultProgLabel" style="font-weight:1000;font-size:13px;white-space:nowrap">0/4</div>
-  </div>
-
-  <div class="card lst-hero">
-    <p class="tiny" style="color:rgba(0,0,0,.5)">Listening 800/1 · Vault 1</p>
-    <h1 style="margin-top:6px">Write keywords.</h1>
-    <p style="margin-top:8px;font-weight:800">Practise notes, distractors, answer checking and transcript review.</p>
-  </div>
-
-  <!-- Practice — direct entry -->
-
-      <!-- Audio guide -->
-      <div class="audio-mock">
-        <p class="tiny">Listening Practice — MUET Session 3 2022 · Google Drive Audio Connected</p>
-        <div class="wave"></div>
-        <p style="font-weight:800;font-size:13px;margin-bottom:10px">Each listening part below has its own Google Drive audio player. Play the audio for the part first, then answer the questions that follow.</p>
-        <button class="btn yellow" id="scriptToggleBtn" onclick="Lst.toggleScript()" style="width:auto;min-width:140px">Show Script Summary</button>
+    <div class="qcard" data-q="1">
+      <div class="qtag">L2</div>
+      <p class="stem">Leanne agrees with Amir that tortoises are</p>
+      <div class="opts">
+        <label class="opt" id="opt-1-0"><input type="radio" name="q1" value="0"><span>A. rare as pets</span></label><label class="opt" id="opt-1-1"><input type="radio" name="q1" value="1"><span>B. famous in movies</span></label><label class="opt" id="opt-1-2"><input type="radio" name="q1" value="2"><span>C. popular nowadays</span></label>
       </div>
-
-      <!-- Script summary by part -->
-      <div id="practiceScript" class="card" style="display:none;background:#f0fdf4">
-        <h3>Session 3 2022 — Listening Script Summary (5 Parts)</h3>
-        <div style="margin-top:10px;display:grid;gap:10px;font-size:13px;font-weight:800">
-          <div style="border-left:4px solid var(--blue);padding-left:10px"><b>Part I — Conversation:</b> Leanne and Amir discuss The Pet Club and Leanne's tortoise named Tito — his garden house, floor stones, and sensitivity to touch.</div>
-          <div style="border-left:4px solid var(--green);padding-left:10px"><b>Part II — Talk:</b> Dr Yusof shares his education journey — primary school in Negeri Sembilan, first job at Elizabeth University, his grandmother's encouragement, father reading newspapers to learn English, part-time teaching during A-Level, and balancing study and work in postgraduate.</div>
-          <div style="border-left:4px solid var(--yellow);padding-left:10px"><b>Part III — Three Speakers:</b> Lina, Saiful and Sarah each explain their main reason for travelling. Match each speaker to one reason from options A–E.</div>
-          <div style="border-left:4px solid var(--orange);padding-left:10px"><b>Part IV — Radio Interview:</b> Dr Ranjit Singh, a psychologist, explains why people lie — to avoid punishment, to protect someone else, for self-protection, to maintain privacy, to be polite, to win admiration, or simply for the thrill of it.</div>
-          <div style="border-left:4px solid var(--pink);padding-left:10px"><b>Part V — Three Dialogues (same recording):</b> Dialogue 1: Akmal advises Madame Fauzia on early signs and causes of hearing loss. Dialogue 2: Mr Alvin tells Bella how to save water at home (fix leaks, turn off taps, water-efficient appliances). Dialogue 3: Dr Andy explains to Lisa what causes dengue fever, its symptoms and why there is no specific cure.</div>
-        </div>
-      </div>
-
-      <div class="coach-note lime">
-        <div class="tag">BEFORE LISTENING / READING</div>
-        <p>Read the questions below first. Write keywords in the note boxes. Then select your answers.</p>
-      </div>
-
-      <!-- Keyword notes -->
-      <div class="card">
-        <h3>Keyword Notes <span class="req">Required</span></h3>
-        <p style="font-size:13px;font-weight:800;color:var(--muted);margin:6px 0 12px">Write short keywords as you listen. 2–3 words per line maximum.</p>
-        <textarea id="lstNotes" rows="4" placeholder="e.g. Thu / 15th / Main Hall / 9am / student card / free / confirm Tue"></textarea>
-      </div>
-
-      <!-- MCQ questions -->
-      <div id="lstQList" style="display:grid;gap:14px"></div>
-        <!-- SIGNAL WORDS -->
-        <div style="background:var(--orange);border:var(--line);box-shadow:var(--shadow);border-radius:var(--r2);padding:16px;margin-bottom:14px">
-          <div style="font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.7);margin-bottom:10px">&#128678; SIGNAL WORDS TO WATCH</div>
-          <div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px;margin-bottom:8px">
-            <div style="font-size:11px;font-weight:1000;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:6px">CORRECTION SIGNALS &mdash; second answer is correct</div>
-            <div style="font-size:13px;font-weight:800;color:white;line-height:1.7">&ldquo;actually&hellip;&rdquo; &middot; &ldquo;but in fact&hellip;&rdquo; &middot; &ldquo;however&hellip;&rdquo; &middot; &ldquo;I mean&hellip;&rdquo; &middot; &ldquo;sorry, I meant&hellip;&rdquo; &middot; &ldquo;to correct myself&hellip;&rdquo;</div>
-          </div>
-          <div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px;margin-bottom:8px">
-            <div style="font-size:11px;font-weight:1000;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:6px">EXAMPLE</div>
-            <div style="font-size:13px;font-weight:800;color:white">&ldquo;The meeting was on <s>Thursday</s> &mdash; sorry, I mean <b>Friday</b>.&rdquo; &rarr; Answer = Friday</div>
-          </div>
-          <div style="background:var(--yellow);color:var(--ink);border-radius:10px;padding:8px 12px;font-size:12px;font-weight:1000">
-            &#9888;&#65039; Wait for the speaker to FINISH the complete thought before writing your answer.
-          </div>
-        </div>
-
-        <!-- NOTE-TAKING SHORTCUTS -->
-        <div style="background:var(--paper);border:var(--line);box-shadow:var(--shadow);border-radius:var(--r2);padding:16px;margin-bottom:14px">
-          <div style="font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:10px">&#9999;&#65039; NOTE-TAKING SHORTCUTS</div>
-          <p style="font-size:13px;font-weight:800;margin-bottom:10px">Write 2&ndash;3 keywords only. Leave blanks and complete after audio ends.</p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-            <div style="background:white;border:2px solid var(--ink);border-radius:12px;padding:8px;text-align:center"><div style="font-weight:1000">env</div><div style="font-size:10px;color:var(--muted);font-weight:800">environment</div></div>
-            <div style="background:white;border:2px solid var(--ink);border-radius:12px;padding:8px;text-align:center"><div style="font-weight:1000">tech</div><div style="font-size:10px;color:var(--muted);font-weight:800">technology</div></div>
-            <div style="background:white;border:2px solid var(--ink);border-radius:12px;padding:8px;text-align:center"><div style="font-weight:1000">gov</div><div style="font-size:10px;color:var(--muted);font-weight:800">government</div></div>
-            <div style="background:white;border:2px solid var(--ink);border-radius:12px;padding:8px;text-align:center"><div style="font-weight:1000">&rarr;</div><div style="font-size:10px;color:var(--muted);font-weight:800">leads to / causes</div></div>
-            <div style="background:white;border:2px solid var(--ink);border-radius:12px;padding:8px;text-align:center"><div style="font-weight:1000">&#8593; / &#8595;</div><div style="font-size:10px;color:var(--muted);font-weight:800">increase / decrease</div></div>
-            <div style="background:white;border:2px solid var(--ink);border-radius:12px;padding:8px;text-align:center"><div style="font-weight:1000">&asymp;</div><div style="font-size:10px;color:var(--muted);font-weight:800">approximately</div></div>
-          </div>
-        </div>
-
-        <!-- SELF-CHECK BEFORE SUBMIT -->
-        <div style="background:var(--paper);border:var(--line);box-shadow:var(--shadow);border-radius:var(--r2);padding:16px;margin-bottom:14px">
-          <div style="font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:10px">&#128203; SELF-CHECK BEFORE SUBMITTING</div>
-          <div style="display:grid;gap:8px">
-            <label style="display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;border:2px solid var(--ink);border-radius:13px;background:white;padding:12px;font-weight:900;cursor:pointer">
-              <input type="checkbox" id="lc1" style="width:20px;height:20px"> <span>I read all questions BEFORE the audio started</span>
-            </label>
-            <label style="display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;border:2px solid var(--ink);border-radius:13px;background:white;padding:12px;font-weight:900;cursor:pointer">
-              <input type="checkbox" id="lc2" style="width:20px;height:20px"> <span>I listened for correction signals (actually, I mean, sorry)</span>
-            </label>
-            <label style="display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;border:2px solid var(--ink);border-radius:13px;background:white;padding:12px;font-weight:900;cursor:pointer">
-              <input type="checkbox" id="lc3" style="width:20px;height:20px"> <span>I wrote keywords only &mdash; not full sentences</span>
-            </label>
-            <label style="display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;border:2px solid var(--ink);border-radius:13px;background:white;padding:12px;font-weight:900;cursor:pointer">
-              <input type="checkbox" id="lc4" style="width:20px;height:20px"> <span>I did not leave any answer blank (guessed if unsure)</span>
-            </label>
-          </div>
-        </div>
-
-      <div class="guide-action-stack">
-        <button class="btn submit-standard wide" style="background:var(--yellow)!important;color:#111!important" onclick="Lst.submit()">Submit Listening Practice</button>
-        <div class="guide-secondary-row">
-          <button class="btn practice-guide-btn white" onclick="Lst.togglePracticeGuide()">Practice Guide</button>
-          <button class="btn vault-menu-btn pink" onclick="location.href=vaultWelcomePage">← Vault Menu</button>
-        </div>
-      </div>
-
-      
-      <div class="practice-guide-panel" id="practiceGuidePanel">
-        <h3>Listening Practice Guide — K.E.Y.</h3>
-        <div class="strategy-steps">
-          <div class="step-card"><div class="step-letter yellow">K</div><div><div class="step-title">Keywords</div><div class="step-desc">Write short notes only: names, dates, places, numbers and repeated words.</div></div></div>
-          <div class="step-card"><div class="step-letter orange">E</div><div><div class="step-title">Expect Distractors</div><div class="step-desc">The first answer you hear may change. Wait for correction words like <b>but</b>, <b>actually</b>, or <b>instead</b>.</div></div></div>
-          <div class="step-card"><div class="step-letter blue">Y</div><div><div class="step-title">Yield Final Answer</div><div class="step-desc">Choose the answer after listening to the full idea, not just one matching word.</div></div></div>
-          <div class="mini-tip">Before submitting: check every question has an answer and compare it with your keyword notes.</div>
-        </div>
-      </div>
-
-      </div>
-
-<!-- Result -->
-  <div id="resultCard" class="result-card" style="background:#fef9c3">
-    <div class="tag">LISTENING RESULT SAVED</div>
-    <span id="resultScore" class="result-score">0/90</span>
-    <span id="resultBand"  class="result-band">Band —</span>
-    <div id="resultDetails" style="margin:12px 0;border:var(--line);border-radius:14px;background:white;padding:12px;font-size:13px;font-weight:800;display:grid;gap:8px"></div>
-    <!-- Script summary reveal after submission -->
-    <div class="card" style="margin-bottom:12px">
-      <h3>Answer Key — Session 3 2022 Listening</h3>
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px;font-size:12px;font-weight:900;text-align:center">
-        <div style="background:#dbeafe;border:2px solid var(--ink);border-radius:10px;padding:6px">Q1: B</div>
-        <div style="background:#dbeafe;border:2px solid var(--ink);border-radius:10px;padding:6px">Q2: C</div>
-        <div style="background:#dbeafe;border:2px solid var(--ink);border-radius:10px;padding:6px">Q3: C</div>
-        <div style="background:#dbeafe;border:2px solid var(--ink);border-radius:10px;padding:6px">Q4: A</div>
-        <div style="background:#dbeafe;border:2px solid var(--ink);border-radius:10px;padding:6px">Q5: B</div>
-        <div style="background:#dbeafe;border:2px solid var(--ink);border-radius:10px;padding:6px">Q6: B</div>
-        <div style="background:#dbeafe;border:2px solid var(--ink);border-radius:10px;padding:6px">Q7: A</div>
-        <div style="background:#dcfce7;border:2px solid var(--ink);border-radius:10px;padding:6px">Q8: B</div>
-        <div style="background:#dcfce7;border:2px solid var(--ink);border-radius:10px;padding:6px">Q9: C</div>
-        <div style="background:#dcfce7;border:2px solid var(--ink);border-radius:10px;padding:6px">Q10: C</div>
-        <div style="background:#dcfce7;border:2px solid var(--ink);border-radius:10px;padding:6px">Q11: A</div>
-        <div style="background:#dcfce7;border:2px solid var(--ink);border-radius:10px;padding:6px">Q12: B</div>
-        <div style="background:#dcfce7;border:2px solid var(--ink);border-radius:10px;padding:6px">Q13: C</div>
-        <div style="background:#dcfce7;border:2px solid var(--ink);border-radius:10px;padding:6px">Q14: C</div>
-        <div style="background:#fef9c3;border:2px solid var(--ink);border-radius:10px;padding:6px">Q15: D</div>
-        <div style="background:#fef9c3;border:2px solid var(--ink);border-radius:10px;padding:6px">Q16: B</div>
-        <div style="background:#fef9c3;border:2px solid var(--ink);border-radius:10px;padding:6px">Q17: E</div>
-        <div style="background:#fce7f3;border:2px solid var(--ink);border-radius:10px;padding:6px">Q18: A</div>
-        <div style="background:#fce7f3;border:2px solid var(--ink);border-radius:10px;padding:6px">Q19: A</div>
-        <div style="background:#fce7f3;border:2px solid var(--ink);border-radius:10px;padding:6px">Q20: B</div>
-        <div style="background:#fce7f3;border:2px solid var(--ink);border-radius:10px;padding:6px">Q21: B</div>
-        <div style="background:#fce7f3;border:2px solid var(--ink);border-radius:10px;padding:6px">Q22: B</div>
-        <div style="background:#fce7f3;border:2px solid var(--ink);border-radius:10px;padding:6px">Q23: B</div>
-        <div style="background:#fce7f3;border:2px solid var(--ink);border-radius:10px;padding:6px">Q24: A</div>
-        <div style="background:#ede9fe;border:2px solid var(--ink);border-radius:10px;padding:6px">Q25: A</div>
-        <div style="background:#ede9fe;border:2px solid var(--ink);border-radius:10px;padding:6px">Q26: B</div>
-        <div style="background:#ede9fe;border:2px solid var(--ink);border-radius:10px;padding:6px">Q27: B</div>
-        <div style="background:#ede9fe;border:2px solid var(--ink);border-radius:10px;padding:6px">Q28: A</div>
-        <div style="background:#ede9fe;border:2px solid var(--ink);border-radius:10px;padding:6px">Q29: B</div>
-        <div style="background:#ede9fe;border:2px solid var(--ink);border-radius:10px;padding:6px">Q30: B</div>
-      </div>
-      <p style="margin-top:10px;font-size:12px;font-weight:900;color:var(--muted)">Colour key: Blue = Part I · Green = Part II · Yellow = Part III · Pink = Part IV · Purple = Part V</p>
+      <div class="explain" id="exp-1">Leanne says tortoises are popular as pets now.</div>
     </div>
-    <div class="btn-row">
-      <button class="btn black wide" onclick="location.href='vault1-writing.html'">Next: Writing ✍️ →</button>
-      <button class="btn vault-menu-btn white" onclick="location.href=vaultWelcomePage">← Vault Menu</button>
+    <div class="qcard" data-q="2">
+      <div class="qtag">L3</div>
+      <p class="stem">Tito lives in the garden because he</p>
+      <div class="opts">
+        <label class="opt" id="opt-2-0"><input type="radio" name="q2" value="0"><span>A. smells</span></label><label class="opt" id="opt-2-1"><input type="radio" name="q2" value="1"><span>B. is a pet</span></label><label class="opt" id="opt-2-2"><input type="radio" name="q2" value="2"><span>C. has a house</span></label>
+      </div>
+      <div class="explain" id="exp-2">Leanne explains Tito lives in the garden because he has his own house there.</div>
     </div>
-  </div>
-
-</section>
+    <div class="qcard" data-q="3">
+      <div class="qtag">L4</div>
+      <p class="stem">Tito’s house was easy to build because</p>
+      <div class="opts">
+        <label class="opt" id="opt-3-0"><input type="radio" name="q3" value="0"><span>A. it was a simple design</span></label><label class="opt" id="opt-3-1"><input type="radio" name="q3" value="1"><span>B. the family built it together</span></label><label class="opt" id="opt-3-2"><input type="radio" name="q3" value="2"><span>C. Leanne’s father is a good builder</span></label>
+      </div>
+      <div class="explain" id="exp-3">Leanne says the design was simple, so it was easy to build.</div>
+    </div>
+    <div class="qcard" data-q="4">
+      <div class="qtag">L5</div>
+      <p class="stem">Leanne covered the floor with stones to</p>
+      <div class="opts">
+        <label class="opt" id="opt-4-0"><input type="radio" name="q4" value="0"><span>A. decorate the floor</span></label><label class="opt" id="opt-4-1"><input type="radio" name="q4" value="1"><span>B. let Tito move easily</span></label><label class="opt" id="opt-4-2"><input type="radio" name="q4" value="2"><span>C. protect Tito from the weather</span></label>
+      </div>
+      <div class="explain" id="exp-4">The stones help Tito move around easily.</div>
+    </div>
+    <div class="qcard" data-q="5">
+      <div class="qtag">L6</div>
+      <p class="stem">Amir is surprised that tortoises are</p>
+      <div class="opts">
+        <label class="opt" id="opt-5-0"><input type="radio" name="q5" value="0"><span>A. easy to love</span></label><label class="opt" id="opt-5-1"><input type="radio" name="q5" value="1"><span>B. sensitive to touch</span></label><label class="opt" id="opt-5-2"><input type="radio" name="q5" value="2"><span>C. born with hard skin</span></label>
+      </div>
+      <div class="explain" id="exp-5">Amir is surprised that tortoises are sensitive to touch.</div>
+    </div>
+    <div class="qcard" data-q="6">
+      <div class="qtag">L7</div>
+      <p class="stem">Where is The Pet Club's table positioned in the hall?</p>
+      <div class="opts">
+        <label class="opt" id="opt-6-0"><input type="radio" name="q6" value="0"><span>A. At the back-left corner of the hall</span></label><label class="opt" id="opt-6-1"><input type="radio" name="q6" value="1"><span>B. Near the main entrance, on the right</span></label><label class="opt" id="opt-6-2"><input type="radio" name="q6" value="2"><span>C. In the very centre of the hall</span></label>
+      </div>
+      <div class="explain" id="exp-6">The Pet Club's table is at the back-left corner of the hall.</div>
+    </div>
+      <button class="part-submit" data-part="Part I — Conversation">CHECK PART I</button>
+      <div class="part-result" id="result-1"></div>
+    </div>
+    </article>
+    <article class="part " data-part-name="Part II — Talk">
+      <button class="part-head">
+        <div class="part-num">2</div>
+        <div class="part-title"><b>Part II — Talk</b><span>Questions 8–14</span></div>
+        <div class="chev">+</div>
+      </button>
+      <div class="part-body">
+      <div class="audio">
+        <div class="audio-head"><div><b>Part II · Talk</b><span>Dr Yusof Lokman</span></div><span class="audio-pill">Questions 8–14</span></div>
+        <iframe src="https://drive.google.com/file/d/112QBpHeyqud6f4UjBy_F_-HDJnWLmTYP/preview" allow="autoplay"></iframe>
+        <p>Play the audio first, then answer the questions in this Part.</p>
+      </div>
+      <div class="clue-mini">
+        <b>Need CLUE?</b>
+        <span>Check the question → Listen for clues → Understand the final meaning → Eliminate distractors.</span>
+      </div>
+    
+    <div class="qcard" data-q="7">
+      <div class="qtag">L8</div>
+      <p class="stem">Dr Yusof went to a primary school in</p>
+      <div class="opts">
+        <label class="opt" id="opt-7-0"><input type="radio" name="q7" value="0"><span>A. Perak</span></label><label class="opt" id="opt-7-1"><input type="radio" name="q7" value="1"><span>B. Negeri Sembilan</span></label><label class="opt" id="opt-7-2"><input type="radio" name="q7" value="2"><span>C. the United Kingdom</span></label>
+      </div>
+      <div class="explain" id="exp-7">Dr Yusof says he went to primary school in Negeri Sembilan.</div>
+    </div>
+    <div class="qcard" data-q="8">
+      <div class="qtag">L9</div>
+      <p class="stem">Dr Yusof’s first job was at</p>
+      <div class="opts">
+        <label class="opt" id="opt-8-0"><input type="radio" name="q8" value="0"><span>A. KL University</span></label><label class="opt" id="opt-8-1"><input type="radio" name="q8" value="1"><span>B. Charles University</span></label><label class="opt" id="opt-8-2"><input type="radio" name="q8" value="2"><span>C. Elizabeth University</span></label>
+      </div>
+      <div class="explain" id="exp-8">His first job was at Elizabeth University.</div>
+    </div>
+    <div class="qcard" data-q="9">
+      <div class="qtag">L10</div>
+      <p class="stem">Who encouraged Dr Yusof to succeed in education?</p>
+      <div class="opts">
+        <label class="opt" id="opt-9-0"><input type="radio" name="q9" value="0"><span>A. His parents</span></label><label class="opt" id="opt-9-1"><input type="radio" name="q9" value="1"><span>B. His teachers</span></label><label class="opt" id="opt-9-2"><input type="radio" name="q9" value="2"><span>C. His grandmother</span></label>
+      </div>
+      <div class="explain" id="exp-9">His grandmother encouraged him and told him education was the key to success.</div>
+    </div>
+    <div class="qcard" data-q="10">
+      <div class="qtag">L11</div>
+      <p class="stem">Dr Yusof’s father took the extra effort to learn English by</p>
+      <div class="opts">
+        <label class="opt" id="opt-10-0"><input type="radio" name="q10" value="0"><span>A. reading the newspaper daily</span></label><label class="opt" id="opt-10-1"><input type="radio" name="q10" value="1"><span>B. carrying books to the school office</span></label><label class="opt" id="opt-10-2"><input type="radio" name="q10" value="2"><span>C. volunteering to clean his teacher’s house</span></label>
+      </div>
+      <div class="explain" id="exp-10">His father read the newspaper every day to improve his English.</div>
+    </div>
+    <div class="qcard" data-q="11">
+      <div class="qtag">L12</div>
+      <p class="stem">During his A-Level, Dr Yusof used his weekends to</p>
+      <div class="opts">
+        <label class="opt" id="opt-11-0"><input type="radio" name="q11" value="0"><span>A. assist his classmates</span></label><label class="opt" id="opt-11-1"><input type="radio" name="q11" value="1"><span>B. do part-time teaching</span></label><label class="opt" id="opt-11-2"><input type="radio" name="q11" value="2"><span>C. complete assignments</span></label>
+      </div>
+      <div class="explain" id="exp-11">He used weekends to do part-time teaching.</div>
+    </div>
+    <div class="qcard" data-q="12">
+      <div class="qtag">L13</div>
+      <p class="stem">While doing his postgraduate studies, Dr Yusof</p>
+      <div class="opts">
+        <label class="opt" id="opt-12-0"><input type="radio" name="q12" value="0"><span>A. studied every day</span></label><label class="opt" id="opt-12-1"><input type="radio" name="q12" value="1"><span>B. avoided working part-time</span></label><label class="opt" id="opt-12-2"><input type="radio" name="q12" value="2"><span>C. balanced his study and work</span></label>
+      </div>
+      <div class="explain" id="exp-12">He balanced study and work during his postgraduate studies.</div>
+    </div>
+    <div class="qcard" data-q="13">
+      <div class="qtag">L14</div>
+      <p class="stem">The most important advice to the new students is to</p>
+      <div class="opts">
+        <label class="opt" id="opt-13-0"><input type="radio" name="q13" value="0"><span>A. learn from your friends</span></label><label class="opt" id="opt-13-1"><input type="radio" name="q13" value="1"><span>B. join many student activities</span></label><label class="opt" id="opt-13-2"><input type="radio" name="q13" value="2"><span>C. aim high in whatever you do</span></label>
+      </div>
+      <div class="explain" id="exp-13">His key advice is to aim high in whatever you do.</div>
+    </div>
+      <button class="part-submit" data-part="Part II — Talk">CHECK PART II</button>
+      <div class="part-result" id="result-2"></div>
+    </div>
+    </article>
+    <article class="part " data-part-name="Part III — Matching">
+      <button class="part-head">
+        <div class="part-num">3</div>
+        <div class="part-title"><b>Part III — Matching</b><span>Questions 15–17</span></div>
+        <div class="chev">+</div>
+      </button>
+      <div class="part-body">
+      <div class="audio">
+        <div class="audio-head"><div><b>Part III · Three Speakers</b><span>Travelling</span></div><span class="audio-pill">Questions 15–17</span></div>
+        <iframe src="https://drive.google.com/file/d/16hCkjfiQSaVwvTyC-1kx7GV1liFq013h/preview" allow="autoplay"></iframe>
+        <p>Play the audio first, then answer the questions in this Part.</p>
+      </div>
+      <div class="clue-mini">
+        <b>Need CLUE?</b>
+        <span>Check the question → Listen for clues → Understand the final meaning → Eliminate distractors.</span>
+      </div>
+    
+    <div class="qcard" data-q="14">
+      <div class="qtag">L15</div>
+      <p class="stem">Lina — main reason for travelling</p>
+      <div class="opts">
+        <label class="opt" id="opt-14-0"><input type="radio" name="q14" value="0"><span>A. To become more creative</span></label><label class="opt" id="opt-14-1"><input type="radio" name="q14" value="1"><span>B. To make new friends</span></label><label class="opt" id="opt-14-2"><input type="radio" name="q14" value="2"><span>C. To learn new languages</span></label><label class="opt" id="opt-14-3"><input type="radio" name="q14" value="3"><span>D. To have new experiences</span></label><label class="opt" id="opt-14-4"><input type="radio" name="q14" value="4"><span>E. To escape a routine life</span></label>
+      </div>
+      <div class="explain" id="exp-14">Lina travels mainly to have new experiences.</div>
+    </div>
+    <div class="qcard" data-q="15">
+      <div class="qtag">L16</div>
+      <p class="stem">Saiful — main reason for travelling</p>
+      <div class="opts">
+        <label class="opt" id="opt-15-0"><input type="radio" name="q15" value="0"><span>A. To become more creative</span></label><label class="opt" id="opt-15-1"><input type="radio" name="q15" value="1"><span>B. To make new friends</span></label><label class="opt" id="opt-15-2"><input type="radio" name="q15" value="2"><span>C. To learn new languages</span></label><label class="opt" id="opt-15-3"><input type="radio" name="q15" value="3"><span>D. To have new experiences</span></label><label class="opt" id="opt-15-4"><input type="radio" name="q15" value="4"><span>E. To escape a routine life</span></label>
+      </div>
+      <div class="explain" id="exp-15">Saiful travels to make new friends.</div>
+    </div>
+    <div class="qcard" data-q="16">
+      <div class="qtag">L17</div>
+      <p class="stem">Sarah — main reason for travelling</p>
+      <div class="opts">
+        <label class="opt" id="opt-16-0"><input type="radio" name="q16" value="0"><span>A. To become more creative</span></label><label class="opt" id="opt-16-1"><input type="radio" name="q16" value="1"><span>B. To make new friends</span></label><label class="opt" id="opt-16-2"><input type="radio" name="q16" value="2"><span>C. To learn new languages</span></label><label class="opt" id="opt-16-3"><input type="radio" name="q16" value="3"><span>D. To have new experiences</span></label><label class="opt" id="opt-16-4"><input type="radio" name="q16" value="4"><span>E. To escape a routine life</span></label>
+      </div>
+      <div class="explain" id="exp-16">Sarah travels to escape her routine life.</div>
+    </div>
+      <button class="part-submit" data-part="Part III — Matching">CHECK PART III</button>
+      <div class="part-result" id="result-3"></div>
+    </div>
+    </article>
+    <article class="part " data-part-name="Part IV — Radio Interview">
+      <button class="part-head">
+        <div class="part-num">4</div>
+        <div class="part-title"><b>Part IV — Radio Interview</b><span>Questions 18–24</span></div>
+        <div class="chev">+</div>
+      </button>
+      <div class="part-body">
+      <div class="audio">
+        <div class="audio-head"><div><b>Part IV · Radio Interview</b><span>Dr Ranjit Singh</span></div><span class="audio-pill">Questions 18–24</span></div>
+        <iframe src="https://drive.google.com/file/d/1-LEHYtc22LskHNUe32tC7bqio6jLS6F6/preview" allow="autoplay"></iframe>
+        <p>Play the audio first, then answer the questions in this Part.</p>
+      </div>
+      <div class="clue-mini">
+        <b>Need CLUE?</b>
+        <span>Check the question → Listen for clues → Understand the final meaning → Eliminate distractors.</span>
+      </div>
+    
+    <div class="qcard" data-q="17">
+      <div class="qtag">L18</div>
+      <p class="stem">According to Dr Ranjit Singh, the most common reason people lie is to</p>
+      <div class="opts">
+        <label class="opt" id="opt-17-0"><input type="radio" name="q17" value="0"><span>A. avoid punishment</span></label><label class="opt" id="opt-17-1"><input type="radio" name="q17" value="1"><span>B. protect a friend</span></label><label class="opt" id="opt-17-2"><input type="radio" name="q17" value="2"><span>C. win admiration from others</span></label>
+      </div>
+      <div class="explain" id="exp-17">Avoiding punishment is described as the most common reason for lying.</div>
+    </div>
+    <div class="qcard" data-q="18">
+      <div class="qtag">L19</div>
+      <p class="stem">A lie is considered “serious” mainly because</p>
+      <div class="opts">
+        <label class="opt" id="opt-18-0"><input type="radio" name="q18" value="0"><span>A. a rule or law has been broken</span></label><label class="opt" id="opt-18-1"><input type="radio" name="q18" value="1"><span>B. the listener already suspects the truth</span></label><label class="opt" id="opt-18-2"><input type="radio" name="q18" value="2"><span>C. it is told to a stranger</span></label>
+      </div>
+      <div class="explain" id="exp-18">A lie becomes serious when a rule or law has been broken.</div>
+    </div>
+    <div class="qcard" data-q="19">
+      <div class="qtag">L20</div>
+      <p class="stem">Serious lies are often easy to detect because the liar’s fear of punishment shows in their</p>
+      <div class="opts">
+        <label class="opt" id="opt-19-0"><input type="radio" name="q19" value="0"><span>A. handwriting and choice of words only</span></label><label class="opt" id="opt-19-1"><input type="radio" name="q19" value="1"><span>B. facial expressions, body movements, voice or words</span></label><label class="opt" id="opt-19-2"><input type="radio" name="q19" value="2"><span>C. ability to remember small details</span></label>
+      </div>
+      <div class="explain" id="exp-19">Fear may show in facial expressions, body movements, voice or words.</div>
+    </div>
+    <div class="qcard" data-q="20">
+      <div class="qtag">L21</div>
+      <p class="stem">Parents who teach their children to say they are at home when they are not are encouraging a</p>
+      <div class="opts">
+        <label class="opt" id="opt-20-0"><input type="radio" name="q20" value="0"><span>A. lie to protect someone else from harm</span></label><label class="opt" id="opt-20-1"><input type="radio" name="q20" value="1"><span>B. self-protection lie</span></label><label class="opt" id="opt-20-2"><input type="radio" name="q20" value="2"><span>C. polite lie</span></label>
+      </div>
+      <div class="explain" id="exp-20">This is described as a self-protection lie.</div>
+    </div>
+    <div class="qcard" data-q="21">
+      <div class="qtag">L22</div>
+      <p class="stem">According to Dr Ranjit Singh, teenagers often hide who they were talking to on the phone mainly to</p>
+      <div class="opts">
+        <label class="opt" id="opt-21-0"><input type="radio" name="q21" value="0"><span>A. avoid being punished by their parents</span></label><label class="opt" id="opt-21-1"><input type="radio" name="q21" value="1"><span>B. maintain their own privacy</span></label><label class="opt" id="opt-21-2"><input type="radio" name="q21" value="2"><span>C. impress their parents</span></label>
+      </div>
+      <div class="explain" id="exp-21">The example illustrates lying to maintain privacy.</div>
+    </div>
+    <div class="qcard" data-q="22">
+      <div class="qtag">L23</div>
+      <p class="stem">Dr Ranjit Singh does not consider a remark like “that colour looks good on you” to be a lie because</p>
+      <div class="opts">
+        <label class="opt" id="opt-22-0"><input type="radio" name="q22" value="0"><span>A. the speaker always means what they say</span></label><label class="opt" id="opt-22-1"><input type="radio" name="q22" value="1"><span>B. the listener does not expect to be told the truth</span></label><label class="opt" id="opt-22-2"><input type="radio" name="q22" value="2"><span>C. it is against the law to say otherwise</span></label>
+      </div>
+      <div class="explain" id="exp-22">The listener does not expect literal truth in this kind of polite remark.</div>
+    </div>
+    <div class="qcard" data-q="23">
+      <div class="qtag">L24</div>
+      <p class="stem">People who lie for “the sheer thrill of it” are mainly driven by</p>
+      <div class="opts">
+        <label class="opt" id="opt-23-0"><input type="radio" name="q23" value="0"><span>A. the power of controlling information</span></label><label class="opt" id="opt-23-1"><input type="radio" name="q23" value="1"><span>B. the need for money</span></label><label class="opt" id="opt-23-2"><input type="radio" name="q23" value="2"><span>C. fear of being punished</span></label>
+      </div>
+      <div class="explain" id="exp-23">They enjoy the power of controlling information.</div>
+    </div>
+      <button class="part-submit" data-part="Part IV — Radio Interview">CHECK PART IV</button>
+      <div class="part-result" id="result-4"></div>
+    </div>
+    </article>
+    <article class="part " data-part-name="Part V — Dialogues">
+      <button class="part-head">
+        <div class="part-num">5</div>
+        <div class="part-title"><b>Part V — Dialogues</b><span>Questions 25–30</span></div>
+        <div class="chev">+</div>
+      </button>
+      <div class="part-body">
+      <div class="audio">
+        <div class="audio-head"><div><b>Part V · Dialogues</b><span>Hearing · Water · Dengue</span></div><span class="audio-pill">Questions 25–30</span></div>
+        <iframe src="https://drive.google.com/file/d/1tgXGA_NX-UuQe-MdCZFQb2zPN0QKs2LV/preview" allow="autoplay"></iframe>
+        <p>Play the audio first, then answer the questions in this Part.</p>
+      </div>
+      <div class="clue-mini">
+        <b>Need CLUE?</b>
+        <span>Check the question → Listen for clues → Understand the final meaning → Eliminate distractors.</span>
+      </div>
+    
+    <div class="qcard" data-q="24">
+      <div class="qtag">L25</div>
+      <p class="stem">One early sign of hearing loss that Madame Fauzia’s own family complained about was her</p>
+      <div class="opts">
+        <label class="opt" id="opt-24-0"><input type="radio" name="q24" value="0"><span>A. constantly turning up the television or radio volume</span></label><label class="opt" id="opt-24-1"><input type="radio" name="q24" value="1"><span>B. talking too loudly on the phone</span></label><label class="opt" id="opt-24-2"><input type="radio" name="q24" value="2"><span>C. forgetting people’s names</span></label>
+      </div>
+      <div class="explain" id="exp-24">Constantly increasing the TV or radio volume is an early sign of hearing loss.</div>
+    </div>
+    <div class="qcard" data-q="25">
+      <div class="qtag">L26</div>
+      <p class="stem">Madame Fauzia realises she feels like a “deaf person” whenever she flies because</p>
+      <div class="opts">
+        <label class="opt" id="opt-25-0"><input type="radio" name="q25" value="0"><span>A. the cabin noise is too loud</span></label><label class="opt" id="opt-25-1"><input type="radio" name="q25" value="1"><span>B. blocked ears occur in an enclosed space like an aeroplane</span></label><label class="opt" id="opt-25-2"><input type="radio" name="q25" value="2"><span>C. she forgets her hearing aid at home</span></label>
+      </div>
+      <div class="explain" id="exp-25">Blocked ears can occur in an enclosed space like an aeroplane.</div>
+    </div>
+    <div class="qcard" data-q="26">
+      <div class="qtag">L27</div>
+      <p class="stem">According to Mr Alvin, a single leaking tap can waste as much as</p>
+      <div class="opts">
+        <label class="opt" id="opt-26-0"><input type="radio" name="q26" value="0"><span>A. one litre of water a day</span></label><label class="opt" id="opt-26-1"><input type="radio" name="q26" value="1"><span>B. three litres of water a day</span></label><label class="opt" id="opt-26-2"><input type="radio" name="q26" value="2"><span>C. ten litres of water a day</span></label>
+      </div>
+      <div class="explain" id="exp-26">A leaking tap can waste as much as three litres of water a day.</div>
+    </div>
+    <div class="qcard" data-q="27">
+      <div class="qtag">L28</div>
+      <p class="stem">An example of a water-efficient appliance Mr Alvin recommends is</p>
+      <div class="opts">
+        <label class="opt" id="opt-27-0"><input type="radio" name="q27" value="0"><span>A. an automatic sensor tap</span></label><label class="opt" id="opt-27-1"><input type="radio" name="q27" value="1"><span>B. a low-flow shower head</span></label><label class="opt" id="opt-27-2"><input type="radio" name="q27" value="2"><span>C. a rainwater collection tank</span></label>
+      </div>
+      <div class="explain" id="exp-27">He recommends an automatic sensor tap.</div>
+    </div>
+    <div class="qcard" data-q="28">
+      <div class="qtag">L29</div>
+      <p class="stem">A person who recovers from dengue fever caused by virus type 1 is protected from</p>
+      <div class="opts">
+        <label class="opt" id="opt-28-0"><input type="radio" name="q28" value="0"><span>A. all four dengue virus types</span></label><label class="opt" id="opt-28-1"><input type="radio" name="q28" value="1"><span>B. virus type 1 only</span></label><label class="opt" id="opt-28-2"><input type="radio" name="q28" value="2"><span>C. mosquito bites in general</span></label>
+      </div>
+      <div class="explain" id="exp-28">Recovery protects against that specific virus type only.</div>
+    </div>
+    <div class="qcard" data-q="29">
+      <div class="qtag">L30</div>
+      <p class="stem">Red spots appearing on the skin during dengue fever are a sign that</p>
+      <div class="opts">
+        <label class="opt" id="opt-29-0"><input type="radio" name="q29" value="0"><span>A. the fever has already ended</span></label><label class="opt" id="opt-29-1"><input type="radio" name="q29" value="1"><span>B. blood vessels have become damaged</span></label><label class="opt" id="opt-29-2"><input type="radio" name="q29" value="2"><span>C. the patient no longer needs treatment</span></label>
+      </div>
+      <div class="explain" id="exp-29">Red spots can indicate damaged blood vessels.</div>
+    </div>
+      <button class="part-submit" data-part="Part V — Dialogues">CHECK PART V</button>
+      <div class="part-result" id="result-5"></div>
+    </div>
+    </article></section>
+<section class="summary"><h2>Finish the Full Paper</h2><p style="margin-top:5px;font-size:13px;line-height:1.4;font-weight:700;color:#555">You can check each Part as you go, then submit the whole paper for your overall score.</p><button class="final-submit" id="finalSubmit">SUBMIT FULL LISTENING PRACTICE →</button><div class="summary-result" id="summaryResult"></div></section>
 </main>
-<div id="toast" class="toast"></div>
-<script src="js/muet-shared.js?v=20260726-1"></script>
-<script src="js/backend-config.js?v=20260726-1"></script>
+<nav class="nav"><a href="muet-hub.html"><img src="assets/heroes/nav-home.svg"><span>Home</span></a><a href="guidance.html"><img src="assets/heroes/icon-muet-intro.svg"><span>Guide</span></a><a class="active" href="vault.html"><img src="assets/heroes/nav-vault.svg"><span>Vault</span></a><a href="progress.html"><img src="assets/heroes/nav-progress.svg"><span>Progress</span></a><a href="settings.html"><img src="assets/heroes/nav-profile.svg"><span>Profile</span></a></nav>
 <script>
-// Read vaultId from activeVault so Starter Vault and Vault 1 both work correctly
-const _activeVault = MUET.loadActiveVault();
-const VAULT_ID     = (_activeVault && _activeVault.vaultId) ? _activeVault.vaultId : 'VAULT-01';
-const VAULT_TITLE  = (_activeVault && _activeVault.vaultTitle) ? _activeVault.vaultTitle : 'Vault 1';
-const IS_STARTER      = VAULT_ID === 'VAULT-00';
-const vaultWelcomePage = IS_STARTER ? 'starter-welcome.html' : 'vault1-welcome.html';
-// ── VAULT 01 · MUET Session 3 2022 · Listening 800/1 ────────────────────
-// 30 questions · 5 parts · Audio tracks connected from Google Drive
-// Answer key is provisional and must be verified against the official key before final deployment
-const VAULT_AUDIO = {
-  "Part I — Conversation": {
-    "title": "Part I Audio — Conversation: Leanne and Amir",
-    "track": "01 Track 1.mp3",
-    "id": "1QQj-1FvvZUddWZwo8LeipWk55mPePYum",
-    "url": "https://drive.google.com/file/d/1QQj-1FvvZUddWZwo8LeipWk55mPePYum/preview"
-  },
-  "Part II — Talk": {
-    "title": "Part II Audio — Talk by Dr Yusof Lokman",
-    "track": "02 Track 2.mp3",
-    "id": "112QBpHeyqud6f4UjBy_F_-HDJnWLmTYP",
-    "url": "https://drive.google.com/file/d/112QBpHeyqud6f4UjBy_F_-HDJnWLmTYP/preview"
-  },
-  "Part III — Matching": {
-    "title": "Part III Audio — Lena, Cy and Sarah on travelling",
-    "track": "04 Track 4.mp3",
-    "id": "16hCkjfiQSaVwvTyC-1kx7GV1liFq013h",
-    "url": "https://drive.google.com/file/d/16hCkjfiQSaVwvTyC-1kx7GV1liFq013h/preview"
-  },
-  "Part IV — Radio Interview": {
-    "title": "Part IV Audio — Interview with Dr Ranjit Singh (why people lie)",
-    "track": "05 Track 5.mp3",
-    "id": "1-LEHYtc22LskHNUe32tC7bqio6jLS6F6",
-    "url": "https://drive.google.com/file/d/1-LEHYtc22LskHNUe32tC7bqio6jLS6F6/preview"
-  },
-  "Part V — Dialogue 1": {
-    "title": "Part V Audio (all 3 dialogues) — Dialogue 1: Hearing Aid Consultation",
-    "track": "06 Track 6.mp3",
-    "id": "1tgXGA_NX-UuQe-MdCZFQb2zPN0QKs2LV",
-    "url": "https://drive.google.com/file/d/1tgXGA_NX-UuQe-MdCZFQb2zPN0QKs2LV/preview",
-    "note": "This recording contains all three Part V dialogues back to back. Dialogue 1 (hearing aid) plays first."
-  },
-  "Part V — Dialogue 2": {
-    "title": "Part V Audio (all 3 dialogues) — Dialogue 2: Water Conservation",
-    "track": "06 Track 6.mp3",
-    "id": "1tgXGA_NX-UuQe-MdCZFQb2zPN0QKs2LV",
-    "url": "https://drive.google.com/file/d/1tgXGA_NX-UuQe-MdCZFQb2zPN0QKs2LV/preview",
-    "note": "Same recording as Dialogue 1 — skip ahead to the second dialogue (water conservation)."
-  },
-  "Part V — Dialogue 3": {
-    "title": "Part V Audio (all 3 dialogues) — Dialogue 3: Dengue Fever",
-    "track": "06 Track 6.mp3",
-    "id": "1tgXGA_NX-UuQe-MdCZFQb2zPN0QKs2LV",
-    "url": "https://drive.google.com/file/d/1tgXGA_NX-UuQe-MdCZFQb2zPN0QKs2LV/preview",
-    "note": "Same recording as Dialogue 1 — skip ahead to the third dialogue (dengue fever)."
-  }
-};
+const answers=[1, 2, 2, 0, 1, 1, 0, 1, 2, 2, 0, 1, 2, 2, 3, 1, 4, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1];
+const explanations=["Leanne says she is the president of the Pet Club \u2014 she is in charge of the club.", "Leanne says tortoises are popular as pets now.", "Leanne explains Tito lives in the garden because he has his own house there.", "Leanne says the design was simple, so it was easy to build.", "The stones help Tito move around easily.", "Amir is surprised that tortoises are sensitive to touch.", "The Pet Club's table is at the back-left corner of the hall.", "Dr Yusof says he went to primary school in Negeri Sembilan.", "His first job was at Elizabeth University.", "His grandmother encouraged him and told him education was the key to success.", "His father read the newspaper every day to improve his English.", "He used weekends to do part-time teaching.", "He balanced study and work during his postgraduate studies.", "His key advice is to aim high in whatever you do.", "Lina travels mainly to have new experiences.", "Saiful travels to make new friends.", "Sarah travels to escape her routine life.", "Avoiding punishment is described as the most common reason for lying.", "A lie becomes serious when a rule or law has been broken.", "Fear may show in facial expressions, body movements, voice or words.", "This is described as a self-protection lie.", "The example illustrates lying to maintain privacy.", "The listener does not expect literal truth in this kind of polite remark.", "They enjoy the power of controlling information.", "Constantly increasing the TV or radio volume is an early sign of hearing loss.", "Blocked ears can occur in an enclosed space like an aeroplane.", "A leaking tap can waste as much as three litres of water a day.", "He recommends an automatic sensor tap.", "Recovery protects against that specific virus type only.", "Red spots can indicate damaged blood vessels."];
+const partMap={"Part I \u2014 Conversation": [0, 1, 2, 3, 4, 5, 6], "Part II \u2014 Talk": [7, 8, 9, 10, 11, 12, 13], "Part III \u2014 Matching": [14, 15, 16], "Part IV \u2014 Radio Interview": [17, 18, 19, 20, 21, 22, 23], "Part V \u2014 Dialogues": [24, 25, 26, 27, 28, 29]};
+document.querySelectorAll(".part-head").forEach(btn=>btn.addEventListener("click",()=>{
+  const current=btn.closest(".part");
+  document.querySelectorAll(".part").forEach(p=>{if(p!==current)p.classList.remove("open");});
+  current.classList.toggle("open");
+  if(current.classList.contains("open")) setTimeout(()=>current.scrollIntoView({behavior:"smooth",block:"start"}),80);
+}));
 
-const lstQuestions = [
-  {
-    "id": "L1",
-    "part": "Part I — Conversation",
-    "stem": "Leanne is happy because she can",
-    "options": [
-      "A. bring her pet to school",
-      "B. be in charge of her club",
-      "C. talk to Amir about her pet"
-    ],
-    "answer": 1,
-    "explanation": "Leanne says she is the president of the Pet Club — she is 'in charge' of the club. Option A is wrong (she cannot bring Tito to school). Option C is a distractor — talking to Amir happens but is not the reason she is happy."
-  },
-  {
-    "id": "L2",
-    "part": "Part I — Conversation",
-    "stem": "Leanne agrees with Amir that tortoises are",
-    "options": [
-      "A. rare as pets",
-      "B. famous in movies",
-      "C. popular nowadays"
-    ],
-    "answer": 2,
-    "explanation": "Leanne says tortoises are 'popular' as pets now. Option A (rare) is the opposite. Option B (famous in movies) is not mentioned."
-  },
-  {
-    "id": "L3",
-    "part": "Part I — Conversation",
-    "stem": "Tito lives in the garden because he",
-    "options": [
-      "A. smells",
-      "B. is a pet",
-      "C. has a house"
-    ],
-    "answer": 2,
-    "explanation": "Leanne explains Tito lives in the garden because he has his own house there. Option A (smells) is a distractor Amir raises but Leanne dismisses it."
-  },
-  {
-    "id": "L4",
-    "part": "Part I — Conversation",
-    "stem": "Tito’s house was easy to build because",
-    "options": [
-      "A. it was a simple design",
-      "B. the family built it together",
-      "C. Leanne’s father is a good builder"
-    ],
-    "answer": 0,
-    "explanation": "Leanne says the design was simple — it was easy to build because of the simple design. Option B (family built together) is not stated. Option C is not mentioned."
-  },
-  {
-    "id": "L5",
-    "part": "Part I — Conversation",
-    "stem": "Leanne covered the floor with stones to",
-    "options": [
-      "A. decorate the floor",
-      "B. let Tito move easily",
-      "C. protect Tito from the weather"
-    ],
-    "answer": 1,
-    "explanation": "Leanne covered the floor with stones so Tito could move around easily — stones provide grip for tortoise movement. Option A (decorate) is not mentioned. Option C (weather) is not the reason given."
-  },
-  {
-    "id": "L6",
-    "part": "Part I — Conversation",
-    "stem": "Amir is surprised that tortoises are",
-    "options": [
-      "A. easy to love",
-      "B. sensitive to touch",
-      "C. born with hard skin"
-    ],
-    "answer": 1,
-    "explanation": "Amir is surprised that tortoises are sensitive to touch — they can feel through their shells. Option A is not what surprises him. Option C (born with hard skin) is a distractor."
-  },
-  {
-    "id": "L7",
-    "part": "Part I — Conversation",
-    "stem": "Where is The Pet Club's table positioned in the hall?",
-    "options": [
-      "A. At the back-left corner of the hall",
-      "B. Near the main entrance, on the right",
-      "C. In the very centre of the hall"
-    ],
-    "answer": 0,
-    "explanation": "Leanne describes the Pet Club's table as being at the back-left corner of the hall — option A. Note: in the real exam this question uses a floor-plan picture; here it has been adapted into a text description of the same position since no diagram image is available in this practice version."
-  },
-  {
-    "id": "L8",
-    "part": "Part II — Talk",
-    "stem": "Dr Yusof went to a primary school in",
-    "options": [
-      "A. Perak",
-      "B. Negeri Sembilan",
-      "C. the United Kingdom"
-    ],
-    "answer": 1,
-    "explanation": "Dr Yusof says he went to a primary school in Negeri Sembilan. Option A (Perak) is mentioned as where he later studied. Option C (UK) is where he did postgraduate work."
-  },
-  {
-    "id": "L9",
-    "part": "Part II — Talk",
-    "stem": "Dr Yusof’s first job was at",
-    "options": [
-      "A. KL University",
-      "B. Charles University",
-      "C. Elizabeth University"
-    ],
-    "answer": 2,
-    "explanation": "Dr Yusof says his first job was at Elizabeth University. Option A (KL University) is a distractor. Option B (Charles University) is not his first job."
-  },
-  {
-    "id": "L10",
-    "part": "Part II — Talk",
-    "stem": "Who encouraged Dr Yusof to succeed in education?",
-    "options": [
-      "A. His parents",
-      "B. His teachers",
-      "C. His grandmother"
-    ],
-    "answer": 2,
-    "explanation": "Dr Yusof says his grandmother encouraged him — she told him education was the key to success. Option A (parents) is a distractor. Option B (teachers) is not stated as the main encourager."
-  },
-  {
-    "id": "L11",
-    "part": "Part II — Talk",
-    "stem": "Dr Yusof’s father took the extra effort to learn English by",
-    "options": [
-      "A. reading the newspaper daily",
-      "B. carrying books to the school office",
-      "C. volunteering to clean his teacher’s house"
-    ],
-    "answer": 0,
-    "explanation": "Dr Yusof's father read the newspaper every day to improve his English. Option B (carrying books) is not stated. Option C (cleaning teacher's house) is a distractor detail."
-  },
-  {
-    "id": "L12",
-    "part": "Part II — Talk",
-    "stem": "During his A-Level, Dr Yusof used his weekends to",
-    "options": [
-      "A. assist his classmates",
-      "B. do part-time teaching",
-      "C. complete assignments"
-    ],
-    "answer": 1,
-    "explanation": "During A-Level, Dr Yusof used weekends to do part-time teaching to support himself. Option A (assist classmates) is not mentioned. Option C (assignments) is a distractor."
-  },
-  {
-    "id": "L13",
-    "part": "Part II — Talk",
-    "stem": "While doing his postgraduate studies, Dr Yusof",
-    "options": [
-      "A. studied every day",
-      "B. avoided working part-time",
-      "C. balanced his study and work"
-    ],
-    "answer": 2,
-    "explanation": "Dr Yusof says he balanced study and work during his postgraduate studies. Option A (studied every day) is too extreme. Option B (avoided working) is incorrect — he worked."
-  },
-  {
-    "id": "L14",
-    "part": "Part II — Talk",
-    "stem": "The most important advice to the new students is to",
-    "options": [
-      "A. learn from your friends",
-      "B. join many student activities",
-      "C. aim high in whatever you do"
-    ],
-    "answer": 2,
-    "explanation": "Dr Yusof's most important advice is to aim high in whatever you do. Option A (learn from friends) is not the main advice. Option B (join activities) is mentioned but not emphasised as most important."
-  },
-  {
-    "id": "L15",
-    "part": "Part III — Matching",
-    "stem": "Lina — main reason for travelling",
-    "options": [
-      "A. To become more creative",
-      "B. To make new friends",
-      "C. To learn new languages",
-      "D. To have new experiences",
-      "E. To escape a routine life"
-    ],
-    "answer": 3,
-    "explanation": "Lina says she travels mainly to have new experiences — to discover things she has never encountered before. Option D is correct."
-  },
-  {
-    "id": "L16",
-    "part": "Part III — Matching",
-    "stem": "Saiful — main reason for travelling",
-    "options": [
-      "A. To become more creative",
-      "B. To make new friends",
-      "C. To learn new languages",
-      "D. To have new experiences",
-      "E. To escape a routine life"
-    ],
-    "answer": 1,
-    "explanation": "Saiful says he travels to make new friends — meeting people from different backgrounds is his main reason. Option B is correct."
-  },
-  {
-    "id": "L17",
-    "part": "Part III — Matching",
-    "stem": "Sarah — main reason for travelling",
-    "options": [
-      "A. To become more creative",
-      "B. To make new friends",
-      "C. To learn new languages",
-      "D. To have new experiences",
-      "E. To escape a routine life"
-    ],
-    "answer": 4,
-    "explanation": "Sarah says she travels to escape her routine life — she finds daily life boring and travel refreshes her. Option E is correct."
-  },
-  {
-    "id": "L18",
-    "part": "Part IV — Radio Interview",
-    "stem": "According to Dr Ranjit Singh, the most common reason people lie is to",
-    "options": [
-      "A. avoid punishment",
-      "B. protect a friend",
-      "C. win admiration from others"
-    ],
-    "answer": 0,
-    "explanation": "Dr Ranjit Singh says avoiding punishment is the most common reason for lying, true for both children and adults. Options B and C are also mentioned later in the interview but are not described as the most common reason."
-  },
-  {
-    "id": "L19",
-    "part": "Part IV — Radio Interview",
-    "stem": "A lie is considered “serious” mainly because",
-    "options": [
-      "A. a rule or law has been broken",
-      "B. the listener already suspects the truth",
-      "C. it is told to a stranger"
-    ],
-    "answer": 0,
-    "explanation": "The interview explains a lie becomes serious when a rule or law is broken, such as a student lying about a broken computer to excuse a late assignment. Options B and C are not stated as the defining feature."
-  },
-  {
-    "id": "L20",
-    "part": "Part IV — Radio Interview",
-    "stem": "Serious lies are often easy to detect because the liar’s fear of punishment shows in their",
-    "options": [
-      "A. handwriting and choice of words only",
-      "B. facial expressions, body movements, voice or words",
-      "C. ability to remember small details"
-    ],
-    "answer": 1,
-    "explanation": "Dr Ranjit Singh states the fear of being punished is so great it shows in the liar's facial expressions, body movements, voice or words. Options A and C are distractors not mentioned."
-  },
-  {
-    "id": "L21",
-    "part": "Part IV — Radio Interview",
-    "stem": "Parents who teach their children to say they are at home when they are not are encouraging a",
-    "options": [
-      "A. lie to protect someone else from harm",
-      "B. self-protection lie",
-      "C. polite lie"
-    ],
-    "answer": 1,
-    "explanation": "Dr Ranjit Singh describes this as a self-protection lie — the children are protecting themselves. Option A is a different category (protecting someone else), and Option C refers to polite social remarks."
-  },
-  {
-    "id": "L22",
-    "part": "Part IV — Radio Interview",
-    "stem": "According to Dr Ranjit Singh, teenagers often hide who they were talking to on the phone mainly to",
-    "options": [
-      "A. avoid being punished by their parents",
-      "B. maintain their own privacy",
-      "C. impress their parents"
-    ],
-    "answer": 1,
-    "explanation": "The example of the daughter naming her friend instead of her boyfriend illustrates lying to maintain privacy. Options A and C are not the reason given for this type of lie."
-  },
-  {
-    "id": "L23",
-    "part": "Part IV — Radio Interview",
-    "stem": "Dr Ranjit Singh does not consider a remark like “that colour looks good on you” to be a lie because",
-    "options": [
-      "A. the speaker always means what they say",
-      "B. the listener does not expect to be told the truth",
-      "C. it is against the law to say otherwise"
-    ],
-    "answer": 1,
-    "explanation": "He explains the listener does not expect the literal truth in polite remarks — they are said because it is considered polite in the culture. Option A contradicts the point being made, and C is not mentioned."
-  },
-  {
-    "id": "L24",
-    "part": "Part IV — Radio Interview",
-    "stem": "People who lie for “the sheer thrill of it” are mainly driven by",
-    "options": [
-      "A. the power of controlling information",
-      "B. the need for money",
-      "C. fear of being punished"
-    ],
-    "answer": 0,
-    "explanation": "Dr Ranjit Singh says these people enjoy the power they get from controlling information, and many children lie to their parents simply to see if they can get away with it. Option C is the opposite motivation described earlier."
-  },
-  {
-    "id": "L25",
-    "part": "Part V — Dialogue 1",
-    "stem": "One early sign of hearing loss that Madame Fauzia’s own family complained about was her",
-    "options": [
-      "A. constantly turning up the television or radio volume",
-      "B. talking too loudly on the phone",
-      "C. forgetting people’s names"
-    ],
-    "answer": 0,
-    "explanation": "Akmal explains that constantly turning up the TV or radio volume is a sign of hearing loss, matching Madame Fauzia's own family's complaint. Options B and C are not mentioned."
-  },
-  {
-    "id": "L26",
-    "part": "Part V — Dialogue 1",
-    "stem": "Madame Fauzia realises she feels like a “deaf person” whenever she flies because",
-    "options": [
-      "A. the cabin noise is too loud",
-      "B. blocked ears occur in an enclosed space like an aeroplane",
-      "C. she forgets her hearing aid at home"
-    ],
-    "answer": 1,
-    "explanation": "Akmal explains blocked ears occur in an enclosed space like an aeroplane, which is why she feels this way when flying. Options A and C are not stated as the cause."
-  },
-  {
-    "id": "L27",
-    "part": "Part V — Dialogue 2",
-    "stem": "According to Mr Alvin, a single leaking tap can waste as much as",
-    "options": [
-      "A. one litre of water a day",
-      "B. three litres of water a day",
-      "C. ten litres of water a day"
-    ],
-    "answer": 1,
-    "explanation": "Mr Alvin states a leaking tap could waste as much as three litres of water a day. Options A and C are not the figure given."
-  },
-  {
-    "id": "L28",
-    "part": "Part V — Dialogue 2",
-    "stem": "An example of a water-efficient appliance Mr Alvin recommends is",
-    "options": [
-      "A. an automatic sensor tap",
-      "B. a low-flow shower head",
-      "C. a rainwater collection tank"
-    ],
-    "answer": 0,
-    "explanation": "Mr Alvin gives the example of an automatic sensor tap, where water only comes out when the tap senses hands nearby. Options B and C are not mentioned in the dialogue."
-  },
-  {
-    "id": "L29",
-    "part": "Part V — Dialogue 3",
-    "stem": "A person who recovers from dengue fever caused by virus type 1 is protected from",
-    "options": [
-      "A. all four dengue virus types",
-      "B. virus type 1 only",
-      "C. mosquito bites in general"
-    ],
-    "answer": 1,
-    "explanation": "Dr Andy explains recovering from one dengue virus type only protects against that specific type — a person can still get dengue again from a different type. Option A is the opposite of what is stated."
-  },
-  {
-    "id": "L30",
-    "part": "Part V — Dialogue 3",
-    "stem": "Red spots appearing on the skin during dengue fever are a sign that",
-    "options": [
-      "A. the fever has already ended",
-      "B. blood vessels have become damaged",
-      "C. the patient no longer needs treatment"
-    ],
-    "answer": 1,
-    "explanation": "Dr Andy explains red spots appear when blood vessels become damaged, which is when the illness can turn life-threatening. Options A and C are incorrect — this is a warning sign, not a recovery sign."
-  }
-];
-const Lst = (() => {
-  let scriptShown = false;
-
-  function openStep(id) {
-    toggle(id, true);
-    setTimeout(() => document.getElementById('body-'+id)?.scrollIntoView({behavior:'smooth',block:'start'}), 100);
-  }
-
-  function toggle(id, forceOpen = false) {
-    const body = document.getElementById('body-'+id);
-    const chev = document.getElementById('chev-'+id);
-    if (!body) return;
-    const open = forceOpen || body.style.display === 'none';
-    body.style.display = open ? 'block' : 'none';
-    if (chev) chev.textContent = open ? '▴' : '▾';
-  }
-
-  function toggleScript() {
-    scriptShown = !scriptShown;
-    document.getElementById('practiceScript').style.display = scriptShown ? 'block' : 'none';
-    document.getElementById('scriptToggleBtn').textContent  = scriptShown ? 'Hide Script' : 'Show Script';
-  }
-
-  function renderQuestions() {
-    const partGroups = {};
-    lstQuestions.forEach((q, qi) => {
-      if (!partGroups[q.part]) partGroups[q.part] = [];
-      partGroups[q.part].push({q, qi});
+function checkIndexes(indexes){
+  let correct=0, answered=0;
+  indexes.forEach(i=>{
+    const sel=document.querySelector(`input[name="q${i}"]:checked`);
+    const val=sel?Number(sel.value):-1;
+    if(sel) answered++;
+    if(val===answers[i]) correct++;
+    document.querySelectorAll(`input[name="q${i}"]`).forEach(r=>{
+      const oi=Number(r.value), lab=document.getElementById(`opt-${i}-${oi}`);
+      lab.classList.remove("correct","wrong");
+      if(oi===answers[i]) lab.classList.add("correct");
+      else if(oi===val) lab.classList.add("wrong");
     });
-
-    const partOrder = [
-      'Part I — Conversation',
-      'Part II — Talk',
-      'Part III — Matching',
-      'Part IV — Radio Interview',
-      'Part V — Dialogue 1',
-      'Part V — Dialogue 2',
-      'Part V — Dialogue 3'
-    ];
-
-    let html = '';
-
-    partOrder.forEach(part => {
-      if (!partGroups[part]) return;
-      const audio = VAULT_AUDIO[part] || VAULT_AUDIO[part.replace(/ \(.*?\)/,'')] || null;
-
-      html += `<div class="audio-part-card">
-        <div class="audio-part-head">
-          <div class="audio-part-title">${audio ? audio.title : part}</div>
-          ${audio ? `<a class="audio-drive-link" href="https://drive.google.com/file/d/${audio.id}/view" target="_blank">Open Audio</a>` : ''}
-        </div>
-        ${audio ? `<iframe class="audio-frame" src="${audio.url}" allow="autoplay"></iframe>
-        <div class="part-note">${audio.note || `Connected to Google Drive: ${audio.track}. Play this audio before answering the questions below.`}</div>` : `<div class="part-note">Audio link pending for this part.</div>`}
-      </div>`;
-
-      partGroups[part].forEach(({q, qi}) => {
-        html += `<div class="card">
-          <div class="qtag">${q.part} · ${q.id}</div>
-          <p style="font-weight:900;margin-bottom:12px">${q.id}. ${q.stem}</p>
-          <div class="options" id="lopts-${qi}">
-            ${q.options.map((opt, oi) => `
-              <label class="option" id="lopt-${qi}-${oi}">
-                <input type="radio" name="lq${qi}" value="${oi}"/>
-                <span>${opt}</span>
-              </label>`).join('')}
-          </div>
-          <div class="explain" id="lexp-${qi}">${q.explanation}</div>
-        </div>`;
-      });
-    });
-
-    document.getElementById('lstQList').innerHTML = html;
-  }
-  function togglePracticeGuide() {
-    const panel = document.getElementById('practiceGuidePanel');
-    if (!panel) return;
-    panel.classList.toggle('show');
-    if (panel.classList.contains('show')) {
-      panel.scrollIntoView({behavior:'smooth', block:'center'});
-    }
-  }
-  function getStudentProfile() {
-    try {
-      return JSON.parse(localStorage.getItem('muet_profile') || '{}');
-    } catch (err) {
-      return {};
-    }
-  }
-
-  function saveAttemptToBackend(payload) {
-    const profile = getStudentProfile();
-    const enriched = {
-      studentEmail: profile.email || profile.studentEmail || 'demo@student.local',
-      studentName: profile.name || profile.studentName || 'Demo Student',
-      studentRegNo: profile.regNo || profile.studentRegNo || '',
-      classGroup: profile.classGroup || profile.group || '',
-      vaultId: VAULT_ID,
-      ...payload
-    };
-
-    if (typeof saveSmartMuetAttempt === 'function') {
-      saveSmartMuetAttempt(enriched).then(res => {
-        console.log('Smart MUET backend save:', res);
-      }).catch(err => console.warn('Backend save failed:', err));
-    } else {
-      console.warn('Backend helper not loaded. Attempt saved locally only.', enriched);
-    }
-    return enriched;
-  }
-
-  function showFeedbackToast(score90, component) {
-    if (score90 >= 74) MUET.toast(`${component} submitted. Excellent work — Band 5 range!`);
-    else if (score90 >= 53) MUET.toast(`${component} submitted. Good progress — keep improving.`);
-    else MUET.toast(`${component} submitted. Review the Practice Guide and try again.`);
-  }
-
-
-
-
-
-  function submit() {
-    const notes = document.getElementById('lstNotes').value.trim();
-    if (!notes) { MUET.toast('Please write your keyword notes before submitting.'); return; }
-
-    let correct = 0;
-    lstQuestions.forEach((q, qi) => {
-      const sel = document.querySelector(`input[name="lq${qi}"]:checked`);
-      const ans = sel ? parseInt(sel.value) : -1;
-      if (ans === q.answer) correct++;
-      q.options.forEach((_, oi) => {
-        const el = document.getElementById(`lopt-${qi}-${oi}`);
-        if (!el) return;
-        if (oi === q.answer) el.classList.add('correct');
-        else if (oi === ans) el.classList.add('wrong');
-      });
-      document.getElementById(`lexp-${qi}`)?.classList.add('show');
-    });
-
-    const total   = lstQuestions.length;
-    const score90 = Math.round(correct / total * 90);
-    const band    = MUET.scoreToBand(score90);
-
-    const session = { vaultId:VAULT_ID, rawScore:correct, totalQ:total, score90, band, bandLabel:band, notes, date:new Date().toISOString(), xpEarned:70 + correct*3 };
-    const list = MUET.loadSessions('listening');
-    list.push(session);
-    MUET.saveSessions('listening', list);
-    MUET.awardBadge('audio_focus');
-    MUET.addXP(session.xpEarned);
-
-    document.getElementById('resultScore').textContent = `${correct}/${total} correct · ${score90}/90`;
-    document.getElementById('resultBand').textContent  = `Estimated Band ${band}`;
-    const fb = MUET.feedbackText('listening', score90);
-    const strength = score90 >= 74 ? 'Excellent listening focus and answer accuracy.' : score90 >= 53 ? 'Good attempt with useful keyword notes.' : 'You completed the listening practice. Keep improving keyword focus.';
-    const nextAction = score90 >= 74 ? 'Proceed to Writing or try the next timed listening set.' : 'Review keyword notes and beware of distractors before trying again.';
-    document.getElementById('resultDetails').innerHTML = `
-      <div>✅ Strength: ${strength}</div>
-      <div>⚡ Feedback: ${fb}</div>
-      <div>📝 Keyword Notes Saved: ${notes.split(/\s+/).slice(0,18).join(' ')}${notes.split(/\s+/).length>18?'...':''}</div>
-      <div>🎯 Next Action: ${nextAction}</div>
-      <div>🎧 Badge Unlocked: Audio Focus</div>`;
-
-    saveAttemptToBackend({
-      component:'Listening',
-      taskType:'MCQ Listening Test',
-      rawScore:correct,
-      totalItems:total,
-      score90,
-      estimatedBand:band,
-      feedback:fb,
-      nextAction,
-      badgeEarned:'Audio Focus',
-      status:'Auto-marked',
-      notes,
-      answerText:`Keyword notes: ${notes}`,
-      rubric:{
-        engine:'Objective auto-check v1',
-        reviewStatus:'Auto-marked',
-        overallStrength: strength,
-        improvementFocus:'Keyword notes and distractor control',
-        nextAction,
-        criteria:[
-          {name:'Accuracy', score:score90, feedback:fb},
-          {name:'Keyword Notes', score:Math.min(20, Math.max(8, notes.split(/\s+/).length)), feedback:'Keyword notes submitted and saved.'}
-        ]
-      }
-    });
-
-    document.getElementById('resultCard').classList.add('show');
-    showFeedbackToast(score90, 'Listening');
-    window.scrollTo({top: document.body.scrollHeight, behavior:'smooth'});
-    updateVaultProgress();
-  }
-
-  return { openStep, toggle, toggleScript, renderQuestions, submit, togglePracticeGuide };
-})();
-
-function updateVaultProgress() {
-  const prog = MUET.vaultProgress(VAULT_ID);
-  const pct  = Math.round(prog.count / 4 * 100);
-  const bar  = document.getElementById('vaultProgBar');
-  const lbl  = document.getElementById('vaultProgLabel');
-  if (bar) bar.style.width = pct + '%';
-  if (lbl) lbl.textContent  = prog.count + '/4';
+    document.getElementById(`exp-${i}`).classList.add("show");
+  });
+  return {correct,answered,total:indexes.length};
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Issue #3: profile guard — redirect unregistered users
-  if (!MUET.loadProfile()) { location.href = 'index.html'; return; }
-  // Update brand bar label to reflect active vault
-  const barLabel = document.querySelector('.bar-label');
-  if (barLabel) barLabel.textContent = VAULT_TITLE + ' · Listening';
-  Lst.renderQuestions();
-  updateVaultProgress();
+document.querySelectorAll(".part-submit").forEach((btn,idx)=>btn.addEventListener("click",()=>{
+  const part=btn.dataset.part;
+  const r=checkIndexes(partMap[part]);
+  const box=document.getElementById(`result-${idx+1}`);
+  box.classList.add("show");
+  box.textContent=`${r.correct}/${r.total} correct · ${r.answered} answered`;
+}));
+
+document.getElementById("finalSubmit").addEventListener("click",()=>{
+  const all=[...Array(30).keys()];
+  const r=checkIndexes(all);
+  const score90=Math.round(r.correct/30*90);
+  const box=document.getElementById("summaryResult");
+  box.classList.add("show");
+  box.innerHTML=`<div class="bigscore">${r.correct}/30</div><div>${score90}/90 equivalent practice score</div><div style="margin-top:6px">${r.answered<30?`You answered ${r.answered} of 30 questions.`:"All 30 questions completed."}</div>`;
+  if(r.answered===30) localStorage.setItem("muet_v1_listening","true");
 });
 </script>
 </body>
