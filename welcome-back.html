@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Welcome Back · Smart MUET Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="auth.css">
+</head>
+<body>
+<main class="shell">
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/heroes/small-muet-logo.svg" alt="Smart MUET Guide">
+      <div><small>SMART MUET GUIDE · PHASE 1</small><b>Welcome Back</b></div>
+    </div>
+    <a class="back" href="welcome.html">← Welcome</a>
+  </header>
+
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="kicker">RETURNING USER</div>
+      <h1>Continue where you left off.</h1>
+      <p class="lead">Enter the email linked to your Smart MUET profile. We’ll restore your saved journey when available.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <label class="field">Email address
+      <input id="email" type="email" autocomplete="email" placeholder="student@example.com">
+      <span class="help">Use the same email you registered with.</span>
+    </label>
+
+    <button class="btn green" id="continueBtn" type="button" style="margin-top:11px">FIND MY PROFILE →</button>
+
+    <div class="divider">or</div>
+
+    <a class="btn white" href="register.html">I NEED TO REGISTER</a>
+
+    <div class="error" id="errorBox"></div>
+  </section>
+
+  <section class="welcome-card" id="welcomeCard">
+    <div class="kicker">PROFILE FOUND</div>
+    <h2 id="welcomeName" style="margin-top:8px">Welcome back 👋</h2>
+    <p class="lead" id="welcomeMessage" style="color:var(--ink)">Your Smart MUET journey is ready to continue.</p>
+
+    <div class="meta-grid">
+      <div class="meta">MUET Session<b id="sessionText">—</b></div>
+      <div class="meta">Target Band<b id="targetText">—</b></div>
+      <div class="meta">Institution<b id="institutionText">—</b></div>
+      <div class="meta">Last Active<b id="lastActiveText">Today</b></div>
+    </div>
+
+    <button class="btn black" id="enterBtn" style="margin-top:12px">CONTINUE MY JOURNEY →</button>
+    <button class="btn pink" id="differentBtn" style="margin-top:9px">NOT ME / USE DIFFERENT EMAIL</button>
+  </section>
+</main>
+
+<script>
+function loadLocalProfile() {
+  try {
+    return JSON.parse(localStorage.getItem('muet_profile') || 'null');
+  } catch (_) {
+    return null;
+  }
+}
+
+function showError(message) {
+  const box = document.getElementById('errorBox');
+  box.textContent = message;
+  box.classList.add('show');
+}
+
+function hideError() {
+  document.getElementById('errorBox').classList.remove('show');
+}
+
+function showProfile(profile) {
+  document.getElementById('welcomeName').textContent = `Welcome back, ${profile.name || 'MUET Candidate'}! 👋`;
+  document.getElementById('welcomeMessage').textContent = 'Your Smart MUET journey is ready to continue.';
+  document.getElementById('sessionText').textContent = (profile.examSession || 'Not set').replace('S','Session ').replace('-',' · ');
+  document.getElementById('targetText').textContent = profile.targetBand ? `Band ${profile.targetBand}` : 'Not set';
+  document.getElementById('institutionText').textContent = profile.institution || 'Not set';
+
+  const last = profile.lastLogin ? new Date(profile.lastLogin) : null;
+  document.getElementById('lastActiveText').textContent = last && !isNaN(last)
+    ? last.toLocaleDateString('en-MY',{day:'numeric',month:'short'})
+    : 'Today';
+
+  document.getElementById('welcomeCard').classList.add('show');
+}
+
+document.getElementById('continueBtn').addEventListener('click', async () => {
+  hideError();
+  const email = document.getElementById('email').value.trim().toLowerCase();
+
+  if (!email) {
+    showError('Please enter your registered email address.');
+    return;
+  }
+
+  const local = loadLocalProfile();
+
+  // Prototype: local restore first.
+  // Later Apps Script will replace/extend this branch.
+  if (local && String(local.email || '').toLowerCase() === email) {
+    local.lastLogin = new Date().toISOString();
+    localStorage.setItem('muet_profile', JSON.stringify(local));
+    showProfile(local);
+    return;
+  }
+
+  showError('No saved profile was found on this device for that email. When Apps Script is connected, this page will also restore profiles across devices.');
+});
+
+document.getElementById('enterBtn').addEventListener('click', () => {
+  window.location.href = 'muet-hub.html';
+});
+
+document.getElementById('differentBtn').addEventListener('click', () => {
+  document.getElementById('welcomeCard').classList.remove('show');
+  document.getElementById('email').value = '';
+  document.getElementById('email').focus();
+});
+
+// Friendly auto-detection for the same device:
+const local = loadLocalProfile();
+if (local && local.email) {
+  document.getElementById('email').value = local.email;
+}
+</script>
+</body>
+</html>

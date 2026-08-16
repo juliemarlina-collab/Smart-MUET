@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Register · Smart MUET Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="auth.css">
+</head>
+<body>
+<main class="shell">
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/heroes/small-muet-logo.svg" alt="Smart MUET Guide">
+      <div><small>SMART MUET GUIDE · PHASE 1</small><b>Create Profile</b></div>
+    </div>
+    <a class="back" href="welcome.html">← Welcome</a>
+  </header>
+
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="kicker">NEW USER</div>
+      <h1>Let’s personalise your MUET journey.</h1>
+      <p class="lead">We only ask for details that help personalise your countdown, progress and exam-readiness journey.</p>
+    </div>
+  </section>
+
+  <form id="registerForm">
+    <section class="card">
+      <div class="step"><div class="step-num">1</div><h2>About You</h2></div>
+      <div class="form-grid">
+        <label class="field">Full name
+          <input id="name" type="text" autocomplete="name" placeholder="e.g. Aisyah Ahmad" required>
+        </label>
+
+        <label class="field">Email address
+          <input id="email" type="email" autocomplete="email" placeholder="student@example.com" required>
+          <span class="help">Your email will be used to restore your Smart MUET progress later.</span>
+        </label>
+
+        <label class="field">Institution
+          <input id="institution" type="text" placeholder="e.g. Politeknik / Matriculation College" required>
+        </label>
+
+        <label class="field">Class / Group
+          <input id="group" type="text" placeholder="e.g. DPR3A">
+        </label>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="step"><div class="step-num" style="background:var(--green)">2</div><h2>Your MUET Goal</h2></div>
+      <div class="form-grid">
+        <label class="field">MUET exam session
+          <select id="examSession" required>
+            <option value="">Choose your exam session</option>
+            <option value="S1-2026">MUET Session 1 · 2026</option>
+            <option value="S2-2026">MUET Session 2 · 2026</option>
+            <option value="S3-2026">MUET Session 3 · 2026</option>
+          </select>
+          <span class="help">Your Home countdown will follow this selected session.</span>
+        </label>
+
+        <label class="field">Target band
+          <select id="targetBand">
+            <option value="3.5">Band 3.5</option>
+            <option value="4.0" selected>Band 4.0</option>
+            <option value="4.5">Band 4.5</option>
+            <option value="5.0">Band 5.0</option>
+            <option value="5+">Band 5+</option>
+          </select>
+        </label>
+
+        <label class="field">Speaking date <span style="font-weight:700;color:var(--muted)">(optional)</span>
+          <input id="speakingDate" type="date">
+          <span class="help">You can add this later when your exact date appears on the MUET/D slip.</span>
+        </label>
+      </div>
+
+      <div class="summary" id="sessionSummary" style="margin-top:10px">
+        Choose your session to preview the main written-test date.
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="notice">
+        By continuing, your profile and learning activity may be stored for progress tracking and pilot testing. No password is stored in this prototype.
+      </div>
+
+      <label style="display:flex;gap:9px;align-items:flex-start;margin-top:10px;font-size:10px;font-weight:900;line-height:1.4">
+        <input id="consent" type="checkbox" style="width:19px;height:19px;margin-top:1px" required>
+        <span>I agree to use Smart MUET Guide for personalised progress tracking.</span>
+      </label>
+
+      <button class="btn yellow" type="submit" style="margin-top:12px">CREATE MY SMART MUET PROFILE →</button>
+      <div class="error" id="errorBox"></div>
+      <div class="success" id="successBox">Profile created ✓ Redirecting to your Home...</div>
+    </section>
+  </form>
+</main>
+
+<script>
+const EXAMS = {
+  "S1-2026": {label:"MUET Session 1 · 2026", written:"25 April 2026"},
+  "S2-2026": {label:"MUET Session 2 · 2026", written:"27 June 2026"},
+  "S3-2026": {label:"MUET Session 3 · 2026", written:"17 October 2026"}
+};
+
+const session = document.getElementById('examSession');
+const summary = document.getElementById('sessionSummary');
+
+session.addEventListener('change', () => {
+  const cfg = EXAMS[session.value];
+  summary.textContent = cfg
+    ? `${cfg.label} · Main written test: ${cfg.written}`
+    : 'Choose your session to preview the main written-test date.';
+});
+
+document.getElementById('registerForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById('email').value.trim().toLowerCase();
+  const consent = document.getElementById('consent').checked;
+  const examSession = document.getElementById('examSession').value;
+  const error = document.getElementById('errorBox');
+
+  if (!email || !examSession || !consent) {
+    error.textContent = 'Please complete the required fields and consent before continuing.';
+    error.classList.add('show');
+    return;
+  }
+
+  error.classList.remove('show');
+
+  const profile = {
+    name: document.getElementById('name').value.trim(),
+    email,
+    institution: document.getElementById('institution').value.trim(),
+    group: document.getElementById('group').value.trim(),
+    examSession,
+    targetBand: document.getElementById('targetBand').value,
+    speakingDate: document.getElementById('speakingDate').value,
+    consent: true,
+    createdAt: new Date().toISOString(),
+    lastLogin: new Date().toISOString()
+  };
+
+  localStorage.setItem('muet_profile', JSON.stringify(profile));
+  localStorage.setItem('muet_registered_email', email);
+
+  document.getElementById('successBox').classList.add('show');
+
+  setTimeout(() => {
+    window.location.href = 'muet-hub.html';
+  }, 900);
+});
+</script>
+</body>
+</html>
