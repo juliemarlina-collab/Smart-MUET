@@ -1,46 +1,429 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Smart MUET Guide · Exam Ready</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/splash.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="Smart MUET Guide V2 - Loading">
+    <title>Smart MUET Guide V2</title>
+    
+    <!-- Google Fonts: Sora + DM Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================
+           DESIGN TOKENS (CSS Custom Properties)
+           ============================================ */
+        :root {
+            /* Colors */
+            --color-primary: #008080;
+            --color-primary-dark: #006666;
+            --color-black: #000000;
+            --color-cream: #FFFBF0;
+            --color-gray: #666666;
+            --color-gray-light: #EEEEEE;
+            
+            /* Typography */
+            --font-heading: 'Sora', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'DM Mono', monospace;
+            
+            --text-xs: 12px;
+            --text-sm: 14px;
+            --text-base: 16px;
+            --text-lg: 18px;
+            --text-xl: 24px;
+            --text-2xl: 32px;
+            --text-3xl: 48px;
+            
+            --line-height-tight: 1.3;
+            --line-height-normal: 1.5;
+            --line-height-relaxed: 1.75;
+            
+            /* Spacing (8dp rhythm) */
+            --spacing-2: 4px;
+            --spacing-4: 8px;
+            --spacing-6: 12px;
+            --spacing-8: 16px;
+            --spacing-10: 20px;
+            --spacing-12: 24px;
+            --spacing-16: 32px;
+            
+            /* Shadows (Neo-brutalism: Hard, No Blur) */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 8px 12px rgba(0, 0, 0, 0.25);
+            --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.3);
+            
+            /* Transitions */
+            --transition-micro: 150ms ease-out;
+            --transition-short: 200ms ease-out;
+            --transition-normal: 300ms ease-in-out;
+            
+            /* Focus */
+            --focus-ring: 3px solid var(--color-primary);
+            --focus-offset: 2px;
+        }
+        
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: 16px;
+            line-height: var(--line-height-normal);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-black);
+            color: var(--color-cream);
+            overflow: hidden;
+        }
+        
+        /* ============================================
+           SPLASH CONTAINER
+           ============================================ */
+        .splash-container {
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+            gap: var(--spacing-8);
+        }
+        
+        /* ============================================
+           LOGO ANIMATION
+           ============================================ */
+        .splash-logo {
+            width: 100%;
+            max-width: 280px;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeIn 400ms ease-out forwards;
+            animation-delay: 0ms;
+        }
+        
+        .splash-logo svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Logo SVG: Neo-brutalism geometric shape (teal + black) */
+        .logo-circle {
+            fill: none;
+            stroke: var(--color-primary);
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        .logo-accent {
+            fill: var(--color-primary);
+        }
+        
+        /* Pulse animation (1200–2800ms) */
+        .splash-logo.pulse {
+            animation: 
+                fadeIn 400ms ease-out forwards,
+                pulse 1600ms ease-in-out forwards;
+            animation-delay: 0ms, 1200ms;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        /* ============================================
+           HEADLINE & TAGLINE
+           ============================================ */
+        .splash-content {
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 200ms ease-out forwards;
+            animation-delay: 400ms;
+        }
+        
+        .splash-headline {
+            font-family: var(--font-heading);
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            line-height: var(--line-height-tight);
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-4);
+            letter-spacing: -0.01em;
+        }
+        
+        .splash-tagline {
+            font-family: var(--font-body);
+            font-size: var(--text-lg);
+            font-weight: 400;
+            line-height: var(--line-height-normal);
+            color: var(--color-cream);
+            opacity: 0.9;
+        }
+        
+        /* ============================================
+           PROGRESS INDICATOR
+           ============================================ */
+        .splash-progress {
+            position: absolute;
+            bottom: max(32px, env(safe-area-inset-bottom));
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: var(--spacing-4);
+            opacity: 0.6;
+        }
+        
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--color-primary);
+            opacity: 0.3;
+            animation: none;
+        }
+        
+        .progress-dot.active {
+            opacity: 1;
+            animation: none;
+        }
+        
+        /* ============================================
+           EXIT FADE (2500–2800ms)
+           ============================================ */
+        .splash-container.exit {
+            animation: fadeOut 300ms ease-in forwards;
+        }
+        
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+        
+        /* ============================================
+           REDUCED MOTION
+           ============================================ */
+        @media (prefers-reduced-motion: reduce) {
+            .splash-logo {
+                animation: none;
+                opacity: 1;
+            }
+            
+            .splash-logo.pulse {
+                animation: none;
+            }
+            
+            .splash-content {
+                animation: none;
+                opacity: 1;
+            }
+            
+            .splash-container.exit {
+                animation: none;
+                opacity: 0;
+            }
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .splash-headline {
+                font-size: var(--text-2xl);
+            }
+            
+            .splash-tagline {
+                font-size: var(--text-base);
+            }
+            
+            .splash-logo {
+                max-width: 200px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .splash-headline {
+                font-size: 28px;
+            }
+            
+            .splash-tagline {
+                font-size: 14px;
+            }
+            
+            .splash-logo {
+                max-width: 160px;
+            }
+        }
+        
+        /* ============================================
+           SKIP BUTTON (Keyboard Accessibility)
+           ============================================ */
+        .splash-skip {
+            position: absolute;
+            top: max(16px, env(safe-area-inset-top));
+            right: max(16px, env(safe-area-inset-right));
+            padding: var(--spacing-4) var(--spacing-6);
+            background-color: transparent;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+            font-family: var(--font-body);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all var(--transition-short);
+            opacity: 0.7;
+        }
+        
+        .splash-skip:hover,
+        .splash-skip:focus {
+            opacity: 1;
+            background-color: var(--color-primary);
+            color: var(--color-black);
+            outline: none;
+        }
+        
+        .splash-skip:active {
+            transform: scale(0.95);
+        }
+        
+        /* Keyboard focus ring */
+        .splash-skip:focus-visible {
+            outline: var(--focus-ring);
+            outline-offset: var(--focus-offset);
+        }
+    </style>
 </head>
 <body>
-  <main class="splash-shell">
-    <section class="splash-card">
-      <div class="logo-wrap">
-        <img src="assets/heroes/small-muet-logo.svg" alt="Smart MUET Guide">
-      </div>
-
-      <div class="kicker">SMART MUET GUIDE · PHASE 1</div>
-
-      <h1>
-        Your journey to
-        <span class="highlight">EXAM READY.</span>
-      </h1>
-
-      <p class="tagline">
-        Prepare with purpose. Track your progress.
-        Know what to do next — right up to your MUET exam day.
-      </p>
-
-      <div class="exam-ready-strip">
-        <div>⏱️<br>COUNTDOWN</div>
-        <div>🎯<br>READINESS</div>
-        <div>📚<br>PRACTICE</div>
-      </div>
-
-      <a class="cta" href="app.html">START MY MUET JOURNEY →</a>
-      <a class="return-link" href="app.html">Already started? Welcome back →</a>
-    </section>
-
-    <p class="footer-note">ELU · JPA · POLITEKNIK PORT DICKSON</p>
-  </main>
+    <!-- Splash Screen -->
+    <div class="splash-container" id="splashContainer" role="presentation">
+        <!-- Logo -->
+        <div class="splash-logo" id="splashLogo">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <!-- Outer circle (teal) -->
+                <circle class="logo-circle" cx="100" cy="100" r="90" />
+                
+                <!-- Inner accent (teal fill) -->
+                <circle class="logo-accent" cx="100" cy="70" r="12" />
+                
+                <!-- Bracket elements (neo-brutalism) -->
+                <path class="logo-circle" d="M 60 50 L 50 50 L 50 150 L 60 150" stroke-width="4" />
+                <path class="logo-circle" d="M 140 50 L 150 50 L 150 150 L 140 150" stroke-width="4" />
+            </svg>
+        </div>
+        
+        <!-- Content -->
+        <div class="splash-content">
+            <h1 class="splash-headline">Smart MUET Guide</h1>
+            <p class="splash-tagline">Prepare for MUET Sesi 3 2026</p>
+        </div>
+        
+        <!-- Progress Indicator -->
+        <div class="splash-progress" aria-hidden="true">
+            <div class="progress-dot active"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+        </div>
+        
+        <!-- Skip Button (Keyboard accessible) -->
+        <button class="splash-skip" id="splashSkipBtn" aria-label="Skip splash screen and go to dashboard">
+            Skip
+        </button>
+    </div>
+    
+    <script>
+        // ============================================
+        // SPLASH SCREEN LOGIC
+        // ============================================
+        
+        const splashContainer = document.getElementById('splashContainer');
+        const splashLogo = document.getElementById('splashLogo');
+        const splashSkipBtn = document.getElementById('splashSkipBtn');
+        
+        // Add pulse animation to logo after 1.2 seconds
+        setTimeout(() => {
+            splashLogo.classList.add('pulse');
+        }, 1200);
+        
+        // Auto-advance to dashboard after 2.8 seconds
+        const AUTO_ADVANCE_TIME = 2800;
+        let splashTimer = setTimeout(() => {
+            advanceToDashboard();
+        }, AUTO_ADVANCE_TIME);
+        
+        // Function to advance to dashboard
+        function advanceToDashboard() {
+            splashContainer.classList.add('exit');
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 300); // Wait for fade-out animation
+        }
+        
+        // Skip button functionality
+        splashSkipBtn.addEventListener('click', () => {
+            clearTimeout(splashTimer);
+            advanceToDashboard();
+        });
+        
+        // Allow tapping anywhere to skip (UX pattern for loading screens)
+        document.addEventListener('touchstart', () => {
+            clearTimeout(splashTimer);
+            advanceToDashboard();
+        }, { once: true });
+        
+        // Keyboard: Enter or Space to skip
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                clearTimeout(splashTimer);
+                advanceToDashboard();
+            }
+        }, { once: true });
+        
+        // Accessibility: Announce loading to screen readers
+        document.addEventListener('load', () => {
+            const ariaLive = document.createElement('div');
+            ariaLive.setAttribute('role', 'status');
+            ariaLive.setAttribute('aria-live', 'polite');
+            ariaLive.setAttribute('aria-atomic', 'true');
+            ariaLive.style.position = 'absolute';
+            ariaLive.style.left = '-10000px';
+            ariaLive.textContent = 'Smart MUET Guide is loading. Prepare for MUET Sesi 3 2026.';
+            document.body.appendChild(ariaLive);
+        });
+    </script>
 </body>
 </html>
