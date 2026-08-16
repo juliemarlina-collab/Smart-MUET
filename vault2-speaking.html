@@ -1,805 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-  <title>Speaking · Vault 2 · Smart MUET Guide</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/muet-guide.css?v=20260726-1"/>
-  <style>
-    /* ── Component colours ── */
-    .spk-hero{background:var(--blue);color:white}
-    .spk-hero p{font-weight:800;color:rgba(255,255,255,.85)}
-
-    /* ── Task tabs ── */
-    .task-tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-    .task-tab{border:var(--line);box-shadow:3px 3px 0 var(--ink);border-radius:14px;background:white;padding:11px;font-weight:1000;cursor:pointer;transition:.1s}
-    .task-tab.active{background:var(--yellow)}
-
-    /* ── PREP boxes ── */
-    .prep-grid{display:grid;gap:10px}
-    .prep-box{background:white;border:var(--line);border-radius:16px;padding:12px;box-shadow:var(--shadow-sm)}
-    .prep-box h3{font-size:14px;margin-bottom:6px}
-    .prep-letter{display:inline-block;width:32px;height:32px;border:2px solid var(--ink);border-radius:8px;text-align:center;line-height:32px;font-weight:1000;font-size:18px;margin-right:6px}
-
-    /* ── Sample answer panel ── */
-    .sample-panel{display:none;background:#fff7cc;border:var(--line);border-radius:22px;box-shadow:var(--shadow);padding:16px;margin:14px 0}
-    .sample-panel.show{display:block}
-
-    /* ── Strategy steps (PREP visual) ── */
-    .strategy-steps{display:grid;gap:10px}
-    .step-card{display:grid;grid-template-columns:48px 1fr;gap:10px;align-items:start;background:white;border:2px solid var(--ink);border-radius:16px;padding:10px;box-shadow:3px 3px 0 var(--ink)}
-    .step-letter{width:42px;height:42px;border:2px solid var(--ink);border-radius:12px;display:grid;place-items:center;font-size:22px;font-weight:1000;box-shadow:2px 2px 0 var(--ink)}
-    .step-title{font-size:15px;font-weight:1000;margin-bottom:2px}
-    .step-desc{font-size:13px;font-weight:800;color:#374151;line-height:1.45}
-
-    /* ── Phrase cards ── */
-    .phrase-section{background:rgba(255,255,255,.12);border-radius:14px;padding:12px;margin-bottom:8px}
-    .phrase-label{font-size:10px;font-weight:1000;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:6px}
-    .phrase-text{font-size:13px;font-weight:800;color:white;line-height:1.6}
-
-    /* ── Self-assessment checklist ── */
-    .self-check-item{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;border:2px solid var(--ink);border-radius:13px;background:white;padding:12px;font-weight:900;cursor:pointer;margin-bottom:8px;transition:.15s}
-    .self-check-item:hover{background:#fefce8}
-    .self-check-item.checked{background:#dcfce7;border-color:#16a34a}
-    .self-check-item input{width:20px;height:20px;margin-top:1px;flex-shrink:0;accent-color:#16a34a}
-
-    /* ── Action buttons ── */
-    .guide-action-stack{display:grid;gap:12px;margin-top:14px}
-    .guide-secondary-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .btn.btn-yellow{background:var(--yellow)!important;color:var(--ink)!important}
-    .btn.btn-white{background:white!important;color:var(--ink)!important}
-    .btn.btn-pink{background:var(--pink)!important;color:var(--ink)!important}
-
-    /* ── Expandable section toggle ── */
-    .section-toggle{background:var(--paper);border:var(--line);border-radius:var(--r2);box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden}
-    .section-toggle-head{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;font-weight:1000;user-select:none}
-    .section-toggle-head:hover{background:#f8fafc}
-    .section-toggle-body{display:none;padding:0 16px 16px;border-top:2px solid rgba(0,0,0,.06)}
-    .section-toggle-body.open{display:block}
-    .toggle-num{width:34px;height:34px;border:var(--line);border-radius:50%;background:var(--yellow);display:grid;place-items:center;font-weight:1000;font-size:15px;flex-shrink:0}
-    .toggle-chev{margin-left:auto;font-size:16px;transition:.15s}
-
-    /* ── Responsive: tablet+ ── */
-    @media(min-width:640px){
-      .prep-grid{grid-template-columns:1fr 1fr}
-      .guide-secondary-row{grid-template-columns:1fr 1fr}
-    }
-    @media(min-width:1024px){
-      .strategy-steps{grid-template-columns:1fr 1fr}
-    }
-  </style>
-  <link rel="stylesheet" href="css/responsive-fix.css?v=20260726-1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#7C25DA">
+<title>Speaking · Vault 2 · Smart MUET Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+--ink:#111;--white:#fff;--soft:#f4f7f8;--muted:#565b63;
+--violet:#7C25DA;--pink:#FF4FA3;--gold:#FFC400;--cyan:#18D9FF;--lime:#19EF14;
+--line:3px solid var(--ink);--shadow:5px 5px 0 var(--ink);--fh:"Sora",sans-serif;--fb:"DM Sans",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--fb);background:var(--violet);color:var(--ink);overflow-x:hidden}a{color:inherit;text-decoration:none}button,textarea,select,input{font:inherit}
+.app{width:100%;max-width:560px;min-height:100dvh;margin:auto;background:var(--soft);padding:15px 14px 112px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.brand{display:flex;align-items:center;gap:9px}.brand img{width:54px;height:54px}.brand small{display:block;font-size:9px;font-weight:1000;color:var(--muted);letter-spacing:.08em}.brand b{display:block;margin-top:3px;font-family:var(--fh);font-size:17px}.back{border:2px solid var(--ink);border-radius:999px;background:#fff;box-shadow:2px 2px 0 var(--ink);padding:8px 11px;font-size:11px;font-weight:1000}
+.hero{position:relative;overflow:hidden;background:#fff;border:var(--line);border-radius:24px;box-shadow:var(--shadow);padding:22px 18px 20px;margin-bottom:15px}.hero:after{content:"";position:absolute;width:96px;height:96px;right:-25px;top:-28px;border:var(--line);border-radius:50%;background:var(--violet)}.tag{position:relative;z-index:2;display:inline-block;background:var(--ink);color:#fff;border-radius:999px;padding:6px 9px;font-size:10px;font-weight:1000;letter-spacing:.08em}.hero h1{position:relative;z-index:2;margin-top:11px;font-family:var(--fh);font-size:clamp(36px,9vw,52px);line-height:.96;letter-spacing:-.05em}.hero h1 span{display:block;color:var(--violet)}.hero p{position:relative;z-index:2;margin-top:12px;color:#3c4148;font-size:16px;line-height:1.5;font-weight:700}
+.mode{background:var(--ink);color:#fff;border:var(--line);border-radius:18px;box-shadow:var(--shadow);padding:13px;margin-bottom:14px}.mode h2{font-family:var(--fh);font-size:19px}.mode p{margin-top:4px;color:#ddd;font-size:12px;line-height:1.4;font-weight:700}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}.stats div{border:2px solid #fff;border-radius:11px;background:#fff;color:#111;padding:8px;text-align:center}.stats b{display:block;font-family:var(--fh);font-size:18px}.stats span{font-size:9px;font-weight:900;color:var(--muted)}
+.task{overflow:hidden;background:#fff;border:var(--line);border-radius:18px;box-shadow:var(--shadow);margin-bottom:11px}.task-head{width:100%;min-height:76px;border:0;background:#f3e9ff;padding:12px;display:grid;grid-template-columns:48px 1fr auto;gap:10px;align-items:center;text-align:left;cursor:pointer}.num{width:46px;height:46px;display:grid;place-items:center;border:2px solid var(--ink);border-radius:12px;background:#fff;font-family:var(--fh);font-size:18px;font-weight:800}.title b{display:block;font-family:var(--fh);font-size:15px}.title span{display:block;margin-top:3px;color:var(--muted);font-size:11px;font-weight:750}.plus{font-size:24px;font-weight:1000}.task.open .plus{transform:rotate(45deg)}.task-body{display:none;border-top:2px solid var(--ink);padding:12px}.task.open .task-body{display:block}
+select{width:100%;min-height:48px;border:2px solid var(--ink);border-radius:11px;background:#fff;padding:9px 10px;font-size:12px;font-weight:800}.prompt{border:2px solid var(--ink);border-radius:12px;background:#fff7c9;padding:10px;margin-top:9px;font-size:12px;line-height:1.5;font-weight:750}
+.help{border:2px solid var(--ink);border-radius:11px;background:#fff0f8;padding:8px;margin-top:9px}.help summary{font-family:var(--fh);font-size:11px;font-weight:800;cursor:pointer}.help p{margin-top:6px;font-size:11px;line-height:1.45;font-weight:700}
+.notes{margin-top:10px}textarea{width:100%;border:2px solid var(--ink);border-radius:11px;background:#fff;padding:10px;font-size:13px;line-height:1.45;resize:vertical}.notes small{display:block;margin-bottom:5px;color:var(--muted);font-size:10px;font-weight:900}
+.phrase{border:2px solid var(--ink);border-radius:11px;background:#fafafa;padding:9px;margin-top:7px;font-size:11px;line-height:1.4;font-weight:700}
+.checks{display:grid;gap:7px;margin-top:10px}.check{display:grid;grid-template-columns:20px 1fr;gap:8px;align-items:start;border:2px solid var(--ink);border-radius:11px;background:#fff;padding:9px;font-size:12px;line-height:1.35;font-weight:750}.check input{width:18px;height:18px}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:50px;margin-top:10px;border:var(--line);border-radius:12px;background:var(--violet);color:#fff;box-shadow:4px 4px 0 var(--ink);font-size:12px;font-weight:1000;cursor:pointer}.result{display:none;margin-top:9px;border:2px solid var(--ink);border-radius:11px;background:#e7fff5;padding:9px;font-size:12px;line-height:1.45;font-weight:800}.result.show{display:block}
+.finish{background:#fff;border:var(--line);border-radius:18px;box-shadow:var(--shadow);padding:14px;margin-top:14px}.finish h2{font-family:var(--fh);font-size:20px}.finish p{margin-top:5px;color:var(--muted);font-size:13px;line-height:1.4;font-weight:700}
+.nav{position:fixed;left:50%;transform:translateX(-50%);bottom:10px;width:calc(100% - 20px);max-width:540px;z-index:70;display:grid;grid-template-columns:repeat(5,1fr);background:#fff;border:var(--line);border-radius:18px;box-shadow:5px 5px 0 var(--ink);padding:6px}.nav a{min-height:58px;display:grid;place-items:center;align-content:center;gap:3px;border-radius:10px;font-size:9px;font-weight:1000}.nav a.active{background:var(--gold);border:2px solid var(--ink)}.nav img{width:26px;height:26px}
+@media(min-width:700px){.app{max-width:850px;padding:24px 24px 120px}.nav{max-width:810px}}
+</style>
 </head>
 <body>
-<main class="app-shell">
-<section class="screen active">
+<main class="app">
+<header class="top">
+<div class="brand"><img src="assets/heroes/small-muet-logo.svg" alt=""><div><small>VAULT 2 · 800/2 · SPEAKING</small><b>Independent Speaking</b></div></div>
+<a class="back" href="vault2.html">← Vault 2</a>
+</header>
 
-  <!-- Brand bar -->
-  <div class="brand-bar">
-    <button class="icon-btn" onclick="location.href=vaultWelcomePage" style="margin-left:0;margin-right:8px">&#8592;</button>
-    <div>
-      <div class="bar-label">Vault 2 &middot; Component 1 of 4</div>
-      <div class="bar-title">SmartSpeaking</div>
-    </div>
-    <button class="icon-btn">&#127908;</button>
-  </div>
+<section class="hero">
+<span class="tag">MUET 800/2 · VAULT 2</span>
+<h1>Plan less.<span>Respond more naturally.</span></h1>
+<p>Complete the Session 2 speaking tasks more independently. PREP is still available, but only when you choose to open it.</p>
+</section>
 
-  <!-- Vault progress bar -->
-  <div style="background:var(--paper);border:var(--line);border-radius:16px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;gap:12px">
-    <div style="flex:1">
-      <div style="font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:4px">Vault 2 Progress</div>
-      <div class="prog-bar"><span id="vaultProgBar" style="width:0%"></span></div>
-    </div>
-    <div id="vaultProgLabel" style="font-weight:1000;font-size:13px;white-space:nowrap">0/4</div>
-  </div>
+<section class="mode">
+<h2>Independent Practice</h2>
+<p>Attempt the task first. Use PREP or phrase support only if you get stuck.</p>
+<div class="stats"><div><b>2</b><span>TASKS</span></div><div><b>30</b><span>MINUTES</span></div><div><b>PREP</b><span>OPTIONAL</span></div></div>
+</section>
 
-  <!-- Hero -->
-  <div class="card spk-hero">
-    <p class="tiny" style="color:rgba(255,255,255,.7)">Speaking 800/2 &middot; 90 marks &middot; 25% of MUET &middot; Vault 2</p>
-    <h1 style="margin-top:6px">Speak with structure.</h1>
-    <p style="margin-top:8px">Use PREP for Task A. Use interaction phrases for Task B.</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px">
-      <div style="background:rgba(255,255,255,.15);border-radius:12px;padding:10px;text-align:center">
-        <div style="font-family:'Sora';font-size:22px;font-weight:800">2</div>
-        <div style="font-size:10px;font-weight:900;color:rgba(255,255,255,.7)">TASKS</div>
-      </div>
-      <div style="background:rgba(255,255,255,.15);border-radius:12px;padding:10px;text-align:center">
-        <div style="font-family:'Sora';font-size:22px;font-weight:800">90</div>
-        <div style="font-size:10px;font-weight:900;color:rgba(255,255,255,.7)">MARKS</div>
-      </div>
-    </div>
-  </div>
+<article class="task open">
+<button class="task-head"><div class="num">A</div><div class="title"><b>Task A · Individual Presentation</b><span>Session 2 2022 · Candidate prompt</span></div><div class="plus">+</div></button>
+<div class="task-body">
+<select id="topicA">
+<option value="a1">Candidate A — Making New Friends</option>
+<option value="a2">Candidate B — Staying in Safe Places</option>
+<option value="a3">Candidate C — Enjoying Hostel Activities</option>
+<option value="a4">Candidate D — Learning Life Skills</option>
+</select>
 
-  <!-- ══ PART 1: BEFORE YOU START ═══════════════════════════════════ -->
-  <div class="section-toggle" id="sec-before">
-    <div class="section-toggle-head" onclick="Spk.toggleSec('before')">
-      <div class="toggle-num">1</div>
-      <div>
-        <div style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Before You Start</div>
-        <div style="font-size:15px;font-weight:1000">What Speaking 800/2 Tests</div>
-      </div>
-      <div class="toggle-chev" id="chev-before">&#9660;</div>
-    </div>
-    <div class="section-toggle-body" id="body-before">
-      <div style="display:grid;gap:12px;padding-top:4px">
-        <!-- Task A -->
-        <div style="background:#dbeafe;border:3px solid var(--ink);border-radius:18px;padding:14px;box-shadow:4px 4px 0 var(--ink)">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-            <div style="background:var(--blue);color:white;border:2px solid var(--ink);border-radius:999px;padding:4px 14px;font-weight:1000;font-size:12px">TASK A</div>
-            <div style="font-weight:1000;font-size:13px">Individual Response</div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-            <div style="background:white;border:2px solid var(--ink);border-radius:12px;padding:10px;text-align:center">
-              <div style="font-size:22px">&#127908;</div>
-              <div style="font-size:11px;font-weight:1000;margin-top:4px">Alone</div>
-              <div style="font-size:10px;color:var(--muted);font-weight:800">Individual</div>
-            </div>
-            <div style="background:white;border:2px solid var(--ink);border-radius:12px;padding:10px;text-align:center">
-              <div style="font-size:22px">&#9201;&#65039;</div>
-              <div style="font-size:11px;font-weight:1000;margin-top:4px">~2 min</div>
-              <div style="font-size:10px;color:var(--muted);font-weight:800">1 prep + 1&ndash;2 speak</div>
-            </div>
-          </div>
-          <div style="background:var(--blue);color:white;border-radius:10px;padding:8px 12px;margin-top:10px;font-size:12px;font-weight:900">
-            &#128161; Use <b>PREP</b> &mdash; Point &middot; Reason &middot; Example &middot; Point again
-          </div>
-        </div>
-        <!-- Task B -->
-        <div style="background:#fce7f3;border:3px solid var(--ink);border-radius:18px;padding:14px;box-shadow:4px 4px 0 var(--ink)">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-            <div style="background:#db2777;color:white;border:2px solid var(--ink);border-radius:999px;padding:4px 14px;font-weight:1000;font-size:12px">TASK B</div>
-            <div style="font-weight:1000;font-size:13px">Group Discussion</div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-            <div style="background:white;border:2px solid var(--ink);border-radius:12px;padding:10px;text-align:center">
-              <div style="font-size:22px">&#128101;</div>
-              <div style="font-size:11px;font-weight:1000;margin-top:4px">3&ndash;4 people</div>
-              <div style="font-size:10px;color:var(--muted);font-weight:800">Group</div>
-            </div>
-            <div style="background:white;border:2px solid var(--ink);border-radius:12px;padding:10px;text-align:center">
-              <div style="font-size:22px">&#9201;&#65039;</div>
-              <div style="font-size:11px;font-weight:1000;margin-top:4px">10 min</div>
-              <div style="font-size:10px;color:var(--muted);font-weight:800">Reach consensus</div>
-            </div>
-          </div>
-          <div style="background:#db2777;color:white;border-radius:10px;padding:8px 12px;margin-top:10px;font-size:12px;font-weight:900">
-            &#128161; Discuss, don&apos;t lecture. Refer to others by name at least twice.
-          </div>
-        </div>
-        <!-- Marking criteria -->
-        <div style="background:#f0fdf4;border:3px solid var(--ink);border-radius:18px;padding:14px;box-shadow:4px 4px 0 var(--ink)">
-          <div style="font-size:12px;font-weight:1000;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px">&#128202; How You Are Marked</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-            <div style="background:white;border:2px solid var(--ink);border-radius:10px;padding:8px 10px;font-size:12px;font-weight:900;text-align:center">&#9989; Task Fulfilment</div>
-            <div style="background:white;border:2px solid var(--ink);border-radius:10px;padding:8px 10px;font-size:12px;font-weight:900;text-align:center">&#128161; Idea Development</div>
-            <div style="background:white;border:2px solid var(--ink);border-radius:10px;padding:8px 10px;font-size:12px;font-weight:900;text-align:center">&#128221; Language Control</div>
-            <div style="background:white;border:2px solid var(--ink);border-radius:10px;padding:8px 10px;font-size:12px;font-weight:900;text-align:center">&#128483;&#65039; Fluency</div>
-          </div>
-          <div style="background:#b8ff36;border:2px solid var(--ink);border-radius:10px;padding:8px 12px;margin-top:10px;font-size:13px;font-weight:1000;text-align:center">
-            Task A: 45 marks &nbsp;+&nbsp; Task B: 45 marks = <span style="font-size:16px">90 total</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="prompt" id="promptA"></div>
 
-  <!-- ══ PART 2: TIPS & TRICKS ══════════════════════════════════════ -->
-  <div class="section-toggle" id="sec-tips">
-    <div class="section-toggle-head" onclick="Spk.toggleSec('tips')">
-      <div class="toggle-num" style="background:var(--orange)">2</div>
-      <div>
-        <div style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Tips &amp; Tricks</div>
-        <div style="font-size:15px;font-weight:1000">PREP Strategy Before You Practise</div>
-      </div>
-      <div class="toggle-chev" id="chev-tips">&#9660;</div>
-    </div>
-    <div class="section-toggle-body" id="body-tips">
-      <div style="padding-top:4px">
-        <!-- PREP visual blocks -->
-        <div class="strategy-steps">
-          <div class="step-card">
-            <div class="step-letter" style="background:var(--blue);color:white">P</div>
-            <div>
-              <div class="step-title">Point &mdash; State your stand</div>
-              <div class="step-desc">Begin with one clear opinion. Example: <b>&ldquo;I believe students should work part-time because&hellip;&rdquo;</b><br>Start strong. The examiner listens to your opening sentence first.</div>
-            </div>
-          </div>
-          <div class="step-card">
-            <div class="step-letter" style="background:var(--orange)">R</div>
-            <div>
-              <div class="step-title">Reason &mdash; Explain why</div>
-              <div class="step-desc">Use: <b>because, the reason is, this is because, due to the fact that</b><br>Give one strong reason — do not list many weak ones.</div>
-            </div>
-          </div>
-          <div class="step-card">
-            <div class="step-letter" style="background:var(--green)">E</div>
-            <div>
-              <div class="step-title">Example &mdash; Malaysian context</div>
-              <div class="step-desc">Use: <b>for example, for instance, a clear example of this is&hellip;</b><br>Local examples score better: PTPTN, campus life, Malaysian companies, EPF.</div>
-            </div>
-          </div>
-          <div class="step-card">
-            <div class="step-letter" style="background:var(--pink)">P</div>
-            <div>
-              <div class="step-title">Point Again &mdash; Close confidently</div>
-              <div class="step-desc">Restate your stand: <b>&ldquo;Therefore, I strongly believe that&hellip;&rdquo;</b><br>This signals the examiner that you have completed your response.</div>
-            </div>
-          </div>
-        </div>
-        <div style="background:var(--yellow);border:var(--line);border-radius:14px;padding:12px 14px;margin-top:12px;font-weight:1000;font-size:13px">
-          &#9201;&#65039; Task B reminder: Write 3&ndash;4 keywords only during prep time. Agree politely, add one reason, invite others by name, and help the group reach a final decision in the last 2 minutes.
-        </div>
-        <button onclick="Spk.toggleSec('sample');document.getElementById('sec-sample').scrollIntoView({behavior:'smooth'})" style="display:block;background:var(--yellow);border:var(--line);border-radius:14px;box-shadow:var(--shadow);padding:13px 16px;font-weight:1000;cursor:pointer;width:100%;margin-top:12px;font-size:14px">I&apos;ve read the tips &#8212; show me a sample &#8594;</button>
-      </div>
-    </div>
-  </div>
+<details class="help">
+<summary>Need PREP?</summary>
+<p><b>P</b> Point → <b>R</b> Reason → <b>E</b> Example → <b>P</b> Point again. Use brief keywords only; do not write a full script.</p>
+</details>
 
-  <!-- ══ PART 3: SAMPLE ANSWER ═════════════════════════════════════ -->
-  <div class="section-toggle" id="sec-sample">
-    <div class="section-toggle-head" onclick="Spk.toggleSec('sample')">
-      <div class="toggle-num" style="background:var(--green)">3</div>
-      <div>
-        <div style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Sample Answer</div>
-        <div style="font-size:15px;font-weight:1000">See What a Good PREP Response Looks Like</div>
-      </div>
-      <div class="toggle-chev" id="chev-sample">&#9660;</div>
-    </div>
-    <div class="section-toggle-body" id="body-sample">
-      <div style="padding-top:4px">
-        <div style="background:#fff7cc;border:var(--line);border-radius:18px;padding:16px">
-          <div style="font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px">SAMPLE TOPIC: MAKING NEW FRIENDS AS AN ADVANTAGE OF HOSTEL ACTIVITIES</div>
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px">
-            <div style="background:var(--blue);color:white;border:2px solid var(--ink);border-radius:10px;padding:8px;text-align:center;font-weight:1000;font-size:13px">P<div style="font-size:9px;font-weight:900;color:rgba(255,255,255,.7)">Point</div></div>
-            <div style="background:var(--orange);color:white;border:2px solid var(--ink);border-radius:10px;padding:8px;text-align:center;font-weight:1000;font-size:13px">R<div style="font-size:9px;font-weight:900;color:rgba(255,255,255,.7)">Reason</div></div>
-            <div style="background:var(--green);color:var(--ink);border:2px solid var(--ink);border-radius:10px;padding:8px;text-align:center;font-weight:1000;font-size:13px">E<div style="font-size:9px;font-weight:900;color:rgba(0,0,0,.5)">Example</div></div>
-            <div style="background:var(--pink);color:var(--ink);border:2px solid var(--ink);border-radius:10px;padding:8px;text-align:center;font-weight:1000;font-size:13px">P<div style="font-size:9px;font-weight:900;color:rgba(0,0,0,.5)">Point Again</div></div>
-          </div>
-          <div style="background:white;border:2px solid var(--ink);border-radius:14px;padding:14px;font-size:13px;font-weight:800;line-height:1.7">
-            <b style="color:var(--blue)">P &mdash;</b> I believe making new friends is the most valuable advantage of hostel activities because it helps students build a support network away from home.<br><br>
-            <b style="color:var(--orange)">R &mdash;</b> This is because hostel activities such as game nights and communal events bring students from different backgrounds together, encouraging natural interaction and friendship.<br><br>
-            <b style="color:var(--green)">E &mdash;</b> For example, many first-year students say that joining orientation-week icebreaker games at their hostel helped them find close friends who later became their study partners.<br><br>
-            <b style="color:var(--pink)">P &mdash;</b> Therefore, making new friends is a key advantage as it gives students both emotional support and a stronger sense of belonging throughout their time at university.
-          </div>
-          <div style="background:var(--ink);color:white;border-radius:12px;padding:10px 12px;margin-top:12px;font-size:12px;font-weight:900">
-            &#128221; Examiner note: Direct answer &middot; one clear reason &middot; specific relatable example &middot; strong closing. About 90 seconds.
-          </div>
-        </div>
-        <button onclick="Spk.toggleSec('phrases');document.getElementById('sec-phrases').scrollIntoView({behavior:'smooth'})" style="display:block;background:var(--yellow);border:var(--line);border-radius:14px;box-shadow:var(--shadow);padding:13px 16px;font-weight:1000;cursor:pointer;width:100%;margin-top:12px;font-size:14px">I&apos;m ready &#8212; go to practice &#8594;</button>
-      </div>
-    </div>
-  </div>
+<div class="notes">
+<small>OPTIONAL QUICK NOTES</small>
+<textarea id="notesA" rows="5" placeholder="Jot down a few keywords only..."></textarea>
+</div>
 
-  <!-- ══ PART 4: USEFUL SPEAKING PHRASES (NEW) ════════════════════ -->
-  <div class="section-toggle" id="sec-phrases">
-    <div class="section-toggle-head" onclick="Spk.toggleSec('phrases')">
-      <div class="toggle-num" style="background:var(--pink)">4</div>
-      <div>
-        <div style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Useful Speaking Phrases</div>
-        <div style="font-size:15px;font-weight:1000">Ready-Made Phrases for Task A &amp; Task B</div>
-      </div>
-      <div class="toggle-chev" id="chev-phrases">&#9660;</div>
-    </div>
-    <div class="section-toggle-body" id="body-phrases">
-      <div style="background:var(--blue);border:var(--line);border-radius:18px;padding:16px;margin-top:4px">
-        <div class="phrase-section">
-          <div class="phrase-label">&#129395; STATING YOUR POINT (P)</div>
-          <div class="phrase-text">&ldquo;I believe that&hellip;&rdquo; &middot; &ldquo;In my opinion&hellip;&rdquo; &middot; &ldquo;I strongly feel that&hellip;&rdquo;<br>&ldquo;From my perspective&hellip;&rdquo; &middot; &ldquo;I would argue that&hellip;&rdquo;</div>
-        </div>
-        <div class="phrase-section">
-          <div class="phrase-label">&#128161; GIVING YOUR REASON (R)</div>
-          <div class="phrase-text">&ldquo;This is because&hellip;&rdquo; &middot; &ldquo;The reason is&hellip;&rdquo; &middot; &ldquo;Due to the fact that&hellip;&rdquo;<br>&ldquo;This can be attributed to&hellip;&rdquo; &middot; &ldquo;One major reason is&hellip;&rdquo;</div>
-        </div>
-        <div class="phrase-section">
-          <div class="phrase-label">&#127981; GIVING AN EXAMPLE (E)</div>
-          <div class="phrase-text">&ldquo;For example&hellip;&rdquo; &middot; &ldquo;For instance&hellip;&rdquo; &middot; &ldquo;A clear example of this is&hellip;&rdquo;<br>&ldquo;Take Malaysia as an example&hellip;&rdquo; &middot; &ldquo;To illustrate this point&hellip;&rdquo;</div>
-        </div>
-        <div class="phrase-section">
-          <div class="phrase-label">&#128101; TASK B &mdash; INTERACTION PHRASES (MPM FUNCTIONS)</div>
-          <div class="phrase-text">Initiate: &ldquo;Shall we start by looking at&hellip;?&rdquo;<br>Prompt: &ldquo;What do you think, [name]?&rdquo; &middot; &ldquo;[Name], do you agree?&rdquo;<br>Turn-take: &ldquo;Building on what [name] said&hellip;&rdquo; &middot; &ldquo;I would like to add&hellip;&rdquo;<br>Negotiate: &ldquo;That is a valid point, however&hellip;&rdquo; &middot; &ldquo;I see it differently because&hellip;&rdquo;<br>Interrupt: &ldquo;May I add something?&rdquo; &middot; &ldquo;Sorry to interrupt, but&hellip;&rdquo;<br>Conclude: &ldquo;So as a group, we have decided the best option is&hellip;&rdquo;</div>
-        </div>
-        <div class="phrase-section">
-          <div class="phrase-label">&#128683; AVOID THESE FILLER WORDS</div>
-          <div class="phrase-text">&#10060; erm&hellip; &middot; &#10060; like&hellip; &middot; &#10060; you know&hellip; &middot; &#10060; so yeah&hellip;<br>Replace with a 1-second pause. A pause sounds confident. Fillers sound nervous.</div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="checks">
+<label class="check"><input type="checkbox" class="aCheck"><span>I stated my point clearly.</span></label>
+<label class="check"><input type="checkbox" class="aCheck"><span>I developed my reason.</span></label>
+<label class="check"><input type="checkbox" class="aCheck"><span>I gave a relevant example.</span></label>
+<label class="check"><input type="checkbox" class="aCheck"><span>I closed my response clearly.</span></label>
+<label class="check"><input type="checkbox" class="aCheck"><span>I spoke naturally without reading a script.</span></label>
+</div>
 
-  <!-- ══ PART 5: YOUR PRACTICE ══════════════════════════════════════ -->
-  <div style="background:var(--ink);border:var(--line);border-radius:16px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px">
-    <div style="background:var(--yellow);border:var(--line);border-radius:10px;width:32px;height:32px;display:grid;place-items:center;font-weight:1000;flex-shrink:0">5</div>
-    <div style="font-family:'Sora';font-weight:800;font-size:14px;color:white">Your Practice</div>
-    <div style="margin-left:auto;font-size:10px;font-weight:900;color:rgba(255,255,255,.5)">PREP notes + transcript + submit</div>
-  </div>
+<button class="btn" id="checkA">CHECK TASK A →</button>
+<div class="result" id="resultA"></div>
+</div>
+</article>
 
-  <!-- Task tabs -->
-  <div class="task-tabs">
-    <button id="tabA" class="task-tab active" onclick="Spk.setTask('A')">&#127908; Task A — Individual</button>
-    <button id="tabB" class="task-tab" onclick="Spk.setTask('B')">&#128101; Task B — Group</button>
-  </div>
+<article class="task">
+<button class="task-head"><div class="num">B</div><div class="title"><b>Task B · Group Discussion</b><span>Hostel improvement · reach a decision</span></div><div class="plus">+</div></button>
+<div class="task-body">
 
-  <!-- Topic selector -->
-  <div style="background:var(--paper);border:var(--line);border-radius:var(--r2);padding:14px;margin-bottom:14px;box-shadow:var(--shadow)">
-    <p class="tiny" style="color:var(--muted)">Practice Topic &mdash; Vault 2</p>
-    <h2 id="taskTitle" style="margin-top:6px">Task A &mdash; Individual Response</h2>
-    <select id="topicSelect" style="margin-top:10px" onchange="Spk.changeTopic()"></select>
-    <p id="topicPrompt" style="margin-top:10px;font-weight:800;font-size:14px;line-height:1.5"></p>
-  </div>
+<div class="prompt">
+<b>Group Discussion:</b><br><br>
+It is important for hostels to meet the needs of their students. Discuss how the hostel can be improved to better meet students' needs.<br><br>
+Consider: <b>Wi-Fi · exercise facilities · cleaning services · better security · food</b>.<br><br>
+Decide the <b>BEST</b> way the hostel can be improved.
+</div>
 
-  <!-- Coach tip -->
-  <div class="coach-note pink">
-    <div class="tag">&#127908; COACH TIP FOR THIS TOPIC</div>
-    <p id="coachTip">Use PREP. Choose one clear stand. Give one specific example.</p>
-  </div>
+<details class="help">
+<summary>Need interaction phrases?</summary>
+<div class="phrase"><b>Agree:</b> “I agree with that point because…”</div>
+<div class="phrase"><b>Build:</b> “I would also add that…”</div>
+<div class="phrase"><b>Disagree politely:</b> “I see your point, however…”</div>
+<div class="phrase"><b>Invite:</b> “What do you think about this?”</div>
+<div class="phrase"><b>Conclude:</b> “Based on our discussion, we agree that…”</div>
+</details>
 
-  <!-- Timer -->
-  <div class="timer-card yellow">
-    <div>
-      <p class="tiny" id="timerLabel">2-Minute Prep Timer</p>
-      <div id="timerDisp" class="timer-big">02:00</div>
-    </div>
-    <button class="btn black" style="width:auto;min-width:80px" id="timerBtn" onclick="Spk.toggleTimer()">Start</button>
-  </div>
+<div class="notes">
+<small>OPTIONAL DISCUSSION NOTES</small>
+<textarea id="notesB" rows="5" placeholder="My strongest point / response to others / final choice..."></textarea>
+</div>
 
-  <!-- PREP notes -->
-  <div class="card">
-    <h2>PREP Notes <span class="req">Required</span></h2>
-    <p style="font-size:13px;font-weight:800;color:var(--muted);margin-top:4px">Write keywords only &mdash; not full sentences.</p>
-    <div class="prep-grid" style="margin-top:12px">
-      <div class="prep-box">
-        <h3><span class="prep-letter" style="background:var(--blue);color:white">P</span> Point</h3>
-        <textarea id="prepP" placeholder="My stand is..."></textarea>
-      </div>
-      <div class="prep-box">
-        <h3><span class="prep-letter" style="background:var(--orange)">R</span> Reason</h3>
-        <textarea id="prepR" placeholder="This is because..."></textarea>
-      </div>
-      <div class="prep-box">
-        <h3><span class="prep-letter" style="background:var(--green)">E</span> Example</h3>
-        <textarea id="prepE" placeholder="For example..."></textarea>
-      </div>
-      <div class="prep-box">
-        <h3><span class="prep-letter" style="background:var(--pink)">P</span> Point Again</h3>
-        <textarea id="prepClose" placeholder="Therefore, I believe..."></textarea>
-      </div>
-    </div>
-  </div>
+<div class="checks">
+<label class="check"><input type="checkbox" class="bCheck"><span>I contributed a clear idea.</span></label>
+<label class="check"><input type="checkbox" class="bCheck"><span>I supported my idea with a reason or example.</span></label>
+<label class="check"><input type="checkbox" class="bCheck"><span>I responded to another candidate.</span></label>
+<label class="check"><input type="checkbox" class="bCheck"><span>I invited or acknowledged another opinion.</span></label>
+<label class="check"><input type="checkbox" class="bCheck"><span>I helped the group reach a final decision.</span></label>
+</div>
 
-  <!-- Transcript -->
-  <div class="card">
-    <h2>Transcript / Speaking Notes <span class="req">Required</span></h2>
-    <p style="font-size:13px;font-weight:800;color:var(--muted);margin-top:4px">After speaking aloud, type your response here. This helps track your vocabulary and structure.</p>
-    <textarea id="transcript" rows="5" style="margin-top:10px" placeholder="I believe students should work part-time because..."></textarea>
-  </div>
+<button class="btn" id="checkB">CHECK TASK B →</button>
+<div class="result" id="resultB"></div>
+</div>
+</article>
 
-  <!-- ══ PART 6: SELF-ASSESSMENT (MPM language functions) ═════════ -->
-  <div style="background:var(--paper);border:var(--line);box-shadow:var(--shadow);border-radius:var(--r2);padding:18px;margin-bottom:16px">
-    <div style="font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:4px">6</div>
-    <h2 id="scTitle" style="margin-bottom:4px">Task A &#8212; Self-Assessment</h2>
-    <p style="font-size:13px;font-weight:800;color:var(--muted);margin-bottom:14px">Tick each language function you used. These map directly to what the examiner listens for.</p>
-    <!-- Task A checklist -->
-    <div id="scTaskA">
-      <label class="self-check-item" onclick="Spk.updateSelfCheck()"><input type="checkbox" id="scA1"><span>I stated my opinion clearly in the first sentence <span style="display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:2px 8px;font-size:10px;font-weight:1000;background:#dbeafe;margin-left:6px">Expressing Opinions</span></span></label>
-      <label class="self-check-item" onclick="Spk.updateSelfCheck()"><input type="checkbox" id="scA2"><span>I gave one strong reason using &ldquo;because&rdquo; or &ldquo;the reason is&rdquo; <span style="display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:2px 8px;font-size:10px;font-weight:1000;background:#fef3c7;margin-left:6px">Giving Reasons</span></span></label>
-      <label class="self-check-item" onclick="Spk.updateSelfCheck()"><input type="checkbox" id="scA3"><span>I gave a specific example to elaborate my point <span style="display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:2px 8px;font-size:10px;font-weight:1000;background:#dcfce7;margin-left:6px">Elaborating</span></span></label>
-      <label class="self-check-item" onclick="Spk.updateSelfCheck()"><input type="checkbox" id="scA4"><span>I linked my example back: &ldquo;This shows that&hellip;&rdquo; or &ldquo;This means that&hellip;&rdquo; <span style="display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:2px 8px;font-size:10px;font-weight:1000;background:#fce7f3;margin-left:6px">Justifying</span></span></label>
-      <label class="self-check-item" onclick="Spk.updateSelfCheck()"><input type="checkbox" id="scA5"><span>I closed with a clear concluding statement <span style="display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:2px 8px;font-size:10px;font-weight:1000;background:#e0e7ff;margin-left:6px">Concluding</span></span></label>
-      <label class="self-check-item" onclick="Spk.updateSelfCheck()"><input type="checkbox" id="scA6"><span>I avoided filler words (erm, like, you know) and used pauses instead <span style="display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:2px 8px;font-size:10px;font-weight:1000;background:#f0fdf4;margin-left:6px">Fluency</span></span></label>
-    </div>
-    <!-- Task B checklist -->
-    <div id="scTaskB" style="display:none">
-      <label class="self-check-item" onclick="Spk.updateSelfCheck()"><input type="checkbox" id="scB1"><span>I initiated or opened the discussion <span style="display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:2px 8px;font-size:10px;font-weight:1000;background:#dbeafe;margin-left:6px">Initiating</span></span></label>
-      <label class="self-check-item" onclick="Spk.updateSelfCheck()"><input type="checkbox" id="scB2"><span>I asked at least one group member for their opinion by name <span style="display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:2px 8px;font-size:10px;font-weight:1000;background:#fef3c7;margin-left:6px">Prompting</span></span></label>
-      <label class="self-check-item" onclick="Spk.updateSelfCheck()"><input type="checkbox" id="scB3"><span>I built on someone else&apos;s point: &ldquo;Building on what [name] said&hellip;&rdquo; <span style="display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:2px 8px;font-size:10px;font-weight:1000;background:#dcfce7;margin-left:6px">Turn-Taking</span></span></label>
-      <label class="self-check-item" onclick="Spk.updateSelfCheck()"><input type="checkbox" id="scB4"><span>I agreed or disagreed with a reason: &ldquo;That is valid, however&hellip;&rdquo; <span style="display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:2px 8px;font-size:10px;font-weight:1000;background:#fce7f3;margin-left:6px">Negotiating</span></span></label>
-      <label class="self-check-item" onclick="Spk.updateSelfCheck()"><input type="checkbox" id="scB5"><span>I evaluated at least two options before deciding <span style="display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:2px 8px;font-size:10px;font-weight:1000;background:#e0e7ff;margin-left:6px">Evaluating</span></span></label>
-      <label class="self-check-item" onclick="Spk.updateSelfCheck()"><input type="checkbox" id="scB6"><span>I helped the group reach a final decision with a concluding statement <span style="display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:2px 8px;font-size:10px;font-weight:1000;background:#f0fdf4;margin-left:6px">Concluding</span></span></label>
-    </div>
-    <div id="selfCheckResult" style="display:none;background:var(--yellow);border:var(--line);border-radius:14px;padding:10px 14px;margin-top:10px;font-weight:1000;font-size:14px;text-align:center"></div>
-  </div>
-
-  <!-- Submit buttons -->
-  <div class="guide-action-stack">
-    <button class="btn btn-yellow wide" onclick="Spk.submit()">Submit Speaking Practice &#127908;</button>
-    <div class="guide-secondary-row">
-      <button class="btn btn-white" onclick="Spk.toggleSec('phrases');document.getElementById('sec-phrases').scrollIntoView({behavior:'smooth'})">Phrase Bank &#128483;&#65039;</button>
-      <button class="btn btn-pink" onclick="location.href=vaultWelcomePage">&#8592; Vault Menu</button>
-    </div>
-  </div>
-
-  <!-- MPM Language Function Feedback -->
-  <div id="fbCard" style="display:none;border:var(--line);border-radius:var(--r2);overflow:hidden;margin-top:14px">
-    <div style="padding:14px 16px;background:var(--ink);color:white;font-family:'Sora';font-size:18px;font-weight:800">&#127919; Language Function Feedback</div>
-    <div id="fbBody" style="padding:14px 16px;background:white"></div>
-  </div>
-
-  <!-- 4-Criteria Round-Up -->
-  <div id="ruCard" style="display:none;border:var(--line);border-radius:var(--r2);overflow:hidden;margin-top:14px">
-    <div style="background:var(--ink);color:white;padding:14px 16px">
-      <p class="tiny" style="color:rgba(255,255,255,.6)">Vault 2 Speaking &#8212; Round-Up</p>
-      <h2 style="margin-top:4px">Your 4 Criteria</h2>
-    </div>
-    <div id="ruGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 16px;background:white"></div>
-    <div id="ruTotal" style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#f8fafc;border-top:2px solid var(--ink)"></div>
-    <div style="padding:14px 16px;background:white;border-top:2px solid var(--ink)">
-      <p style="font-size:12px;font-weight:800;color:var(--muted)">&#128161; This is a practice indicator only. Your lecturer marks you officially.</p>
-    </div>
-  </div>
-
-  <!-- Result card -->
-  <div id="resultCard" class="result-card lime">
-    <div class="tag">SPEAKING RESULT SAVED</div>
-    <span id="resultScore" class="result-score">0/90</span>
-    <span id="resultBand"  class="result-band">Band &mdash;</span>
-    <div style="margin:12px 0;border:var(--line);border-radius:14px;background:white;padding:12px">
-      <p id="resultStrength" style="font-weight:900;font-size:13px"></p>
-      <p id="resultImprove"  style="font-weight:800;font-size:13px;color:var(--muted);margin-top:6px"></p>
-      <p id="resultNext"     style="font-weight:800;font-size:13px;margin-top:6px"></p>
-    </div>
-    <div style="background:var(--ink);color:white;border:var(--line);border-radius:14px;padding:10px 12px;margin-bottom:12px;font-weight:900;font-size:13px" id="achieveBadge"></div>
-    <div class="btn-row">
-      <button class="btn black wide" onclick="location.href='vault2-reading.html'">Next: Reading &#128214; &rarr;</button>
-      <button class="btn btn-white" onclick="location.href=vaultWelcomePage">&#8592; Vault Menu</button>
-    </div>
-  </div>
-
+<section class="finish">
+<h2>Finish Vault 2 Speaking</h2>
+<p>Complete both task checks to record your second-cycle Speaking practice.</p>
+<button class="btn" id="finish">SAVE SPEAKING PRACTICE →</button>
+<div class="result" id="finishResult"></div>
 </section>
 </main>
 
-<div id="toast" class="toast"></div>
-<script src="js/muet-shared.js?v=20260726-1"></script>
-<script src="js/backend-config.js?v=20260726-1"></script>
+<nav class="nav">
+<a href="muet-hub.html"><img src="assets/heroes/nav-home.svg"><span>Home</span></a>
+<a href="guidance.html"><img src="assets/heroes/icon-muet-intro.svg"><span>Guide</span></a>
+<a class="active" href="vault.html"><img src="assets/heroes/nav-vault.svg"><span>Vault</span></a>
+<a href="progress.html"><img src="assets/heroes/nav-progress.svg"><span>Progress</span></a>
+<a href="settings.html"><img src="assets/heroes/nav-profile.svg"><span>Profile</span></a>
+</nav>
+
 <script>
-// ── Vault context ─────────────────────────────────────────────────────
-const _activeVault   = MUET.loadActiveVault();
-const VAULT_ID       = (_activeVault && _activeVault.vaultId) ? _activeVault.vaultId : 'VAULT-02';
-const VAULT_TITLE    = (_activeVault && _activeVault.vaultTitle) ? _activeVault.vaultTitle : 'Vault 2';
-const IS_STARTER     = VAULT_ID === 'VAULT-00';
-const vaultWelcomePage = IS_STARTER ? 'starter-welcome.html' : 'vault2-welcome.html';
+const prompts={
+a1:"Hostel activities offer several advantages to students. Your task is to talk about: MAKING NEW FRIENDS. Explain why making new friends is an important advantage of hostel activities.",
+a2:"Hostel activities offer several advantages to students. Your task is to talk about: STAYING IN SAFE PLACES. Explain why staying in a safe place is an important advantage of hostel activities.",
+a3:"Hostel activities offer several advantages to students. Your task is to talk about: ENJOYING HOSTEL ACTIVITIES. Explain why enjoying hostel activities is an important advantage for students.",
+a4:"Hostel activities offer several advantages to students. Your task is to talk about: LEARNING LIFE SKILLS. Explain why learning life skills is an important advantage of hostel activities."
+};
 
-// ── Topic data (Vault 2 · MUET Session 2 2022 · Speaking 800/2, Booklet 1) ───────
-const topicsA = [
-  {
-    "id": "A1",
-    "title": "Candidate A — Making New Friends",
-    "prompt": "Hostel activities offer several advantages to students. Your task is to talk about: MAKING NEW FRIENDS. Explain why making new friends is an important advantage of hostel activities.",
-    "tip": "Use PREP. Example point: “Making new friends is important because it builds a support network away from home.” Give a relatable example — icebreaker games during orientation week, or bonding with roommates over shared hostel activities."
-  },
-  {
-    "id": "A2",
-    "title": "Candidate B — Staying in Safe Places",
-    "prompt": "Hostel activities offer several advantages to students. Your task is to talk about: STAYING IN SAFE PLACES. Explain why staying in a safe place is an important advantage of hostel activities.",
-    "tip": "Use PREP. Example point: “A safe hostel environment lets students focus on their studies without worrying about their wellbeing.” Mention security guards, CCTV, curfew rules, or controlled entry as examples."
-  },
-  {
-    "id": "A3",
-    "title": "Candidate C — Enjoying Hostel Activities",
-    "prompt": "Hostel activities offer several advantages to students. Your task is to talk about: ENJOYING HOSTEL ACTIVITIES. Explain why enjoying hostel activities is an important advantage for students.",
-    "tip": "Use PREP. Example point: “Enjoyable hostel activities help relieve academic stress and build school spirit.” Give examples such as sports day, game nights, or cultural celebrations organised by the hostel."
-  },
-  {
-    "id": "A4",
-    "title": "Candidate D — Learning Life Skills",
-    "prompt": "Hostel activities offer several advantages to students. Your task is to talk about: LEARNING LIFE SKILLS. Explain why learning life skills is an important advantage of hostel activities.",
-    "tip": "Use PREP. Example point: “Living in a hostel teaches independence through everyday tasks.” Mention cooking, doing laundry, budgeting an allowance, or managing time between chores and studies."
-  }
-];
-const topicsB = [
-  {
-    "id": "B1",
-    "title": "Hostel Improvement — Group Discussion",
-    "prompt": "It is important for hostels to meet the needs of their students. In your group, discuss how the hostel can be improved to better meet students’ needs. Consider: Wifi, exercise facilities, cleaning services, better security, food. Decide the BEST way the hostel can be improved.",
-    "tip": "Compare all five options fairly before reaching a conclusion. Invite others: “What do you think, [name]?” Build on each other’s points. Guide the group to one agreed best improvement in the last 2 minutes."
-  }
-];
+const topicA=document.getElementById("topicA");
+const promptA=document.getElementById("promptA");
+function renderPrompt(){promptA.textContent=prompts[topicA.value];}
+topicA.addEventListener("change",renderPrompt); renderPrompt();
 
-const Spk = (() => {
-  let task = 'A', secs = 120, timerId = null;
+document.querySelectorAll(".task-head").forEach(btn=>btn.addEventListener("click",()=>{
+ const current=btn.closest(".task");
+ document.querySelectorAll(".task").forEach(t=>{if(t!==current)t.classList.remove("open");});
+ current.classList.toggle("open");
+ if(current.classList.contains("open"))setTimeout(()=>current.scrollIntoView({behavior:"smooth",block:"start"}),80);
+}));
 
-  // ── Section toggle ──────────────────────────────────────────────────
-  function toggleSec(id) {
-    const body = document.getElementById('body-' + id);
-    const chev = document.getElementById('chev-' + id);
-    if (!body) return;
-    const open = body.classList.toggle('open');
-    if (chev) chev.style.transform = open ? 'rotate(180deg)' : '';
-    if (open) setTimeout(() => body.scrollIntoView({ behavior:'smooth', block:'nearest' }), 100);
-  }
-
-  // ── Task toggle ─────────────────────────────────────────────────────
-  function setTask(t) {
-    task = t;
-    document.getElementById('tabA').classList.toggle('active', t === 'A');
-    document.getElementById('tabB').classList.toggle('active', t === 'B');
-    document.getElementById('taskTitle').textContent = t === 'A'
-      ? 'Task A \u2014 Individual Response' : 'Task B \u2014 Group Discussion';
-    const scTitle = document.getElementById('scTitle');
-    if(scTitle) scTitle.textContent = t==='A' ? 'Task A \u2014 Self-Assessment' : 'Task B \u2014 Self-Assessment';
-    const scA = document.getElementById('scTaskA');
-    const scB = document.getElementById('scTaskB');
-    if(scA) scA.style.display = t==='A'?'block':'none';
-    if(scB) scB.style.display = t==='B'?'block':'none';
-    secs = t === 'A' ? 120 : 180;
-    stopTimer(); renderTimer(); renderTopics(); changeTopic();
-  }
-
-  function renderTopics() {
-    const sel  = document.getElementById('topicSelect');
-    const data = task === 'A' ? topicsA : topicsB;
-    sel.innerHTML = data.map(x => `<option value="${x.id}">${x.title}</option>`).join('');
-  }
-
-  function getTopic() {
-    const id   = document.getElementById('topicSelect').value;
-    const data = task === 'A' ? topicsA : topicsB;
-    return data.find(x => x.id === id) || data[0];
-  }
-
-  function changeTopic() {
-    const t = getTopic();
-    document.getElementById('topicPrompt').textContent = t.prompt;
-    document.getElementById('coachTip').textContent    = t.tip;
-  }
-
-  // ── Timer ───────────────────────────────────────────────────────────
-  function toggleTimer() {
-    if (timerId) { stopTimer(); return; }
-    timerId = setInterval(() => {
-      secs--;
-      renderTimer();
-      if (secs <= 0) { stopTimer(); MUET.toast(task === 'A' ? 'Prep time done. Start speaking!' : 'Prep time done. Begin discussion.'); }
-    }, 1000);
-    document.getElementById('timerBtn').textContent = 'Pause';
-  }
-
-  function stopTimer() {
-    clearInterval(timerId); timerId = null;
-    const b = document.getElementById('timerBtn');
-    if (b) b.textContent = 'Start';
-  }
-
-  function renderTimer() {
-    const m = String(Math.floor(secs / 60)).padStart(2,'0');
-    const s = String(secs % 60).padStart(2,'0');
-    document.getElementById('timerDisp').textContent = `${m}:${s}`;
-    document.getElementById('timerLabel').textContent = task === 'A' ? '2-Minute Prep Timer' : '3-Minute Prep Timer';
-  }
-
-  // ── Self-assessment (MPM language functions) ───────────────────────
-  function updateSelfCheck() {
-    setTimeout(() => {
-      const ids = task==='A'?['scA1','scA2','scA3','scA4','scA5','scA6']:['scB1','scB2','scB3','scB4','scB5','scB6'];
-      const checked = ids.filter(id => document.getElementById(id)?.checked).length;
-      ids.forEach(id => {
-        const label = document.getElementById(id)?.closest('.self-check-item');
-        if(label) label.classList.toggle('checked', document.getElementById(id).checked);
-      });
-      const el = document.getElementById('selfCheckResult');
-      if (el) {
-        el.style.display = 'block';
-        el.textContent = checked >= 5
-          ? `\u2705 ${checked}/${ids.length} checked \u2014 Ready to submit!`
-          : checked >= 3
-          ? `\u26a1 ${checked}/${ids.length} checked \u2014 Review the remaining items.`
-          : `\u26a0\ufe0f ${checked}/${ids.length} checked \u2014 Complete your PREP before submitting.`;
-      }
-    }, 50);
-  }
-
-  // ── MPM Language Function Analysis ─────────────────────────────────
-  function analyseFunctions(transcript) {
-    const t = transcript.toLowerCase();
-    if(task === 'A') return [
-      {fn:'Expressing Opinions (P)',
-       pass:/\b(i believe|i think|in my opinion|personally|i strongly feel|i would argue|from my perspective)\b/.test(t),
-       passMsg:'Opinion phrase detected. You stated your stand clearly.',
-       failMsg:'No opinion phrase. Start with: \u201cI believe\u2026\u201d or \u201cIn my opinion\u2026\u201d'},
-      {fn:'Giving Reasons (R)',
-       pass:/\b(because|this is because|the reason is|due to the fact|one major reason|since)\b/.test(t),
-       passMsg:'Reasoning language detected. You explained your point well.',
-       failMsg:'Add a reason: \u201cThis is because\u2026\u201d or \u201cThe reason is\u2026\u201d'},
-      {fn:'Elaborating (E)',
-       pass:/\b(for example|for instance|such as|take .{1,20} as an example|to illustrate|a clear example)\b/.test(t),
-       passMsg:'Example language detected. You elaborated your point well.',
-       failMsg:'Add an example: \u201cFor example\u2026\u201d or \u201cTake Malaysia as an example\u2026\u201d'},
-      {fn:'Justifying',
-       pass:/\b(this shows|this proves|this means that|this demonstrates|which means|therefore|thus)\b/.test(t),
-       passMsg:'Justification language detected. You linked your example back to your argument.',
-       failMsg:'After your example, link it back: \u201cThis shows that\u2026\u201d or \u201cThis means that\u2026\u201d'},
-      {fn:'Concluding / Summarising (P again)',
-       pass:/\b(therefore|thus|hence|in conclusion|to conclude|to summarise|this is why i|i strongly believe)\b/.test(t),
-       passMsg:'Closing language detected. You ended your response clearly.',
-       failMsg:'Close with: \u201cTherefore, I strongly believe that\u2026\u201d or \u201cIn conclusion\u2026\u201d'}
-    ];
-    else return [
-      {fn:'Initiating Discussion',
-       pass:/\b(shall we|let us begin|let\u2019s start|i would like to start|can we discuss)\b/.test(t),
-       passMsg:'You initiated the discussion.',
-       failMsg:'Try to initiate: \u201cShall we begin by looking at\u2026?\u201d'},
-      {fn:'Prompting (Turn-Taking)',
-       pass:/\b(what do you think|do you agree|your thoughts|would you like to add)\b/.test(t)||/[a-z]+,\s+(what|do|did|can|could)\b/.test(t),
-       passMsg:'You prompted other speakers. Good interaction.',
-       failMsg:'Prompt others: \u201cWhat do you think, [name]?\u201d'},
-      {fn:'Expressing Opinions',
-       pass:/\b(i believe|i think|in my opinion|i feel|i would|personally)\b/.test(t),
-       passMsg:'You expressed your opinions clearly.',
-       failMsg:'State your view: \u201cI believe\u2026\u201d or \u201cIn my opinion\u2026\u201d'},
-      {fn:'Negotiating / Evaluating',
-       pass:/\b(however|on the other hand|i see it differently|that is a valid point|i agree but|i disagree because|compared to)\b/.test(t),
-       passMsg:'You negotiated and evaluated ideas. Good group skills.',
-       failMsg:'Negotiate: \u201cThat is a valid point, however\u2026\u201d'},
-      {fn:'Concluding / Reaching Consensus',
-       pass:/\b(as a group|we have decided|we agree|the best option is|to conclude|in conclusion|we chose)\b/.test(t),
-       passMsg:'You helped the group reach a conclusion.',
-       failMsg:'Conclude: \u201cSo as a group, we have decided that\u2026\u201d'}
-    ];
-  }
-
-  // ── 4-Criteria Round-Up ─────────────────────────────────────────────
-  function buildRoundup(transcript, prep, fnResults, scCount) {
-    const t=transcript.toLowerCase();
-    const wc=transcript.split(/\s+/).filter(Boolean).length;
-    const filledPrep=Object.values(prep).filter(v=>v.length>0).length;
-    const fnPassed=fnResults.filter(f=>f.pass).length;
-    const fnTotal=fnResults.length;
-    const tf=Math.min(25,Math.round((filledPrep/4)*10+(fnPassed/fnTotal)*10+(scCount/6)*5));
-    const hasComplex=/\b(although|despite|however|which|that|who|because|if|unless|since|whereas)\b/.test(t);
-    const hasPunct=(t.match(/[,;]/g)||[]).length>=2;
-    const acc=Math.min(25,Math.round(8+(hasComplex?8:0)+(hasPunct?5:0)+Math.min(4,Math.floor(wc/20))));
-    const hasComparison=/\b(more|less|better|worse|rather than|compared to|not only|but also|unlike)\b/.test(t);
-    const hasConditional=/\b(if|unless|should|would|could|might)\b/.test(t);
-    const range=Math.min(25,Math.round(8+(hasComparison?8:0)+(hasConditional?5:0)+Math.min(4,Math.floor(wc/25))));
-    const fillers=(t.match(/\b(erm|uhh|umm|you know|so yeah|like,)\b/g)||[]).length;
-    const fluency=Math.min(25,Math.round(Math.min(20,wc/4)+5-(fillers*2)));
-    return {
-      criteria:[
-        {label:'Task Fulfilment',score:tf,max:25,desc:filledPrep>=3?'PREP plan complete.':'Complete more PREP boxes.',grade:tf>=20?'pass':tf>=12?'mid':'fail'},
-        {label:'Accuracy',score:acc,max:25,desc:hasComplex?'Complex sentences detected.':'Use: although, because, however.',grade:acc>=20?'pass':acc>=12?'mid':'fail'},
-        {label:'Range',score:range,max:25,desc:hasComparison?'Sentence variety detected.':'Add comparisons or conditionals.',grade:range>=20?'pass':range>=12?'mid':'fail'},
-        {label:'Fluency',score:fluency,max:25,desc:fluency>=18?`Word count: ${wc}. Good flow.`:`Word count: ${wc}. Remove fillers.`,grade:fluency>=20?'pass':fluency>=12?'mid':'fail'}
-      ],
-      total:tf+acc+range+fluency
-    };
-  }
-
-  // ── Profile helper ──────────────────────────────────────────────────
-  function getProfile() {
-    try { return JSON.parse(localStorage.getItem('smartMuetProfile') || '{}'); } catch { return {}; }
-  }
-
-  // ── Backend save ────────────────────────────────────────────────────
-  function saveToBackend(payload) {
-    const p = getProfile();
-    const enriched = {
-      studentEmail: p.email || p.studentEmail || 'demo@student.local',
-      studentName:  p.name  || p.studentName  || 'Demo Student',
-      studentRegNo: p.regNo || p.studentRegNo || '',
-      classGroup:   p.classGroup || p.group   || '',
-      vaultId: VAULT_ID,
-      ...payload
-    };
-    if (typeof saveSmartMuetAttempt === 'function') {
-      saveSmartMuetAttempt(enriched).catch(err => console.warn('Backend save failed:', err));
-    }
-    return enriched;
-  }
-
-  // ── Submit ──────────────────────────────────────────────────────────
-  function submit() {
-    const transcript = document.getElementById('transcript').value.trim();
-    if (!transcript) { MUET.toast('Please type your transcript or speaking notes before submitting.'); return; }
-    const prep = {
-      point:   document.getElementById('prepP').value.trim(),
-      reason:  document.getElementById('prepR').value.trim(),
-      example: document.getElementById('prepE').value.trim(),
-      close:   document.getElementById('prepClose').value.trim()
-    };
-    const filledPrep = Object.values(prep).filter(v => v.length > 0).length;
-    if(filledPrep < 2){ MUET.toast('Please fill at least 2 PREP boxes before submitting.'); return; }
-    const topic    = getTopic();
-    const fnResults = analyseFunctions(transcript);
-    const scIds = task==='A'?['scA1','scA2','scA3','scA4','scA5','scA6']:['scB1','scB2','scB3','scB4','scB5','scB6'];
-    const scCount = scIds.filter(id => document.getElementById(id)?.checked).length;
-    const roundup = buildRoundup(transcript, prep, fnResults, scCount);
-    const score90 = Math.min(90, Math.round(roundup.total * 0.9));
-    const band     = MUET.scoreToBand(score90);
-    const fnPassed = fnResults.filter(f=>f.pass).length;
-
-    // Save session
-    const wc = transcript.split(/\s+/).length;
-    const session = {
-      vaultId: VAULT_ID, type: task==='A'?'Task A':'Task B',
-      topicId: topic.id, topicTitle: topic.title, prompt: topic.prompt,
-      score90, score: score90, band, bandLabel: band,
-      prep, transcript, selfChecked: scCount, fnPassed, roundupTotal: roundup.total,
-      date: new Date().toISOString(), xpEarned: 80 + filledPrep * 5
-    };
-    const sessions = MUET.loadSessions('speaking');
-    sessions.push(session);
-    MUET.saveSessions('speaking', sessions);
-    MUET.awardBadge('first_step');
-    if(task==='A') MUET.awardBadge('prep_starter');
-    if(task==='B') MUET.awardBadge('discussion_builder');
-    MUET.addXP(session.xpEarned);
-
-    // Render MPM feedback
-    document.getElementById('fbBody').innerHTML = fnResults.map(fn=>`
-      <div style="display:flex;align-items:flex-start;gap:10px;border:2px solid var(--ink);border-radius:12px;padding:10px;margin-bottom:8px;background:${fn.pass?'#f0fdf4':'#fff7ed'};border-color:${fn.pass?'#16a34a':'#ea580c'}">
-        <div style="font-size:20px;flex-shrink:0">${fn.pass?'&#9989;':'&#9888;&#65039;'}</div>
-        <div>
-          <div style="font-size:11px;font-weight:1000;text-transform:uppercase;color:var(--muted);letter-spacing:.06em">${fn.fn}</div>
-          <div style="font-size:13px;font-weight:800;margin-top:2px;line-height:1.4">${fn.pass?fn.passMsg:fn.failMsg}</div>
-        </div>
-      </div>`).join('');
-    document.getElementById('fbCard').style.display = 'block';
-
-    // Render round-up
-    const gradeCss = {pass:'#f0fdf4;border-color:#16a34a', mid:'#fff7ed;border-color:#ea580c', fail:'#fef2f2;border-color:#dc2626'};
-    const gradeColor = {pass:'#16a34a', mid:'#ea580c', fail:'#dc2626'};
-    document.getElementById('ruGrid').innerHTML = roundup.criteria.map(c=>`
-      <div style="border:2px solid var(--ink);border-radius:14px;padding:12px;text-align:center;background:${gradeCss[c.grade]}">
-        <span style="font-family:'Sora';font-size:26px;font-weight:800;display:block;color:${gradeColor[c.grade]}">${c.score}</span>
-        <span style="font-size:11px;font-weight:1000;text-transform:uppercase;color:var(--muted);display:block;margin-top:2px">${c.label}</span>
-        <div style="font-size:11px;font-weight:800;margin-top:6px;line-height:1.4;color:var(--muted)">${c.desc}</div>
-      </div>`).join('');
-    document.getElementById('ruTotal').innerHTML =
-      `<div><b style="font-family:'Sora';font-size:13px">Practice Indicator</b><br><small style="font-weight:800;color:var(--muted)">Indicative only \u2014 lecturer marks officially</small></div>
-       <div style="font-family:'Sora';font-size:28px;font-weight:800;color:var(--blue)">${roundup.total}<small style="font-size:14px">/100</small></div>`;
-    document.getElementById('ruCard').style.display = 'block';
-
-    const fb = MUET.feedbackText('speaking', score90);
-    const strength = score90>=64?'Clear PREP planning and sufficient speaking notes.':'You attempted the task and recorded your thinking.';
-    const nextAct = task==='A'?'Practise Task B: initiate, prompt others by name, negotiate and conclude.':'Practise closing with a clear group consensus statement.';
-    const badge = task==='A'?'PREP Starter':'Discussion Builder';
-
-    document.getElementById('resultScore').textContent = `${score90}/90`;
-    document.getElementById('resultBand').textContent  = `Estimated Band ${band}`;
-    document.getElementById('resultStrength').textContent = `\u2705 Strength: ${strength}`;
-    document.getElementById('resultImprove').textContent  = `\u26a1 Feedback: ${fb}`;
-    document.getElementById('resultNext').textContent     = `\ud83c\udfaf Next: ${nextAct}`;
-    document.getElementById('achieveBadge').textContent   = `\ud83c\udfc5 Badge: ${badge} \u2014 +${session.xpEarned} XP \u2014 ${fnPassed}/${fnResults.length} language functions passed`;
-
-    saveToBackend({
-      component:'Speaking', taskType: task==='A'?'Task A':'Task B',
-      rawScore: score90, totalItems: 90, score90, estimatedBand: band,
-      feedback: fb, nextAction: nextAct, badgeEarned: badge,
-      status:'Rule-based auto-feedback v3', answerText: transcript,
-      topicId: topic.id, topicTitle: topic.title, prompt: topic.prompt, prep,
-      fnPassed, roundupTotal: roundup.total, selfChecked: scCount
-    });
-
-    document.getElementById('resultCard').classList.add('show');
-    if(score90>=74) MUET.toast('Speaking submitted. Excellent \u2014 Band 5 range!');
-    else if(score90>=53) MUET.toast('Speaking submitted. Good progress \u2014 keep improving.');
-    else MUET.toast('Speaking submitted. Review the Phrase Bank and try again.');
-    window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
-    updateVaultProgress();
-  }
-
-  return { toggleSec, setTask, changeTopic, toggleTimer, submit, updateSelfCheck, analyseFunctions, buildRoundup };
-})();
-
-// ── Vault progress display ─────────────────────────────────────────────
-function updateVaultProgress() {
-  const prog = MUET.vaultProgress(VAULT_ID);
-  const pct  = Math.round(prog.count / 4 * 100);
-  const bar  = document.getElementById('vaultProgBar');
-  const lbl  = document.getElementById('vaultProgLabel');
-  if (bar) bar.style.width = pct + '%';
-  if (lbl) lbl.textContent = prog.count + '/4';
-}
-
-// ── Init ───────────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  if (!MUET.loadProfile()) { location.href = 'index.html'; return; }
-  const barLabel = document.querySelector('.bar-label');
-  if (barLabel) barLabel.textContent = VAULT_TITLE + ' \u00b7 Speaking';
-  Spk.toggleSec('tips');
-  Spk.setTask('A');
-  updateVaultProgress();
-});
+let doneA=false,doneB=false;
+document.getElementById("checkA").onclick=()=>{
+ const n=[...document.querySelectorAll(".aCheck")].filter(x=>x.checked).length;
+ doneA=n>=4;
+ const box=document.getElementById("resultA"); box.classList.add("show");
+ box.innerHTML=doneA?"<b>Task A ready ✓</b><br>You completed the independent speaking self-check.":"<b>Review Task A.</b><br>Complete at least four of the five speaking checks.";
+};
+document.getElementById("checkB").onclick=()=>{
+ const n=[...document.querySelectorAll(".bCheck")].filter(x=>x.checked).length;
+ doneB=n>=4;
+ const box=document.getElementById("resultB"); box.classList.add("show");
+ box.innerHTML=doneB?"<b>Task B ready ✓</b><br>Your discussion self-check is complete.":"<b>Review Task B.</b><br>Complete at least four of the five discussion checks.";
+};
+document.getElementById("finish").onclick=()=>{
+ const box=document.getElementById("finishResult"); box.classList.add("show");
+ if(doneA&&doneB){localStorage.setItem("muet_v2_speaking","true");box.innerHTML="<b>Vault 2 Speaking completed ✓</b><br>Task A and Task B have both been checked.";}
+ else box.innerHTML="<b>Complete both tasks first.</b><br>Check Task A and Task B before saving.";
+};
 </script>
 </body>
 </html>
